@@ -57,3 +57,7 @@ frontend/build/
 # OS Files
 .DS_Store
 Thumbs.db
+
+# Thesis Knowledge Base
+info-source/
+docs/

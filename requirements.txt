@@ -1,5 +1,10 @@
 langchain
 langchain-community
+langchain-chroma
 chromadb
 sentence-transformers
 ollama
+fastapi
+uvicorn
+pydantic
+pandas
