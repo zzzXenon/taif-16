@@ -8,7 +8,7 @@ from core.prompts import SYSTEM_PROMPT_IER, SYSTEM_PROMPT_LRR, SYSTEM_PROMPT_NLG
 
 def get_ier_decomposition(user_input):
     """Membedah niat menggunakan LLM dan mengembalikan objek IntentDimensions"""
-    llm = ChatOllama(model="qwen3:4b", temperature=0.1)
+    llm = ChatOllama(model="qwen3:8b", temperature=0.1)
     parser = PydanticOutputParser(pydantic_object=IEROutput)
     
     prompt = ChatPromptTemplate.from_messages([
@@ -88,7 +88,7 @@ def llm_reranker(user_query, top_results, uadc_data_dict):
     Modul LLM-based Reranker (LRR) untuk menilai ulang (re-rank) kandidat hasil pencarian matematis
     menggunakan model Qwen3 untuk mendapatkan penalaran logis dan skor 0-10.
     """
-    llm = ChatOllama(model="qwen3:4b", temperature=0.0)
+    llm = ChatOllama(model="qwen3:8b", temperature=0.0)
     parser = PydanticOutputParser(pydantic_object=LRRScoring)
     
     prompt = ChatPromptTemplate.from_messages([
@@ -137,7 +137,7 @@ def generate_final_response(user_query, reranked_results):
     Modul Natural Language Generation (NLG).
     Mengubah hasil re-ranking kaku menjadi respons teks layaknya pemandu wisata.
     """
-    llm = ChatOllama(model="qwen3:4b", temperature=0.3)
+    llm = ChatOllama(model="qwen3:8b", temperature=0.3)
     
     # Bangun teks konteks (Knowledge) dari hasil LRR
     context_text = ""
@@ -164,7 +164,7 @@ def rewrite_query(current_query: str, chat_history: list) -> CQRResult:
     """
     Modul CQR: Menulis ulang kueri berdasarkan riwayat obrolan (First-plus-Last Sliding Window)
     """
-    llm = ChatOllama(model="qwen3:4b", temperature=0.0)
+    llm = ChatOllama(model="qwen3:8b", temperature=0.0)
     parser = PydanticOutputParser(pydantic_object=CQRResult)
     
     # Format riwayat chat menjadi string
