@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 *.so
 .Python
+.ipynb_checkpoints/
 env/
 build/
 develop-eggs/
@@ -62,6 +63,7 @@ frontend/build/
 # OS Files
 .DS_Store
 Thumbs.db
+ollama
 
 # Thesis Knowledge Base
 info-source/

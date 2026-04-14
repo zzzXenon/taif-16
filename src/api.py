@@ -45,7 +45,7 @@ def startup_event():
     print("Mempersiapkan database wisata dimensi (ChromaDB UADC)...")
     embedding_model = HuggingFaceEmbeddings(
         model_name=EMBEDDING_MODEL,
-        model_kwargs={'device': 'cpu', 'local_files_only': True},
+        model_kwargs={'device': 'cpu', 'local_files_only': False},
         encode_kwargs={'normalize_embeddings': True}
     )
     vector_db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_model)
