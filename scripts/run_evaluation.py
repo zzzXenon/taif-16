@@ -66,7 +66,7 @@ def main():
         print("Gagal membaca eval_ground_truths.json. Silakan jalankan generate_gt_skeleton.py terlebih dahulu.")
         return
 
-    API_URL = "http://localhost:8000/api/chat"
+    API_URL = "http://localhost:8001/api/chat"
     ablation_modes = ["baseline", "pipeline_a_only", "proposed"]
     
     # Filter hanya kueri yang sudah diisi Ground Truth-nya oleh Anotator
@@ -99,7 +99,7 @@ def main():
             }
             
             try:
-                res = requests.post(API_URL, json=payload, timeout=60)
+                res = requests.post(API_URL, json=payload, timeout=180)
                 if res.status_code == 200:
                     resp_data = res.json()
                     source_docs = resp_data.get("source_documents", [])
@@ -143,6 +143,14 @@ def main():
             avg_ndcg = sum(m_metrics["ndcg"]) / len(m_metrics["ndcg"])
             
             print(f"{mode:<18} | {avg_hr:.4f} | {avg_mrr:.4f} | {avg_rec:.4f} | {avg_ndcg:.4f}")
+
+    # Simpan hasil ke JSON untuk backup
+    import os
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_path = os.path.join(BASE_DIR, "data", "eval_results.json")
+    with open(out_path, 'w', encoding='utf-8') as f:
+        json.dump(results_db, f, indent=2, ensure_ascii=False)
+    print(f"\nHasil evaluasi disimpan di: {out_path}")
 
 if __name__ == "__main__":
     main()
