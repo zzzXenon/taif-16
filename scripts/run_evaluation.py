@@ -26,6 +26,7 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 SINGLE_TURN_GT_PATH = os.path.join(DATA_DIR, "eval_ground_truths.json")
 MULTI_TURN_GT_PATH = os.path.join(DATA_DIR, "eval_pipeline_b.json")
 RESULTS_OUTPUT_PATH = os.path.join(DATA_DIR, "eval_results.json")
+REPORT_OUTPUT_PATH = os.path.join(DATA_DIR, "eval_report.txt")
 
 # Mode ablasi yang diperiksa untuk single-turn
 SINGLE_TURN_MODES = ["baseline", "pipeline_a_only", "proposed"]
@@ -403,11 +404,38 @@ def save_results(single_turn_results, multi_turn_results):
 # ENTRY POINT
 # ============================================================
 
+class Tee:
+    """Menulis output ke console DAN file secara bersamaan."""
+    def __init__(self, filepath, mode='w'):
+        self.file = open(filepath, mode, encoding='utf-8')
+        self.stdout = sys.stdout
+    
+    def write(self, data):
+        self.stdout.write(data)
+        self.file.write(data)
+    
+    def flush(self):
+        self.stdout.flush()
+        self.file.flush()
+    
+    def close(self):
+        self.file.close()
+        sys.stdout = self.stdout
+
+
 def main():
     parser = argparse.ArgumentParser(description="Evaluasi RAG Pipeline Terpadu")
     parser.add_argument("--single-turn", action="store_true", help="Hanya evaluasi single-turn (A, Baseline, Proposed)")
     parser.add_argument("--multi-turn", action="store_true", help="Hanya evaluasi multi-turn (Pipeline B CQR)")
     args = parser.parse_args()
+    
+    # Redirect semua output ke console + file
+    from datetime import datetime
+    tee = Tee(REPORT_OUTPUT_PATH, mode='w')
+    sys.stdout = tee
+    
+    print(f"Evaluasi dimulai: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Laporan disimpan ke: {REPORT_OUTPUT_PATH}")
     
     # Default: jalankan keduanya jika tidak ada flag
     run_st = True
@@ -429,7 +457,11 @@ def main():
     
     save_results(st_results, mt_results)
     
-    print("\n✅ Evaluasi selesai.")
+    print(f"\nEvaluasi selesai: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Laporan teks: {REPORT_OUTPUT_PATH}")
+    print(f"Data JSON: {RESULTS_OUTPUT_PATH}")
+    
+    tee.close()
 
 
 if __name__ == "__main__":
