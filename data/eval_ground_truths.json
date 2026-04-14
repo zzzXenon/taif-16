@@ -898,32 +898,5 @@
       "Geosite Sipinsur",
       "Patung Yesus, Bukit Sibeabea"
     ]
-  },
-  {
-    "level": 5,
-    "query": "Simpan kueri di atas ke dalam file berformat `.json` atau masukkan ke program python penguji Anda.",
-    "ground_truths": [
-      "Air Soda Parbubu",
-      "Air Terjun Sigarattung (Sampuran Na Pitu)",
-      "Bukit Senyum"
-    ]
-  },
-  {
-    "level": 5,
-    "query": "Anotasikan *Ground Truth* secara manual untuk ke-50 kueri tersebut dengan melihat `data/wisata-toba-unified-final.csv`.",
-    "ground_truths": [
-      "Bukit Indah Simarjarunjung",
-      "Geosite Sipinsur",
-      "Jenny'S Restaurant"
-    ]
-  },
-  {
-    "level": 5,
-    "query": "Hitung HR@4, MRR@4, Recall@4, dan NDCG@4 pada masing-masing tingkatan ini (dari 1 sampai 5) di setiap mode Pipeline (Proposed, Baseline, A).",
-    "ground_truths": [
-      "Aek Rangat Pangururan",
-      "Air Soda Parbubu",
-      "Elios - Rumah Makan Khas Batak"
-    ]
   }
 ]

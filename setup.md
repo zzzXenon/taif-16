@@ -74,9 +74,9 @@ Untuk menggunakan web aplikasi interaktif, Anda membutuhkan 2 terminal yang berj
 ### Terminal 1 (Menjalankan API Backend)
 Pastikan Anda berada di *root folder* (folder `taif-16/` atau tempat Anda melakukan kloning) dan *virtual environment* Python Anda sedang aktif:
 ```bash
-python -m uvicorn src.api:app --reload --port 8000
+python -m uvicorn src.api:app --reload --port 8001
 ```
-> Server FastAPI akan berjalan di `http://localhost:8000`
+> Server FastAPI akan berjalan di `http://localhost:8001`
 
 ### Terminal 2 (Menjalankan UI Frontend)
 Berpindahlah ke dalam folder `frontend/` lalu jalankan server React:

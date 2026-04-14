@@ -50,7 +50,7 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/chat', {
+      const response = await fetch('http://127.0.0.1:8001/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ function App() {
       setMessages(prev => [...prev, {
         id: Date.now() + 1,
         role: 'bot',
-        content: `**Error**: Gagal terhubung ke API backend. Pastikan server FastAPI di \`http://127.0.0.1:8000\` sudah berjalan.\n\nDetail: ${error.message}`
+        content: `**Error**: Gagal terhubung ke API backend. Pastikan server FastAPI di \`http://127.0.0.1:8001\` sudah berjalan.\n\nDetail: ${error.message}`
       }]);
     } finally {
       setIsLoading(false);
