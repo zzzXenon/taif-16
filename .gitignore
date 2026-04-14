@@ -42,6 +42,11 @@ data/*.json
 !package.json
 !package-lock.json
 
+!data/wisata-toba-unified-final.csv
+!data/eval_ground_truths.json
+!data/referensi_tempat_wisata.json
+!data_eval.json
+
 # Logs and Debug outputs
 logs/
 *.log
@@ -61,3 +66,4 @@ Thumbs.db
 # Thesis Knowledge Base
 info-source/
 docs/
+!docs/eval_dataset_queries.md

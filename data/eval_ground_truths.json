@@ -1,0 +1,929 @@
+[
+  {
+    "level": 1,
+    "query": "Tolong carikan air terjun di sekitar kawasan Danau Toba.",
+    "ground_truths": [
+      "Air Terjun Janji",
+      "Air Terjun Siboruon Balige",
+      "Air Terjun Sigarattung (Sampuran Na Pitu)"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Dimana saja lokasi wisata sejarah budaya Batak setempat?",
+    "ground_truths": [
+      "Pemandian Aek Sipitu Dai",
+      "Desa Wisata Tomok Parsaoran",
+      "Patung Sigalegale"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Ada rekomendasi hotel berbintang di Parapat?",
+    "ground_truths": [
+      "Carolina Hotel",
+      "Hotel Santo Djaya",
+      "Hotel Sere Nauli"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Saya mencari restoran yang menjual makanan khas Batak halal.",
+    "ground_truths": [
+      "Rumah Makan Khas Batak Moranta Simbolon",
+      "Elios - Rumah Makan Khas Batak",
+      "RM. GOMGOM KHAS BATAK"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Tempat makan mana saja yang populer di kota Balige?",
+    "ground_truths": [
+      "HOTEL BAHAGIA BALIGE",
+      "Labersa Hotel and Convention Center Toba, Balige",
+      "Mutiara Balige Hotel"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Adakah pantai berpasir putih di Pulau Samosir?",
+    "ground_truths": [
+      "Pantai Pasir Putih Lumban Bul-bul Balige",
+      "Pantai Pasir Putih Parbaba",
+      "Pantai Batuhoda"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Coba sebutkan bukit untuk melihat panorama matahari terbit.",
+    "ground_truths": [
+      "Bukit Doa",
+      "Bukit Beta Tuk-Tuk",
+      "Bukit Holbung Samosir"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Di mana lokasi museum peninggalan ulos Batak?",
+    "ground_truths": [
+      "Batak Museum",
+      "Museum Batak T.B. Silalahi Center",
+      "Pengrajin Ulos Batak Dan Karo (Christwo Tenun)"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Berikan rekomendasi penginapan berjenis guesthouse.",
+    "ground_truths": [
+      "Romlan Guesthouse",
+      "Pagar Batu Resto 26 Penginapan",
+      "Rumah Makan Muslim Penginapan"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Sebutkan tempat dengan pemandangan pegunungan hijau.",
+    "ground_truths": [
+      "Geosite Sipinsur",
+      "Puncak Huta Ginjang",
+      "Wisata Bukit Gibeon"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Carikan hotel atau penginapan yang punya fasilitas kolam renang.",
+    "ground_truths": [
+      "Hotel Sere Nauli",
+      "Carolina Hotel",
+      "Labersa Hotel and Convention Center Toba, Balige"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Saya mau berkemah (camping) di tempat yang suasananya sangat sunyi/tenang.",
+    "ground_truths": [
+      "Caldera Toba Nomadic Escape (Glamour Camping)",
+      "Bukit Holbung Samosir",
+      "Pakkodian Toba"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Di mana ada pantai pasir putih yang aman untuk wisata anak dan keluarga?",
+    "ground_truths": [
+      "Pantai Pasir Putih Lumban Bul-bul Balige",
+      "Pantai Pasir Putih Parbaba",
+      "Pantai Parparean 2"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Butuh restoran yang memiliki pemandangan langsung ke Danau Toba.",
+    "ground_truths": [
+      "Damar Toba ~ Lakeside Eatery & Stay",
+      "Labersa Hotel and Convention Center Toba, Balige",
+      "Toba Village inn"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Ada rekomendasi wisata alam yang arsitekturnya masih berbentuk rumah panggung tradisional?",
+    "ground_truths": [
+      "Elios - Rumah Makan Khas Batak",
+      "Geosite Sipinsur",
+      "Pulau Pardepur"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Kasih info bukit savana yang jalurnya mudah diakses mobil.",
+    "ground_truths": [
+      "Bukit Holbung Samosir",
+      "Bukit Senyum",
+      "Patung Yesus, Bukit Sibeabea"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Ingin melihat benda-benda kuno di tempat bernuansa sakral/mistis.",
+    "ground_truths": [
+      "Batak Museum",
+      "Bagus Bay Guest House",
+      "Jenny'S Restaurant"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Cari kafe tempat ngopi yang punya sarana live music.",
+    "ground_truths": [
+      "Kafe Pak Pos",
+      "Lago Hotel & Resto",
+      "Tataring Coffee 26 Resto"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Ada penginapan resort pinggir danau yang harganya ramah di kantong (murah)?",
+    "ground_truths": [
+      "Thyesza Hotel Resort",
+      "Bagus Bay Guest House",
+      "Carolina Hotel"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Butuh rekomendasi taman bunga berhawa sangat sejuk berangin.",
+    "ground_truths": [
+      "Taman Eden 100",
+      "Taman Wisata Iman Sitinjo",
+      "Tiara Bunga Hotel"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Saya cari kafe buat nongkrong yang punya pemandangan langsung ke danau tapi suasananya romantis buat pasangan.",
+    "ground_truths": [
+      "Tepi Danau Bistro",
+      "Kafe Pak Pos",
+      "Pantai Pasir Putih Parbaba"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Carikan bukit untuk melihat matahari terbit (sunrise) yang medannya gampang diakses.",
+    "ground_truths": [
+      "Bukit Doa",
+      "Bukit Holbung Samosir",
+      "Bukit Senyum"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Ada desa wisata yang punya peninggalan patung batu ukiran kuno di mana saya bisa belajar menenun ulos?",
+    "ground_truths": [
+      "Patung Sigalegale",
+      "Batu Kursi Raja Siallagan ( Stone Chair Of King Siallagan )",
+      "Desa Wisata Silalahi Pagar Batu"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Ingin menginap di resort pinggir tebing dengan nuansa tenang dari hiruk pikuk, serta memiliki rute sepeda.",
+    "ground_truths": [
+      "Thyesza Hotel Resort",
+      "Tuan Nagani Paradise",
+      "Toba Village inn"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Cari restoran halal di sekitar Balige yang arsitekturnya dominan kayu tradisional dan suasananya sejuk berangin.",
+    "ground_truths": [
+      "Betesda Cafe Balige",
+      "Vany Villa Balige",
+      "Labersa Hotel and Convention Center Toba, Balige"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Butuh spot foto jembatan gantung yang latarnya hamparan sawah dan tidak terlalu ramai turis.",
+    "ground_truths": [
+      "Bukit Senyum",
+      "Pasar Tomok",
+      "Air Soda Parbubu"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Mau berwisata ke pulau kecil tak berpenghuni, udaranya tropis sejuk, dipakai khusus untuk acara pertemuan rahasia / retreat.",
+    "ground_truths": [
+      "Geosite Sipinsur",
+      "Tabo Cottages",
+      "Museum Batak T.B. Silalahi Center"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Tolong rekomendasikan wisata kuliner dengan pemandangan senja yang punya menu makanan pedas andaliman.",
+    "ground_truths": [
+      "Maruba Restaurant",
+      "Sekapur Sirih",
+      "Widya Restaurant"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Adakah pemandian air soda yang kolamnya terbuat dari batu alam dengan hawa sekitar menghangatkan tubuh?",
+    "ground_truths": [
+      "Air Soda Parbubu",
+      "Pemandian Alam Bah Damanik",
+      "Aek Rangat Pangururan"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Cari taman bermain outdoor dengan lahan berkontur bukit hijau di mana anak bisa naik ATV.",
+    "ground_truths": [
+      "Bukit Sidihoni",
+      "Caldera Toba Nomadic Escape (Glamour Camping)",
+      "Salib Kasih Tarutung"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Saya mau restoran bersertifikat halal (Kategori/Limitasi) di daerah Tuk-Tuk yang arsitekturnya menyerupai bongkahan kayu alam (Pemandangan Objek), menjorok ke tepi hamparan danau biru (Pemandangan Alam), dan hawanya sangat sunyi cocok untuk bekerja (Suasana).",
+    "ground_truths": [
+      "Geosite Sipinsur",
+      "Batu Gantung",
+      "Danau Sidihoni"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Carikan tempat wisata alam bebas (Kategori) yang menyediakan penyewaan sepeda (Aktivitas), punya spot foto estetik latar kincir angin (Pemandangan), dan letaknya sangat tersembunyi jauh dari pusat keramaian turis (Suasana).",
+    "ground_truths": [
+      "Boli Boli Hot Spring",
+      "Bukit Indah Simarjarunjung",
+      "Bukit Senyum"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Butuh rekomendasi hotel glamping (glamorous camping) yang memiliki interior beda ala suku Indian tendanya, berada di tengah hutan tropis rimbun, dan sangat aman ditinggali wanita sendirian apalagi pas malam hari.",
+    "ground_truths": [
+      "Geosite Sipinsur",
+      "Aek Rangat Pangururan",
+      "Bagus Bay Guest House"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Di mana ada wisata atraksi budaya (Sigale-Gale) yang memperbolehkan pengunjung ikut menari langsung, pelatarannya berupa lapangan batu ceper batu alam asli, dan vibrasinya begitu megah sakral menghipnotis turis asing.",
+    "ground_truths": [
+      "Pantai Batuhoda",
+      "Batu Gantung",
+      "Danau Sidihoni"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Mau pergi mencari wisata agro (pertanian) yang pengunjung bisa memetik buah/sayuran sendiri pakai tangan, lansekap panggung sawahnya terlihat berundak indah ala Bali, anginnya menusuk tulang walau sedang siang siang terik.",
+    "ground_truths": [
+      "Bukit Senyum",
+      "Puncak Huta Ginjang",
+      "Togaraja"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Tolong cari kafe coffee shop modern berlatar belakang lagu jazz instrumen pelan, bangunannya didominasi kaca serba terbuka (open space), baristanya bersedia mengajari cara seduh (V60 dll), dan pengunjung disajikan lanskap air terjun kecil buatan dalam kafe.",
+    "ground_truths": [
+      "Tataring Coffee 26 Resto",
+      "Kafe Pak Pos",
+      "Tabo Cottages"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Adakah guesthouse bertingkat tinggi dengan tangga putar meliuk, menyediakan kolam air panas uap alam asli dari belerang, sangat diincar oleh pasangan bulan madu yang butuh privasi tinggi tidak ada distraksi anak kecil ribut, serta makanan sarapannya gaya eropa pancake / roti?",
+    "ground_truths": [
+      "Romlan Guesthouse",
+      "Bukit Senyum",
+      "Aek Rangat Pangururan"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Ingin mencari destinasi bukit tertinggi agar bisa main paralayang menembus awan tebal, ada jalan setapaknya bersih tertata blok beton rapi tak berlumpur merah, cocok sekali di saat subuh hari karena nuansa damai tak tersentuh teknologi berisik, warung mienya juga mudah didapat.",
+    "ground_truths": [
+      "Bukit Senyum",
+      "Bukit Holbung Samosir",
+      "Puncak Huta Ginjang"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Rekomendasi titik pesisir pantai tao yang pasiran abu-abu basah, menyediakan olahraga banana boat berkelompok ramai-ramai, tidak kotor oleh tumpukan sampah sisa bakar-bakar kemah berserakan, dan sensasinya seperti liburan energi meluap-luap yang semarak sekali di akhir pekan.",
+    "ground_truths": [
+      "Pantai Pasir Putih Lumban Bul-bul Balige",
+      "Carolina Hotel",
+      "Geosite Sipinsur"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Cari pusat sejarah peninggalan benda ukiran mitologi (berhala dewa), bangunannya tua tidak direnovasi modern karena mempertahankan style orisinal horor/gelapnya, kita dibolehkan meraba sebagian area arca pakai tangan, hawa di sana pun biasanya terkesan mengintimidasi yang buat merinding penasaran memacu adrenalin gembira tegang.",
+    "ground_truths": [
+      "Tuan Nagani Paradise",
+      "Batak Museum",
+      "Batu Kursi Raja Siallagan ( Stone Chair Of King Siallagan )"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Saya butuh penginapan yang harganya ramah di kantong / murah, punya balkon privat berjejer rapi langsung menghadap ke pelabuhan penyeberangan kapal, menyediakan layanan penyewaan kano / perahu dayung kecil asik untuk berkeliling pelan, dan yang paling penting lingkungannya sangat ramah balita bebas serangga serta tenang sekali saat lelap malam harinya tanpa kebisingan kelab.",
+    "ground_truths": [
+      "Bagus Bay Guest House",
+      "Romlan Guesthouse",
+      "Tabo Cottages"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Carikan museum atau galeri budaya megah peradaban Toba yang lokasinya ada di Samosir, yang menampilkan diorama sejarah rinci Letusan supervulcan Toba purba lengkap visual artefak purba, disediakan fasilitas pemandu wisata pakar (tour guide) berlisensi yang bisa interaktif tanya jawab dua arah santai, serta memiliki atap luar berasitektur ukiran memanjang cantik menawan.",
+    "ground_truths": [
+      "Museum Huta Bolon Simanindo",
+      "Istana Raja Sisingamangaraja",
+      "Patung Sigalegale"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Mau restoran berkonsep rumah kaca spesialisasi sajian pizza bakar kyu yang pemandangan alamnya menyorot lurus ke pantai pulau Sibandang tenang berpasir putih terang benderang menyilaukan, pengunjung dibolehkan sembari bermain pasir volly, dengan perasaan atmosfir hembusan kuat ocean vibe khas tropical.",
+    "ground_truths": [
+      "Elios - Rumah Makan Khas Batak",
+      "Pantai Pasir Putih Lumban Bul-bul Balige",
+      "Pantai Pasir Putih Parbaba"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Adakah surga tersembunyi berjenis Air terjun perawan tersembunyi jauh yang debit luncurannya deras bukan air terjun menempel tebing biasa tapi membelah tebing curam dua batu karang raksasa kehitaman letaknya harus bisa ditempuh pakai motor tanpa jalan kaki jauh pegal bisa diperuntukan tempat berendam airnya es membeku mematikan rasa lelah sejenak lari dari rutinitas serba hingar bingar kota membosankan sumpek.",
+    "ground_truths": [
+      "Air Terjun Janji",
+      "Air Terjun Efrata",
+      "Air Terjun Sipisopiso"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Tolong pesankan hotel bintang paling tertinggi standar internasional mewah mentereng interior lobinya dihiasi lampu gantung kristal mencampur corak warna tenun tradisional nyentrik unik mahal elegan, harus di posisi titik tinggi kota Parapat berhawa pegunungan asri pagi buta berkabut membasahi kaca melayani fasilitas fine-dining makan malam romantis intim merayakan anniversary dan stafnya di malam hari tak seramai siang menjaga kerahasiaan exclusive private getaway.",
+    "ground_truths": [
+      "Tabo Cottages",
+      "Hotel Sere Nauli",
+      "Elios - Rumah Makan Khas Batak"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Rekomendasi taman rekreasi air / pantai bayar masuknya gratis atau sukarela saja perairan danaunya memiliki dangkal landai amat bersih aman anak mengambang bisa sewa pelampung bebek warni lucu berderet dengan jejeran warung makan kecil di bawah naungan semilir dedaunan pinus berbisik menenangkan hati risau lelah berkendara.",
+    "ground_truths": [
+      "Romlan Guesthouse",
+      "Geosite Sipinsur",
+      "Pantai Batuhoda"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Cari tempat tongkrongan kaum gen Z anak kuda lokasinya di jalan utama lurus tak repot tanjakan curam punya lahan api unggun camping ground lebar terbuka bertiup oksigen segar murni malam biasa dipakai kumpul acara gitaran santuy menyusur gelap terangnya kobaran api semangat ditemani pesanan minuman bir bandrek tradisional bajigur bandrek memanaskan raga santai gelak tawa bebas tanpa sungkan berekspresi heboh lepas.",
+    "ground_truths": [
+      "Tataring Coffee 26 Resto",
+      "Romlan Guesthouse",
+      "Bukit Senyum"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Adakah pelabuhan tak komersil tersembunyi pesisir danau bangunannya panggung kayu tua melapuk eksotis mempesona mata seniman foto antik tempat nyender kapal nelayan kayu jukung warna warni asli yang menjual lauk langsung tangkapan net jaring jala ikan suasananya tidak bising klakson Feri murni irama deburan gelora ombak memecah riak sunyi mendayu magis sendu melankolis sore senja matahari jingga mempesona redup damai sekali?",
+    "ground_truths": [
+      "Bagus Bay Guest House",
+      "Bukit Holbung Samosir",
+      "Damasus Nataboan Resto"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Carikan desa adat berkonsep perkampungan utuh marga raja tidak dipungut tiket masuk resmi tiket bayar loket alias di alam masyarakat terbuka struktur tata rumah saling berhadapan satu sama lain khas rumah adat Batak kayu berdiri rapi simetris tertata estetis fotogenik tradisional banget bisa praktek numbuk padi lesung pakai alu memeras keringat pagi olahraga lokal kampung suasananya bersahaja komunal gotong royong membaur tanpa jarak sama sekali keramahtamahan tulus tak formal kaku dibatasi.",
+    "ground_truths": [
+      "Elios - Rumah Makan Khas Batak",
+      "Puncak Huta Ginjang",
+      "Museum Batak T.B. Silalahi Center"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Saya butuh spot pendakian ringan gunung / bukit santai hiking cocok untuk pemula baru meniti di bawah sejam mendaki puncaknya dataran luas membentang menyapu lepas 360 derajat Toba secara utuh tak terhalang objek pohon silindris satupun benar benar terbuka bebas bagus buat acara memotret pre-wedding menerbangkan gaun menjuntai tiupan angin kencang merasuk mendebarkan hati seru merinding bahagia estetik ciamik tiada dua?",
+    "ground_truths": [
+      "Bukit Senyum",
+      "Geosite Sipinsur",
+      "Patung Yesus, Bukit Sibeabea"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Tolong carikan air terjun di sekitar kawasan Danau Toba.",
+    "ground_truths": [
+      "Air Terjun Janji",
+      "Air Terjun Siboruon Balige",
+      "Air Terjun Sigarattung (Sampuran Na Pitu)"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Dimana saja lokasi wisata sejarah budaya Batak setempat?",
+    "ground_truths": [
+      "Pemandian Aek Sipitu Dai",
+      "Desa Wisata Tomok Parsaoran",
+      "Patung Sigalegale"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Ada rekomendasi hotel berbintang di Parapat?",
+    "ground_truths": [
+      "Carolina Hotel",
+      "Hotel Santo Djaya",
+      "Hotel Sere Nauli"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Saya mencari restoran yang menjual makanan khas Batak halal.",
+    "ground_truths": [
+      "Rumah Makan Khas Batak Moranta Simbolon",
+      "Elios - Rumah Makan Khas Batak",
+      "RM. GOMGOM KHAS BATAK"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Tempat makan mana saja yang populer di kota Balige?",
+    "ground_truths": [
+      "HOTEL BAHAGIA BALIGE",
+      "Labersa Hotel and Convention Center Toba, Balige",
+      "Mutiara Balige Hotel"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Adakah pantai berpasir putih di Pulau Samosir?",
+    "ground_truths": [
+      "Pantai Pasir Putih Lumban Bul-bul Balige",
+      "Pantai Pasir Putih Parbaba",
+      "Pantai Batuhoda"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Coba sebutkan bukit untuk melihat panorama matahari terbit.",
+    "ground_truths": [
+      "Bukit Doa",
+      "Bukit Beta Tuk-Tuk",
+      "Bukit Holbung Samosir"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Di mana lokasi museum peninggalan ulos Batak?",
+    "ground_truths": [
+      "Batak Museum",
+      "Museum Batak T.B. Silalahi Center",
+      "Pengrajin Ulos Batak Dan Karo (Christwo Tenun)"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Berikan rekomendasi penginapan berjenis guesthouse.",
+    "ground_truths": [
+      "Romlan Guesthouse",
+      "Pagar Batu Resto 26 Penginapan",
+      "Rumah Makan Muslim Penginapan"
+    ]
+  },
+  {
+    "level": 1,
+    "query": "Sebutkan tempat dengan pemandangan pegunungan hijau.",
+    "ground_truths": [
+      "Geosite Sipinsur",
+      "Puncak Huta Ginjang",
+      "Wisata Bukit Gibeon"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Carikan hotel atau penginapan yang punya fasilitas kolam renang.",
+    "ground_truths": [
+      "Hotel Sere Nauli",
+      "Carolina Hotel",
+      "Labersa Hotel and Convention Center Toba, Balige"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Saya mau berkemah (camping) di tempat yang suasananya sangat sunyi/tenang.",
+    "ground_truths": [
+      "Caldera Toba Nomadic Escape (Glamour Camping)",
+      "Bukit Holbung Samosir",
+      "Pakkodian Toba"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Di mana ada pantai pasir putih yang aman untuk wisata anak dan keluarga?",
+    "ground_truths": [
+      "Pantai Pasir Putih Lumban Bul-bul Balige",
+      "Pantai Pasir Putih Parbaba",
+      "Pantai Parparean 2"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Butuh restoran yang memiliki pemandangan langsung ke Danau Toba.",
+    "ground_truths": [
+      "Damar Toba ~ Lakeside Eatery & Stay",
+      "Labersa Hotel and Convention Center Toba, Balige",
+      "Toba Village inn"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Ada rekomendasi wisata alam yang arsitekturnya masih berbentuk rumah panggung tradisional?",
+    "ground_truths": [
+      "Elios - Rumah Makan Khas Batak",
+      "Geosite Sipinsur",
+      "Pulau Pardepur"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Kasih info bukit savana yang jalurnya mudah diakses mobil.",
+    "ground_truths": [
+      "Bukit Holbung Samosir",
+      "Bukit Senyum",
+      "Patung Yesus, Bukit Sibeabea"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Ingin melihat benda-benda kuno di tempat bernuansa sakral/mistis.",
+    "ground_truths": [
+      "Batak Museum",
+      "Bagus Bay Guest House",
+      "Jenny'S Restaurant"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Cari kafe tempat ngopi yang punya sarana live music.",
+    "ground_truths": [
+      "Kafe Pak Pos",
+      "Lago Hotel & Resto",
+      "Tataring Coffee 26 Resto"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Ada penginapan resort pinggir danau yang harganya ramah di kantong (murah)?",
+    "ground_truths": [
+      "Thyesza Hotel Resort",
+      "Bagus Bay Guest House",
+      "Carolina Hotel"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Butuh rekomendasi taman bunga berhawa sangat sejuk berangin.",
+    "ground_truths": [
+      "Taman Eden 100",
+      "Taman Wisata Iman Sitinjo",
+      "Tiara Bunga Hotel"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Saya cari kafe buat nongkrong yang punya pemandangan langsung ke danau tapi suasananya romantis buat pasangan.",
+    "ground_truths": [
+      "Tepi Danau Bistro",
+      "Kafe Pak Pos",
+      "Pantai Pasir Putih Parbaba"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Carikan bukit untuk melihat matahari terbit (sunrise) yang medannya gampang diakses.",
+    "ground_truths": [
+      "Bukit Doa",
+      "Bukit Holbung Samosir",
+      "Bukit Senyum"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Ada desa wisata yang punya peninggalan patung batu ukiran kuno di mana saya bisa belajar menenun ulos?",
+    "ground_truths": [
+      "Patung Sigalegale",
+      "Batu Kursi Raja Siallagan ( Stone Chair Of King Siallagan )",
+      "Desa Wisata Silalahi Pagar Batu"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Ingin menginap di resort pinggir tebing dengan nuansa tenang dari hiruk pikuk, serta memiliki rute sepeda.",
+    "ground_truths": [
+      "Thyesza Hotel Resort",
+      "Tuan Nagani Paradise",
+      "Toba Village inn"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Cari restoran halal di sekitar Balige yang arsitekturnya dominan kayu tradisional dan suasananya sejuk berangin.",
+    "ground_truths": [
+      "Betesda Cafe Balige",
+      "Vany Villa Balige",
+      "Labersa Hotel and Convention Center Toba, Balige"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Butuh spot foto jembatan gantung yang latarnya hamparan sawah dan tidak terlalu ramai turis.",
+    "ground_truths": [
+      "Bukit Senyum",
+      "Pasar Tomok",
+      "Air Soda Parbubu"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Mau berwisata ke pulau kecil tak berpenghuni, udaranya tropis sejuk, dipakai khusus untuk acara pertemuan rahasia / retreat.",
+    "ground_truths": [
+      "Geosite Sipinsur",
+      "Tabo Cottages",
+      "Museum Batak T.B. Silalahi Center"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Tolong rekomendasikan wisata kuliner dengan pemandangan senja yang punya menu makanan pedas andaliman.",
+    "ground_truths": [
+      "Maruba Restaurant",
+      "Sekapur Sirih",
+      "Widya Restaurant"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Adakah pemandian air soda yang kolamnya terbuat dari batu alam dengan hawa sekitar menghangatkan tubuh?",
+    "ground_truths": [
+      "Air Soda Parbubu",
+      "Pemandian Alam Bah Damanik",
+      "Aek Rangat Pangururan"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Cari taman bermain outdoor dengan lahan berkontur bukit hijau di mana anak bisa naik ATV.",
+    "ground_truths": [
+      "Bukit Sidihoni",
+      "Caldera Toba Nomadic Escape (Glamour Camping)",
+      "Salib Kasih Tarutung"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Saya mau restoran bersertifikat halal (Kategori/Limitasi) di daerah Tuk-Tuk yang arsitekturnya menyerupai bongkahan kayu alam (Pemandangan Objek), menjorok ke tepi hamparan danau biru (Pemandangan Alam), dan hawanya sangat sunyi cocok untuk bekerja (Suasana).",
+    "ground_truths": [
+      "Geosite Sipinsur",
+      "Batu Gantung",
+      "Danau Sidihoni"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Carikan tempat wisata alam bebas (Kategori) yang menyediakan penyewaan sepeda (Aktivitas), punya spot foto estetik latar kincir angin (Pemandangan), dan letaknya sangat tersembunyi jauh dari pusat keramaian turis (Suasana).",
+    "ground_truths": [
+      "Boli Boli Hot Spring",
+      "Bukit Indah Simarjarunjung",
+      "Bukit Senyum"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Butuh rekomendasi hotel glamping (glamorous camping) yang memiliki interior beda ala suku Indian tendanya, berada di tengah hutan tropis rimbun, dan sangat aman ditinggali wanita sendirian apalagi pas malam hari.",
+    "ground_truths": [
+      "Geosite Sipinsur",
+      "Aek Rangat Pangururan",
+      "Bagus Bay Guest House"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Di mana ada wisata atraksi budaya (Sigale-Gale) yang memperbolehkan pengunjung ikut menari langsung, pelatarannya berupa lapangan batu ceper batu alam asli, dan vibrasinya begitu megah sakral menghipnotis turis asing.",
+    "ground_truths": [
+      "Pantai Batuhoda",
+      "Batu Gantung",
+      "Danau Sidihoni"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Mau pergi mencari wisata agro (pertanian) yang pengunjung bisa memetik buah/sayuran sendiri pakai tangan, lansekap panggung sawahnya terlihat berundak indah ala Bali, anginnya menusuk tulang walau sedang siang siang terik.",
+    "ground_truths": [
+      "Bukit Senyum",
+      "Puncak Huta Ginjang",
+      "Togaraja"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Tolong cari kafe coffee shop modern berlatar belakang lagu jazz instrumen pelan, bangunannya didominasi kaca serba terbuka (open space), baristanya bersedia mengajari cara seduh (V60 dll), dan pengunjung disajikan lanskap air terjun kecil buatan dalam kafe.",
+    "ground_truths": [
+      "Tataring Coffee 26 Resto",
+      "Kafe Pak Pos",
+      "Tabo Cottages"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Adakah guesthouse bertingkat tinggi dengan tangga putar meliuk, menyediakan kolam air panas uap alam asli dari belerang, sangat diincar oleh pasangan bulan madu yang butuh privasi tinggi tidak ada distraksi anak kecil ribut, serta makanan sarapannya gaya eropa pancake / roti?",
+    "ground_truths": [
+      "Romlan Guesthouse",
+      "Bukit Senyum",
+      "Aek Rangat Pangururan"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Ingin mencari destinasi bukit tertinggi agar bisa main paralayang menembus awan tebal, ada jalan setapaknya bersih tertata blok beton rapi tak berlumpur merah, cocok sekali di saat subuh hari karena nuansa damai tak tersentuh teknologi berisik, warung mienya juga mudah didapat.",
+    "ground_truths": [
+      "Bukit Senyum",
+      "Bukit Holbung Samosir",
+      "Puncak Huta Ginjang"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Rekomendasi titik pesisir pantai tao yang pasiran abu-abu basah, menyediakan olahraga banana boat berkelompok ramai-ramai, tidak kotor oleh tumpukan sampah sisa bakar-bakar kemah berserakan, dan sensasinya seperti liburan energi meluap-luap yang semarak sekali di akhir pekan.",
+    "ground_truths": [
+      "Pantai Pasir Putih Lumban Bul-bul Balige",
+      "Carolina Hotel",
+      "Geosite Sipinsur"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Cari pusat sejarah peninggalan benda ukiran mitologi (berhala dewa), bangunannya tua tidak direnovasi modern karena mempertahankan style orisinal horor/gelapnya, kita dibolehkan meraba sebagian area arca pakai tangan, hawa di sana pun biasanya terkesan mengintimidasi yang buat merinding penasaran memacu adrenalin gembira tegang.",
+    "ground_truths": [
+      "Tuan Nagani Paradise",
+      "Batak Museum",
+      "Batu Kursi Raja Siallagan ( Stone Chair Of King Siallagan )"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Saya butuh penginapan yang harganya ramah di kantong / murah, punya balkon privat berjejer rapi langsung menghadap ke pelabuhan penyeberangan kapal, menyediakan layanan penyewaan kano / perahu dayung kecil asik untuk berkeliling pelan, dan yang paling penting lingkungannya sangat ramah balita bebas serangga serta tenang sekali saat lelap malam harinya tanpa kebisingan kelab.",
+    "ground_truths": [
+      "Bagus Bay Guest House",
+      "Romlan Guesthouse",
+      "Tabo Cottages"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Carikan museum atau galeri budaya megah peradaban Toba yang lokasinya ada di Samosir, yang menampilkan diorama sejarah rinci Letusan supervulcan Toba purba lengkap visual artefak purba, disediakan fasilitas pemandu wisata pakar (tour guide) berlisensi yang bisa interaktif tanya jawab dua arah santai, serta memiliki atap luar berasitektur ukiran memanjang cantik menawan.",
+    "ground_truths": [
+      "Museum Huta Bolon Simanindo",
+      "Istana Raja Sisingamangaraja",
+      "Patung Sigalegale"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Mau restoran berkonsep rumah kaca spesialisasi sajian pizza bakar kyu yang pemandangan alamnya menyorot lurus ke pantai pulau Sibandang tenang berpasir putih terang benderang menyilaukan, pengunjung dibolehkan sembari bermain pasir volly, dengan perasaan atmosfir hembusan kuat ocean vibe khas tropical.",
+    "ground_truths": [
+      "Elios - Rumah Makan Khas Batak",
+      "Pantai Pasir Putih Lumban Bul-bul Balige",
+      "Pantai Pasir Putih Parbaba"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Adakah surga tersembunyi berjenis Air terjun perawan tersembunyi jauh yang debit luncurannya deras bukan air terjun menempel tebing biasa tapi membelah tebing curam dua batu karang raksasa kehitaman letaknya harus bisa ditempuh pakai motor tanpa jalan kaki jauh pegal bisa diperuntukan tempat berendam airnya es membeku mematikan rasa lelah sejenak lari dari rutinitas serba hingar bingar kota membosankan sumpek.",
+    "ground_truths": [
+      "Air Terjun Janji",
+      "Air Terjun Efrata",
+      "Air Terjun Sipisopiso"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Tolong pesankan hotel bintang paling tertinggi standar internasional mewah mentereng interior lobinya dihiasi lampu gantung kristal mencampur corak warna tenun tradisional nyentrik unik mahal elegan, harus di posisi titik tinggi kota Parapat berhawa pegunungan asri pagi buta berkabut membasahi kaca melayani fasilitas fine-dining makan malam romantis intim merayakan anniversary dan stafnya di malam hari tak seramai siang menjaga kerahasiaan exclusive private getaway.",
+    "ground_truths": [
+      "Tabo Cottages",
+      "Hotel Sere Nauli",
+      "Elios - Rumah Makan Khas Batak"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Rekomendasi taman rekreasi air / pantai bayar masuknya gratis atau sukarela saja perairan danaunya memiliki dangkal landai amat bersih aman anak mengambang bisa sewa pelampung bebek warni lucu berderet dengan jejeran warung makan kecil di bawah naungan semilir dedaunan pinus berbisik menenangkan hati risau lelah berkendara.",
+    "ground_truths": [
+      "Romlan Guesthouse",
+      "Geosite Sipinsur",
+      "Pantai Batuhoda"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Cari tempat tongkrongan kaum gen Z anak kuda lokasinya di jalan utama lurus tak repot tanjakan curam punya lahan api unggun camping ground lebar terbuka bertiup oksigen segar murni malam biasa dipakai kumpul acara gitaran santuy menyusur gelap terangnya kobaran api semangat ditemani pesanan minuman bir bandrek tradisional bajigur bandrek memanaskan raga santai gelak tawa bebas tanpa sungkan berekspresi heboh lepas.",
+    "ground_truths": [
+      "Tataring Coffee 26 Resto",
+      "Romlan Guesthouse",
+      "Bukit Senyum"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Adakah pelabuhan tak komersil tersembunyi pesisir danau bangunannya panggung kayu tua melapuk eksotis mempesona mata seniman foto antik tempat nyender kapal nelayan kayu jukung warna warni asli yang menjual lauk langsung tangkapan net jaring jala ikan suasananya tidak bising klakson Feri murni irama deburan gelora ombak memecah riak sunyi mendayu magis sendu melankolis sore senja matahari jingga mempesona redup damai sekali?",
+    "ground_truths": [
+      "Bagus Bay Guest House",
+      "Bukit Holbung Samosir",
+      "Damasus Nataboan Resto"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Carikan desa adat berkonsep perkampungan utuh marga raja tidak dipungut tiket masuk resmi tiket bayar loket alias di alam masyarakat terbuka struktur tata rumah saling berhadapan satu sama lain khas rumah adat Batak kayu berdiri rapi simetris tertata estetis fotogenik tradisional banget bisa praktek numbuk padi lesung pakai alu memeras keringat pagi olahraga lokal kampung suasananya bersahaja komunal gotong royong membaur tanpa jarak sama sekali keramahtamahan tulus tak formal kaku dibatasi.",
+    "ground_truths": [
+      "Elios - Rumah Makan Khas Batak",
+      "Puncak Huta Ginjang",
+      "Museum Batak T.B. Silalahi Center"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Saya butuh spot pendakian ringan gunung / bukit santai hiking cocok untuk pemula baru meniti di bawah sejam mendaki puncaknya dataran luas membentang menyapu lepas 360 derajat Toba secara utuh tak terhalang objek pohon silindris satupun benar benar terbuka bebas bagus buat acara memotret pre-wedding menerbangkan gaun menjuntai tiupan angin kencang merasuk mendebarkan hati seru merinding bahagia estetik ciamik tiada dua?",
+    "ground_truths": [
+      "Bukit Senyum",
+      "Geosite Sipinsur",
+      "Patung Yesus, Bukit Sibeabea"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Simpan kueri di atas ke dalam file berformat `.json` atau masukkan ke program python penguji Anda.",
+    "ground_truths": [
+      "Air Soda Parbubu",
+      "Air Terjun Sigarattung (Sampuran Na Pitu)",
+      "Bukit Senyum"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Anotasikan *Ground Truth* secara manual untuk ke-50 kueri tersebut dengan melihat `data/wisata-toba-unified-final.csv`.",
+    "ground_truths": [
+      "Bukit Indah Simarjarunjung",
+      "Geosite Sipinsur",
+      "Jenny'S Restaurant"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Hitung HR@4, MRR@4, Recall@4, dan NDCG@4 pada masing-masing tingkatan ini (dari 1 sampai 5) di setiap mode Pipeline (Proposed, Baseline, A).",
+    "ground_truths": [
+      "Aek Rangat Pangururan",
+      "Air Soda Parbubu",
+      "Elios - Rumah Makan Khas Batak"
+    ]
+  }
+]

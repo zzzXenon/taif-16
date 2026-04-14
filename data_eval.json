@@ -1,0 +1,135 @@
+{
+  "csv": [
+    {
+      "file": "data - hotel-metadata.csv",
+      "cols": [
+        "place-id",
+        "place-name",
+        "price-per-head",
+        "check-in",
+        "check-out",
+        "recommend-menu",
+        "Fasilitas",
+        "address",
+        "lat-long",
+        "place-type",
+        "place-rating",
+        "status"
+      ],
+      "has_desc": false,
+      "preview_desc": null
+    },
+    {
+      "file": "data - resto-hotel-v2.csv",
+      "cols": [
+        "place-name",
+        "reviewer-id",
+        "name",
+        "reviewer-rating",
+        "review-text",
+        "published-at",
+        "scraped-at-date",
+        "reviewer-type"
+      ],
+      "has_desc": false,
+      "preview_desc": null
+    },
+    {
+      "file": "data - resto-metadata.csv",
+      "cols": [
+        "place-id",
+        "place-name",
+        "price-per-head",
+        "opening-hours",
+        "recommend-menu",
+        "Fasilitas",
+        "address",
+        "lat-long",
+        "place-type",
+        "place-rating",
+        "status"
+      ],
+      "has_desc": false,
+      "preview_desc": null
+    },
+    {
+      "file": "data - wisata-metadata.csv",
+      "cols": [
+        "place-id",
+        "place-name",
+        "place-type",
+        "entry-fee",
+        "lat-long",
+        "operational-hour",
+        "address",
+        "place-rating",
+        "status",
+        "operational-day",
+        "place-ownership",
+        "description"
+      ],
+      "has_desc": true,
+      "preview_desc": null
+    },
+    {
+      "file": "data - wisata-v2.csv",
+      "cols": [
+        "place-name",
+        "reviewer-id",
+        "name",
+        "reviewer-rating",
+        "review-text",
+        "published-at",
+        "scraped-at-date"
+      ],
+      "has_desc": false,
+      "preview_desc": null
+    }
+  ],
+  "pdf": [
+    {
+      "file": "akomodasi.pdf",
+      "preview": "Akomodasi   Labersa   Deskripsi  : Labersa Toba Hotel & Convention Center adalah hotel bintang 4  dengan 152 kamar, terletak di antara pusat bisnis dan objek  wisata yang cocok untuk perjalanan bisnis dan liburan Anda di  Sumatera Utara. Jaraknya hanya sekitar 25  menit dari Bandara  Internasional Sisingamangaraja XII dan 3 menit dari ibu kota  Kabupaten Toba (Balige). Labersa Toba Hotel & Convent"
+    },
+    {
+      "file": "data cafe.pdf",
+      "preview": "Cafe Damar Toba ~ Lakeside Eatery & Stay     Alamat   : Damar Toba ~ Lakeside Eatery & Stay (Jl. Pemandian No.94, Lumban Silintong,  Balige, Toba, North Sumatra 22312)   Harga   : 35000 -150000   Ulasan   : Rating 5/5. Kamarnya bersih & nyaman. Sewaktu check in, ada  welcome drink. Staf  ramah & sangat membantu. Makanannya enak. Di area restoran bisa duduk menikmati pemandangan  danau. Ada area be"
+    },
+    {
+      "file": "data fasilitas umum.pdf",
+      "preview": "Fasilitas Umum     Rumah Sakit HKBP Balige   Deskripsi  : Rumah Sakit Umum HKBP Balige adalah rumah sakit umum milik  Organisasi HKBP yang berlokasi di Balige, Kabupaten Toba, Sumatera  Utara, dengan kelas C dan telah meraih akreditasi Paripurna/Bintang  Lima.   Long & Lat  : 2.3307859686452255, 99.06605320514075   Lokasi   : Jl. Gereja No.17, Lumban Dolok Haume Bange, Kec. Balige, Toba   Kategori"
+    },
+    {
+      "file": "data pub bar.pdf",
+      "preview": "Mesikel and Bar     Alamat   : Mesikel and Bar (Jl. Trimurti No.58, Berastagi)   Harga   : -  Ulasan   : -    Sivanet Mejersquad Bar     Alamat   : Sivanet Mejersquad (Jl. Gundaling II, Berastagi)   Harga   : -  Ulasan   : -    Pangkas Alter Delauw Bar     Alamat   : Pangkas Alter Delauw (Jl. Gundaling I, Berastagi)   Harga   : -  Ulasan   : -    Roy\"S PUB     Alamat   : Roy\"S PUB (Kawasan Tuktuk "
+    },
+    {
+      "file": "data pusat oleh oleh.pdf",
+      "preview": "Pusat Oleh Oleh Batikta     Alamat   : Batikta Balige   Harga   : -  Ulasan   : Rating 5/5. cappuccino nya enak banget! nendang sejak seruputan pertama. Ada rasa  gurih dan pahit kopi yang terasa sampai di pangkal lidah. Aku coba kopi tetes juga, lumayan bisa  mengganjal mata kantuk yang kurang tidur. Tempat ini keren, di belakang masih bisa menatap  hamparan hijau padi yang dikotak -kotak olah pe"
+    },
+    {
+      "file": "data rumah makan non halal.pdf",
+      "preview": "Tapian Nadenggan Restaurant (Non - Halal)     Alamat   : Tapian Nadenggan Restaurant   Harga   : 25000 -50000   Ulasan   : Rating 5/5. Babi goreng dan SOP nya mantul klw ke Dolok sanggul wajib kesini klw  mau mkn babi ada juga saksang dan arsik babi nya sambal andalimannya mantap pool... (Sc:  google.com)     Kedai Bakmie Panjang (Non - Halal)     Alamat   : Kedai Bakmie Panjang   Harga   : 25000 "
+    },
+    {
+      "file": "data rumah makan.pdf",
+      "preview": "Restoran Sinar Minang (Halal)     Alamat   : RM. Sinar Minang (Desa Meat Kecamatan Tampahan, Meat, Kec. Balige, Toba,  Sumatera Utara 22312)   Harga   : 25000 \u2013 45000   Ulasan   : Rating 5/5. Cobain Rendang, Dendeng, sambal sama Telor Bebek  Gorengnya....muantab banget. (Sc: google.com)     Warung Makan Muslim Bu Nurul (Halal)     Alamat   : Warung Makan Muslim Bu Nurul (Jl. P. Siantar, Sibola Hot"
+    },
+    {
+      "file": "fasum.pdf",
+      "preview": "Fasilitas Umum \u2014 Toba Rumah Sakit : Rumah Sakit HKBP Balige Rumah Ibadah : Masjid Al Hadhona Balige (Jl. Mesjid, Napitupulu Bagasan) Bank/ATM : BRI Balige SPBU : SPBU Lumban Lobu Swalayan : tidak ada Apotek : tidak ada Money Changer : tidak ada Pasar Tradisional : Pasar Balerong Balige Pelabuhan : Pelabuhan Balige Rumah Sakit : Rumah Sakit Porsea Rumah Ibadah : Masjid An-Nur Paritohan (Paritohan,P"
+    },
+    {
+      "file": "profiles.pdf",
+      "preview": "Profiles Kabupaten : Toba Jumlah Pengunjung Nasional : 751225 Jumlah Pengunjung Internasional : 379 Bahasa : Indonesia, Batak Toba, Inggris Kisaran Budget : 500.000 - 1.500.000 Musim Terbaik : Juni-Agustus, Desember-Januari Cuaca Terbaik : April-September (Kering) Musim yang Tidak Disarankan : November-Februari (Hujan lebat) Kabupaten : Simalungun Jumlah Pengunjung Nasional : 2595069 Jumlah Pengun"
+    },
+    {
+      "file": "transportasi.pdf",
+      "preview": "Transportasi   Kapal Ihan Batak   Deskripsi  : KMP Ihan Batak adalah kapal ferry Ro -Ro pertama yang dibangun  oleh pemerintah untuk Danau Toba, berkapasitas 300 Gross  Tonage (GT) dan mampu mengangkut sekitar 280 penumpang  serta 35 -40 kendaraan. Kapal ini dioperasikan oleh ASDP untuk  melayani rute penyeberangan penting di Danau Toba, seperti  Ajibata -Ambarita, demi meningkatkan konektivitas d"
+    },
+    {
+      "file": "wisata.pdf",
+      "preview": "Tempat   Wisata   Pantai   Lumban   Bulbul   Deskripsi   :   Pantai   Lumban   Bulbul,   juga   dikenal   sebagai   Pantai   Bulbul,   adalah   pantai   unik   yang   terletak   di   tepi   Danau   Toba,   tepatnya   di   Desa   Lumban   Bulbul,   Kecamatan   Balige,   Kabupaten   Toba,   Sumatera   Utara.   Pantai   ini   terkenal   dengan   pasir   putihnya   dan   menjadi   daya   tarik   wisat"
+    }
+  ]
+}
