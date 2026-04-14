@@ -37,7 +37,7 @@ SINGLE_TURN_MODES = ["baseline", "pipeline_a_only", "proposed"]
 # - proposed: CQR ON + Pipeline A Retrieval (sistem penuh)
 MULTI_TURN_MODES = ["baseline", "pipeline_b_only", "proposed"]
 
-REQUEST_TIMEOUT = 180  # detik
+REQUEST_TIMEOUT = 600  # detik (Pipeline A/Proposed bisa lambat karena multi-LLM call)
 
 
 # ============================================================
@@ -93,20 +93,37 @@ def calculate_ndcg_at_k(retrieved_items, ground_truths):
 
 def extract_place_name_from_source(doc_string):
     """Mengekstrak nama tempat dari string source_document API response."""
-    # Format Baseline: "Source 1: Nama Tempat: Bukit Holbung Samosir\nKategori: Wisata..."
-    lines = doc_string.split('\n')
-    for line in lines:
-        if "Nama Tempat:" in line:
-            nama = line.split("Nama Tempat:")[1].strip()
-            if ". Kategori" in nama:
-                nama = nama.split(". Kategori")[0].strip()
-            return nama
+    # Format Baseline: "Source 1: Nama Tempat: Bukit Holbung Samosir. Kategori: Wisata..."
+    if "Nama Tempat:" in doc_string:
+        try:
+            nama = doc_string.split("Nama Tempat:")[1].strip()
+            # Potong di separator berikutnya
+            for sep in [". Kategori", ".\n", "\n"]:
+                if sep in nama:
+                    nama = nama.split(sep)[0].strip()
+                    break
+            # Bersihkan titik di akhir
+            return nama.rstrip('.')
+        except:
+            pass
     # Format Proposed/Pipeline A: "🎯 PlaceName (Category) [Base Skor: ...]"
     if "🎯" in doc_string:
         try:
             after_emoji = doc_string.split("🎯")[1].strip()
             place_name = after_emoji.split("(")[0].strip()
             return place_name
+        except:
+            pass
+    # Format place_name di metadata
+    if "place_name" in doc_string:
+        try:
+            nama = doc_string.split("place_name")[1]
+            nama = nama.split(":")[1].strip().strip('"').strip("'")
+            for sep in [",", "\n", "}"]:
+                if sep in nama:
+                    nama = nama.split(sep)[0].strip().strip('"')
+                    break
+            return nama
         except:
             pass
     return "Tempat Tidak Diketahui"
@@ -126,6 +143,9 @@ def send_chat_request(session_id, message, ablation_mode):
         else:
             print(f"    ⚠ HTTP {res.status_code}: {res.text[:100]}")
             return None
+    except requests.exceptions.ReadTimeout:
+        print(f"    ⏱ Timeout ({REQUEST_TIMEOUT}s) untuk mode '{ablation_mode}'")
+        return None
     except Exception as e:
         print(f"    ❌ Request error: {e}")
         return None
@@ -145,6 +165,9 @@ def compute_all_metrics(retrieved_places, ground_truths):
         "recall": calculate_recall_at_k(retrieved_places, ground_truths),
         "ndcg": calculate_ndcg_at_k(retrieved_places, ground_truths),
     }
+
+
+DEBUG_RAW_DOCS = True  # Set False setelah parsing sudah benar
 
 
 # ============================================================
@@ -190,6 +213,14 @@ def run_single_turn_evaluation():
             resp = send_chat_request(session_id, query, mode)
             
             if resp:
+                # Debug: cetak raw source_documents sekali saja untuk lihat formatnya
+                if DEBUG_RAW_DOCS and idx == 0:
+                    raw_docs = resp.get("source_documents", [])
+                    print(f"\n    [DEBUG] Raw source_documents for mode '{mode}':")
+                    for di, rd in enumerate(raw_docs[:2]):
+                        print(f"      Doc {di}: {rd[:150]}...")
+                    print()
+                
                 retrieved = extract_retrieved_places(resp)
                 metrics = compute_all_metrics(retrieved, ground_truths)
                 
@@ -427,6 +458,7 @@ def main():
     parser = argparse.ArgumentParser(description="Evaluasi RAG Pipeline Terpadu")
     parser.add_argument("--single-turn", action="store_true", help="Hanya evaluasi single-turn (A, Baseline, Proposed)")
     parser.add_argument("--multi-turn", action="store_true", help="Hanya evaluasi multi-turn (Pipeline B CQR)")
+    parser.add_argument("--limit", type=int, default=0, help="Batasi jumlah kueri (0 = semua). Gunakan --limit 5 untuk tes cepat.")
     args = parser.parse_args()
     
     # Redirect semua output ke console + file
