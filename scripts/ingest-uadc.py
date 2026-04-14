@@ -9,16 +9,17 @@ from langchain_chroma import Chroma
 from langchain_core.documents import Document
 
 import sys
-# Make sure we can import from the current project directory
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Import schemas dari folder src/
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BASE_DIR, 'src'))
 from schemas import AttractionFeatures
 
 # ==========================================
 # KONFIGURASI
 # ==========================================
-CSV_FILE_PATH = "./wisata-toba-final-v2.csv"
-CHECKPOINT_FILE = "./uadc_checkpoint.json"
-CHROMA_PATH = "./chroma_db_uadc"
+CSV_FILE_PATH = os.path.join(BASE_DIR, "data", "wisata-toba-unified-final.csv")
+CHECKPOINT_FILE = os.path.join(BASE_DIR, "data", "uadc_checkpoint.json")
+CHROMA_PATH = os.path.join(BASE_DIR, "data", "chroma_db_uadc")
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 
 # Prompt Ekstraksi LLM
@@ -69,13 +70,16 @@ def process_and_checkpoint_data(limit=None):
     
     print(f"Total baris raw: {len(df)}")
     
-    # KUNCI UTAMA: Gabungkan (Group) ribuan ulasan menjadi 1 baris per tempat wisata
-    df = df.groupby(['item_id', 'place_name', 'category']).agg({
-        'reviews': lambda x: ' | '.join(x.astype(str)),
-        'rating': 'mean'
-    }).reset_index()
+    # Dataset wisata-toba-unified-final.csv sudah diagregasi (1 baris per tempat)
+    # Tambahkan item_id jika belum ada
+    if 'item_id' not in df.columns:
+        df['item_id'] = range(1, len(df) + 1)
+    if 'rating' not in df.columns:
+        df['rating'] = 0.0
+    if 'reviews' not in df.columns:
+        df['reviews'] = df['description']
     
-    print(f"Setelah di-group berdasarkan tempat wisata: {len(df)} tempat unik.")
+    print(f"Total tempat wisata: {len(df)} tempat unik.")
     
     if limit:
         df = df.head(limit)
@@ -138,7 +142,7 @@ def build_chroma_database(extracted_data):
     print(f"Menyiapkan model embedding {EMBEDDING_MODEL}...")
     embedding_model = HuggingFaceEmbeddings(
         model_name=EMBEDDING_MODEL,
-        model_kwargs={'device': 'cpu', 'local_files_only': True},
+        model_kwargs={'device': 'cpu', 'local_files_only': False},
         encode_kwargs={'normalize_embeddings': True}
     )
     

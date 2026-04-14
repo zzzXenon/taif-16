@@ -8,9 +8,9 @@ from langchain_core.documents import Document
 # ==========================================
 # KONFIGURASI
 # ==========================================
-CSV_FILE_PATH = "./wisata-toba-cleaned.csv"
-CHROMA_PATH = "./chroma_db_baseline"
-# MODEL_NAME = "BAAI/bge-m3"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CSV_FILE_PATH = os.path.join(BASE_DIR, "data", "wisata-toba-unified-final.csv")
+CHROMA_PATH = os.path.join(BASE_DIR, "data", "chroma_db_baseline")
 MODEL_NAME = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 
 def load_and_process_data(file_path):
@@ -28,29 +28,23 @@ def load_and_process_data(file_path):
     
     documents = []
     
-    for _, row in df.iterrows():
+    for idx, row in df.iterrows():
         # ---------------------------------------------------------
         # TEKNIK BASELINE: CONTEXTUAL FLATTENING
         # Menggabungkan metadata penting ke dalam teks utama.
-        # Format: "Nama: [X]. Kategori: [Y]. Alamat: [Z]. Ulasan: [Review]"
+        # Format: "Nama: [X]. Kategori: [Y]. Deskripsi: [Z]"
         # ---------------------------------------------------------
         content_text = (
             f"Nama Tempat: {row['place_name']}. "
             f"Kategori: {row['category']}. "
-            f"Alamat: {row['address']}. "
-            f"Rating: {row['rating']}. "
-            f"Ulasan: {row['reviews']}"
+            f"Deskripsi dan Ulasan: {row['description']}"
         )
         
-        # Metadata tetap disimpan untuk keperluan referensi nanti (opsional di baseline)
         metadata = {
-            "item_id": str(row['item_id']),
             "place_name": row['place_name'],
             "category": row['category'],
-            "rating": float(row['rating']) if row['rating'] else 0.0,
         }
         
-        # Membuat objek Document LangChain
         doc = Document(page_content=content_text, metadata=metadata)
         documents.append(doc)
         
@@ -87,7 +81,7 @@ def save_to_chroma(chunks):
     # Gunakan device='cpu' jika tidak punya GPU NVIDIA
     embedding_model = HuggingFaceEmbeddings(
         model_name=MODEL_NAME,
-        model_kwargs={'device': 'cpu', 'local_files_only': True}, # Ganti ke CUDA jika pakai server datacenter 
+        model_kwargs={'device': 'cpu', 'local_files_only': False},
         encode_kwargs={'normalize_embeddings': True}
     )
 
