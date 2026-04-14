@@ -53,7 +53,7 @@ def startup_event():
     print("Mempersiapkan database wisata KLASIK (Baseline)...")
     baseline_db = Chroma(persist_directory=os.path.join(DATA_DIR, "chroma_db_baseline"), embedding_function=embedding_model)
     
-    llm = ChatOllama(model="qwen3:1.7b", temperature=0.7)
+    llm = ChatOllama(model="qwen3:8b", temperature=0.7)
     retriever = baseline_db.as_retriever(search_kwargs={"k": 4})
     baseline_qa = RetrievalQA.from_chain_type(
         llm=llm,
@@ -103,7 +103,7 @@ async def chat_endpoint(request: ChatRequest):
         
         if not cqr.is_search_required:
             print("\nAiYukToba (Chit-Chat):")
-            llm = ChatOllama(model="qwen3:1.7b", temperature=0.5)
+            llm = ChatOllama(model="qwen3:8b", temperature=0.5)
             casual_response = llm.invoke(f"Berdasarkan percakapan ini, jawab sapaan pengguna dengan ramah: '{query}'")
             reply = casual_response.content
             

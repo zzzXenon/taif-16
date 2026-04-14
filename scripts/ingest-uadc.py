@@ -35,7 +35,7 @@ Gunakan bahasa Indonesia. Jika tidak ada informasi eksplisit untuk suatu dimensi
 
 def extract_features_with_llm(place_name, category, reviews):
     """Mengekstrak 4 dimensi fitur dari ulasan menggunakan LLM"""
-    llm = ChatOllama(model="qwen3:1.7b", temperature=0.1)
+    llm = ChatOllama(model="qwen3:8b", temperature=0.1)
     parser = PydanticOutputParser(pydantic_object=AttractionFeatures)
     
     prompt = ChatPromptTemplate.from_messages([

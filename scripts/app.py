@@ -38,7 +38,7 @@ def get_baseline_vector_db():
     return Chroma(persist_directory="./chroma_db_baseline", embedding_function=embedding_model)
 
 def get_baseline_qa_chain(baseline_db):
-    llm = ChatOllama(model="qwen3:1.7b", temperature=0.7)
+    llm = ChatOllama(model="qwen3:8b", temperature=0.7)
     retriever = baseline_db.as_retriever(search_kwargs={"k": 4})
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
@@ -57,7 +57,7 @@ def get_baseline_vector_db():
     return Chroma(persist_directory="./chroma_db_baseline", embedding_function=embedding_model)
 
 def get_baseline_qa_chain(baseline_db):
-    llm = ChatOllama(model="qwen3:1.7b", temperature=0.7)
+    llm = ChatOllama(model="qwen3:8b", temperature=0.7)
     retriever = baseline_db.as_retriever(search_kwargs={"k": 4})
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
@@ -122,7 +122,7 @@ def main():
             if not cqr.is_search_required:
                 # Chit-chat Mode
                 print("\n🤖 AiYukToba:")
-                llm = ChatOllama(model="qwen3:1.7b", temperature=0.5)
+                llm = ChatOllama(model="qwen3:8b", temperature=0.5)
                 casual_response = llm.invoke(f"Berdasarkan percakapan ini, jawab sapaan pengguna dengan ramah: '{query}'")
                 print(casual_response.content)
                 print("=" * 60)
