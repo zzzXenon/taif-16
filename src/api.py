@@ -124,7 +124,8 @@ async def chat_endpoint(request: ChatRequest):
         result = baseline_qa.invoke({"query": cqr.standalone_query})
         final_output = result["result"]
         for i, doc in enumerate(result["source_documents"]):
-            source_docs.append(f"Source {i+1}: {doc.page_content[:200]}...")
+            place_name = doc.metadata.get("place_name", "Tidak Diketahui")
+            source_docs.append(f"Source {i+1}: Nama Tempat: {place_name}. Kategori: {doc.metadata.get('category', '')}\nIsi: {doc.page_content[:200]}...")
             
         save_message(session_id, "user", query, cqr.standalone_query)
         save_message(session_id, "ai", final_output)
