@@ -25,8 +25,7 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 
 SINGLE_TURN_GT_PATH = os.path.join(DATA_DIR, "eval_ground_truths.json")
 MULTI_TURN_GT_PATH = os.path.join(DATA_DIR, "eval_pipeline_b.json")
-RESULTS_OUTPUT_PATH = os.path.join(DATA_DIR, "eval_results.json")
-REPORT_OUTPUT_PATH = os.path.join(DATA_DIR, "eval_report.txt")
+# Output paths will be generated dynamically in main()
 
 # Mode ablasi yang diperiksa untuk single-turn
 SINGLE_TURN_MODES = ["baseline", "pipeline_a_only", "proposed"]
@@ -166,8 +165,7 @@ def compute_all_metrics(retrieved_places, ground_truths):
         "ndcg": calculate_ndcg_at_k(retrieved_places, ground_truths),
     }
 
-
-DEBUG_RAW_DOCS = True  # Set False setelah parsing sudah benar
+DEBUG_RAW_DOCS = False  # Matikan untuk eksekusi real
 
 
 # ============================================================
@@ -418,7 +416,7 @@ def print_multi_turn_report(results_db):
             print(f"{mode:<18} | {sum(hrs)/len(hrs):.4f} | {sum(mrrs)/len(mrrs):.4f} | {sum(recs)/len(recs):.4f} | {sum(ndcgs)/len(ndcgs):.4f}")
 
 
-def save_results(single_turn_results, multi_turn_results):
+def save_results(single_turn_results, multi_turn_results, output_path):
     """Menyimpan semua hasil ke file JSON."""
     output = {}
     if single_turn_results:
@@ -426,9 +424,8 @@ def save_results(single_turn_results, multi_turn_results):
     if multi_turn_results:
         output["multi_turn"] = multi_turn_results
     
-    with open(RESULTS_OUTPUT_PATH, 'w', encoding='utf-8') as f:
+    with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
-    print(f"\n💾 Hasil evaluasi disimpan di: {RESULTS_OUTPUT_PATH}")
 
 
 # ============================================================
@@ -455,19 +452,41 @@ class Tee:
 
 
 def main():
+    global SINGLE_TURN_MODES, MULTI_TURN_MODES
     parser = argparse.ArgumentParser(description="Evaluasi RAG Pipeline Terpadu")
     parser.add_argument("--single-turn", action="store_true", help="Hanya evaluasi single-turn (A, Baseline, Proposed)")
     parser.add_argument("--multi-turn", action="store_true", help="Hanya evaluasi multi-turn (Pipeline B CQR)")
     parser.add_argument("--limit", type=int, default=0, help="Batasi jumlah kueri (0 = semua). Gunakan --limit 5 untuk tes cepat.")
+    parser.add_argument("--mode", type=str, help="Hanya evaluasi mode spesifik (misal: 'baseline', 'pipeline_a_only', 'proposed')")
     args = parser.parse_args()
+    
+    file_suffix = ""
+    # Filter mode berdasarkan argumen
+    if args.mode:
+        if args.mode in SINGLE_TURN_MODES:
+            SINGLE_TURN_MODES = [args.mode]
+        if args.mode in MULTI_TURN_MODES:
+            MULTI_TURN_MODES = [args.mode]
+        file_suffix += f"_{args.mode}"
+    else:
+        file_suffix += "_all"
+        
+    if args.single_turn:
+        file_suffix += "_ST"
+    if args.multi_turn:
+        file_suffix += "_MT"
+        
+    results_path = os.path.join(DATA_DIR, f"eval_results{file_suffix}.json")
+    report_path = os.path.join(DATA_DIR, f"eval_report{file_suffix}.txt")
     
     # Redirect semua output ke console + file
     from datetime import datetime
-    tee = Tee(REPORT_OUTPUT_PATH, mode='w')
+    tee = Tee(report_path, mode='w')
     sys.stdout = tee
     
     print(f"Evaluasi dimulai: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"Laporan disimpan ke: {REPORT_OUTPUT_PATH}")
+    print(f"Laporan teks disimpan ke: {report_path}")
+    print(f"Data JSON di: {results_path}")
     
     # Default: jalankan keduanya jika tidak ada flag
     run_st = True
