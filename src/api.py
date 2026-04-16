@@ -72,6 +72,7 @@ class ChatResponse(BaseModel):
     reply: str
     standalone_query: str
     source_documents: list[str] = []
+    json_parse_fails: int = 0
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
@@ -161,7 +162,11 @@ async def chat_endpoint(request: ChatRequest):
 
     reranked_results = llm_reranker(cqr.standalone_query, top_results, uadc_data_dict)
     
+    format_fails = 0
     for res in reranked_results:
+        if res.get("format_failed", False):
+            format_fails += 1
+            
         source_docs.append(
             f"🎯 {res['place_name']} ({res['category']}) "
             f"[Base Skor: {res['total_score']:.4f} -> LRR Skor: {res.get('lrr_score', 'N/A')}/10.0] "
@@ -177,7 +182,8 @@ async def chat_endpoint(request: ChatRequest):
     return ChatResponse(
         reply=final_output,
         standalone_query=cqr.standalone_query,
-        source_documents=source_docs
+        source_documents=source_docs,
+        json_parse_fails=format_fails
     )
 
 if __name__ == "__main__":

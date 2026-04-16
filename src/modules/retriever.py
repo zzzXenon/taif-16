@@ -16,13 +16,17 @@ def get_ier_decomposition(user_input):
         ("human", "{query}")
     ])
     
-    chain = prompt | llm | parser
-    response = chain.invoke({
-        "query": user_input,
-        "format_instructions": parser.get_format_instructions()
-    })
-    
-    return response.dimensions
+    try:
+        response = chain.invoke({
+            "query": user_input,
+            "format_instructions": parser.get_format_instructions()
+        })
+        return response.dimensions
+    except Exception as e:
+        # Fallback empty dimensions if JSON fails
+        from schemas import IntentDimensions
+        print(f"IER JSON Parse Error: {e}")
+        return IntentDimensions(expected_landscape_content="", expected_activities="", expected_atmosphere="")
 
 def dimension_aware_search(vector_db, intent_dimensions, w_lan=1.0, w_act=1.0, w_atm=1.0, top_k=5):
     """
@@ -117,10 +121,12 @@ def llm_reranker(user_query, top_results, uadc_data_dict):
             
             res["lrr_score"] = llm_eval.score
             res["lrr_reasoning"] = llm_eval.reasoning
+            res["format_failed"] = False
         except Exception as e:
             # Fallback jika LLM gagal mengurai JSON
             res["lrr_score"] = res["total_score"] # gunakan base score sebagai fallback
             res["lrr_reasoning"] = f"Gagal mengevaluasi reasoning: {e}"
+            res["format_failed"] = True
         
         reranked_results.append(res)
     

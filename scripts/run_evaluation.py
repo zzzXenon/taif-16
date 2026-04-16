@@ -198,6 +198,7 @@ def run_single_turn_evaluation():
         m: {L: {"hr": [], "mrr": [], "recall": [], "ndcg": []} for L in range(1, 6)} 
         for m in SINGLE_TURN_MODES
     }
+    results_db["meta"] = {m: {"json_fails": 0, "total_lrr_calls": 0} for m in SINGLE_TURN_MODES}
 
     for idx, item in enumerate(eval_data):
         level = item["level"]
@@ -222,10 +223,16 @@ def run_single_turn_evaluation():
                 retrieved = extract_retrieved_places(resp)
                 metrics = compute_all_metrics(retrieved, ground_truths)
                 
+                # Track Format Compliance errors
+                fails = resp.get("json_parse_fails", 0)
+                results_db["meta"][mode]["json_fails"] += fails
+                if mode != "baseline":
+                    results_db["meta"][mode]["total_lrr_calls"] += 4 # top_k=4 in API
+                
                 for metric_name, val in metrics.items():
                     results_db[mode][level][metric_name].append(val)
                     
-                print(f"    {mode:18s} → HR={metrics['hr']:.1f} MRR={metrics['mrr']:.3f} RCL={metrics['recall']:.3f} NDCG={metrics['ndcg']:.3f}  |  Retrieved: {retrieved[:3]}")
+                print(f"    {mode:18s} → HR={metrics['hr']:.1f} MRR={metrics['mrr']:.3f} RCL={metrics['recall']:.3f} NDCG={metrics['ndcg']:.3f} | Fails={fails}  |  Retrieved: {retrieved[:3]}")
             else:
                 print(f"    {mode:18s} → GAGAL")
     
@@ -364,6 +371,17 @@ def print_single_turn_report(results_db):
             avg_rec = sum(m["recall"]) / len(m["recall"])
             avg_ndcg = sum(m["ndcg"]) / len(m["ndcg"])
             print(f"{mode:<18} | {avg_hr:.4f} | {avg_mrr:.4f} | {avg_rec:.4f} | {avg_ndcg:.4f}")
+
+    print(f"\n--- FORMAT COMPLIANCE RATE (JSON PARSING) ---")
+    for mode in SINGLE_TURN_MODES:
+        if mode == "baseline": continue
+        fails = results_db.get("meta", {}).get(mode, {}).get("json_fails", 0)
+        total = results_db.get("meta", {}).get(mode, {}).get("total_lrr_calls", 0)
+        if total == 0: 
+            print(f"{mode:<18} | N/A")
+            continue
+        rate = ((total - fails) / total) * 100
+        print(f"{mode:<18} | JSON Fails: {fails} / {total} candidate ops | Compliance Rate: {rate:.1f}%")
 
 
 def print_multi_turn_report(results_db):

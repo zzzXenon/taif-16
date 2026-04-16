@@ -1,17 +1,57 @@
-# semua template instruksi
+# semua template few-shot (completion)
 
 SYSTEM_PROMPT_IER = """
-Anda adalah pakar analisis perjalanan Danau Toba. 
-Bedah query pengguna menjadi 3 dimensi berdasarkan UGuideRAG:
-1. Landscape and Content (bentang alam, arsitektur, lanskap fisik, peninggalan sejarah, fasilitas).
-2. Activities (kegiatan yang bisa dilakukan).
-3. Atmosphere (nuansa dan mood).
+Tugas: Ekstraksi fitur pencarian tempat wisata menjadi 3 dimensi. Pahami contoh-contoh di bawah ini dan hasilkan output JSON murni tanpa kalimat pengantar untuk query yang baru.
+
+---
+Query: "Cari tempat yang sejuk buat kemping"
+Output:
+{
+  "expected_landscape_content": "Pemandangan alam terbuka, area hijau, pegunungan",
+  "expected_activities": "Kemping, berkemah, memasang tenda",
+  "expected_atmosphere": "Sejuk, dingin, alami"
+}
+---
+Query: "Kafe pinggir danau yang estetik buat kerja"
+Output:
+{
+  "expected_landscape_content": "Kafe dengan pemandangan danau, desain estetik, gedung",
+  "expected_activities": "Bekerja, WFC, nongkrong, minum kopi",
+  "expected_atmosphere": "Tenang, nyaman, inspiratif"
+}
+---
 """
 
 SYSTEM_PROMPT_LRR = """
-Anda adalah asisten travel cerdas (LLM Re-ranker) yang bertugas mengevaluasi kecocokan tempat wisata terhadap kueri pengguna.
-Tugas Anda: Berikan skor 0.0 hingga 10.0 berdasarkan seberapa baik fitur tempat tersebut memenuhi kueri pengguna secara logis, kontekstual, dan naratif.
+Tugas: Berikan evaluasi rasional dan skor logika (0.0 hingga 10.0) seberapa cocok fitur Kandidat Tempat Wisata ini terhadap Kueri Pengguna.
 
+---
+Kueri Pengguna: "Tempat nongkrong malam"
+Data Kandidat Tempat Wisata:
+Nama: Cafe ABC
+Landscape & Content: Kedai kopi modern
+Activities: Makan, ngopi santai
+Atmosphere: Ramai, kasual
+Deskripsi Umum: Buka 24 jam dengan view kota.
+Output:
+{
+  "score": 9.5,
+  "reasoning": "Sangat cocok karena buka pada malam hari, memiliki aktivitas sesuai untuk nongkrong dan minum kopi, serta suasana kasual."
+}
+---
+Kueri Pengguna: "Tempat berenang untuk anak"
+Data Kandidat Tempat Wisata:
+Nama: Bukit Menoreh
+Landscape & Content: Bukit hijau, tracking trail
+Activities: Mendaki, foto-foto
+Atmosphere: Tenang
+Deskripsi Umum: -
+Output:
+{
+  "score": 1.0,
+  "reasoning": "Sangat tidak sesuai karena fasilitasnya adalah mendaki bukit, yang tidak memiliki sarana berenang apalagi aman untuk anak-anak."
+}
+---
 Kueri Pengguna: "{query}"
 
 Data Kandidat Tempat Wisata:
@@ -20,8 +60,6 @@ Landscape & Content: {landscape}
 Activities: {activities}
 Atmosphere: {atmosphere}
 Deskripsi Umum: {summary}
-
-Berikan alasan (reasoning) yang kuat, lalu tentukan skor akhir.
 """
 
 SYSTEM_PROMPT_NLG = """
@@ -36,15 +74,30 @@ Aturan:
 """
 
 SYSTEM_PROMPT_CQR = """
-Anda adalah asisten AI yang ahli dalam meresolusi konteks percakapan (Conversational Query Rewriting/CQR).
-Tugas Anda adalah membaca "Kueri Saat Ini" dan menganalisis "Riwayat Chat Terakhir" untuk menghasilkan kueri tunggal yang berdiri sendiri (Standalone Query) tanpa menghilangkan intisari intent pengguna.
+Tugas: Conversational Query Rewriting. Analisis "Riwayat Chat Terakhir" untuk merangkai "Kueri Saat Ini" menjadi sebuah Standalone Query tanpa menghilangkan maknanya.
 
-Aturan:
-1. Jika "Kueri Saat Ini" mengandung kata ganti kabur seperti "di sana", "tempat itu", atau "bagaimana kalau besok?", terjemahkan menjadi rujukan spesifik dari riwayat chat.
-2. JANGAN menjawab pertanyaannya, Anda HANYA MENGUBAH / MERETRANSKRIPI kalimatnya agar jelas dibaca sistem pencarian database (Search).
-3. Jika kueri adalah chat biasa (contoh: "halo", "terima kasih", "oke sip", "saya setuju"), keluarkan standalone_query apa adanya, tetapi atur is_search_required = False.
-4. Jika kueri membahas tentang rencana wisata, objek wisata, atau bertanya informasi yang membutuhkan database, atur is_search_required = True.
-
+---
+Riwayat Chat (Pesan Terlama -> Terbaru):
+User: Tolong carikan air terjun di danau toba
+AI: Ini ada 3 air terjun...
+Kueri Saat Ini:
+Berapa harga tiket masuk tempat yang pertama?
+Output:
+{
+  "standalone_query": "Berapa harga tiket masuk tempat air terjun yang pertama direkomendasikan?",
+  "is_search_required": true
+}
+---
+Riwayat Chat (Pesan Terlama -> Terbaru):
+User: Hai AiYukToba!
+Kueri Saat Ini:
+Terima kasih sarannya!
+Output:
+{
+  "standalone_query": "Terima kasih sarannya!",
+  "is_search_required": false
+}
+---
 Riwayat Chat (Pesan Terlama -> Terbaru):
 {chat_history}
 
