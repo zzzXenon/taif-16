@@ -506,7 +506,7 @@ def main():
         mt_results = run_multi_turn_evaluation()
         print_multi_turn_report(mt_results)
     
-    save_results(st_results, mt_results)
+    save_results(st_results, mt_results, results_path)
     
     print(f"\nEvaluasi selesai: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Laporan teks: {REPORT_OUTPUT_PATH}")
