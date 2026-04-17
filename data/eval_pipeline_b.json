@@ -1,0 +1,75 @@
+{
+  "description": "Dataset Evaluasi Pipeline B (Multi-Turn CQR) — Standar TREC CAsT. Evaluasi dilakukan pada Turn Terakhir saja.",
+  "scenarios": [
+    {
+      "id": "scenario_1",
+      "name": "Coreference Resolution Rentang Panjang (8 Turns)",
+      "description": "Sistem harus sadar 'yang' di Turn 8 merujuk ke kumpulan syarat dari 7 giliran sebelumnya.",
+      "turns": [
+        {"turn": 1, "message": "Tolong carikan penginapan murah di sekitar Balige."},
+        {"turn": 2, "message": "Apakah di sana fasilitasnya bersih?"},
+        {"turn": 3, "message": "Saya butuh yang menyediakan sarapan gratis pagi hari."},
+        {"turn": 4, "message": "Berapa jarak dari pusat kota biasanya?"},
+        {"turn": 5, "message": "Oh, kalau yang halamannya langsung menghadap danau ada tidak?"},
+        {"turn": 6, "message": "Bisa sekalian tempat parkirnya yang luas."},
+        {"turn": 7, "message": "Apakah udaranya cukup sejuk?"},
+        {"turn": 8, "message": "Kalau begitu tolong pilihkan yang kamarnya paling estetik buat foto."}
+      ],
+      "eval_turn": 8,
+      "expected_standalone_intents": "penginapan murah di Balige, bersih, sarapan gratis, dekat pusat kota, menghadap danau, parkir luas, udara sejuk, kamar estetik untuk foto",
+      "ground_truths": [
+        "Labersa Hotel and Convention Center Toba, Balige",
+        "Mutiara Balige Hotel",
+        "Vany Villa Balige"
+      ]
+    },
+    {
+      "id": "scenario_2",
+      "name": "Context Shift & Negative Constraint (9 Turns)",
+      "description": "Sistem harus berhasil mereset paksa 'hutan pinus' & 'Samosir', dan fokus pada pencarian Pantai pasir putih di Balige dengan banana boat, aman anak, dan dekat makanan laut.",
+      "turns": [
+        {"turn": 1, "message": "Saya ingin mencari wisata alam hutan pinus di Toba."},
+        {"turn": 2, "message": "Adakah yang suasananya sepi dan tenang untuk bekerja?"},
+        {"turn": 3, "message": "Bisa dipakai sambil pasang hammock (tempat tidur gantung) tidak?"},
+        {"turn": 4, "message": "Ah tunggu, saya berubah pikiran. Jangan hutan pinus. Carikan saja pantai pasir putih."},
+        {"turn": 5, "message": "Lokasinya jangan di Samosir karena terlalu jauh dari rute saya."},
+        {"turn": 6, "message": "Kalau di kawasan pesisir Balige apakah ada pantainya?"},
+        {"turn": 7, "message": "Adakah wahana penyewaan pisang karet (banana boat) di pantai itu?"},
+        {"turn": 8, "message": "Apakah gelombangnya cenderung aman untuk anak-anak bermain?"},
+        {"turn": 9, "message": "Carikan yang juga punya restoran makanan laut terdekat dari sana."}
+      ],
+      "eval_turn": 9,
+      "expected_standalone_intents": "pantai pasir putih di kawasan Balige (BUKAN Samosir, BUKAN hutan pinus), ada banana boat, aman untuk anak, dan dekat restoran makanan laut",
+      "ground_truths": [
+        "Pantai Pasir Putih Lumban Bul-bul Balige",
+        "Pantai Parparean 2",
+        "Pantai Batuhoda"
+      ]
+    },
+    {
+      "id": "scenario_3",
+      "name": "Penelusuran Subjek Ellipsis Ekstrem (11 Turns)",
+      "description": "LLM CQR harus berjuang menghindari Memory Forgetting di Turn 11 untuk mengekstrak kueri super-intent secara sempurna.",
+      "turns": [
+        {"turn": 1, "message": "Sebutkan nama restoran yang menyajikan masakan Batak Otentik."},
+        {"turn": 2, "message": "Apakah mereka menyajikan ikan mas arsik yang enak?"},
+        {"turn": 3, "message": "Di mana lokasi persisnya berada?"},
+        {"turn": 4, "message": "Saya cuma mau tempat yang harganya sangat merakyat / murah tidak menguras kantong."},
+        {"turn": 5, "message": "Apakah di sana tersedia menu mi gomak bumbu andaliman juga?"},
+        {"turn": 6, "message": "Mengenai interior, apakah desain bangunannya masih menggunakan arsitektur tradisional panggung kayu?"},
+        {"turn": 7, "message": "Bisa tidak bersantap sambil melihat pemandangan hamparan sawah dari dalam?"},
+        {"turn": 8, "message": "Apakah akses aspal jalannya cukup mulus kalau saya bawa mobil besar?"},
+        {"turn": 9, "message": "Satu lagi, hawanya sejuk berangin tidak di daerah sana?"},
+        {"turn": 10, "message": "Berapa lama rata-rata waktu pelayanannya melayani turis?"},
+        {"turn": 11, "message": "Baiklah, tarik kecocokan data restoran yang bukanya malam hari memajang lampu kelap-kelip dengan semua syarat ketat tadi."}
+      ],
+      "eval_turn": 11,
+      "expected_standalone_intents": "restoran masakan Batak otentik, arsik enak, murah, mi gomak andaliman, arsitektur tradisional kayu, pemandangan sawah, akses mulus mobil besar, sejuk berangin, buka malam hari, lampu kelap-kelip",
+      "ground_truths": [
+        "Rumah Makan Khas Batak Moranta Simbolon",
+        "Elios - Rumah Makan Khas Batak",
+        "RM. GOMGOM KHAS BATAK"
+      ]
+    }
+  ]
+}

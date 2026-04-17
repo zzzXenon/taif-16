@@ -18,7 +18,7 @@ vector_db = Chroma(
 
 print("✅ Vector DB load success")
 
-llm = ChatOllama(model="qwen3:4b")
+llm = ChatOllama(model="qwen3:8b")
 
 retriever = vector_db.as_retriever(search_kwargs={"k": 3})
 

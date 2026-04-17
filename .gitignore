@@ -45,6 +45,7 @@ data/*.json
 
 !data/wisata-toba-unified-final.csv
 !data/eval_ground_truths.json
+!data/eval_pipeline_b.json
 !data/referensi_tempat_wisata.json
 !data_eval.json
 

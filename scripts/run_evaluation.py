@@ -527,8 +527,8 @@ def main():
     save_results(st_results, mt_results, results_path)
     
     print(f"\nEvaluasi selesai: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"Laporan teks: {REPORT_OUTPUT_PATH}")
-    print(f"Data JSON: {RESULTS_OUTPUT_PATH}")
+    print(f"Laporan teks: {report_path}")
+    print(f"Data JSON: {results_path}")
     
     tee.close()
 
