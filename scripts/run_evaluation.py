@@ -172,7 +172,7 @@ DEBUG_RAW_DOCS = False  # Matikan untuk eksekusi real
 # BAGIAN 1: EVALUASI SINGLE-TURN (Pipeline A, Baseline, Proposed)
 # ============================================================
 
-def run_single_turn_evaluation():
+def run_single_turn_evaluation(limit=0):
     """Menjalankan evaluasi single-turn dari eval_ground_truths.json."""
     print("\n" + "=" * 60)
     print("BAGIAN 1: EVALUASI SINGLE-TURN (Baseline / Pipeline A / Proposed)")
@@ -190,8 +190,12 @@ def run_single_turn_evaluation():
     if not eval_data:
         print("❌ Tidak ada data evaluasi yang valid!")
         return None
-    
-    print(f"📊 Ditemukan {len(eval_data)} kueri siap evaluasi.\n")
+        
+    if limit > 0:
+        eval_data = eval_data[:limit]
+        print(f"📊 Ditemukan {len(data)} kueri, DIBATASI HANYA {limit} kueri untuk tes.\n")
+    else:
+        print(f"📊 Ditemukan {len(eval_data)} kueri siap evaluasi.\n")
     
     # Struktur: { mode: { level: { "hr": [], "mrr": [], "recall": [], "ndcg": [] } } }
     results_db = {
@@ -243,7 +247,7 @@ def run_single_turn_evaluation():
 # BAGIAN 2: EVALUASI MULTI-TURN (Pipeline B — CQR)
 # ============================================================
 
-def run_multi_turn_evaluation():
+def run_multi_turn_evaluation(limit=0):
     """Menjalankan evaluasi multi-turn dari eval_pipeline_b.json."""
     print("\n" + "=" * 60)
     print("BAGIAN 2: EVALUASI MULTI-TURN / PIPELINE B (CQR)")
@@ -260,8 +264,12 @@ def run_multi_turn_evaluation():
     if not scenarios:
         print("❌ Tidak ada skenario yang ditemukan!")
         return None
-    
-    print(f"📊 Ditemukan {len(scenarios)} skenario multi-turn.\n")
+        
+    if limit > 0:
+        scenarios = scenarios[:limit]
+        print(f"📊 DIBATASI HANYA {limit} skenario multi-turn untuk tes.\n")
+    else:
+        print(f"📊 Ditemukan {len(scenarios)} skenario multi-turn.\n")
     
     # Struktur: { mode: { scenario_id: { metrics + details } } }
     results_db = {m: {} for m in MULTI_TURN_MODES}
@@ -517,11 +525,11 @@ def main():
     mt_results = None
     
     if run_st:
-        st_results = run_single_turn_evaluation()
+        st_results = run_single_turn_evaluation(limit=args.limit)
         print_single_turn_report(st_results)
     
     if run_mt:
-        mt_results = run_multi_turn_evaluation()
+        mt_results = run_multi_turn_evaluation(limit=args.limit)
         print_multi_turn_report(mt_results)
     
     save_results(st_results, mt_results, results_path)
