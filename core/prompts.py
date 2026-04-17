@@ -6,19 +6,19 @@ Tugas: Ekstraksi fitur pencarian tempat wisata menjadi 3 dimensi. Pahami contoh-
 ---
 Query: "Cari tempat yang sejuk buat kemping"
 Output:
-{
+{{
   "expected_landscape_content": "Pemandangan alam terbuka, area hijau, pegunungan",
   "expected_activities": "Kemping, berkemah, memasang tenda",
   "expected_atmosphere": "Sejuk, dingin, alami"
-}
+}}
 ---
 Query: "Kafe pinggir danau yang estetik buat kerja"
 Output:
-{
+{{
   "expected_landscape_content": "Kafe dengan pemandangan danau, desain estetik, gedung",
   "expected_activities": "Bekerja, WFC, nongkrong, minum kopi",
   "expected_atmosphere": "Tenang, nyaman, inspiratif"
-}
+}}
 ---
 """
 
@@ -34,10 +34,10 @@ Activities: Makan, ngopi santai
 Atmosphere: Ramai, kasual
 Deskripsi Umum: Buka 24 jam dengan view kota.
 Output:
-{
+{{
   "score": 9.5,
   "reasoning": "Sangat cocok karena buka pada malam hari, memiliki aktivitas sesuai untuk nongkrong dan minum kopi, serta suasana kasual."
-}
+}}
 ---
 Kueri Pengguna: "Tempat berenang untuk anak"
 Data Kandidat Tempat Wisata:
@@ -47,10 +47,10 @@ Activities: Mendaki, foto-foto
 Atmosphere: Tenang
 Deskripsi Umum: -
 Output:
-{
+{{
   "score": 1.0,
   "reasoning": "Sangat tidak sesuai karena fasilitasnya adalah mendaki bukit, yang tidak memiliki sarana berenang apalagi aman untuk anak-anak."
-}
+}}
 ---
 Kueri Pengguna: "{query}"
 
@@ -83,20 +83,20 @@ AI: Ini ada 3 air terjun...
 Kueri Saat Ini:
 Berapa harga tiket masuk tempat yang pertama?
 Output:
-{
+{{
   "standalone_query": "Berapa harga tiket masuk tempat air terjun yang pertama direkomendasikan?",
   "is_search_required": true
-}
+}}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
 User: Hai AiYukToba!
 Kueri Saat Ini:
 Terima kasih sarannya!
 Output:
-{
+{{
   "standalone_query": "Terima kasih sarannya!",
   "is_search_required": false
-}
+}}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
 {chat_history}
