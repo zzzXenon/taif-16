@@ -36,7 +36,7 @@ SINGLE_TURN_MODES = ["baseline", "pipeline_a_only", "proposed"]
 # - proposed: CQR ON + Pipeline A Retrieval (sistem penuh)
 MULTI_TURN_MODES = ["baseline", "pipeline_b_only", "proposed"]
 
-REQUEST_TIMEOUT = 600  # detik (Pipeline A/Proposed bisa lambat karena multi-LLM call)
+REQUEST_TIMEOUT = 1000  # detik (Pipeline A/Proposed bisa lambat karena multi-LLM call)
 
 
 # ============================================================

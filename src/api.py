@@ -4,6 +4,7 @@ from pydantic import BaseModel
 import sys
 import os
 import json
+import time
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
@@ -73,9 +74,12 @@ class ChatResponse(BaseModel):
     standalone_query: str
     source_documents: list[str] = []
     json_parse_fails: int = 0
+    latency_seconds: float = 0.0
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
+    start_time_total = time.time()
+    
     query = request.message
     session_id = request.session_id
     ablation_mode = request.ablation_mode
@@ -100,21 +104,30 @@ async def chat_endpoint(request: ChatRequest):
             
         prompt_history.extend(recent_history)
         
+        start_cqr = time.time()
         cqr = rewrite_query(query, prompt_history)
+        time_cqr = time.time() - start_cqr
+        print(f"  [Timer] CQR Selesai dalam {time_cqr:.2f} detik")
         
         if not cqr.is_search_required:
             print("\nAiYukToba (Chit-Chat):")
+            start_nlg = time.time()
             llm = ChatOllama(model="qwen3:8b", temperature=0.5)
             casual_response = llm.invoke(f"Berdasarkan percakapan ini, jawab sapaan pengguna dengan ramah: '{query}'")
             reply = casual_response.content
+            time_nlg = time.time() - start_nlg
+            print(f"  [Timer] Casual Chat Selesai dalam {time_nlg:.2f} detik")
             
             save_message(session_id, "user", query, cqr.standalone_query)
             save_message(session_id, "ai", reply)
             
+            total_time = time.time() - start_time_total
+            print(f"== [Timer] TOTAL KESELURUHAN: {total_time:.2f} detik ==\n")
             return ChatResponse(
                 reply=reply,
                 standalone_query=cqr.standalone_query,
-                source_documents=[]
+                source_documents=[],
+                latency_seconds=total_time
             )
 
     source_docs = []
@@ -122,7 +135,11 @@ async def chat_endpoint(request: ChatRequest):
     if ablation_mode in ["pipeline_b_only", "baseline"]:
         mode_nm = "Pipeline B" if ablation_mode == "pipeline_b_only" else "Baseline RAG"
         print(f"\n[Ablation Study] Menjalankan {mode_nm} dengan Pencarian Standar...")
+        start_base = time.time()
         result = baseline_qa.invoke({"query": cqr.standalone_query})
+        time_base = time.time() - start_base
+        print(f"  [Timer] {mode_nm} QA Selesai dalam {time_base:.2f} detik")
+        
         final_output = result["result"]
         for i, doc in enumerate(result["source_documents"]):
             place_name = doc.metadata.get("place_name", "Tidak Diketahui")
@@ -131,26 +148,35 @@ async def chat_endpoint(request: ChatRequest):
         save_message(session_id, "user", query, cqr.standalone_query)
         save_message(session_id, "ai", final_output)
         
+        total_time = time.time() - start_time_total
+        print(f"== [Timer] TOTAL KESELURUHAN: {total_time:.2f} detik ==\n")
         return ChatResponse(
             reply=final_output,
             standalone_query=cqr.standalone_query,
-            source_documents=source_docs
+            source_documents=source_docs,
+            latency_seconds=total_time
         )
         
     # Proposed (A+B) or pipeline_a_only
     print("\nSedang memproses intent dengan IER...")
+    start_ier = time.time()
     try:
         intent = get_ier_decomposition(cqr.standalone_query)
+        time_ier = time.time() - start_ier
+        print(f"  [Timer] IER Selesai dalam {time_ier:.2f} detik")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Gagal mendekomposisi niat: {e}")
         
     print("\nSedang mencari kecocokan matematis di database dimensi...")
+    start_db = time.time()
     top_results = dimension_aware_search(
         vector_db=vector_db, 
         intent_dimensions=intent,
         w_lan=1.0, w_act=1.0, w_atm=1.0,
         top_k=4
     )
+    time_db = time.time() - start_db
+    print(f"  [Timer] Pencarian Database Selesai dalam {time_db:.2f} detik")
     
     print("\nSedang mengevaluasi ulang dengan LLM Re-Ranker...")
     try:
@@ -160,7 +186,10 @@ async def chat_endpoint(request: ChatRequest):
     except Exception:
         uadc_data_dict = {}
 
+    start_lrr = time.time()
     reranked_results = llm_reranker(cqr.standalone_query, top_results, uadc_data_dict)
+    time_lrr = time.time() - start_lrr
+    print(f"  [Timer] LRR Selesai dalam {time_lrr:.2f} detik")
     
     format_fails = 0
     for res in reranked_results:
@@ -174,16 +203,23 @@ async def chat_endpoint(request: ChatRequest):
         )
         
     print("\nMenyusun respons akhir (NLG)...")
+    start_nlg = time.time()
     final_output = generate_final_response(cqr.standalone_query, reranked_results)
+    time_nlg = time.time() - start_nlg
+    print(f"  [Timer] NLG Selesai dalam {time_nlg:.2f} detik")
     
     save_message(session_id, "user", query, cqr.standalone_query)
     save_message(session_id, "ai", final_output)
+    
+    total_time = time.time() - start_time_total
+    print(f"== [Timer] TOTAL KESELURUHAN: {total_time:.2f} detik ==\n")
     
     return ChatResponse(
         reply=final_output,
         standalone_query=cqr.standalone_query,
         source_documents=source_docs,
-        json_parse_fails=format_fails
+        json_parse_fails=format_fails,
+        latency_seconds=total_time
     )
 
 if __name__ == "__main__":
