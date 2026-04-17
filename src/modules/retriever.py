@@ -5,6 +5,16 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser, StrOutputParser
 from schemas import IEROutput, LRRScoring, CQRResult
 from core.prompts import SYSTEM_PROMPT_IER, SYSTEM_PROMPT_LRR, SYSTEM_PROMPT_NLG, SYSTEM_PROMPT_CQR
+import os
+
+os.makedirs("logs", exist_ok=True)
+
+def log_llm_response(module_name, raw_text):
+    """Fungsi pembantu untuk mencatat raw output LLM ke file log."""
+    with open("logs/json_parsing.log", "a", encoding="utf-8") as f:
+        f.write(f"\n[{module_name}] RAW OUTPUT:\n")
+        f.write(raw_text)
+        f.write("\n" + "-"*40 + "\n")
 
 def get_ier_decomposition(user_input):
     """Membedah niat menggunakan LLM dan mengembalikan objek IntentDimensions"""
@@ -16,16 +26,20 @@ def get_ier_decomposition(user_input):
         ("human", "{query}")
     ])
     
+    chain = prompt | llm | StrOutputParser()
+    
     try:
-        response = chain.invoke({
+        raw_response = chain.invoke({
             "query": user_input,
             "format_instructions": parser.get_format_instructions()
         })
+        log_llm_response("IER", raw_response)
+        response = parser.parse(raw_response)
         return response.dimensions
     except Exception as e:
         # Fallback empty dimensions if JSON fails
         from schemas import IntentDimensions
-        print(f"IER JSON Parse Error: {e}")
+        print(f"IER Parse Error: {e}")
         return IntentDimensions(expected_landscape_content="", expected_activities="", expected_atmosphere="")
 
 def dimension_aware_search(vector_db, intent_dimensions, w_lan=1.0, w_act=1.0, w_atm=1.0, top_k=5):
@@ -98,7 +112,7 @@ def llm_reranker(user_query, top_results, uadc_data_dict):
     prompt = ChatPromptTemplate.from_messages([
         ("system", SYSTEM_PROMPT_LRR + "\n\nFormat jawaban:\n{format_instructions}"),
     ])
-    chain = prompt | llm | parser
+    chain = prompt | llm | StrOutputParser()
 
     reranked_results = []
     
@@ -109,7 +123,7 @@ def llm_reranker(user_query, top_results, uadc_data_dict):
         features = candidate_info.get("features", {})
         
         try:
-            llm_eval = chain.invoke({
+            raw_eval = chain.invoke({
                 "query": user_query,
                 "place_name": res["place_name"],
                 "landscape": features.get("landscape_content_features", ""),
@@ -118,6 +132,8 @@ def llm_reranker(user_query, top_results, uadc_data_dict):
                 "summary": features.get("summary", ""),
                 "format_instructions": parser.get_format_instructions()
             })
+            log_llm_response(f"LRR - {res['place_name']}", raw_eval)
+            llm_eval = parser.parse(raw_eval)
             
             res["lrr_score"] = llm_eval.score
             res["lrr_reasoning"] = llm_eval.reasoning
@@ -186,12 +202,17 @@ def rewrite_query(current_query: str, chat_history: list) -> CQRResult:
         ("system", SYSTEM_PROMPT_CQR + "\n\nFormat output harus JSON sesuai skema berikut:\n{format_instructions}"),
     ])
     
-    chain = prompt | llm | parser
+    chain = prompt | llm | StrOutputParser()
     
-    result = chain.invoke({
-        "chat_history": history_str,
-        "current_query": current_query,
-        "format_instructions": parser.get_format_instructions()
-    })
-    
-    return result
+    try:
+        raw_result = chain.invoke({
+            "chat_history": history_str,
+            "current_query": current_query,
+            "format_instructions": parser.get_format_instructions()
+        })
+        log_llm_response("CQR", raw_result)
+        result = parser.parse(raw_result)
+        return result
+    except Exception as e:
+        print(f"CQR Parse Error: {e}")
+        return CQRResult(standalone_query=current_query, is_search_required=True)
