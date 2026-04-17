@@ -49,9 +49,7 @@ data/*.json
 !data/referensi_tempat_wisata.json
 !data_eval.json
 
-# Logs and Debug outputs
-logs/
-*.log
+# Debug outputs
 *.txt
 !requirements.txt
 
