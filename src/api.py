@@ -55,7 +55,7 @@ def startup_event():
     baseline_db = Chroma(persist_directory=os.path.join(DATA_DIR, "chroma_db_baseline"), embedding_function=embedding_model)
     
     llm = ChatOllama(model="qwen3:8b", temperature=0.7)
-    retriever = baseline_db.as_retriever(search_kwargs={"k": 4})
+    retriever = baseline_db.as_retriever(search_kwargs={"k": 5})
     baseline_qa = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",

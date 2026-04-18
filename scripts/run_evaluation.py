@@ -231,12 +231,12 @@ def run_single_turn_evaluation(limit=0):
                 fails = resp.get("json_parse_fails", 0)
                 results_db["meta"][mode]["json_fails"] += fails
                 if mode != "baseline":
-                    results_db["meta"][mode]["total_lrr_calls"] += 4 # top_k=4 in API
+                    results_db["meta"][mode]["total_lrr_calls"] += 5 # top_k=5 in API
                 
                 for metric_name, val in metrics.items():
                     results_db[mode][level][metric_name].append(val)
                     
-                print(f"    {mode:18s} → HR={metrics['hr']:.1f} MRR={metrics['mrr']:.3f} RCL={metrics['recall']:.3f} NDCG={metrics['ndcg']:.3f} | Fails={fails}  |  Retrieved: {retrieved[:3]}")
+                print(f"    {mode:18s} → HR={metrics['hr']:.1f} MRR={metrics['mrr']:.3f} RCL={metrics['recall']:.3f} NDCG={metrics['ndcg']:.3f} | Fails={fails}  |  Retrieved: {retrieved[:5]}")
             else:
                 print(f"    {mode:18s} → GAGAL")
     
@@ -368,7 +368,7 @@ def print_single_turn_report(results_db):
     
     for level in range(1, 6):
         print(f"\n--- INTENT LEVEL {level} ---")
-        print(f"{'Mode':<18} | {'HR@4':<6} | {'MRR@4':<6} | {'RCL@4':<6} | {'NDCG@4':<6}")
+        print(f"{'Mode':<18} | {'HR@5':<6} | {'MRR@5':<6} | {'RCL@5':<6} | {'NDCG@5':<6}")
         print("-" * 55)
         for mode in SINGLE_TURN_MODES:
             m = results_db[mode][level]
@@ -415,7 +415,7 @@ def print_multi_turn_report(results_db):
         
         sc_name = first_entry["scenario_name"] if first_entry else sc_id
         print(f"\n--- {sc_name} ---")
-        print(f"{'Mode':<18} | {'HR@4':<6} | {'MRR@4':<6} | {'RCL@4':<6} | {'NDCG@4':<6} | CQR Standalone Query")
+        print(f"{'Mode':<18} | {'HR@5':<6} | {'MRR@5':<6} | {'RCL@5':<6} | {'NDCG@5':<6} | CQR Standalone Query")
         print("-" * 100)
         
         for mode in MULTI_TURN_MODES:
@@ -428,7 +428,7 @@ def print_multi_turn_report(results_db):
     
     # Cetak rata-rata keseluruhan per mode
     print(f"\n--- RATA-RATA KESELURUHAN ---")
-    print(f"{'Mode':<18} | {'HR@4':<6} | {'MRR@4':<6} | {'RCL@4':<6} | {'NDCG@4':<6}")
+    print(f"{'Mode':<18} | {'HR@5':<6} | {'MRR@5':<6} | {'RCL@5':<6} | {'NDCG@5':<6}")
     print("-" * 55)
     for mode in MULTI_TURN_MODES:
         hrs, mrrs, recs, ndcgs = [], [], [], []
