@@ -58,27 +58,32 @@ def get_ca_ier(current_query: str, chat_history: list) -> CAIEROutput:
 
 def dimension_aware_search(vector_db, intent_dimensions, w_lan=1.0, w_act=1.0, w_atm=1.0, top_k=5):
     """
-    Mencari di ChromaDB per dimensi dengan bobot:
-    Score_i = w_lan * sim(query_lan, item_lan) + w_act * sim(query_act, item_act) + w_atm * sim(query_atm, item_atm)
+    Mencari di ChromaDB per dimensi dengan bobot.
+    Dimensi yang kosong (empty string) TIDAK akan dicari agar tidak mengacaukan skor.
     """
-    # 1. Kueri terpisah untuk setiap dimensi
-    res_lan = vector_db.similarity_search_with_relevance_scores(
-        intent_dimensions.expected_landscape_content, 
-        k=15, 
-        filter={"dimension": "landscape_content"}
-    )
+    res_lan, res_act, res_atm = [], [], []
     
-    res_act = vector_db.similarity_search_with_relevance_scores(
-        intent_dimensions.expected_activities, 
-        k=15, 
-        filter={"dimension": "activity"}
-    )
-    
-    res_atm = vector_db.similarity_search_with_relevance_scores(
-        intent_dimensions.expected_atmosphere, 
-        k=15, 
-        filter={"dimension": "atmosphere"}
-    )
+    # 1. Kueri terpisah untuk setiap dimensi, HANYA jika tidak kosong
+    if intent_dimensions.expected_landscape_content.strip():
+        res_lan = vector_db.similarity_search_with_relevance_scores(
+            intent_dimensions.expected_landscape_content, 
+            k=15, 
+            filter={"dimension": "landscape_content"}
+        )
+        
+    if intent_dimensions.expected_activities.strip():
+        res_act = vector_db.similarity_search_with_relevance_scores(
+            intent_dimensions.expected_activities, 
+            k=15, 
+            filter={"dimension": "activity"}
+        )
+        
+    if intent_dimensions.expected_atmosphere.strip():
+        res_atm = vector_db.similarity_search_with_relevance_scores(
+            intent_dimensions.expected_atmosphere, 
+            k=15, 
+            filter={"dimension": "atmosphere"}
+        )
 
     # Dictionary untuk menyimpan agregasi skor per item_id
     item_scores = {}
@@ -133,7 +138,7 @@ def cross_encoder_rerank(standalone_query, top_results, uadc_data_dict):
     except Exception as e:
         print(f"CrossEncoder failed to load: {e}")
         # Return fallback if model fails
-        return top_results[:3]
+        return top_results[:5]
         
     pairs = []
     for res in top_results:
