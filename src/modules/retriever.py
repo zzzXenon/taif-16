@@ -104,8 +104,10 @@ def dimension_aware_search(vector_db, intent_dimensions, w_lan=1.0, w_act=1.0, w
                     "dimensions_found": 0
                 }
             
-            # Tambahkan bagian bobot
-            item_scores[item_id]["total_score"] += weight * score
+            # Tambahkan offset +1.0 agar skor negatif (mis. -0.05) menjadi positif (0.95).
+            # Ini penting agar dokumen yang muncul di banyak dimensi mendapat skor total yang lebih tinggi.
+            positive_score = score + 1.0
+            item_scores[item_id]["total_score"] += weight * positive_score
             item_scores[item_id]["dimensions_found"] += 1
             
     # Memproses ketiga hasil kueri
@@ -168,7 +170,7 @@ def cross_encoder_rerank(standalone_query, top_results, uadc_data_dict):
     # Sort descending based on Cross-Encoder score
     top_results.sort(key=lambda x: x.get("lrr_score", 0), reverse=True)
     
-    return top_results[:3]
+    return top_results[:5]
 
 
 def generate_final_response(user_query, reranked_results, uadc_data_dict=None):

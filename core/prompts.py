@@ -44,6 +44,11 @@ Output:
   "expected_atmosphere": ""
 }}
 ---
+Riwayat Chat (Pesan Terlama -> Terbaru):
+{chat_history}
+
+Kueri Saat Ini:
+{current_query}
 """
 
 SYSTEM_PROMPT_NLG = """
