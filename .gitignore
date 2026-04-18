@@ -68,3 +68,4 @@ ollama
 info-source/
 docs/
 !docs/eval_dataset_queries.md
+opps/

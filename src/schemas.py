@@ -1,16 +1,13 @@
 from pydantic import BaseModel, Field
 from typing import List
 
-# 1. SKEMA UNTUK IER (INFERENCE / QUERY)
-class IntentDimensions(BaseModel):
-    """Skema untuk dekomposisi niat pengguna (IER) berdasarkan paper UGuideRAG."""
-    expected_landscape_content: str = Field(description="Elemen visual, fisik, alam, peninggalan sejarah, fasilitas, dan arsitektur yang diharapkan.")
-    expected_activities: str = Field(description="Tindakan atau kegiatan spesifik yang ingin dilakukan.")
-    expected_atmosphere: str = Field(description="Nuansa, mood, atau kualitas emosional yang dicari.")
-
-class IEROutput(BaseModel):
-    """Output dari modul Intent-Enhanced Retriever."""
-    dimensions: IntentDimensions
+class CAIEROutput(BaseModel):
+    """Skema untuk Context-Aware Intent Extraction (CA-IER)."""
+    standalone_query: str = Field(description="Kueri yang dibersihkan dari anaphora berdasarkan riwayat chat.")
+    is_search_required: bool = Field(description="True jika butuh database wisata, False jika chit-chat biasa.")
+    expected_landscape_content: str = Field(description="Kata kunci untuk lanskap/visual/fasilitas. Kosongkan jika tidak relevan.")
+    expected_activities: str = Field(description="Kata kunci untuk aktivitas. Kosongkan jika tidak relevan.")
+    expected_atmosphere: str = Field(description="Kata kunci untuk suasana/mood. Kosongkan jika tidak relevan.")
 
 # 2. SKEMA UNTUK UADC (INGESTION / DATABASE)
 class AttractionFeatures(BaseModel):
@@ -25,9 +22,4 @@ class LRRScoring(BaseModel):
     """Skema output untuk LLM Re-Ranking."""
     reasoning: str = Field(description="Alasan logis mengapa tempat wisata ini cocok atau tidak cocok dengan kueri pengguna.")
     score: float = Field(description="Skor relasional dari 0.0 hingga 10.0.")
-
-# 4. SKEMA UNTUK CQR (PIPELINE B - REWRITING)
-class CQRResult(BaseModel):
-    """Skema output dari Conversational Query Rewriting (CQR)."""
-    standalone_query: str = Field(description="Kueri yang telah dibersihkan dari referensi ambigu (anaphora) dan dapat berdiri sendiri. Tetap dalam bahasa Indonesia asli.")
-    is_search_required: bool = Field(description="True jika pengguna mencari rekomendasi/informasi wisata yang perlu ditarik dari database ChromaDB, False jika hanya sapaan casual/chit-chat.")
+

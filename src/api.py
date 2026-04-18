@@ -8,8 +8,8 @@ import time
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from modules.retriever import get_ier_decomposition, dimension_aware_search, llm_reranker, generate_final_response, rewrite_query
-from schemas import CQRResult
+from modules.retriever import get_ca_ier, dimension_aware_search, cross_encoder_rerank, generate_final_response
+from schemas import CAIEROutput
 from database import init_db, create_session, save_message, get_chat_history, get_first_query
 
 from langchain_chroma import Chroma
@@ -89,27 +89,34 @@ async def chat_endpoint(request: ChatRequest):
         
     create_session(session_id)
     
-    cqr = None
-    if ablation_mode in ["pipeline_a_only", "baseline"]:
-        print(f"\n[Ablation Study] Pipeline B (CQR) dinonaktifkan untuk mode '{ablation_mode}'.")
-        cqr = CQRResult(standalone_query=query, is_search_required=True)
+    ca_ier = None
+    if ablation_mode == "baseline":
+        print("\n[Ablation Study] Menjalankan Baseline RAG murni.")
+        ca_ier = CAIEROutput(
+            standalone_query=query, 
+            is_search_required=True,
+            expected_landscape_content="",
+            expected_activities="",
+            expected_atmosphere=""
+        )
     else:
-        print(f"\n[🔄 Modul CQR] Sedang membersihkan konteks...")
-        q1 = get_first_query(session_id)
-        recent_history = get_chat_history(session_id, limit=4)
-        
+        print(f"\n[🔄 Modul CA-IER] Memproses Kueri...")
         prompt_history = []
-        if q1 and (not recent_history or recent_history[0][1] != q1):
-            prompt_history.append(("user", f"[PESAN PERTAMA]: {q1}"))
-            
-        prompt_history.extend(recent_history)
         
-        start_cqr = time.time()
-        cqr = rewrite_query(query, prompt_history)
-        time_cqr = time.time() - start_cqr
-        print(f"  [Timer] CQR Selesai dalam {time_cqr:.2f} detik")
+        # Pipeline A Only ignores chat history to test isolated retrieval
+        if ablation_mode in ["proposed", "pipeline_b_only"]:
+            q1 = get_first_query(session_id)
+            recent_history = get_chat_history(session_id, limit=4)
+            if q1 and (not recent_history or recent_history[0][1] != q1):
+                prompt_history.append(("user", f"[PESAN PERTAMA]: {q1}"))
+            prompt_history.extend(recent_history)
         
-        if not cqr.is_search_required:
+        start_ca_ier = time.time()
+        ca_ier = get_ca_ier(query, prompt_history)
+        time_ca_ier = time.time() - start_ca_ier
+        print(f"  [Timer] CA-IER Selesai dalam {time_ca_ier:.2f} detik")
+        
+        if not ca_ier.is_search_required:
             print("\nAiYukToba (Chit-Chat):")
             start_nlg = time.time()
             llm = ChatOllama(model="qwen3:8b", temperature=0.5)
@@ -118,14 +125,14 @@ async def chat_endpoint(request: ChatRequest):
             time_nlg = time.time() - start_nlg
             print(f"  [Timer] Casual Chat Selesai dalam {time_nlg:.2f} detik")
             
-            save_message(session_id, "user", query, cqr.standalone_query)
+            save_message(session_id, "user", query, ca_ier.standalone_query)
             save_message(session_id, "ai", reply)
             
             total_time = time.time() - start_time_total
             print(f"== [Timer] TOTAL KESELURUHAN: {total_time:.2f} detik ==\n")
             return ChatResponse(
                 reply=reply,
-                standalone_query=cqr.standalone_query,
+                standalone_query=ca_ier.standalone_query,
                 source_documents=[],
                 latency_seconds=total_time
             )
@@ -136,7 +143,7 @@ async def chat_endpoint(request: ChatRequest):
         mode_nm = "Pipeline B" if ablation_mode == "pipeline_b_only" else "Baseline RAG"
         print(f"\n[Ablation Study] Menjalankan {mode_nm} dengan Pencarian Standar...")
         start_base = time.time()
-        result = baseline_qa.invoke({"query": cqr.standalone_query})
+        result = baseline_qa.invoke({"query": ca_ier.standalone_query})
         time_base = time.time() - start_base
         print(f"  [Timer] {mode_nm} QA Selesai dalam {time_base:.2f} detik")
         
@@ -145,40 +152,31 @@ async def chat_endpoint(request: ChatRequest):
             place_name = doc.metadata.get("place_name", "Tidak Diketahui")
             source_docs.append(f"Source {i+1}: Nama Tempat: {place_name}. Kategori: {doc.metadata.get('category', '')}\nIsi: {doc.page_content[:200]}...")
             
-        save_message(session_id, "user", query, cqr.standalone_query)
+        save_message(session_id, "user", query, ca_ier.standalone_query)
         save_message(session_id, "ai", final_output)
         
         total_time = time.time() - start_time_total
         print(f"== [Timer] TOTAL KESELURUHAN: {total_time:.2f} detik ==\n")
         return ChatResponse(
             reply=final_output,
-            standalone_query=cqr.standalone_query,
+            standalone_query=ca_ier.standalone_query,
             source_documents=source_docs,
             latency_seconds=total_time
         )
         
     # Proposed (A+B) or pipeline_a_only
-    print("\nSedang memproses intent dengan IER...")
-    start_ier = time.time()
-    try:
-        intent = get_ier_decomposition(cqr.standalone_query)
-        time_ier = time.time() - start_ier
-        print(f"  [Timer] IER Selesai dalam {time_ier:.2f} detik")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Gagal mendekomposisi niat: {e}")
-        
     print("\nSedang mencari kecocokan matematis di database dimensi...")
     start_db = time.time()
     top_results = dimension_aware_search(
         vector_db=vector_db, 
-        intent_dimensions=intent,
+        intent_dimensions=ca_ier,
         w_lan=1.0, w_act=1.0, w_atm=1.0,
-        top_k=4
+        top_k=15 # Lebarkan corong untuk cross-encoder
     )
     time_db = time.time() - start_db
     print(f"  [Timer] Pencarian Database Selesai dalam {time_db:.2f} detik")
     
-    print("\nSedang mengevaluasi ulang dengan LLM Re-Ranker...")
+    print("\nSedang mengevaluasi ulang dengan Cross-Encoder Reranker...")
     try:
         uadc_data_path = os.path.join(DATA_DIR, "uadc_checkpoint.json")
         with open(uadc_data_path, "r", encoding="utf-8") as f:
@@ -187,9 +185,9 @@ async def chat_endpoint(request: ChatRequest):
         uadc_data_dict = {}
 
     start_lrr = time.time()
-    reranked_results = llm_reranker(cqr.standalone_query, top_results, uadc_data_dict)
+    reranked_results = cross_encoder_rerank(ca_ier.standalone_query, top_results, uadc_data_dict)
     time_lrr = time.time() - start_lrr
-    print(f"  [Timer] LRR Selesai dalam {time_lrr:.2f} detik")
+    print(f"  [Timer] Cross-Encoder Reranker Selesai dalam {time_lrr:.2f} detik")
     
     format_fails = 0
     for res in reranked_results:
@@ -198,17 +196,16 @@ async def chat_endpoint(request: ChatRequest):
             
         source_docs.append(
             f"🎯 {res['place_name']} ({res['category']}) "
-            f"[Base Skor: {res['total_score']:.4f} -> LRR Skor: {res.get('lrr_score', 'N/A')}/10.0] "
-            f"\n💡 Info: {res.get('lrr_reasoning', 'N/A')}"
+            f"[Base Skor: {res['total_score']:.4f} -> Cross-Encoder Skor: {res.get('lrr_score', 0):.4f}]"
         )
         
     print("\nMenyusun respons akhir (NLG)...")
     start_nlg = time.time()
-    final_output = generate_final_response(cqr.standalone_query, reranked_results)
+    final_output = generate_final_response(ca_ier.standalone_query, reranked_results, uadc_data_dict)
     time_nlg = time.time() - start_nlg
     print(f"  [Timer] NLG Selesai dalam {time_nlg:.2f} detik")
     
-    save_message(session_id, "user", query, cqr.standalone_query)
+    save_message(session_id, "user", query, ca_ier.standalone_query)
     save_message(session_id, "ai", final_output)
     
     total_time = time.time() - start_time_total
@@ -216,7 +213,7 @@ async def chat_endpoint(request: ChatRequest):
     
     return ChatResponse(
         reply=final_output,
-        standalone_query=cqr.standalone_query,
+        standalone_query=ca_ier.standalone_query,
         source_documents=source_docs,
         json_parse_fails=format_fails,
         latency_seconds=total_time
