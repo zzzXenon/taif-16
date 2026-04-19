@@ -248,108 +248,183 @@ def run_single_turn_evaluation(limit=0):
 # ============================================================
 
 def run_multi_turn_evaluation(limit=0):
-    """Menjalankan evaluasi multi-turn dari eval_pipeline_b.json."""
+    """Menjalankan evaluasi multi-turn dari eval_pipeline_b.json.
+
+    New Checkpoint Evaluation Schema:
+      - eval_turn: array of integers (mis. [1, 2, 3])
+      - ground_truths: per-turn (di dalam setiap turn dict)
+      - expected_standalone: per-turn
+
+    Aturan:
+      1. Hanya evaluasi turn yang ada di eval_turn array
+      2. Chit-chat (is_search_required=False ATAU source_documents kosong) → skip metrik
+      3. Agregasi hanya dari turn yang benar-benar dihitung
+    """
     print("\n" + "=" * 60)
     print("BAGIAN 2: EVALUASI MULTI-TURN / PIPELINE B (CQR)")
     print("=" * 60)
-    
+
     try:
         with open(MULTI_TURN_GT_PATH, 'r', encoding='utf-8') as f:
             data = json.load(f)
     except FileNotFoundError:
         print(f"❌ File tidak ditemukan: {MULTI_TURN_GT_PATH}")
         return None
-    
-    scenarios = data.get("scenarios", [])
+
+    scenarios = data if isinstance(data, list) else data.get("scenarios", [])
     if not scenarios:
         print("❌ Tidak ada skenario yang ditemukan!")
         return None
-        
+
     if limit > 0:
         scenarios = scenarios[:limit]
         print(f"📊 DIBATASI HANYA {limit} skenario multi-turn untuk tes.\n")
     else:
         print(f"📊 Ditemukan {len(scenarios)} skenario multi-turn.\n")
-    
-    # Struktur: { mode: { scenario_id: { metrics + details } } }
+
     results_db = {m: {} for m in MULTI_TURN_MODES}
-    
+
     for sc_idx, scenario in enumerate(scenarios):
         sc_id = scenario["id"]
-        sc_name = scenario["name"]
+        sc_name = scenario.get("name", "Unnamed")
         turns = scenario["turns"]
-        eval_turn = scenario["eval_turn"]
-        ground_truths = scenario["ground_truths"]
-        expected_intents = scenario.get("expected_standalone_intents", "")
-        
+        raw_eval_turn = scenario.get("eval_turn", [])
+
+        if isinstance(raw_eval_turn, int):
+            eval_turns = [raw_eval_turn]
+        elif isinstance(raw_eval_turn, list):
+            eval_turns = [int(t) for t in raw_eval_turn]
+        else:
+            print(f"  ⚠ eval_turn tidak valid: {raw_eval_turn},lewatkan skenario ini.")
+            continue
+
+        turn_map = {t["turn"]: t for t in turns}
+
         print(f"\n{'─' * 50}")
         print(f"📋 Skenario {sc_idx+1}: {sc_name}")
-        print(f"   Jumlah Turn: {len(turns)} | Evaluasi pada Turn: {eval_turn}")
-        print(f"   Ground Truths: {ground_truths}")
-        print(f"   Expected Intents: {expected_intents[:80]}...")
+        print(f"   Jumlah Turn: {len(turns)} | Eval Turn: {eval_turns}")
         print(f"{'─' * 50}")
-        
+
         for mode in MULTI_TURN_MODES:
-            # Setiap mode mendapat session_id unik agar histori tidak tercampur
             session_id = f"eval_mt_{sc_id}_{mode}_{int(time.time())}"
-            
+
             print(f"\n  🔧 Mode: {mode}")
-            
-            final_response = None
-            standalone_query_returned = ""
-            
+
+            eval_results = []
+            standalone_queries = []
+
             for turn in turns:
                 turn_num = turn["turn"]
                 message = turn["message"]
-                is_eval_turn = (turn_num == eval_turn)
-                
+                is_eval_turn = (turn_num in eval_turns)
+                expected_standalone = turn.get("expected_standalone", "")
+                turn_ground_truths = turn.get("ground_truths", [])
+
                 marker = "⭐ EVAL" if is_eval_turn else f"  T{turn_num}"
                 print(f"    {marker}: {message[:60]}...")
-                
+
                 resp = send_chat_request(session_id, message, mode)
-                
+
                 if resp is None:
-                    print(f"        ❌ Gagal mendapatkan respons!")
+                    print(f"        ❌ Gagal mendapat respons!")
                     if is_eval_turn:
-                        break
+                        eval_results.append({
+                            "turn": turn_num,
+                            "error": "Tidak respons"
+                        })
                     continue
-                
-                # Tampilkan standalone_query yang dikembalikan CQR
+
                 sq = resp.get("standalone_query", "")
-                if sq:
-                    print(f"        CQR → \"{sq[:80]}...\"")
-                
+                source_docs = resp.get("source_documents", [])
+                is_chitchat = False
+
                 if is_eval_turn:
-                    final_response = resp
-                    standalone_query_returned = sq
-                    
-                # Jeda kecil antar turn agar tidak membanjiri server
-                time.sleep(0.5)
-            
-            # Hitung metrik dari Turn Terakhir
-            if final_response:
-                retrieved = extract_retrieved_places(final_response)
-                metrics = compute_all_metrics(retrieved, ground_truths)
-                
+                    if sq and source_docs:
+                        is_search_required = True
+                    elif not source_docs:
+                        is_search_required = False
+                    else:
+                        is_search_required = True
+
+                    if not is_search_required or not source_docs:
+                        is_chitchat = True
+                        print(f"        [INFO] Turn {turn_num} dilewati: Chit-chat terdeteksi (is_search_required=False)")
+                        eval_results.append({
+                            "turn": turn_num,
+                            "chitchat": True,
+                            "standalone_query": sq,
+                            "expected_standalone": expected_standalone,
+                        })
+                    else:
+                        if sq:
+                            standalone_queries.append({"turn": turn_num, "query": sq})
+
+                        retrieved = extract_retrieved_places(resp)
+                        metrics = compute_all_metrics(retrieved, turn_ground_truths)
+
+                        eval_results.append({
+                            "turn": turn_num,
+                            "chitchat": False,
+                            "standalone_query": sq,
+                            "expected_standalone": expected_standalone,
+                            "retrieved_places": retrieved,
+                            "ground_truths": turn_ground_truths,
+                            **metrics,
+                        })
+
+                        hr = metrics["hr"]
+                        mrr = metrics["mrr"]
+                        recall = metrics["recall"]
+                        ndcg_val = metrics["ndcg"]
+                        print(f"        📊 Turn {turn_num}: HR={hr:.1f} MRR={mrr:.3f} RCL={recall:.3f} NDCG={ndcg_val:.3f}")
+                        print(f"           Retrieved: {retrieved[:4]}")
+
+                time.sleep(0.3)
+
+            valid_results = [r for r in eval_results if not r.get("chitchat", False)]
+
+            if valid_results:
+                count = len(valid_results)
+                avg_hr = sum(r["hr"] for r in valid_results) / count
+                avg_mrr = sum(r["mrr"] for r in valid_results) / count
+                avg_recall = sum(r["recall"] for r in valid_results) / count
+                avg_ndcg = sum(r["ndcg"] for r in valid_results) / count
+
+                chitchat_skips = sum(1 for r in eval_results if r.get("chitchat"))
+
                 results_db[mode][sc_id] = {
                     "scenario_name": sc_name,
-                    "standalone_query": standalone_query_returned,
-                    "retrieved_places": retrieved,
-                    "ground_truths": ground_truths,
-                    **metrics
+                    "eval_turns": eval_turns,
+                    "valid_turns_count": count,
+                    "avg_hr": avg_hr,
+                    "avg_mrr": avg_mrr,
+                    "avg_recall": avg_recall,
+                    "avg_ndcg": avg_ndcg,
+                    "turn_details": eval_results,
+                    "chitchat_skips": chitchat_skips,
                 }
-                
-                print(f"\n    📊 Hasil {mode}:")
-                print(f"       HR={metrics['hr']:.1f}  MRR={metrics['mrr']:.3f}  Recall={metrics['recall']:.3f}  NDCG={metrics['ndcg']:.3f}")
-                print(f"       Retrieved: {retrieved[:4]}")
-                print(f"       CQR Output: \"{standalone_query_returned[:100]}\"")
+
+                note = f" | {chitchat_skips} chitchat skipped" if chitchat_skips > 0 else ""
+                print(f"\n    📊 Agregasi {mode}{note}:"
+                      f"  HR={avg_hr:.4f}  MRR={avg_mrr:.4f}  Recall={avg_recall:.4f}  NDCG={avg_ndcg:.4f}")
+
+            elif eval_results and all(r.get("chitchat") for r in eval_results):
+                results_db[mode][sc_id] = {
+                    "scenario_name": sc_name,
+                    "eval_turns": eval_turns,
+                    "status": "all_chitchat",
+                    "turn_details": eval_results,
+                    "chitchat_skips": len(eval_results),
+                }
+                print(f"\n    💬 {mode}: Semua eval turns = chit-chat.")
             else:
                 results_db[mode][sc_id] = {
                     "scenario_name": sc_name,
-                    "error": "Tidak mendapat respons pada turn evaluasi"
+                    "eval_turns": eval_turns,
+                    "error": "Tidak ada respons valid",
                 }
                 print(f"\n    ❌ {mode}: Tidak ada respons untuk dievaluasi.")
-    
+
     return results_db
 
 
@@ -401,7 +476,6 @@ def print_multi_turn_report(results_db):
     print("LAPORAN EVALUASI MULTI-TURN / PIPELINE B (CQR)")
     print("=" * 60)
     
-    # Kumpulkan semua scenario_id
     all_scenario_ids = set()
     for mode in MULTI_TURN_MODES:
         all_scenario_ids.update(results_db[mode].keys())
@@ -415,29 +489,33 @@ def print_multi_turn_report(results_db):
         
         sc_name = first_entry["scenario_name"] if first_entry else sc_id
         print(f"\n--- {sc_name} ---")
-        print(f"{'Mode':<18} | {'HR@5':<6} | {'MRR@5':<6} | {'RCL@5':<6} | {'NDCG@5':<6} | CQR Standalone Query")
-        print("-" * 100)
+        print(f"{'Mode':<18} | {'HR@5':<6} | {'MRR@5':<6} | {'RCL@5':<6} | {'NDCG@5':<6} | Valid Turns")
+        print("-" * 90)
         
         for mode in MULTI_TURN_MODES:
             entry = results_db[mode].get(sc_id, {})
             if "error" in entry:
                 print(f"{mode:<18} | {'ERR':<6} | {'ERR':<6} | {'ERR':<6} | {'ERR':<6} | {entry['error']}")
-            elif "hr" in entry:
-                sq = entry.get("standalone_query", "N/A")[:60]
-                print(f"{mode:<18} | {entry['hr']:.4f} | {entry['mrr']:.4f} | {entry['recall']:.4f} | {entry['ndcg']:.4f} | \"{sq}...\"")
+            elif "avg_hr" in entry:
+                valid = entry.get("valid_turns_count", 0)
+                skips = entry.get("chitchat_skips", 0)
+                note = f"{valid} valid, {skips} skip"
+                print(f"{mode:<18} | {entry['avg_hr']:.4f} | {entry['avg_mrr']:.4f} | {entry['avg_recall']:.4f} | {entry['avg_ndcg']:.4f} | {note}")
+            elif entry.get("status") == "all_chitchat":
+                skips = entry.get("chitchat_skips", 0)
+                print(f"{mode:<18} | {'----':<6} | {'----':<6} | {'----':<6} | {'----':<6} | All chitchat ({skips})")
     
-    # Cetak rata-rata keseluruhan per mode
     print(f"\n--- RATA-RATA KESELURUHAN ---")
     print(f"{'Mode':<18} | {'HR@5':<6} | {'MRR@5':<6} | {'RCL@5':<6} | {'NDCG@5':<6}")
     print("-" * 55)
     for mode in MULTI_TURN_MODES:
         hrs, mrrs, recs, ndcgs = [], [], [], []
         for sc_id, entry in results_db[mode].items():
-            if "hr" in entry:
-                hrs.append(entry["hr"])
-                mrrs.append(entry["mrr"])
-                recs.append(entry["recall"])
-                ndcgs.append(entry["ndcg"])
+            if "avg_hr" in entry:
+                hrs.append(entry["avg_hr"])
+                mrrs.append(entry["avg_mrr"])
+                recs.append(entry["avg_recall"])
+                ndcgs.append(entry["avg_ndcg"])
         if hrs:
             print(f"{mode:<18} | {sum(hrs)/len(hrs):.4f} | {sum(mrrs)/len(mrrs):.4f} | {sum(recs)/len(recs):.4f} | {sum(ndcgs)/len(ndcgs):.4f}")
 

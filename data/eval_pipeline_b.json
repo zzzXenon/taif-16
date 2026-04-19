@@ -1,75 +1,277 @@
-{
-  "description": "Dataset Evaluasi Pipeline B (Multi-Turn CQR) — Standar TREC CAsT. Evaluasi dilakukan pada Turn Terakhir saja.",
-  "scenarios": [
-    {
-      "id": "scenario_1",
-      "name": "Coreference Resolution Rentang Panjang (8 Turns)",
-      "description": "Sistem harus sadar 'yang' di Turn 8 merujuk ke kumpulan syarat dari 7 giliran sebelumnya.",
-      "turns": [
-        {"turn": 1, "message": "Tolong carikan penginapan murah di sekitar Balige."},
-        {"turn": 2, "message": "Apakah di sana fasilitasnya bersih?"},
-        {"turn": 3, "message": "Saya butuh yang menyediakan sarapan gratis pagi hari."},
-        {"turn": 4, "message": "Berapa jarak dari pusat kota biasanya?"},
-        {"turn": 5, "message": "Oh, kalau yang halamannya langsung menghadap danau ada tidak?"},
-        {"turn": 6, "message": "Bisa sekalian tempat parkirnya yang luas."},
-        {"turn": 7, "message": "Apakah udaranya cukup sejuk?"},
-        {"turn": 8, "message": "Kalau begitu tolong pilihkan yang kamarnya paling estetik buat foto."}
-      ],
-      "eval_turn": 8,
-      "expected_standalone_intents": "penginapan murah di Balige, bersih, sarapan gratis, dekat pusat kota, menghadap danau, parkir luas, udara sejuk, kamar estetik untuk foto",
-      "ground_truths": [
-        "Labersa Hotel and Convention Center Toba, Balige",
-        "Mutiara Balige Hotel",
-        "Vany Villa Balige"
-      ]
-    },
-    {
-      "id": "scenario_2",
-      "name": "Context Shift & Negative Constraint (9 Turns)",
-      "description": "Sistem harus berhasil mereset paksa 'hutan pinus' & 'Samosir', dan fokus pada pencarian Pantai pasir putih di Balige dengan banana boat, aman anak, dan dekat makanan laut.",
-      "turns": [
-        {"turn": 1, "message": "Saya ingin mencari wisata alam hutan pinus di Toba."},
-        {"turn": 2, "message": "Adakah yang suasananya sepi dan tenang untuk bekerja?"},
-        {"turn": 3, "message": "Bisa dipakai sambil pasang hammock (tempat tidur gantung) tidak?"},
-        {"turn": 4, "message": "Ah tunggu, saya berubah pikiran. Jangan hutan pinus. Carikan saja pantai pasir putih."},
-        {"turn": 5, "message": "Lokasinya jangan di Samosir karena terlalu jauh dari rute saya."},
-        {"turn": 6, "message": "Kalau di kawasan pesisir Balige apakah ada pantainya?"},
-        {"turn": 7, "message": "Adakah wahana penyewaan pisang karet (banana boat) di pantai itu?"},
-        {"turn": 8, "message": "Apakah gelombangnya cenderung aman untuk anak-anak bermain?"},
-        {"turn": 9, "message": "Carikan yang juga punya restoran makanan laut terdekat dari sana."}
-      ],
-      "eval_turn": 9,
-      "expected_standalone_intents": "pantai pasir putih di kawasan Balige (BUKAN Samosir, BUKAN hutan pinus), ada banana boat, aman untuk anak, dan dekat restoran makanan laut",
-      "ground_truths": [
-        "Pantai Pasir Putih Lumban Bul-bul Balige",
-        "Pantai Parparean 2",
-        "Pantai Batuhoda"
-      ]
-    },
-    {
-      "id": "scenario_3",
-      "name": "Penelusuran Subjek Ellipsis Ekstrem (11 Turns)",
-      "description": "LLM CQR harus berjuang menghindari Memory Forgetting di Turn 11 untuk mengekstrak kueri super-intent secara sempurna.",
-      "turns": [
-        {"turn": 1, "message": "Sebutkan nama restoran yang menyajikan masakan Batak Otentik."},
-        {"turn": 2, "message": "Apakah mereka menyajikan ikan mas arsik yang enak?"},
-        {"turn": 3, "message": "Di mana lokasi persisnya berada?"},
-        {"turn": 4, "message": "Saya cuma mau tempat yang harganya sangat merakyat / murah tidak menguras kantong."},
-        {"turn": 5, "message": "Apakah di sana tersedia menu mi gomak bumbu andaliman juga?"},
-        {"turn": 6, "message": "Mengenai interior, apakah desain bangunannya masih menggunakan arsitektur tradisional panggung kayu?"},
-        {"turn": 7, "message": "Bisa tidak bersantap sambil melihat pemandangan hamparan sawah dari dalam?"},
-        {"turn": 8, "message": "Apakah akses aspal jalannya cukup mulus kalau saya bawa mobil besar?"},
-        {"turn": 9, "message": "Satu lagi, hawanya sejuk berangin tidak di daerah sana?"},
-        {"turn": 10, "message": "Berapa lama rata-rata waktu pelayanannya melayani turis?"},
-        {"turn": 11, "message": "Baiklah, tarik kecocokan data restoran yang bukanya malam hari memajang lampu kelap-kelip dengan semua syarat ketat tadi."}
-      ],
-      "eval_turn": 11,
-      "expected_standalone_intents": "restoran masakan Batak otentik, arsik enak, murah, mi gomak andaliman, arsitektur tradisional kayu, pemandangan sawah, akses mulus mobil besar, sejuk berangin, buka malam hari, lampu kelap-kelip",
-      "ground_truths": [
-        "Rumah Makan Khas Batak Moranta Simbolon",
-        "Elios - Rumah Makan Khas Batak",
-        "RM. GOMGOM KHAS BATAK"
-      ]
-    }
-  ]
-}
+[
+  {
+    "id": "scenario_b_001",
+    "name": "The Chit-Chat Survivor",
+    "description": "Tests if the system retains context through pure chit-chat conversations without explicit place filters",
+    "eval_turn": [
+      1,
+      2,
+      5,
+      8
+    ],
+    "turns": [
+      {
+        "turn": 1,
+        "message": "Saya ingin mencari penginapan di sekitar Toba. Ada rekomendasi hotel atau penginapan yang bagus?",
+        "expected_standalone": "cari hotel penginapan di Toba",
+        "ground_truths": [
+          "Tao Silalahi Hotel",
+          "Hotel Nabasa",
+          "Hotel Sere Nauli",
+          "Mutiara Balige Hotel"
+        ]
+      },
+      {
+        "turn": 2,
+        "message": "Yang punya view pemandangan danau Toba yang indah, punya kolam renang juga boleh.",
+        "expected_standalone": "cari hotel dengan view danau Toba dan kolam renang",
+        "ground_truths": [
+          "Tao Silalahi Hotel",
+          "Mutiara Balige Hotel"
+        ]
+      },
+      {
+        "turn": 3,
+        "message": "Wah mantap! Suasananya kayak gimana ya?",
+        "expected_standalone": "chit-chat tentang suasana",
+        "ground_truths": []
+      },
+      {
+        "turn": 4,
+        "message": "Suhunya dingin ga disana?",
+        "expected_standalone": "chit-chat tentang cuaca suhu",
+        "ground_truths": []
+      },
+      {
+        "turn": 5,
+        "message": "Ada yang lebih tenang ga ya? Saya suka suasana yang sepi nih.",
+        "expected_standalone": "cari hotel dengan suasana tenang sepi",
+        "ground_truths": [
+          "Tao Silalahi Hotel"
+        ]
+      },
+      {
+        "turn": 6,
+        "message": "Okeoke, kalau masalah harga gimana?",
+        "expected_standalone": "chit-chat tentang harga",
+        "ground_truths": []
+      },
+      {
+        "turn": 7,
+        "message": "Jadi kalau mau booking hari ini bisa langsung datang ga ya?",
+        "expected_standalone": "chit-chat tentang booking",
+        "ground_truths": []
+      },
+      {
+        "turn": 8,
+        "message": "Nah, kalau Tau Silalahi Hotel itu termasuk hotel baru atau lama ya?",
+        "expected_standalone": "informasi tentang Tao Silalahi Hotel",
+        "ground_truths": [
+          "Tao Silalahi Hotel"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "scenario_b_002",
+    "name": "The Constraint Pivot",
+    "description": "Tests if the system can pivot from one constraint (cheap) to another (luxury) while maintaining context",
+    "eval_turn": [
+      1,
+      2,
+      3,
+      4,
+      9
+    ],
+    "turns": [
+      {
+        "turn": 1,
+        "message": "Lagi cari hotel di Toba yang murah meriah aja, buat numpang tidur sementara.",
+        "expected_standalone": "cari hotel murah di Toba",
+        "ground_truths": [
+          "Hotel Adela",
+          "RAP Hotel Balige",
+          "Hotel Santo Djaya"
+        ]
+      },
+      {
+        "turn": 2,
+        "message": "Yang penting ada AC dan kamar mandi bersih, harga di bawah 300rb.",
+        "expected_standalone": "cari hotel murah dengan AC di bawah 300rb",
+        "ground_truths": [
+          "Hotel Adela",
+          "RAP Hotel Balige"
+        ]
+      },
+      {
+        "turn": 3,
+        "message": "Deket pusat kota Balige ga? Supaya mudah cari makanan.",
+        "expected_standalone": "cari hotel murah dekat pusat kota",
+        "ground_truths": [
+          "Hotel Adela",
+          "RAP Hotel Balige",
+          "Mutiara Balige Hotel"
+        ]
+      },
+      {
+        "turn": 4,
+        "message": "Eh gajadi cari yang murah, saya mau cari yang paling mewah dan fasilitas lengkap saja.",
+        "expected_standalone": "cari hotel mewah dan fasilitas lengkap di Toba",
+        "ground_truths": [
+          "Tao Silalahi Hotel",
+          "Thyesza Hotel Resort",
+          "Labersa Hotel and Convention Center Toba, Balige"
+        ]
+      },
+      {
+        "turn": 5,
+        "message": "Wah kalau yang mewah itu bedanya dimana ya?",
+        "expected_standalone": "chit-chat tentang hotel mewah",
+        "ground_truths": []
+      },
+      {
+        "turn": 6,
+        "message": "Fasilitas kolam renangnya ada yang 24 jam ga?",
+        "expected_standalone": "chit-chat tentang kolam renang hotel",
+        "ground_truths": []
+      },
+      {
+        "turn": 7,
+        "message": "Breakfast nya juga included kan?",
+        "expected_standalone": "chit-chat tentang sarapan hotel",
+        "ground_truths": []
+      },
+      {
+        "turn": 8,
+        "message": " Kalau buat staycation family weekend gitu cocok ga ya?",
+        "expected_standalone": "chit-chat tentang staycation keluarga",
+        "ground_truths": []
+      },
+      {
+        "turn": 9,
+        "message": "Saya denger Tau Silalahi Hotel itu view-nya langsung menghadap danau ya?",
+        "expected_standalone": "informasi tentang Tao Silalahi Hotel",
+        "ground_truths": [
+          "Tao Silalahi Hotel"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "scenario_b_003",
+    "name": "The Cross-Domain Jump",
+    "description": "Tests if the system can pivot from one category (Wisata Alam) to another (Restaurant/Kuliner) while maintaining location context",
+    "eval_turn": [
+      1,
+      2,
+      3,
+      4,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "turns": [
+      {
+        "turn": 1,
+        "message": "Lagi cari tempat wisatam alam di Toba yang punya pantai buat berenang.",
+        "expected_standalone": "cari tempat wisata alam pantai di Toba",
+        "ground_truths": [
+          "Sigurgur Beach & Restaurant",
+          "Pantai Pulo Tao",
+          "Pantai Pasir Putih Parparean",
+          "Pantai Lumban Bul-bul Balige"
+        ]
+      },
+      {
+        "turn": 2,
+        "message": "Yang pantainya masih bersih dan ga terlalu rame ya, punya spotlight",
+        "expected_standalone": "cari pantai alami bersih dan sepi",
+        "ground_truths": [
+          "Sigurgur Beach & Restaurant",
+          "Pantai Pulo Tao"
+        ]
+      },
+      {
+        "turn": 3,
+        "message": "Ada yang bisa main banana boat juga ga?",
+        "expected_standalone": "cari pantai dengan fasilitas banana boat",
+        "ground_truths": [
+          "Sigurgur Beach & Restaurant",
+          "Pantai Lumban Bul-bul Balige",
+          "Long Beach"
+        ]
+      },
+      {
+        "turn": 4,
+        "message": "Nah yang di area Silalahi itu ada ga ya?",
+        "expected_standalone": "cari pantai di area Silalahi",
+        "ground_truths": [
+          "Sigurgur Beach & Restaurant"
+        ]
+      },
+      {
+        "turn": 5,
+        "message": "Wah beach-nya bersih banget ya, jarang2 nih nemu pantai sepi beginsi.",
+        "expected_standalone": "chit-chat tentang pantai",
+        "ground_truths": []
+      },
+      {
+        "turn": 6,
+        "message": "Pemandangannya langsung menghadap Toba juga kan?",
+        "expected_standalone": "chit-chat tentang pemandangan",
+        "ground_truths": []
+      },
+      {
+        "turn": 7,
+        "message": "Ehbtw, kalau di dekat wisata alam tadi ada restoran yang enak ga?",
+        "expected_standalone": "cari restoran dekat Sigurgur Beach",
+        "ground_truths": [
+          "3J Lamongan Cafe N Resto",
+          "WF Coffee&Resto",
+          "Sigurgur Beach & Restaurant",
+          "Betesda Cafe Balige"
+        ]
+      },
+      {
+        "turn": 8,
+        "message": "Yang menyediakan makanan khas Batak tapi ga terlalu pedas, anak2 juga bisa makan.",
+        "expected_standalone": "cari restoran makanan Batak tidak pedas",
+        "ground_truths": [
+          "3J Lamongan Cafe N Resto",
+          "Sigurgur Beach & Restaurant",
+          "Restaurant Dugul"
+        ]
+      },
+      {
+        "turn": 9,
+        "message": "Yang punya view danau juga bagus gitu, jadi bisa makan sambil lihat pemandangan.",
+        "expected_standalone": "cari restoran dengan view danau Toba",
+        "ground_truths": [
+          "WF Coffee&Resto",
+          "3J Lamongan Cafe N Resto",
+          "Betesda Cafe Balige"
+        ]
+      },
+      {
+        "turn": 10,
+        "message": "Yang harga makanannya still affordable gitu ada ga ya?",
+        "expected_standalone": "cari restoran harga terjangkau",
+        "ground_truths": [
+          "3J Lamongan Cafe N Resto",
+          "Sigurgur Beach & Restaurant",
+          "Betesda Cafe Balige"
+        ]
+      },
+      {
+        "turn": 11,
+        "message": "Kalau Sigurgur Beach & Restaurant itu makanannya biasa ga?",
+        "expected_standalone": "informasi tentang Sigurgur Beach & Restaurant",
+        "ground_truths": [
+          "Sigurgur Beach & Restaurant"
+        ]
+      }
+    ]
+  }
+]
