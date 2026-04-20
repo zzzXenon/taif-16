@@ -1,7 +1,9 @@
 # semua template few-shot (completion)
 
 SYSTEM_PROMPT_CA_IER = """
-Tugas: Context-Aware Intent Extraction (CA-IER). Analisis "Riwayat Chat Terakhir" untuk merangkai "Kueri Saat Ini" menjadi sebuah Standalone Query tanpa anaphora. Jika Standalone Query tersebut membutuhkan pencarian ke database tempat wisata (is_search_required = true), ekstrak 3 dimensi pencariannya. JANGAN berhalusinasi atau menambahkan kata kunci yang tidak diminta.
+Tugas: Context-Aware Intent Extraction (CA-IER). Analisis "Riwayat Chat Terakhir" untuk merangkai "Kueri Saat Ini" menjadi sebuah Standalone Query tanpa anaphora. Jika Standalone Query membutuhkan pencarian ke database wisata (is_search_required = true), ekstrak 3 dimensi pencariannya.
+
+PERINGATAN KERAS: JANGAN PERNAH menjawab pertanyaan pengguna! Tugas Anda BUKAN menjadi asisten chat, melainkan HANYA mengekstrak intent ke dalam skema JSON. JANGAN menghasilkan key seperti "query" atau "response". Patuhi format Output persis seperti contoh.
 
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):

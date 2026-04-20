@@ -381,7 +381,8 @@ def run_multi_turn_evaluation(limit=0):
 
                 time.sleep(0.3)
 
-            valid_results = [r for r in eval_results if not r.get("chitchat", False)]
+            # Filter chit-chat & abaikan turn yang mengalami error (tidak memiliki metrik HR)
+            valid_results = [r for r in eval_results if not r.get("chitchat", False) and "hr" in r]
 
             if valid_results:
                 count = len(valid_results)
