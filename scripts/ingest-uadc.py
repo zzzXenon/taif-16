@@ -1,195 +1,259 @@
+"""
+ingest-uadc.py  (v2)
+---------------------
+Reads entities_final.csv, calls Ollama LLM to extract 4 feature dimensions
+per entity, saves results to uadc_checkpoint.json, then builds chroma_db_uadc.
+
+Changes from original:
+  - Source CSV: entities_final.csv (instead of wisata-toba-unified-final.csv)
+  - Embedding device: auto-detect GPU
+  - LLM model: configurable via env var UADC_LLM (default: qwen3:14b)
+  - Paths overridable via env vars
+  - Parallel-friendly: resumes from checkpoint, skips already-processed entities
+
+Run:
+  python scripts/ingest-uadc.py
+
+Override model:
+  UADC_LLM=qwen3:8b python scripts/ingest-uadc.py
+"""
+
 import os
 import json
+import time
+import sys
+
 import pandas as pd
-from langchain_community.chat_models import ChatOllama
+from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import PydanticOutputParser
+from langchain_core.output_parsers import PydanticOutputParser, StrOutputParser
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
 
-import sys
-# Import schemas dari folder src/
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(BASE_DIR, 'src'))
+sys.path.insert(0, os.path.join(BASE_DIR, "src"))
 from schemas import AttractionFeatures
 
-# ==========================================
-# KONFIGURASI
-# ==========================================
-CSV_FILE_PATH = os.path.join(BASE_DIR, "data", "wisata-toba-unified-final.csv")
-CHECKPOINT_FILE = os.path.join(BASE_DIR, "data", "uadc_checkpoint.json")
-CHROMA_PATH = os.path.join(BASE_DIR, "data", "chroma_db_uadc")
+# ─────────────────────────────────────────────────
+# CONFIG  (all overridable via env vars)
+# ─────────────────────────────────────────────────
+CSV_FILE_PATH   = os.environ.get("ENTITIES_CSV",  os.path.join(BASE_DIR, "data", "entities_final.csv"))
+CHECKPOINT_FILE = os.environ.get("UADC_CHECKPOINT", os.path.join(BASE_DIR, "data", "uadc_checkpoint.json"))
+CHROMA_PATH     = os.environ.get("CHROMA_UADC",   os.path.join(BASE_DIR, "data", "chroma_db_uadc"))
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+LLM_MODEL       = os.environ.get("UADC_LLM", "qwen3:14b")
 
-# Prompt Ekstraksi LLM
+REVIEW_CHAR_LIMIT = 4000   # ~1300 tokens; keeps prompts manageable
+
+# ─────────────────────────────────────────────────
+# DEVICE DETECTION
+# ─────────────────────────────────────────────────
+def detect_device() -> tuple[str, int]:
+    try:
+        import torch
+        if torch.cuda.is_available():
+            name = torch.cuda.get_device_name(0)
+            vram = torch.cuda.get_device_properties(0).total_memory // (1024**2)
+            print(f"   [Device] GPU: {name} ({vram} MB) → CUDA")
+            return "cuda", 512 if vram >= 6000 else 256
+    except ImportError:
+        pass
+    print("   [Device] → CPU")
+    return "cpu", 64
+
+
+# ─────────────────────────────────────────────────
+# LLM FEATURE EXTRACTION
+# ─────────────────────────────────────────────────
 SYSTEM_PROMPT_UADC = """
 Anda adalah pakar pariwisata yang bertugas menganalisis tempat wisata di Danau Toba.
-Berdasarkan ulasan pengunjung berikut, ekstrak fitur-fitur tempat wisata tersebut menjadi 4 bagian:
-1. Landscape & Content (Fitur alam, peninggalan sejarah, bangunan, kualitas fisik, dan arsitektur)
+Berdasarkan informasi dan ulasan pengunjung berikut, ekstrak fitur-fitur tempat tersebut menjadi 4 bagian:
+1. Landscape & Content (Fitur alam, peninggalan sejarah, bangunan, kualitas fisik, arsitektur, fasilitas)
 2. Activities (Aktivitas yang bisa dilakukan oleh pengunjung)
 3. Atmosphere (Nuansa emosional, tingkat keramaian, mood, dan suasana hati)
-4. Summary (Deskripsi singkat umum)
+4. Summary (Deskripsi singkat umum 1-2 kalimat)
 
-Gunakan bahasa Indonesia. Jika tidak ada informasi eksplisit untuk suatu dimensi, berikan estimasi yang masuk akal berdasarkan konteks tempat tersebut, JANGAN KOSONG.
+Gunakan bahasa Indonesia. Jika tidak ada informasi eksplisit untuk suatu dimensi,
+berikan estimasi masuk akal berdasarkan nama/kategori tempat. JANGAN KOSONG.
 """
 
-def extract_features_with_llm(place_name, category, reviews):
-    """Mengekstrak 4 dimensi fitur dari ulasan menggunakan LLM"""
-    llm = ChatOllama(model="qwen3:8b", temperature=0.1)
+
+def extract_features_with_llm(place_name: str, category: str, description: str) -> dict:
+    """Extract 4 feature dimensions from entity description using LLM."""
+    llm    = ChatOllama(model=LLM_MODEL, temperature=0.1, format="json")
     parser = PydanticOutputParser(pydantic_object=AttractionFeatures)
-    
+
     prompt = ChatPromptTemplate.from_messages([
-        ("system", SYSTEM_PROMPT_UADC + "\n\nFormat keluaran harus persis seperti JSON berikut:\n{format_instructions}"),
-        ("human", "Nama Tempat: {place_name}\nKategori: {category}\nUlasan Pengunjung:\n{reviews}")
+        ("system", SYSTEM_PROMPT_UADC + "\n\nFormat keluaran JSON:\n{format_instructions}"),
+        ("human",  "Nama: {place_name}\nKategori: {category}\nInformasi & Ulasan:\n{description}")
     ])
-    
-    chain = prompt | llm | parser
-    
+
+    chain = prompt | llm | StrOutputParser()
+
     try:
-        response = chain.invoke({
-            "place_name": place_name,
-            "category": category,
-            "reviews": reviews,
-            "format_instructions": parser.get_format_instructions()
+        raw = chain.invoke({
+            "place_name":          place_name,
+            "category":            category,
+            "description":         description[:REVIEW_CHAR_LIMIT],
+            "format_instructions": parser.get_format_instructions(),
         })
-        return response.dict()
+        result = parser.parse(raw)
+        return result.dict()
     except Exception as e:
-        print(f"Error LLM extraction for '{place_name}': {e}")
-        # Default fallback if LLM fails
+        print(f"   [WARN] LLM extraction failed for '{place_name}': {e}")
         return {
-            "landscape_content_features": f"Pemandangan alam dan bangunan di {place_name}.",
-            "activity_features": f"Berbagai aktivitas rekreasi di {place_name}.",
-            "atmosphere_features": f"Suasana wisata yang khas di {place_name}.",
-            "summary": f"Tempat wisata {place_name} dengan kategori {category}."
+            "landscape_content_features": f"Pemandangan alam dan fasilitas di {place_name}.",
+            "activity_features":          f"Berbagai aktivitas rekreasi di {place_name}.",
+            "atmosphere_features":        f"Suasana wisata yang khas di {place_name}.",
+            "summary":                    f"{place_name} — tempat {category} di kawasan Danau Toba.",
         }
 
-def process_and_checkpoint_data(limit=None):
-    """Mengekstrak fitur dan menyimpannya ke JSON checkpoint sementara"""
+
+# ─────────────────────────────────────────────────
+# STEP 1: LLM Extraction with checkpoint
+# ─────────────────────────────────────────────────
+def process_and_checkpoint(limit=None) -> dict:
+    print(f"\n[1/2] Membaca {CSV_FILE_PATH}...")
+    if not os.path.exists(CSV_FILE_PATH):
+        raise FileNotFoundError(
+            f"File tidak ditemukan: {CSV_FILE_PATH}\n"
+            f"Set env var: ENTITIES_CSV=/path/to/entities_final.csv"
+        )
+
     df = pd.read_csv(CSV_FILE_PATH).fillna("")
-    
-    print(f"Total baris raw: {len(df)}")
-    
-    # Dataset wisata-toba-unified-final.csv sudah diagregasi (1 baris per tempat)
-    # Tambahkan item_id jika belum ada
-    if 'item_id' not in df.columns:
-        df['item_id'] = range(1, len(df) + 1)
-    if 'rating' not in df.columns:
-        df['rating'] = 0.0
-    if 'reviews' not in df.columns:
-        df['reviews'] = df['description']
-    
-    print(f"Total tempat wisata: {len(df)} tempat unik.")
-    
+    if "item_id" not in df.columns:
+        df["item_id"] = range(1, len(df) + 1)
+
     if limit:
         df = df.head(limit)
-        print(f"⚠️ Menjalankan mode DRY RUN untuk {limit} tempat pertama...")
-    
-    # Load existing checkpoint if any
-    extracted_data = {}
+        print(f"   [DRY RUN] Hanya memproses {limit} entitas pertama.")
+
+    total = len(df)
+    print(f"   Total entitas: {total}")
+    print(f"   LLM model    : {LLM_MODEL}")
+
+    # Resume from checkpoint
+    extracted: dict = {}
     if os.path.exists(CHECKPOINT_FILE):
         with open(CHECKPOINT_FILE, "r", encoding="utf-8") as f:
             try:
-                extracted_data = json.load(f)
-                print(f"✅ Memuat {len(extracted_data)} data dari checkpoint yang sudah ada.")
-            except:
-                pass
-            
-    # Process rows
-    new_extractions = 0
-    for idx, row in df.iterrows():
-        item_id = str(row['item_id'])
-        
-        # Skip if already processed
-        if item_id in extracted_data:
-            continue
-            
-        print(f"🔄 Mengekstrak dimensi untuk: {row['place_name']} ({idx+1}/{len(df)})")
-        
-        # Limit review text length to avoid token limit errors
-        reviews_text = str(row['reviews'])[:3000] # roughly 1000 tokens
-        
-        features = extract_features_with_llm(
-            place_name=row['place_name'],
-            category=row['category'],
-            reviews=reviews_text
-        )
-        
-        # Add metadata
-        extracted_data[item_id] = {
-            "item_id": item_id,
-            "place_name": row['place_name'],
-            "category": row['category'],
-            "rating": float(row['rating']) if row['rating'] else 0.0,
-            "features": features
-        }
-        new_extractions += 1
-        
-        # Save checkpoint periodically
-        if new_extractions % 2 == 0:
-            with open(CHECKPOINT_FILE, "w", encoding="utf-8") as f:
-                json.dump(extracted_data, f, indent=4, ensure_ascii=False)
-                
-    # Final save
-    with open(CHECKPOINT_FILE, "w", encoding="utf-8") as f:
-        json.dump(extracted_data, f, indent=4, ensure_ascii=False)
-        
-    print(f"✅ Ekstraksi LLM selesai. Total data di checkpoint: {len(extracted_data)}")
-    return extracted_data
+                extracted = json.load(f)
+                print(f"   Melanjutkan dari checkpoint: {len(extracted)} sudah diproses.")
+            except json.JSONDecodeError:
+                print("   [WARN] Checkpoint rusak, mulai dari awal.")
 
-def build_chroma_database(extracted_data):
-    """Membangun dimensi vektor 4 arah dari data yang sudah diekstrak"""
-    print(f"Menyiapkan model embedding {EMBEDDING_MODEL}...")
+    new_count = 0
+    t0 = time.time()
+
+    for idx, row in df.iterrows():
+        item_id = str(row["item_id"])
+        if item_id in extracted:
+            continue
+
+        place_name = str(row.get("place_name", "")).strip()
+        category   = str(row.get("category",   "")).strip()
+        description = str(row.get("description", "")).strip()
+
+        done_so_far = len(extracted)
+        eta_s = ""
+        if new_count > 0:
+            elapsed = time.time() - t0
+            rate    = elapsed / new_count
+            remaining = total - done_so_far - 1
+            eta_s = f" | ETA ~{remaining * rate / 60:.0f} mnt"
+
+        print(f"   [{done_so_far+1}/{total}] {place_name}{eta_s}")
+
+        features = extract_features_with_llm(place_name, category, description)
+
+        extracted[item_id] = {
+            "item_id":    item_id,
+            "place_name": place_name,
+            "category":   category,
+            "rating":     float(row.get("rating", 0.0)) if str(row.get("rating", "")).replace(".", "").isdigit() else 0.0,
+            "features":   features,
+        }
+        new_count += 1
+
+        # Save checkpoint every 5 new entries
+        if new_count % 5 == 0:
+            _save_checkpoint(extracted)
+
+    _save_checkpoint(extracted)
+    print(f"\n   Ekstraksi selesai. Total di checkpoint: {len(extracted)} entitas.")
+    return extracted
+
+
+def _save_checkpoint(data: dict):
+    with open(CHECKPOINT_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+
+# ─────────────────────────────────────────────────
+# STEP 2: Build chroma_db_uadc
+# ─────────────────────────────────────────────────
+def build_chroma_uadc(extracted: dict, device: str, encode_batch_size: int):
+    import shutil
+    print(f"\n[2/2] Membangun chroma_db_uadc ({len(extracted)} entitas × 4 dimensi)...")
+
+    if os.path.exists(CHROMA_PATH):
+        print(f"   Menghapus DB lama...")
+        shutil.rmtree(CHROMA_PATH)
+
+    print(f"   Menginisialisasi embedding model pada {device.upper()}...")
     embedding_model = HuggingFaceEmbeddings(
         model_name=EMBEDDING_MODEL,
-        model_kwargs={'device': 'cpu', 'local_files_only': False},
-        encode_kwargs={'normalize_embeddings': True}
+        model_kwargs={"device": device, "local_files_only": False},
+        encode_kwargs={"normalize_embeddings": True, "batch_size": encode_batch_size},
     )
-    
-    documents = []
-    print("Mempersiapkan dokumen berdimensi...")
-    
-    for item_id, data in extracted_data.items():
-        base_meta = {
-            "item_id": data["item_id"],
-            "place_name": data["place_name"],
-            "category": data["category"],
-            "rating": data["rating"],
-        }
-        
-        feats = data["features"]
-        
-        # 1. LANDSCAPE & CONTENT
-        meta_lan = base_meta.copy()
-        meta_lan["dimension"] = "landscape_content"
-        documents.append(Document(page_content=feats["landscape_content_features"], metadata=meta_lan))
-        
-        # 2. ACTIVITIES
-        meta_act = base_meta.copy()
-        meta_act["dimension"] = "activity"
-        documents.append(Document(page_content=feats["activity_features"], metadata=meta_act))
-        
-        # 3. ATMOSPHERE
-        meta_atm = base_meta.copy()
-        meta_atm["dimension"] = "atmosphere"
-        documents.append(Document(page_content=feats["atmosphere_features"], metadata=meta_atm))
-        
-        # 4. SUMMARY (digunakan untuk fallback atau deskripsi umum)
-        meta_sum = base_meta.copy()
-        meta_sum["dimension"] = "summary"
-        documents.append(Document(page_content=feats["summary"], metadata=meta_sum))
 
-    print(f"Menyimpan {len(documents)} vektor (dari {len(extracted_data)} tempat * 4 dimensi) ke ChromaDB...")
-    
-    # Hapus DB lama secara manual jika diperlukan, tapi kita gunakan folder terpisah: chroma_db_uadc
+    documents = []
+    for item_id, data in extracted.items():
+        base_meta = {
+            "item_id":    data["item_id"],
+            "place_name": data["place_name"],
+            "category":   data["category"],
+            "rating":     data["rating"],
+        }
+        feats = data["features"]
+
+        dims = [
+            ("landscape_content", feats["landscape_content_features"]),
+            ("activity",          feats["activity_features"]),
+            ("atmosphere",        feats["atmosphere_features"]),
+            ("summary",           feats["summary"]),
+        ]
+        for dim_name, dim_text in dims:
+            meta = base_meta.copy()
+            meta["dimension"] = dim_name
+            documents.append(Document(page_content=dim_text, metadata=meta))
+
+    print(f"   Menyimpan {len(documents)} vektor ke ChromaDB...")
+    t0 = time.time()
     db = Chroma.from_documents(
         documents=documents,
         embedding=embedding_model,
-        persist_directory=CHROMA_PATH
+        persist_directory=CHROMA_PATH,
     )
-    print(f"SUCCESS! Database UADC tersimpan di: {CHROMA_PATH}")
+    print(f"   → Selesai dalam {time.time()-t0:.1f}s. DB: {CHROMA_PATH}")
+    print(f"   Total vectors: {db._collection.count()}")
 
+
+# ─────────────────────────────────────────────────
+# MAIN
+# ─────────────────────────────────────────────────
 if __name__ == "__main__":
-    data = process_and_checkpoint_data()
-    
-    build_chroma_database(data)
+    print("=" * 60)
+    print("  UADC Ingest v2 — entities_final.csv → chroma_db_uadc")
+    print("=" * 60)
+
+    device, encode_batch = detect_device()
+
+    # Step 1: LLM extraction (resumes from checkpoint automatically)
+    extracted = process_and_checkpoint()
+
+    # Step 2: Build vector DB
+    build_chroma_uadc(extracted, device, encode_batch)
+
+    print("\n[DONE] UADC ingestion selesai.")
