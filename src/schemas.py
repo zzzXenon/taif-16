@@ -5,6 +5,7 @@ class CAIEROutput(BaseModel):
     """Skema untuk Context-Aware Intent Extraction (CA-IER)."""
     standalone_query: str = Field(description="Kueri yang dibersihkan dari anaphora berdasarkan riwayat chat.")
     is_search_required: bool = Field(description="True jika butuh database wisata, False jika chit-chat biasa.")
+    location: str = Field(default="", description="Nama kabupaten/kota yang disebutkan pengguna (tanpa prefix Kota/Kabupaten). Contoh: 'Samosir', 'Toba', 'Humbang Hasundutan'. Kosongkan jika tidak ada lokasi spesifik.")
     expected_landscape_content: str = Field(description="Kata kunci untuk lanskap/visual/fasilitas. Kosongkan jika tidak relevan.")
     expected_activities: str = Field(description="Kata kunci untuk aktivitas. Kosongkan jika tidak relevan.")
     expected_atmosphere: str = Field(description="Kata kunci untuk suasana/mood. Kosongkan jika tidak relevan.")

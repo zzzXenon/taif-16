@@ -178,7 +178,7 @@ def generate_final_response(user_query, reranked_results, uadc_data_dict=None):
     Modul Natural Language Generation (NLG).
     Mengubah hasil re-ranking menjadi respons teks dengan penalaran logis.
     """
-    llm = ChatOllama(model="qwen3:8b", temperature=0.3)
+    llm = ChatOllama(model="qwen3:8b", temperature=0.6)
     
     # Bangun teks konteks (Knowledge) dari hasil Reranking + Fitur UADC
     context_text = ""

@@ -17,7 +17,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_ollama import ChatOllama
 from langchain_classic.chains import RetrievalQA
 
-app = FastAPI(title="UGuideRAG API Backend", version="1.0.0")
+app = FastAPI(title="API Backend", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -143,7 +143,24 @@ async def chat_endpoint(request: ChatRequest):
         mode_nm = "Pipeline B" if ablation_mode == "pipeline_b_only" else "Baseline RAG"
         print(f"\n[Ablation Study] Menjalankan {mode_nm} dengan Pencarian Standar...")
         start_base = time.time()
-        result = baseline_qa.invoke({"query": ca_ier.standalone_query})
+        
+        # Apply location filter if CA-IER extracted a specific city/regency
+        location_filter = ca_ier.location.strip() if hasattr(ca_ier, 'location') else ""
+        if location_filter:
+            print(f"  [Filter] Menerapkan filter city_regency='{location_filter}'")
+            retriever = baseline_db.as_retriever(
+                search_kwargs={"k": 5, "filter": {"city_regency": location_filter}}
+            )
+            from langchain_classic.chains import RetrievalQA as RQA
+            llm_base = ChatOllama(model="qwen3:8b", temperature=0.7)
+            qa_with_filter = RQA.from_chain_type(
+                llm=llm_base, chain_type="stuff",
+                retriever=retriever, return_source_documents=True
+            )
+            result = qa_with_filter.invoke({"query": ca_ier.standalone_query})
+        else:
+            result = baseline_qa.invoke({"query": ca_ier.standalone_query})
+        
         time_base = time.time() - start_base
         print(f"  [Timer] {mode_nm} QA Selesai dalam {time_base:.2f} detik")
         

@@ -1,9 +1,11 @@
 # semua template few-shot (completion)
 
 SYSTEM_PROMPT_CA_IER = """
-Tugas: Context-Aware Intent Extraction (CA-IER). Analisis "Riwayat Chat Terakhir" untuk merangkai "Kueri Saat Ini" menjadi sebuah Standalone Query tanpa anaphora. Jika Standalone Query membutuhkan pencarian ke database wisata (is_search_required = true), ekstrak 3 dimensi pencariannya.
+Tugas: Context-Aware Intent Extraction (CA-IER). Analisis "Riwayat Chat Terakhir" untuk merangkai "Kueri Saat Ini" menjadi sebuah Standalone Query tanpa anaphora. Jika Standalone Query membutuhkan pencarian ke database wisata (is_search_required = true), ekstrak 3 dimensi pencarian DAN lokasi jika ada.
 
-PERINGATAN KERAS: JANGAN PERNAH menjawab pertanyaan pengguna! Tugas Anda BUKAN menjadi asisten chat, melainkan HANYA mengekstrak intent ke dalam skema JSON. JANGAN menghasilkan key seperti "query" atau "response". Patuhi format Output persis seperti contoh.
+Aturan field 'location': Isi dengan nama kabupaten/kota di Sumatera Utara yang EKSPLISIT disebutkan pengguna (tanpa prefix 'Kota'/'Kabupaten'). Contoh: 'Samosir', 'Toba', 'Tapanuli Utara'. Kosongkan string jika pengguna tidak menyebut lokasi spesifik.
+
+PERINGATAN KERAS: JANGAN PERNAH menjawab pertanyaan pengguna! Tugas Anda BUKAN menjadi asisten chat, melainkan HANYA mengekstrak intent ke dalam skema JSON. Patuhi format Output persis seperti contoh.
 
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
@@ -15,9 +17,24 @@ Output:
 {{
   "standalone_query": "Berapa harga tiket masuk tempat air terjun yang pertama direkomendasikan?",
   "is_search_required": true,
+  "location": "",
   "expected_landscape_content": "Air terjun, tempat pertama",
   "expected_activities": "",
   "expected_atmosphere": ""
+}}
+---
+Riwayat Chat (Pesan Terlama -> Terbaru):
+User: Hai AiYukToba!
+Kueri Saat Ini:
+Cari tempat makan yang enak di Samosir
+Output:
+{{
+  "standalone_query": "Cari tempat makan yang enak di Samosir",
+  "is_search_required": true,
+  "location": "Samosir",
+  "expected_landscape_content": "Restoran, rumah makan",
+  "expected_activities": "Makan, kuliner",
+  "expected_atmosphere": "Enak, lezat"
 }}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
@@ -28,6 +45,7 @@ Output:
 {{
   "standalone_query": "Cari tempat yang sejuk buat kemping",
   "is_search_required": true,
+  "location": "",
   "expected_landscape_content": "Tempat kemping",
   "expected_activities": "Kemping, berkemah",
   "expected_atmosphere": "Sejuk"
@@ -41,6 +59,7 @@ Output:
 {{
   "standalone_query": "Terima kasih sarannya!",
   "is_search_required": false,
+  "location": "",
   "expected_landscape_content": "",
   "expected_activities": "",
   "expected_atmosphere": ""

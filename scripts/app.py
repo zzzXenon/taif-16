@@ -1,45 +1,65 @@
+"""
+CLI Chatbot Manual.
+Gunakan ini untuk interaksi langsung di terminal.
+
+Cara pakai:
+  python scripts/app.py                             # Proposed (Pipeline A+B)
+  python scripts/app.py --ablation baseline         # Baseline RAG only
+  python scripts/app.py --ablation pipeline_a_only  # Pipeline A only (no CQR)
+  python scripts/app.py --ablation pipeline_b_only  # Pipeline B only (CQR + baseline检索)
+"""
+
 import sys
 import os
 import argparse
 
-# Configure stdout to handle emojis in Windows Console
-sys.stdout.reconfigure(encoding='utf-8')
+# Add project root to path so 'core' module can be found
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(PROJECT_ROOT, ".."))
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "..", "src"))
 
-# Ensure is in path
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
-from modules.retriever import get_ier_decomposition, dimension_aware_search, llm_reranker, generate_final_response, rewrite_query
-from schemas import CQRResult
+from modules.retriever import get_ca_ier, dimension_aware_search, cross_encoder_rerank, generate_final_response
+from schemas import CAIEROutput
 import json
 import uuid
+
+sys.stdout.reconfigure(encoding='utf-8')
+
 from database import init_db, create_session, save_message, get_chat_history, get_first_query
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_ollama import ChatOllama
 from langchain_classic.chains import RetrievalQA
 
-CHROMA_PATH = "./chroma_db_uadc"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+
+CHROMA_PATH = os.path.join(DATA_DIR, "chroma_db_uadc")
+BASELINE_CHROMA_PATH = os.path.join(DATA_DIR, "chroma_db_baseline")
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+
 
 def get_vector_db():
     embedding_model = HuggingFaceEmbeddings(
         model_name=EMBEDDING_MODEL,
-        model_kwargs={'device': 'cpu', 'local_files_only': True},
+        model_kwargs={'device': 'cpu', 'local_files_only': False},
         encode_kwargs={'normalize_embeddings': True}
     )
     return Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_model)
 
+
 def get_baseline_vector_db():
     embedding_model = HuggingFaceEmbeddings(
         model_name=EMBEDDING_MODEL,
-        model_kwargs={'device': 'cpu', 'local_files_only': True},
+        model_kwargs={'device': 'cpu', 'local_files_only': False},
         encode_kwargs={'normalize_embeddings': True}
     )
-    return Chroma(persist_directory="./chroma_db_baseline", embedding_function=embedding_model)
+    return Chroma(persist_directory=BASELINE_CHROMA_PATH, embedding_function=embedding_model)
+
 
 def get_baseline_qa_chain(baseline_db):
     llm = ChatOllama(model="qwen3:8b", temperature=0.7)
-    retriever = baseline_db.as_retriever(search_kwargs={"k": 4})
+    retriever = baseline_db.as_retriever(search_kwargs={"k": 5})
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",
@@ -48,167 +68,169 @@ def get_baseline_qa_chain(baseline_db):
     )
     return qa_chain
 
-def get_baseline_vector_db():
-    embedding_model = HuggingFaceEmbeddings(
-        model_name=EMBEDDING_MODEL,
-        model_kwargs={'device': 'cpu', 'local_files_only': True},
-        encode_kwargs={'normalize_embeddings': True}
-    )
-    return Chroma(persist_directory="./chroma_db_baseline", embedding_function=embedding_model)
-
-def get_baseline_qa_chain(baseline_db):
-    llm = ChatOllama(model="qwen3:8b", temperature=0.7)
-    retriever = baseline_db.as_retriever(search_kwargs={"k": 4})
-    qa_chain = RetrievalQA.from_chain_type(
-        llm=llm,
-        chain_type="stuff",
-        retriever=retriever,
-        return_source_documents=True
-    )
-    return qa_chain
 
 def main():
-    parser = argparse.ArgumentParser(description="UGuideRAG Interactive Chatbot")
-    parser.add_argument("--disable-cqr", action="store_true", help="Nonaktifkan Pipeline B (CQR) untuk ablation study (hanya Pipeline A)")
+    parser = argparse.ArgumentParser(description="CLI Chatbot")
+    parser.add_argument(
+        "--ablation",
+        type=str,
+        default="proposed",
+        choices=["proposed", "pipeline_a_only", "pipeline_b_only", "baseline"],
+        help="Mode ablasi: proposed (A+B), pipeline_a_only (A без CQR), pipeline_b_only (B+baseline检索), baseline (tanpa CQR & tanpa dimensi)"
+    )
+    parser.add_argument("--top-k", type=int, default=5, help="Jumlah hasil pencarian untuk ditampilkan")
     args = parser.parse_args()
 
-    print("--- AiYukToba Assistant Active ---")
+    ablation_mode = args.ablation
+
+    print("=" * 60)
+    print("🤖 AiYukToba CLI - Mode:", ablation_mode)
+    print("=" * 60)
     
-    print("Mempersiapkan database rekam jejak (SQLite)...")
+    print("\n📂 Memuat database...")
     init_db()
-    
-    # Buat sesi unik untuk setiap run script
-    current_session = str(uuid.uuid4())
-    create_session(current_session)
-    
-    print("Mempersiapkan database wisata (ChromaDB)...")
     vector_db = get_vector_db()
+    baseline_db = get_baseline_vector_db()
+    baseline_qa = get_baseline_qa_chain(baseline_db)
+    print("✅ Database siap.\n")
+
+    session_id = str(uuid.uuid4())
+    create_session(session_id)
     
-    print("Ready! Ketik 'exit' atau 'keluar' untuk mengakhiri.\n")
+    print("💬 Ketik pesan anda (atau 'exit'/'keluar' untuk mengakhiri)\n")
 
     while True:
-        query = input("😎 Anda: ")
+        query = input("😎 Anda: ").strip()
         
-        if query.strip().lower() in ['exit', 'keluar', 'quit']:
-            print("Sampai jumpa lagi! 👋")
+        if query.lower() in ['exit', 'keluar', 'quit', 'keluar']:
+            print("\n👋 Sampai jumpa!")
             break
             
-        if not query.strip():
+        if not query:
             continue
+        
+        print(f"\n[📝 Query]: {query}")
+        
+        if ablation_mode == "baseline":
+            print("\n[Baseline] Langsung searchtanpa CQR atau dimensi...")
+            result = baseline_qa.invoke({"query": query})
             
-        if args.pipeline_a_only:
-            print(f"\n[⚠️ Ablation Study] Pipeline B (CQR) dinonaktifkan. Mengembalikan raw query (Pipeline A Saja)...")
-            cqr = CQRResult(standalone_query=query, is_search_required=True)
-        else:
-            # Pipeline B: Tarik History
-            # Menggunakan "First-plus-last sliding window"
-            # Ambil Q1 sebagai anchor, dan 3 pesan terakhir
-            q1 = get_first_query(current_session)
-            recent_history = get_chat_history(current_session, limit=4) # 2 pasang terakhir
+            print("\n=== DOKUMEN REFERENSI (BASELINE) ===")
+            source_docs = []
+            for i, doc in enumerate(result["source_documents"]):
+                place_name = doc.metadata.get("place_name", "Tidak Diketahui")
+                print(f"  {i+1}. {place_name} [{doc.metadata.get('category', '')}]")
+                source_docs.append(f"Source {i+1}: Nama Tempat: {place_name}. Kategori: {doc.metadata.get('category', '')}")
             
-            # Susun history yang disalurkan ke LLM CQR
-            prompt_history = []
+            print("\n" + "=" * 60)
+            print("🤖 AiYukToba (Baseline):")
+            print(result["result"])
+            print("=" * 60)
+            
+            save_message(session_id, "user", query, query)
+            save_message(session_id, "ai", result["result"])
+            continue
+        
+        # Pipeline A, Pipeline B, atau Proposed: Jalankan CA-IER (Context-Aware Intent Entity Recognition)
+        print(f"\n[🔄 Modul CA-IER] Memproses konteks ({ablation_mode})...")
+        prompt_history = []
+        
+        if ablation_mode in ["proposed", "pipeline_b_only"]:
+            q1 = get_first_query(session_id)
+            recent_history = get_chat_history(session_id, limit=4)
             if q1 and (not recent_history or recent_history[0][1] != q1):
                 prompt_history.append(("user", f"[PESAN PERTAMA]: {q1}"))
-                
             prompt_history.extend(recent_history)
-            
-            print(f"\n[🔄 Modul CQR] Sedang membersihkan konteks... (History {len(prompt_history)} nodes)")
-            cqr = rewrite_query(query, prompt_history)
-            
-            print(f"[🔍 Standalone Query]: {cqr.standalone_query}")
-            print(f"[⚙️ Is Search Required?]: {cqr.is_search_required}")
-            
-            if not cqr.is_search_required:
-                # Chit-chat Mode
-                print("\n🤖 AiYukToba:")
-                llm = ChatOllama(model="qwen3:8b", temperature=0.5)
-                casual_response = llm.invoke(f"Berdasarkan percakapan ini, jawab sapaan pengguna dengan ramah: '{query}'")
-                print(casual_response.content)
-                print("=" * 60)
-                
-                # Simpan chat non-search ke DB
-                save_message(current_session, "user", query, cqr.standalone_query)
-                save_message(current_session, "ai", casual_response.content)
-                continue
-            
-        # PIPELINE A / BASELINE EXECUTION
-        if args.pipeline_b_only:
-            print("\n[⚠️ Ablation Study] Menjalankan Pipeline B + Pencarian Standar...")
-            result = baseline_qa.invoke({"query": cqr.standalone_query})
-            
-            print("\n=== DOKUMEN REFERENSI (BASELINE RAG) ===")
-            for i, doc in enumerate(result["source_documents"]):
-                print(f"{i+1}. [Source snippet]: {doc.page_content[:100]}...")
-            
-            final_output = result["result"]
-            print("\nMenyusun respons akhir...\n")
+            print(f"  [History] {len(prompt_history)} percakapan terakhir")
+        
+        ca_ier = get_ca_ier(query, prompt_history)
+        
+        print(f"\n[📤 Standalone Query]: {ca_ier.standalone_query}")
+        print(f"  ├─ is_search_required: {ca_ier.is_search_required}")
+        print(f"  ├─ Landscape/Content: {ca_ier.expected_landscape_content or '(none)'}")
+        print(f"  ├─ Activities: {ca_ier.expected_activities or '(none)'}")
+        print(f"  └─ Atmosphere: {ca_ier.expected_atmosphere or '(none)'}")
+        
+        if not ca_ier.is_search_required:
+            print("\n[💬 Chit-Chat Mode]")
+            llm = ChatOllama(model="qwen3:8b", temperature=0.5)
+            casual_response = llm.invoke(f"Jawab dengan ramah: '{query}'")
+            print("\n" + "=" * 60)
+            print("🤖 AiYukToba:")
+            print(casual_response.content)
             print("=" * 60)
-            print("🤖 AiYukToba (Baseline QA):")
-            print(final_output)
+            save_message(session_id, "user", query, ca_ier.standalone_query)
+            save_message(session_id, "ai", casual_response.content)
+            continue
+        
+        if ablation_mode == "pipeline_b_only":
+            print("\n[Pipeline B Only] Baseline Retrieval...")
+            result = baseline_qa.invoke({"query": ca_ier.standalone_query})
+            
+            print("\n=== DOKUMEN REFERENSI (Pipeline B) ===")
+            source_docs = []
+            for i, doc in enumerate(result["source_documents"][:args.top_k]):
+                place_name = doc.metadata.get("place_name", "Tidak Diketahui")
+                print(f"  {i+1}. {place_name} [{doc.metadata.get('category', '')}]")
+                source_docs.append(f"Source {i+1}: Nama Tempat: {place_name}. Kategori: {doc.metadata.get('category', '')}")
+            
+            print("\n" + "=" * 60)
+            print("🤖 AiYukToba (Pipeline B):")
+            print(result["result"])
             print("=" * 60)
             
-            save_message(current_session, "user", query, cqr.standalone_query)
-            save_message(current_session, "ai", final_output)
+            save_message(session_id, "user", query, ca_ier.standalone_query)
+            save_message(session_id, "ai", result["result"])
             continue
-
-        # PIPELINE A: Jika perlu dicarikan tempat wisata
-        print("\nSedang memproses intent anda...")
-        try:
-            intent = get_ier_decomposition(cqr.standalone_query)
-            print("\n=== HASIL DEKOMPOSISI (IER) ===")
-            print(f"Landscape & Content : {intent.expected_landscape_content}")
-            print(f"Activities          : {intent.expected_activities}")
-            print(f"Atmosphere          : {intent.expected_atmosphere}")
-        except Exception as e:
-            print(f"\nGagal mendekomposisi niat: {e}")
-            continue
-
-        # Vector Search
-        print("\nSedang mencari kecocokan matematis di database...")
+        
+        if ablation_mode == "pipeline_a_only":
+            print("\n[Pipeline A Only] tanpa CQR (history diabaikan)...")
+        
+        # Proposed / Pipeline A: Dimension-Aware Search
+        print("\n[🔍 Dimension-Aware Search] Mencari di database...")
         top_results = dimension_aware_search(
-            vector_db=vector_db, 
-            intent_dimensions=intent,
+            vector_db=vector_db,
+            intent_dimensions=ca_ier,
             w_lan=1.0, w_act=1.0, w_atm=1.0,
-            top_k=4
+            top_k=15
         )
         
-        print("\n=== TOP 4 REKOMENDASI (MATEMATIS) ===")
-        for i, res in enumerate(top_results):
-            print(f"{i+1}. {res['place_name']} (Kategori: {res['category']}, Base Skor: {res['total_score']:.4f})")
+        print(f"\n=== TOP {min(10, len(top_results))} HASIL PENCARIAN ===")
+        for i, res in enumerate(top_results[:args.top_k]):
+            print(f"  {i+1}. {res['place_name']} [{res['category']}] (score: {res['total_score']:.4f})")
         
-        # LLM Re-Ranking
-        print("\nSedang mengevaluasi ulang dengan LLM Re-Ranker (Qwen3)...")
+        # Cross-Encoder Reranking
+        print("\n[🎯 Cross-Encoder Reranker] Meranking ulang...")
         try:
-            with open("uadc_checkpoint.json", "r", encoding="utf-8") as f:
+            uadc_data_path = os.path.join(DATA_DIR, "uadc_checkpoint.json")
+            with open(uadc_data_path, "r", encoding="utf-8") as f:
                 uadc_data_dict = json.load(f)
         except Exception as e:
-            print(f"Gagal memuat checkpoint UADC: {e}")
+            print(f"  ⚠ Gagal load checkpoint: {e}")
             uadc_data_dict = {}
-
-        reranked_results = llm_reranker(cqr.standalone_query, top_results, uadc_data_dict)
         
-        print("\n=== TOP 4 REKOMENDASI (HASIL RE-RANKING LLM) ===")
-        for i, res in enumerate(reranked_results):
-            print(f"\n{i+1}. {res['place_name']}")
-            print(f"   Kategori   : {res['category']}")
-            print(f"   Base Skor  : {res['total_score']:.4f} -> LRR Skor: {res.get('lrr_score', 'N/A')}/10.0")
-            print(f"   Reasoning  : {res.get('lrr_reasoning', 'N/A')}")
-            
-        with open("lrr_debug.json", "w", encoding="utf-8") as f:
-            json.dump(reranked_results, f, indent=4, ensure_ascii=False)
+        reranked_results = cross_encoder_rerank(ca_ier.standalone_query, top_results, uadc_data_dict)
         
-        # Generate Response
-        print("\nMenyusun respons akhir...\n")
-        print("=" * 60)
+        print(f"\n=== TOP {min(5, len(reranked_results))} REKOMENDASI ===")
+        for i, res in enumerate(reranked_results[:args.top_k]):
+            ce_score = res.get('lrr_score', 0)
+            print(f"  {i+1}. {res['place_name']} [{res['category']}]")
+            print(f"      Base: {res['total_score']:.4f} → CE: {ce_score:.4f}")
+            if res.get('lrr_reasoning'):
+                print(f"      Reasoning: {res['lrr_reasoning'][:80]}...")
+        
+        # Generate Final Response
+        print("\n[📝 Generating Response]...")
+        final_output = generate_final_response(ca_ier.standalone_query, reranked_results, uadc_data_dict)
+        
+        print("\n" + "=" * 60)
         print("🤖 AiYukToba:")
-        final_output = generate_final_response(cqr.standalone_query, reranked_results)
         print(final_output)
         print("=" * 60)
         
-        # PIPELINE B: Simpan state memori ke DB (User dan AI)
-        save_message(current_session, "user", query, cqr.standalone_query)
-        save_message(current_session, "ai", final_output)
+        save_message(session_id, "user", query, ca_ier.standalone_query)
+        save_message(session_id, "ai", final_output)
+
 
 if __name__ == "__main__":
     main()
