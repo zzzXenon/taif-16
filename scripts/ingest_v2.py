@@ -30,13 +30,21 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 
 # ─────────────────────────────────────────────────
-# CONFIG
+# CONFIG  (all paths overridable via env vars)
 # ─────────────────────────────────────────────────
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 
-CSV_FILE_PATH   = os.path.join(DATA_DIR, "entities_final.csv")
-CHROMA_PATH     = os.path.join(DATA_DIR, "chroma_db_baseline")
+# Override with:  ENTITIES_CSV=/your/path/entities_final.csv
+CSV_FILE_PATH = os.environ.get(
+    "ENTITIES_CSV",
+    os.path.join(DATA_DIR, "entities_final.csv")
+)
+# Override with:  CHROMA_OUT=/your/path/chroma_db_baseline
+CHROMA_PATH = os.environ.get(
+    "CHROMA_OUT",
+    os.path.join(DATA_DIR, "chroma_db_baseline")
+)
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 
 CHUNK_SIZE    = 1000
@@ -79,6 +87,17 @@ def detect_device() -> tuple[str, int]:
 def load_documents(file_path: str) -> list[Document]:
     print(f"\n[1/4] Membaca data dari {file_path}...")
     t0 = time.time()
+
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(
+            f"\n[ERROR] File tidak ditemukan: {file_path}"
+            f"\n\nSolusi:"
+            f"\n  1. Upload file ke server:"
+            f"\n       scp data/entities_final.csv user@server:{file_path}"
+            f"\n  2. Atau set env var ke path yang sudah ada:"
+            f"\n       ENTITIES_CSV=/path/lain/entities_final.csv python scripts/ingest_v2.py"
+            f"\n\nJalankan preprocess_entities.py di local machine terlebih dahulu jika belum ada."
+        )
 
     df = pd.read_csv(file_path).fillna("")
 
