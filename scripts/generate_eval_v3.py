@@ -34,10 +34,12 @@ from langchain_core.output_parsers import StrOutputParser
 # ─────────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────────
-CHECKPOINT_FILE  = os.environ.get("UADC_CHECKPOINT", os.path.join(BASE_DIR, "data", "uadc_checkpoint.json"))
-OUT_PIPELINE_A   = os.path.join(BASE_DIR, "data", "eval_ground_truths_v3.json")
-OUT_PIPELINE_B   = os.path.join(BASE_DIR, "data", "eval_pipeline_b_v2.json")
-LLM_MODEL        = os.environ.get("EVAL_LLM", "qwen3:14b")
+CHECKPOINT_FILE    = os.environ.get("UADC_CHECKPOINT", os.path.join(BASE_DIR, "data", "uadc_checkpoint.json"))
+OUT_PIPELINE_A     = os.path.join(BASE_DIR, "data", "eval_ground_truths_v3.json")
+OUT_PIPELINE_B     = os.path.join(BASE_DIR, "data", "eval_pipeline_b_v2.json")
+EVAL_A_CHECKPOINT  = os.path.join(BASE_DIR, "data", "eval_a_progress.json")  # resume support
+LLM_MODEL          = os.environ.get("EVAL_LLM", "qwen3:14b")
+OLLAMA_TIMEOUT     = int(os.environ.get("OLLAMA_TIMEOUT", "300"))  # seconds
 
 SEED = 42
 random.seed(SEED)
@@ -84,7 +86,21 @@ LEVEL_SPECS = {
 # LLM HELPERS
 # ─────────────────────────────────────────────────
 def get_llm():
-    return ChatOllama(model=LLM_MODEL, temperature=0.7)
+    return ChatOllama(
+        model=LLM_MODEL,
+        temperature=0.7,
+        timeout=OLLAMA_TIMEOUT,
+        keep_alive="10m",  # keep model loaded between calls
+    )
+
+
+def ping_ollama():
+    """Send a trivial request to keep Ollama warm before a batch."""
+    try:
+        llm = ChatOllama(model=LLM_MODEL, temperature=0.0, keep_alive="10m")
+        llm.invoke("ping")
+    except Exception:
+        pass
 
 
 def generate_pipeline_a_query(level: int, seeds: list[dict]) -> str:
@@ -263,7 +279,16 @@ def _parse_json_from_llm(raw: str, fallback):
 def build_pipeline_a(checkpoint: dict) -> list:
     entities = list(checkpoint.values())
     print(f"\n[Pipeline A] {len(entities)} entitas tersedia.")
-    print(f"   Target: 10 queries × 5 levels = 50 total\n")
+    print(f"   Target: 10 queries × 5 levels = 50 total")
+
+    # ── Resume from checkpoint ───────────────────
+    progress: dict = {}  # {level_str: [queries]}
+    if os.path.exists(EVAL_A_CHECKPOINT):
+        with open(EVAL_A_CHECKPOINT, "r", encoding="utf-8") as f:
+            progress = json.load(f)
+        done_levels = [int(k) for k in progress]
+        print(f"   Melanjutkan dari checkpoint: Level {done_levels} sudah selesai.")
+    print()
 
     # Group by category for diverse sampling
     by_category: dict[str, list] = {}
@@ -274,21 +299,29 @@ def build_pipeline_a(checkpoint: dict) -> list:
     results = []
 
     for level in range(1, 6):
+        level_key = str(level)
+
+        # Skip if already done
+        if level_key in progress:
+            print(f"   Level {level} — sudah ada di checkpoint, skip.")
+            results.extend(progress[level_key])
+            continue
+
         spec = LEVEL_SPECS[level]
         n_seeds = spec["n_seeds"]
         print(f"   Level {level} ({spec['name']}) — generating 10 queries...")
 
+        # Warm up Ollama before each level
+        ping_ollama()
+
         queries_this_level = []
         attempts = 0
-        max_attempts = 25  # avoid infinite loop
-
-        # Use diverse sampling across categories
+        max_attempts = 25
         cat_list = list(by_category.keys())
 
         while len(queries_this_level) < 10 and attempts < max_attempts:
             attempts += 1
 
-            # Sample seeds from different categories for diversity
             random.shuffle(cat_list)
             seeds = []
             for cat in cat_list:
@@ -307,7 +340,6 @@ def build_pipeline_a(checkpoint: dict) -> list:
                     continue
 
                 ground_truths = [s["place_name"] for s in seeds]
-
                 queries_this_level.append({
                     "level": level,
                     "query": query,
@@ -317,10 +349,15 @@ def build_pipeline_a(checkpoint: dict) -> list:
 
             except Exception as e:
                 print(f"      [WARN] Query generation failed: {e}")
-                time.sleep(1)
+                time.sleep(2)
+
+        # Save checkpoint after each level
+        progress[level_key] = queries_this_level
+        with open(EVAL_A_CHECKPOINT, "w", encoding="utf-8") as f:
+            json.dump(progress, f, indent=2, ensure_ascii=False)
 
         results.extend(queries_this_level)
-        print(f"   Level {level} done: {len(queries_this_level)} queries\n")
+        print(f"   Level {level} done: {len(queries_this_level)} queries — checkpoint saved.\n")
 
     return results
 
