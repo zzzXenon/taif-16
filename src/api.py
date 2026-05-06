@@ -14,8 +14,8 @@ from database import init_db, create_session, save_message, get_chat_history, ge
 
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_ollama import ChatOllama
 from langchain_classic.chains import RetrievalQA
+from modules.llm_loader import load_model, get_chat_llm, strip_thinking
 
 app = FastAPI(title="API Backend", version="1.0.0")
 
@@ -54,7 +54,9 @@ def startup_event():
     print("Mempersiapkan database wisata KLASIK (Baseline)...")
     baseline_db = Chroma(persist_directory=os.path.join(DATA_DIR, "chroma_db_baseline"), embedding_function=embedding_model)
     
-    llm = ChatOllama(model="qwen3:8b", temperature=0.7)
+    print("Memuat model LLM Qwen3 ke GPU...")
+    load_model()
+    llm = get_chat_llm(temperature=0.7, max_new_tokens=512)
     retriever = baseline_db.as_retriever(search_kwargs={"k": 5})
     baseline_qa = RetrievalQA.from_chain_type(
         llm=llm,
@@ -119,9 +121,9 @@ async def chat_endpoint(request: ChatRequest):
         if not ca_ier.is_search_required:
             print("\nAiYukToba (Chit-Chat):")
             start_nlg = time.time()
-            llm = ChatOllama(model="qwen3:8b", temperature=0.5)
+            llm = get_chat_llm(temperature=0.5, max_new_tokens=512)
             casual_response = llm.invoke(f"Berdasarkan percakapan ini, jawab sapaan pengguna dengan ramah: '{query}'")
-            reply = casual_response.content
+            reply = strip_thinking(casual_response.content)
             time_nlg = time.time() - start_nlg
             print(f"  [Timer] Casual Chat Selesai dalam {time_nlg:.2f} detik")
             
@@ -152,7 +154,7 @@ async def chat_endpoint(request: ChatRequest):
                 search_kwargs={"k": 5, "filter": {"city_regency": location_filter}}
             )
             from langchain_classic.chains import RetrievalQA as RQA
-            llm_base = ChatOllama(model="qwen3:8b", temperature=0.7)
+            llm_base = get_chat_llm(temperature=0.7, max_new_tokens=512)
             qa_with_filter = RQA.from_chain_type(
                 llm=llm_base, chain_type="stuff",
                 retriever=retriever, return_source_documents=True
@@ -164,7 +166,7 @@ async def chat_endpoint(request: ChatRequest):
         time_base = time.time() - start_base
         print(f"  [Timer] {mode_nm} QA Selesai dalam {time_base:.2f} detik")
         
-        final_output = result["result"]
+        final_output = strip_thinking(result["result"])
         for i, doc in enumerate(result["source_documents"]):
             place_name = doc.metadata.get("place_name", "Tidak Diketahui")
             source_docs.append(f"Source {i+1}: Nama Tempat: {place_name}. Kategori: {doc.metadata.get('category', '')}\nIsi: {doc.page_content[:200]}...")

@@ -1,11 +1,10 @@
 langchain
 langchain-community
 langchain-chroma
-langchain-ollama 
 langchain-huggingface
 chromadb
 sentence-transformers
-ollama
+accelerate
 fastapi
 uvicorn
 pydantic
