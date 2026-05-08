@@ -6,7 +6,7 @@ import os
 import re
 import subprocess
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline as hf_pipeline, GenerationConfig
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline as hf_pipeline
 from langchain_huggingface import HuggingFacePipeline, ChatHuggingFace
 
 MODEL_NAME = "Qwen/Qwen3-8B"
@@ -73,19 +73,15 @@ def get_chat_llm(temperature: float = 0.0, max_new_tokens: int = 512) -> ChatHug
     model, tokenizer = load_model()
     do_sample = temperature > 0.0
 
-    gen_config = GenerationConfig(
+    pipe = hf_pipeline(
+        "text-generation",
+        model=model,
+        tokenizer=tokenizer,
         max_new_tokens=max_new_tokens,
         do_sample=do_sample,
         temperature=temperature if do_sample else 1.0,
         repetition_penalty=1.05,
         pad_token_id=tokenizer.eos_token_id,
-    )
-
-    pipe = hf_pipeline(
-        "text-generation",
-        model=model,
-        tokenizer=tokenizer,
-        generation_config=gen_config,
         return_full_text=False,
     )
 
