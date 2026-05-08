@@ -19,7 +19,7 @@ import sys
 # ============================================================
 # KONFIGURASI
 # ============================================================
-API_URL = "http://localhost:8001/api/chat"
+API_URL = "http://localhost:8002/api/chat"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 
@@ -167,14 +167,21 @@ def extract_retrieved_places(response_data):
 
 def compute_all_metrics(retrieved_places, ground_truths):
     """Menghitung semua 4 metrik sekaligus dan mengembalikan dict."""
+    # Deduplicate retrieved list (preserve order) to avoid DCG inflation
+    seen = set()
+    deduped = []
+    for p in retrieved_places:
+        if p not in seen:
+            seen.add(p)
+            deduped.append(p)
     return {
-        "hr": calculate_hr_at_k(retrieved_places, ground_truths),
-        "mrr": calculate_mrr_at_k(retrieved_places, ground_truths),
-        "recall": calculate_recall_at_k(retrieved_places, ground_truths),
-        "ndcg": calculate_ndcg_at_k(retrieved_places, ground_truths),
+        "hr":     calculate_hr_at_k(deduped, ground_truths),
+        "mrr":    calculate_mrr_at_k(deduped, ground_truths),
+        "recall": calculate_recall_at_k(deduped, ground_truths),
+        "ndcg":   calculate_ndcg_at_k(deduped, ground_truths),
     }
 
-DEBUG_RAW_DOCS = False  # Matikan untuk eksekusi real
+DEBUG_RAW_DOCS = True  # Print extracted names vs ground truths for diagnosis
 
 
 # ============================================================
