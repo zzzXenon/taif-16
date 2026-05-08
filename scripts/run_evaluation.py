@@ -108,11 +108,18 @@ def extract_place_name_from_source(doc_string):
         except:
             pass
     # Format Proposed/Pipeline A: "🎯 PlaceName (Category) [Base Skor: ...]"
+    # Place names may contain parentheses e.g. "Air Terjun Sigarattung (Sampuran Na Pitu)"
+    # Strategy: strip everything from "[Base Skor:" onward, then remove the LAST " (Category)"
     if "🎯" in doc_string:
         try:
             after_emoji = doc_string.split("🎯")[1].strip()
-            place_name = after_emoji.split("(")[0].strip()
-            return place_name
+            # Remove score suffix
+            before_score = after_emoji.split(" [Base Skor:")[0].strip()
+            # Remove last parenthetical (the category)
+            last_paren = before_score.rfind(" (")
+            if last_paren != -1:
+                return before_score[:last_paren].strip()
+            return before_score
         except:
             pass
     # Format place_name di metadata
