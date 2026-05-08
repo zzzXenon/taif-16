@@ -1,7 +1,9 @@
 # logika utama Intent Decomposition & pencarian ChromaDB
 import os
+import re
+import json
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import PydanticOutputParser, StrOutputParser
+from langchain_core.output_parsers import StrOutputParser
 from schemas import CAIEROutput
 from core.prompts import SYSTEM_PROMPT_CA_IER, SYSTEM_PROMPT_NLG
 from sentence_transformers import CrossEncoder
@@ -16,9 +18,37 @@ def log_llm_response(module_name, raw_text):
         f.write(raw_text)
         f.write("\n" + "-"*40 + "\n")
 
+
+def _parse_ca_ier_json(raw: str, fallback_query: str) -> CAIEROutput:
+    """Extract and parse JSON from LLM output, return fallback on failure."""
+    # Strip markdown code fences
+    raw = re.sub(r"```(?:json)?", "", raw).strip().rstrip("```").strip()
+    # Find first { ... } block
+    start = raw.find("{")
+    if start != -1:
+        depth = 0
+        for i, c in enumerate(raw[start:], start=start):
+            if c == "{": depth += 1
+            elif c == "}":
+                depth -= 1
+                if depth == 0:
+                    try:
+                        data = json.loads(raw[start:i+1])
+                        return CAIEROutput(
+                            standalone_query=data.get("standalone_query", fallback_query),
+                            is_search_required=bool(data.get("is_search_required", True)),
+                            location=data.get("location", ""),
+                            expected_landscape_content=data.get("expected_landscape_content", ""),
+                            expected_activities=data.get("expected_activities", ""),
+                            expected_atmosphere=data.get("expected_atmosphere", ""),
+                        )
+                    except Exception:
+                        break
+    raise ValueError(f"No valid JSON found in: {raw[:200]}")
+
+
 def get_ca_ier(current_query: str, chat_history: list) -> CAIEROutput:
     llm = get_chat_llm(temperature=0.0, max_new_tokens=512)
-    parser = PydanticOutputParser(pydantic_object=CAIEROutput)
 
     history_str = "Tidak ada riwayat. Ini adalah pesan pertama."
     if chat_history:
@@ -28,8 +58,9 @@ def get_ca_ier(current_query: str, chat_history: list) -> CAIEROutput:
             history_lines.append(f"{prefix}{content}")
         history_str = "\n".join(history_lines)
 
+    # No format_instructions — avoids curly-brace conflicts in LangChain templates
     prompt = ChatPromptTemplate.from_messages([
-        ("system", SYSTEM_PROMPT_CA_IER + "\n\nBuatlah dalam format JSON yang valid sesuai instruksi:\n{format_instructions}"),
+        ("system", SYSTEM_PROMPT_CA_IER),
     ])
 
     chain = prompt | llm | StrOutputParser()
@@ -38,44 +69,47 @@ def get_ca_ier(current_query: str, chat_history: list) -> CAIEROutput:
         raw_result = chain.invoke({
             "chat_history": history_str,
             "current_query": current_query,
-            "format_instructions": parser.get_format_instructions()
         })
         raw_result = strip_thinking(raw_result)
         log_llm_response("CA-IER", raw_result)
-        result = parser.parse(raw_result)
-        return result
+        return _parse_ca_ier_json(raw_result, current_query)
     except Exception as e:
         print(f"CA-IER Parse Error: {e}")
+        log_llm_response("CA-IER FALLBACK", f"Exception: {e}")
         return CAIEROutput(
             standalone_query=current_query,
             is_search_required=True,
-            expected_landscape_content="",
-            expected_activities="",
-            expected_atmosphere=""
+            expected_landscape_content=current_query,
+            expected_activities=current_query,
+            expected_atmosphere=current_query
         )
 
 def dimension_aware_search(vector_db, intent_dimensions, w_lan=1.0, w_act=1.0, w_atm=1.0, top_k=5):
     res_lan, res_act, res_atm = [], [], []
 
-    if intent_dimensions.expected_landscape_content.strip():
+    lan_q = intent_dimensions.expected_landscape_content.strip()
+    act_q = intent_dimensions.expected_activities.strip()
+    atm_q = intent_dimensions.expected_atmosphere.strip()
+
+    # Fallback: if all dimensions empty, use standalone_query for all
+    if not lan_q and not act_q and not atm_q:
+        fallback_q = intent_dimensions.standalone_query.strip()
+        print(f"  [WARN] All dimensions empty — falling back to standalone query: '{fallback_q[:60]}'")
+        lan_q = act_q = atm_q = fallback_q
+
+    if lan_q:
         res_lan = vector_db.similarity_search_with_relevance_scores(
-            intent_dimensions.expected_landscape_content,
-            k=15,
-            filter={"dimension": "landscape_content"}
+            lan_q, k=15, filter={"dimension": "landscape_content"}
         )
 
-    if intent_dimensions.expected_activities.strip():
+    if act_q:
         res_act = vector_db.similarity_search_with_relevance_scores(
-            intent_dimensions.expected_activities,
-            k=15,
-            filter={"dimension": "activity"}
+            act_q, k=15, filter={"dimension": "activity"}
         )
 
-    if intent_dimensions.expected_atmosphere.strip():
+    if atm_q:
         res_atm = vector_db.similarity_search_with_relevance_scores(
-            intent_dimensions.expected_atmosphere,
-            k=15,
-            filter={"dimension": "atmosphere"}
+            atm_q, k=15, filter={"dimension": "atmosphere"}
         )
 
     item_scores = {}
