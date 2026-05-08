@@ -45,6 +45,15 @@ REQUEST_TIMEOUT = 1000  # detik (Pipeline A/Proposed bisa lambat karena multi-LL
 # FUNGSI METRIK (dipakai oleh kedua jenis evaluasi)
 # ============================================================
 
+def normalize_place_name(name: str) -> str:
+    """Normalize place name for case-insensitive, whitespace-tolerant comparison."""
+    import re
+    name = name.lower().strip()
+    name = re.sub(r'\s+', ' ', name)          # collapse multiple spaces
+    name = name.rstrip('.')                    # strip trailing period
+    return name
+
+
 def calculate_hr_at_k(retrieved_items, ground_truths):
     """Hit Rate: 1.0 jika minimal 1 benar muncul, 0.0 jika meleset semua."""
     if not ground_truths:
@@ -174,14 +183,17 @@ def compute_all_metrics(retrieved_places, ground_truths):
         if p not in seen:
             seen.add(p)
             deduped.append(p)
+    # Normalize both sides for case-insensitive, whitespace-tolerant comparison
+    norm_retrieved = [normalize_place_name(p) for p in deduped]
+    norm_gt = set(normalize_place_name(g) for g in ground_truths)
     return {
-        "hr":     calculate_hr_at_k(deduped, ground_truths),
-        "mrr":    calculate_mrr_at_k(deduped, ground_truths),
-        "recall": calculate_recall_at_k(deduped, ground_truths),
-        "ndcg":   calculate_ndcg_at_k(deduped, ground_truths),
+        "hr":     calculate_hr_at_k(norm_retrieved, norm_gt),
+        "mrr":    calculate_mrr_at_k(norm_retrieved, norm_gt),
+        "recall": calculate_recall_at_k(norm_retrieved, norm_gt),
+        "ndcg":   calculate_ndcg_at_k(norm_retrieved, norm_gt),
     }
 
-DEBUG_RAW_DOCS = True  # Print extracted names vs ground truths for diagnosis
+DEBUG_RAW_DOCS = False  # Disable now; extraction confirmed working
 
 
 # ============================================================
