@@ -24,7 +24,6 @@ import time
 import sys
 
 import pandas as pd
-from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser, StrOutputParser
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -34,6 +33,7 @@ from langchain_core.documents import Document
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, "src"))
 from schemas import AttractionFeatures
+from modules.llm_loader import get_chat_llm, strip_thinking
 
 # ─────────────────────────────────────────────────
 # CONFIG  (all overridable via env vars)
@@ -81,7 +81,7 @@ berikan estimasi masuk akal berdasarkan nama/kategori tempat. JANGAN KOSONG.
 
 def extract_features_with_llm(place_name: str, category: str, description: str) -> dict:
     """Extract 4 feature dimensions from entity description using LLM."""
-    llm    = ChatOllama(model=LLM_MODEL, temperature=0.1, format="json")
+    llm    = get_chat_llm(temperature=0.1, max_new_tokens=1024)
     parser = PydanticOutputParser(pydantic_object=AttractionFeatures)
 
     prompt = ChatPromptTemplate.from_messages([
@@ -98,6 +98,7 @@ def extract_features_with_llm(place_name: str, category: str, description: str) 
             "description":         description[:REVIEW_CHAR_LIMIT],
             "format_instructions": parser.get_format_instructions(),
         })
+        raw = strip_thinking(raw)
         result = parser.parse(raw)
         return result.dict()
     except Exception as e:
