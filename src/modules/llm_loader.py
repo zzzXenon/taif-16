@@ -9,7 +9,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline as hf_pipeline
 from langchain_huggingface import HuggingFacePipeline, ChatHuggingFace
 
-MODEL_NAME = "Qwen/Qwen3-8B"
+MODEL_NAME = os.environ.get("LLM_MODEL", "Qwen/Qwen3-14B")
 
 _model = None
 _tokenizer = None
