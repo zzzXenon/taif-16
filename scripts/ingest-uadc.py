@@ -152,9 +152,10 @@ def process_and_checkpoint(limit=None) -> dict:
         if item_id in extracted:
             continue
 
-        place_name = str(row.get("place_name", "")).strip()
-        category   = str(row.get("category",   "")).strip()
-        description = str(row.get("description", "")).strip()
+        place_name   = str(row.get("place_name",   "")).strip()
+        category     = str(row.get("category",     "")).strip()
+        description  = str(row.get("description",  "")).strip()
+        city_regency = str(row.get("city_regency", "")).strip()
 
         done_so_far = len(extracted)
         eta_s = ""
@@ -169,11 +170,12 @@ def process_and_checkpoint(limit=None) -> dict:
         features = extract_features_with_llm(place_name, category, description)
 
         extracted[item_id] = {
-            "item_id":    item_id,
-            "place_name": place_name,
-            "category":   category,
-            "rating":     float(row.get("rating", 0.0)) if str(row.get("rating", "")).replace(".", "").isdigit() else 0.0,
-            "features":   features,
+            "item_id":     item_id,
+            "place_name":  place_name,
+            "category":    category,
+            "city_regency": city_regency,
+            "rating":      float(row.get("rating", 0.0)) if str(row.get("rating", "")).replace(".", "").isdigit() else 0.0,
+            "features":    features,
         }
         new_count += 1
 
