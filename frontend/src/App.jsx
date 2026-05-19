@@ -49,8 +49,10 @@ function App() {
     setInput('');
     setIsLoading(true);
 
-    try {
-      const response = await fetch('http://127.0.0.1:8001/api/chat', {
+      // Coba akses langsung ke IP Server (jika port 8002 dibuka)
+      const API_URL = 'http://172.22.22.23:8002/api/chat';
+      
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
