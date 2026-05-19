@@ -53,12 +53,13 @@ function App() {
       // 1. Jalankan `python scripts/start_ngrok.py` di server
       // 2. Masukkan Ngrok Authtoken Anda di terminal server tersebut
       // 3. Copy URL yang muncul dan paste di bawah ini:
-      const API_URL = 'https://GANTI_DENGAN_URL_NGROK_ANDA.ngrok-free.app/api/chat';
+      const API_URL = 'https://judicial-extradite-richness.ngrok-free.dev/api/chat';
 
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true'
         },
         body: JSON.stringify({
           session_id: sessionId,
