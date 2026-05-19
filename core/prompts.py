@@ -5,6 +5,8 @@ Tugas: Context-Aware Intent Extraction (CA-IER). Analisis "Riwayat Chat Terakhir
 
 Aturan field 'location': Isi dengan nama kabupaten/kota di Sumatera Utara yang EKSPLISIT disebutkan pengguna (tanpa prefix 'Kota'/'Kabupaten'). Contoh: 'Samosir', 'Toba', 'Tapanuli Utara'. Kosongkan string jika pengguna tidak menyebut lokasi spesifik.
 
+Aturan resolusi kata ganti (PENTING): Kata seperti 'tersebut', 'itu', 'tadi', 'yang tadi', 'di sana', 'tempatnya' HARUS diganti dengan entitas PALING SPESIFIK yang disebutkan pengguna dalam riwayat chat. Gunakan kata dari kueri USER, BUKAN dari jawaban AI. Contoh: jika user bertanya 'air terjun' lalu AI menjawab 'wisata alam', dan user berikutnya bertanya 'wisata alam tersebut', standalone_query harus tetap menyebutkan 'air terjun' sebagai entitas yang dimaksud.
+
 PERINGATAN KERAS: JANGAN PERNAH menjawab pertanyaan pengguna! Tugas Anda BUKAN menjadi asisten chat, melainkan HANYA mengekstrak intent ke dalam skema JSON. Patuhi format Output persis seperti contoh.
 
 ---
@@ -15,10 +17,25 @@ Kueri Saat Ini:
 Berapa harga tiket masuk tempat yang pertama?
 Output:
 {{
-  "standalone_query": "Berapa harga tiket masuk tempat air terjun yang pertama direkomendasikan?",
+  "standalone_query": "Berapa harga tiket masuk air terjun pertama yang direkomendasikan di Danau Toba?",
   "is_search_required": true,
   "location": "",
-  "expected_landscape_content": "Air terjun, tempat pertama",
+  "expected_landscape_content": "Air terjun, tiket masuk",
+  "expected_activities": "",
+  "expected_atmosphere": ""
+}}
+---
+Riwayat Chat (Pesan Terlama -> Terbaru):
+User: Saya mencari air terjun di sekitar daerah Dairi
+AI: Wisata alam yang terletak di sekitar Dairi...
+Kueri Saat Ini:
+Dimana alamat wisata alam tersebut?
+Output:
+{{
+  "standalone_query": "Dimana alamat air terjun di daerah Dairi?",
+  "is_search_required": true,
+  "location": "Dairi",
+  "expected_landscape_content": "Air terjun, alamat lokasi",
   "expected_activities": "",
   "expected_atmosphere": ""
 }}
@@ -70,6 +87,7 @@ Riwayat Chat (Pesan Terlama -> Terbaru):
 
 Kueri Saat Ini:
 {current_query}
+Output:
 """
 
 SYSTEM_PROMPT_NLG = """

@@ -220,6 +220,18 @@ async def chat_endpoint(request: ChatRequest):
     time_lrr = time.time() - start_lrr
     print(f"  [Timer] Cross-Encoder Reranker Selesai dalam {time_lrr:.2f} detik")
     
+    if not reranked_results:
+        no_result_reply = "Maaf, saya tidak menemukan tempat wisata yang cocok dengan pencarian Anda di database kami. Coba gunakan kata kunci yang berbeda, atau sebutkan kabupaten/kota yang lebih spesifik ya! 😊"
+        save_message(session_id, "user", query, ca_ier.standalone_query)
+        save_message(session_id, "ai", no_result_reply)
+        total_time = time.time() - start_time_total
+        return ChatResponse(
+            reply=no_result_reply,
+            standalone_query=ca_ier.standalone_query,
+            source_documents=[],
+            latency_seconds=total_time
+        )
+
     format_fails = 0
     for res in reranked_results:
         if res.get("format_failed", False):
