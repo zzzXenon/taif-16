@@ -58,7 +58,6 @@ def get_ca_ier(current_query: str, chat_history: list) -> CAIEROutput:
             history_lines.append(f"{prefix}{content}")
         history_str = "\n".join(history_lines)
 
-    # No format_instructions — avoids curly-brace conflicts in LangChain templates
     prompt = ChatPromptTemplate.from_messages([
         ("system", SYSTEM_PROMPT_CA_IER),
     ])
@@ -148,8 +147,10 @@ _cross_encoder_model = None
 def get_cross_encoder():
     global _cross_encoder_model
     if _cross_encoder_model is None:
-        print("\nMemuat model Qwen3-Reranker-0.6B ke memori (Hanya satu kali)...")
-        _cross_encoder_model = CrossEncoder('Qwen/Qwen3-Reranker-0.6B', trust_remote_code=True)
+        print("\nMemuat model BAAI/bge-reranker-base ke memori (Hanya satu kali)...")
+        # Mengganti Qwen3 dengan BAAI bge-reranker-base untuk mencegah Segfault / Crash.
+        # BGE-Reranker sangat stabil dan mendukung bahasa Indonesia dengan sangat baik.
+        _cross_encoder_model = CrossEncoder('BAAI/bge-reranker-base')
     return _cross_encoder_model
 
 def cross_encoder_rerank(standalone_query, top_results, uadc_data_dict):

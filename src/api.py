@@ -1,10 +1,12 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import sys
 import os
 import json
 import time
+import traceback
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
@@ -18,6 +20,16 @@ from langchain_classic.chains import RetrievalQA
 from modules.llm_loader import load_model, get_chat_llm, strip_thinking
 
 app = FastAPI(title="API Backend", version="1.0.0")
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    tb = traceback.format_exc()
+    print("GLOBAL EXCEPTION:\n", tb)
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal Server Error", "traceback": tb}
+    )
+
 
 app.add_middleware(
     CORSMiddleware,
