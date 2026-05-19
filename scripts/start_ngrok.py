@@ -16,9 +16,9 @@ def main():
         ngrok.set_auth_token(token)
         print("Token berhasil disimpan.")
         
-    print("\nMembuka tunnel ke port 8002...")
+    print("\nMembuka tunnel ke port 8004...")
     try:
-        public_url = ngrok.connect(8002).public_url
+        public_url = ngrok.connect(8004).public_url
         print("\n" + "="*50)
         print("✅ BERHASIL! URL API Anda adalah:")
         print(f"👉  {public_url}")
