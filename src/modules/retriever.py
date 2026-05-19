@@ -186,7 +186,7 @@ def cross_encoder_rerank(standalone_query, top_results, uadc_data_dict):
     return top_results[:5]
 
 def generate_final_response(user_query, reranked_results, uadc_data_dict=None):
-    llm = get_chat_llm(temperature=0.6, max_new_tokens=512)
+    llm = get_chat_llm(temperature=0.6, max_new_tokens=1024)
 
     context_text = ""
     for i, res in enumerate(reranked_results):

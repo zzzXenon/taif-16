@@ -55,13 +55,19 @@ def save_message(session_id: str, role: str, content: str, standalone_content: s
 def get_chat_history(session_id: str, limit: int = 6):
     """
     Menarik $N$ pesan terakhir (ideal = 6 atau 3 pasang).
+    Untuk pesan user, gunakan standalone_content (hasil CQR) agar konteks lebih bersih.
+    Untuk pesan AI, ambil 80 karakter pertama sebagai ringkasan agar prompt tidak terlalu panjang.
     Dikembalikan dalam urutan kronologis yang benar.
     """
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
     cursor.execute('''
-        SELECT role, content 
+        SELECT role,
+               CASE
+                 WHEN role = 'user' THEN COALESCE(standalone_content, content)
+                 ELSE SUBSTR(content, 1, 120)
+               END as effective_content
         FROM messages 
         WHERE session_id = ? 
         ORDER BY id DESC 

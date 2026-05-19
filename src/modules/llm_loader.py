@@ -60,8 +60,15 @@ def load_model():
 
 
 def strip_thinking(text: str) -> str:
-    """Remove Qwen3 <think>...</think> reasoning blocks from output."""
-    cleaned = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
+    """Remove Qwen3 <think>...</think> reasoning blocks from output.
+    Uses greedy match to handle long multi-line think blocks.
+    Also handles unclosed <think> tags (model was cut off mid-think).
+    """
+    # Remove complete <think>...</think> blocks (greedy to handle long blocks)
+    cleaned = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL)
+    # Also remove any unclosed <think> block (everything from <think> to end)
+    cleaned = re.sub(r"<think>.*", "", cleaned, flags=re.DOTALL)
+    cleaned = cleaned.strip()
     return cleaned if cleaned else text
 
 
