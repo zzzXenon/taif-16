@@ -50,11 +50,10 @@ function App() {
     setIsLoading(true);
 
     try {
-      // Deteksi otomatis apakah kita jalan di bawah Jupyter Proxy atau lokal
-      const isProxy = window.location.pathname.includes('/proxy/');
-      const API_URL = isProxy 
-        ? '/proxy/8002/api/chat' 
-        : 'http://127.0.0.1:8002/api/chat';
+      // 1. Jalankan `python scripts/start_ngrok.py` di server
+      // 2. Masukkan Ngrok Authtoken Anda di terminal server tersebut
+      // 3. Copy URL yang muncul dan paste di bawah ini:
+      const API_URL = 'https://GANTI_DENGAN_URL_NGROK_ANDA.ngrok-free.app/api/chat';
 
       const response = await fetch(API_URL, {
         method: 'POST',
