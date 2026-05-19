@@ -49,183 +49,184 @@ function App() {
     setInput('');
     setIsLoading(true);
 
+    try {
       // Coba akses langsung ke IP Server (jika port 8002 dibuka)
       const API_URL = 'http://172.22.22.23:8002/api/chat';
-      
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          session_id: sessionId,
-          message: userMsg.content,
-          ablation_mode: ablationMode
-        })
-      });
 
-      if (!response.ok) {
-        throw new Error('API Error');
-      }
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        session_id: sessionId,
+        message: userMsg.content,
+        ablation_mode: ablationMode
+      })
+    });
 
-      const data = await response.json();
-
-      setMessages(prev => [...prev, {
-        id: Date.now() + 1,
-        role: 'bot',
-        content: data.reply,
-        source_documents: data.source_documents,
-        standalone_query: data.standalone_query
-      }]);
-
-    } catch (error) {
-      setMessages(prev => [...prev, {
-        id: Date.now() + 1,
-        role: 'bot',
-        content: `**Error**: Gagal terhubung ke API backend. Pastikan server FastAPI di \`http://127.0.0.1:8001\` sudah berjalan.\n\nDetail: ${error.message}`
-      }]);
-    } finally {
-      setIsLoading(false);
+    if (!response.ok) {
+      throw new Error('API Error');
     }
-  };
 
-  return (
-    <div className="app-container">
-      <aside className="sidebar">
-        <div className="brand">
-          <span className="brand-icon">✨</span>
-          <span>AiYukToba</span>
-        </div>
+    const data = await response.json();
 
-        <div className="glass-panel">
-          <div className="control-group">
-            <h3 className="control-label">Run options</h3>
+    setMessages(prev => [...prev, {
+      id: Date.now() + 1,
+      role: 'bot',
+      content: data.reply,
+      source_documents: data.source_documents,
+      standalone_query: data.standalone_query
+    }]);
 
-            <label className={`radio-option ${ablationMode === 'proposed' ? 'selected' : ''}`}>
-              <input
-                type="radio"
-                name="ablationMode"
-                value="proposed"
-                checked={ablationMode === 'proposed'}
-                onChange={(e) => setAblationMode(e.target.value)}
-              />
-              <div className="radio-custom"></div>
-              <div className="radio-text">Pipeline A + B</div>
-            </label>
+  } catch (error) {
+    setMessages(prev => [...prev, {
+      id: Date.now() + 1,
+      role: 'bot',
+      content: `**Error**: Gagal terhubung ke API backend. Pastikan server FastAPI di \`http://127.0.0.1:8001\` sudah berjalan.\n\nDetail: ${error.message}`
+    }]);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
-            <label className={`radio-option ${ablationMode === 'pipeline_a_only' ? 'selected' : ''}`}>
-              <input
-                type="radio"
-                name="ablationMode"
-                value="pipeline_a_only"
-                checked={ablationMode === 'pipeline_a_only'}
-                onChange={(e) => setAblationMode(e.target.value)}
-              />
-              <div className="radio-custom"></div>
-              <div className="radio-text">Pipeline A</div>
-            </label>
+return (
+  <div className="app-container">
+    <aside className="sidebar">
+      <div className="brand">
+        <span className="brand-icon">✨</span>
+        <span>AiYukToba</span>
+      </div>
 
-            <label className={`radio-option ${ablationMode === 'pipeline_b_only' ? 'selected' : ''}`}>
-              <input
-                type="radio"
-                name="ablationMode"
-                value="pipeline_b_only"
-                checked={ablationMode === 'pipeline_b_only'}
-                onChange={(e) => setAblationMode(e.target.value)}
-              />
-              <div className="radio-custom"></div>
-              <div className="radio-text">Pipeline B</div>
-            </label>
+      <div className="glass-panel">
+        <div className="control-group">
+          <h3 className="control-label">Run options</h3>
 
-            <label className={`radio-option ${ablationMode === 'baseline' ? 'selected' : ''}`}>
-              <input
-                type="radio"
-                name="ablationMode"
-                value="baseline"
-                checked={ablationMode === 'baseline'}
-                onChange={(e) => setAblationMode(e.target.value)}
-              />
-              <div className="radio-custom"></div>
-              <div className="radio-text">Baseline</div>
-            </label>
-          </div>
-        </div>
-
-        <div style={{ marginTop: 'auto', fontSize: '0.8rem', color: '#64748b' }}>
-          <p>Prototype</p>
-          <p>Session ID: <br /><span style={{ fontFamily: 'monospace' }}>{sessionId}</span></p>
-        </div>
-      </aside>
-
-      <main className="main-chat">
-        <div className="chat-messages">
-          {messages.map((msg) => (
-            <div key={msg.id} className={`message-wrapper ${msg.role}`}>
-              <div className="message-bubble">
-                <div className="markdown-body">
-                  <ReactMarkdown>{msg.content}</ReactMarkdown>
-                </div>
-
-                {msg.role === 'bot' && (msg.standalone_query || (msg.source_documents && msg.source_documents.length > 0)) && (
-                  <div className="bot-metadata">
-                    {msg.standalone_query && (
-                      <div className="bot-metadata-title">
-                        <span className="badge">CQR Engine</span>
-                        <span>"{msg.standalone_query}"</span>
-                      </div>
-                    )}
-
-                    {msg.source_documents && msg.source_documents.length > 0 && (
-                      <div style={{ marginTop: '0.75rem' }}>
-                        <div className="bot-metadata-title"><span className="badge">Retrieval</span> Referensi:</div>
-                        {msg.source_documents.map((doc, idx) => (
-                          <div key={idx} className="source-item">
-                            {doc}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-
-          {isLoading && (
-            <div className="message-wrapper bot">
-              <div className="message-bubble" style={{ padding: '1rem' }}>
-                <div className="typing-indicator">
-                  <div className="typing-dot"></div>
-                  <div className="typing-dot"></div>
-                  <div className="typing-dot"></div>
-                </div>
-              </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
-
-        <div className="input-area">
-          <form className="input-container" onSubmit={handleSend}>
+          <label className={`radio-option ${ablationMode === 'proposed' ? 'selected' : ''}`}>
             <input
-              type="text"
-              className="chat-input"
-              placeholder="Tanya rekomendasi wisata Danau Toba..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              disabled={isLoading}
+              type="radio"
+              name="ablationMode"
+              value="proposed"
+              checked={ablationMode === 'proposed'}
+              onChange={(e) => setAblationMode(e.target.value)}
             />
-            <button type="submit" className="send-button" disabled={!input.trim() || isLoading}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-              </svg>
-            </button>
-          </form>
+            <div className="radio-custom"></div>
+            <div className="radio-text">Pipeline A + B</div>
+          </label>
+
+          <label className={`radio-option ${ablationMode === 'pipeline_a_only' ? 'selected' : ''}`}>
+            <input
+              type="radio"
+              name="ablationMode"
+              value="pipeline_a_only"
+              checked={ablationMode === 'pipeline_a_only'}
+              onChange={(e) => setAblationMode(e.target.value)}
+            />
+            <div className="radio-custom"></div>
+            <div className="radio-text">Pipeline A</div>
+          </label>
+
+          <label className={`radio-option ${ablationMode === 'pipeline_b_only' ? 'selected' : ''}`}>
+            <input
+              type="radio"
+              name="ablationMode"
+              value="pipeline_b_only"
+              checked={ablationMode === 'pipeline_b_only'}
+              onChange={(e) => setAblationMode(e.target.value)}
+            />
+            <div className="radio-custom"></div>
+            <div className="radio-text">Pipeline B</div>
+          </label>
+
+          <label className={`radio-option ${ablationMode === 'baseline' ? 'selected' : ''}`}>
+            <input
+              type="radio"
+              name="ablationMode"
+              value="baseline"
+              checked={ablationMode === 'baseline'}
+              onChange={(e) => setAblationMode(e.target.value)}
+            />
+            <div className="radio-custom"></div>
+            <div className="radio-text">Baseline</div>
+          </label>
         </div>
-      </main>
-    </div>
-  );
+      </div>
+
+      <div style={{ marginTop: 'auto', fontSize: '0.8rem', color: '#64748b' }}>
+        <p>Prototype</p>
+        <p>Session ID: <br /><span style={{ fontFamily: 'monospace' }}>{sessionId}</span></p>
+      </div>
+    </aside>
+
+    <main className="main-chat">
+      <div className="chat-messages">
+        {messages.map((msg) => (
+          <div key={msg.id} className={`message-wrapper ${msg.role}`}>
+            <div className="message-bubble">
+              <div className="markdown-body">
+                <ReactMarkdown>{msg.content}</ReactMarkdown>
+              </div>
+
+              {msg.role === 'bot' && (msg.standalone_query || (msg.source_documents && msg.source_documents.length > 0)) && (
+                <div className="bot-metadata">
+                  {msg.standalone_query && (
+                    <div className="bot-metadata-title">
+                      <span className="badge">CQR Engine</span>
+                      <span>"{msg.standalone_query}"</span>
+                    </div>
+                  )}
+
+                  {msg.source_documents && msg.source_documents.length > 0 && (
+                    <div style={{ marginTop: '0.75rem' }}>
+                      <div className="bot-metadata-title"><span className="badge">Retrieval</span> Referensi:</div>
+                      {msg.source_documents.map((doc, idx) => (
+                        <div key={idx} className="source-item">
+                          {doc}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+
+        {isLoading && (
+          <div className="message-wrapper bot">
+            <div className="message-bubble" style={{ padding: '1rem' }}>
+              <div className="typing-indicator">
+                <div className="typing-dot"></div>
+                <div className="typing-dot"></div>
+                <div className="typing-dot"></div>
+              </div>
+            </div>
+          </div>
+        )}
+        <div ref={messagesEndRef} />
+      </div>
+
+      <div className="input-area">
+        <form className="input-container" onSubmit={handleSend}>
+          <input
+            type="text"
+            className="chat-input"
+            placeholder="Tanya rekomendasi wisata Danau Toba..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            disabled={isLoading}
+          />
+          <button type="submit" className="send-button" disabled={!input.trim() || isLoading}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </main>
+  </div>
+);
 }
 
 export default App;
