@@ -46,7 +46,7 @@ Repositori GitHub **tidak** menyimpan *database* vektor (*ChromaDB*) karena terl
 python scripts/process-new-data.py
 ```
 
-**2. Membangun Vektor UGuideRAG (Proposed Mode)**
+**2. Membangun Vektor (Proposed Mode)**
 Menjalankan *Semantic Chunking* berbasis 3 Dimensi (*Landscape, Activities, Atmosphere*) menggunakan model *embedding* `LazarusNLP`. Membutuhkan waktu beberapa menit.
 ```bash
 python scripts/ingest-uadc.py

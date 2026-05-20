@@ -1,16 +1,26 @@
 # logika utama Intent Decomposition & pencarian ChromaDB
 import os
-import re
-import json
+from langchain_openai import ChatOpenAI
+from langchain_core.embeddings import FakeEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
+from langchain_core.output_parsers import PydanticOutputParser, StrOutputParser
 from schemas import CAIEROutput
 from core.prompts import SYSTEM_PROMPT_CA_IER, SYSTEM_PROMPT_NLG
 from sentence_transformers import CrossEncoder
-from modules.llm_loader import get_chat_llm, strip_thinking
 
 os.makedirs("logs", exist_ok=True)
 
+LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "http://localhost:80/v1")
+
+def _get_llm(model_name="qwen3", temperature=0.0, max_tokens=512, **kwargs):
+    return ChatOpenAI(
+        model=model_name,
+        base_url=LLM_BASE_URL.rstrip("/"),
+        api_key="dummy",
+        temperature=temperature,
+        max_tokens=max_tokens,
+        **kwargs
+    )
 
 def log_llm_response(module_name, raw_text):
     with open("logs/json_parsing.log", "a", encoding="utf-8") as f:
@@ -18,37 +28,9 @@ def log_llm_response(module_name, raw_text):
         f.write(raw_text)
         f.write("\n" + "-"*40 + "\n")
 
-
-def _parse_ca_ier_json(raw: str, fallback_query: str) -> CAIEROutput:
-    """Extract and parse JSON from LLM output, return fallback on failure."""
-    # Strip markdown code fences
-    raw = re.sub(r"```(?:json)?", "", raw).strip().rstrip("```").strip()
-    # Find first { ... } block
-    start = raw.find("{")
-    if start != -1:
-        depth = 0
-        for i, c in enumerate(raw[start:], start=start):
-            if c == "{": depth += 1
-            elif c == "}":
-                depth -= 1
-                if depth == 0:
-                    try:
-                        data = json.loads(raw[start:i+1])
-                        return CAIEROutput(
-                            standalone_query=data.get("standalone_query", fallback_query),
-                            is_search_required=bool(data.get("is_search_required", True)),
-                            location=data.get("location", ""),
-                            expected_landscape_content=data.get("expected_landscape_content", ""),
-                            expected_activities=data.get("expected_activities", ""),
-                            expected_atmosphere=data.get("expected_atmosphere", ""),
-                        )
-                    except Exception:
-                        break
-    raise ValueError(f"No valid JSON found in: {raw[:200]}")
-
-
 def get_ca_ier(current_query: str, chat_history: list) -> CAIEROutput:
-    llm = get_chat_llm(temperature=0.0, max_new_tokens=512)
+    llm = _get_llm(temperature=0.0, max_tokens=512)
+    parser = PydanticOutputParser(pydantic_object=CAIEROutput)
 
     history_str = "Tidak ada riwayat. Ini adalah pesan pertama."
     if chat_history:
@@ -59,7 +41,7 @@ def get_ca_ier(current_query: str, chat_history: list) -> CAIEROutput:
         history_str = "\n".join(history_lines)
 
     prompt = ChatPromptTemplate.from_messages([
-        ("human", SYSTEM_PROMPT_CA_IER),
+        ("system", SYSTEM_PROMPT_CA_IER + "\n\nBuatlah dalam format JSON yang valid sesuai instruksi:\n{format_instructions}"),
     ])
 
     chain = prompt | llm | StrOutputParser()
@@ -68,47 +50,43 @@ def get_ca_ier(current_query: str, chat_history: list) -> CAIEROutput:
         raw_result = chain.invoke({
             "chat_history": history_str,
             "current_query": current_query,
+            "format_instructions": parser.get_format_instructions()
         })
-        raw_result = strip_thinking(raw_result)
         log_llm_response("CA-IER", raw_result)
-        return _parse_ca_ier_json(raw_result, current_query)
+        result = parser.parse(raw_result)
+        return result
     except Exception as e:
         print(f"CA-IER Parse Error: {e}")
-        log_llm_response("CA-IER FALLBACK", f"Exception: {e}")
         return CAIEROutput(
             standalone_query=current_query,
             is_search_required=True,
-            expected_landscape_content=current_query,
-            expected_activities=current_query,
-            expected_atmosphere=current_query
+            expected_landscape_content="",
+            expected_activities="",
+            expected_atmosphere=""
         )
 
 def dimension_aware_search(vector_db, intent_dimensions, w_lan=1.0, w_act=1.0, w_atm=1.0, top_k=5):
     res_lan, res_act, res_atm = [], [], []
 
-    lan_q = intent_dimensions.expected_landscape_content.strip()
-    act_q = intent_dimensions.expected_activities.strip()
-    atm_q = intent_dimensions.expected_atmosphere.strip()
-
-    # Fallback: if all dimensions empty, use standalone_query for all
-    if not lan_q and not act_q and not atm_q:
-        fallback_q = intent_dimensions.standalone_query.strip()
-        print(f"  [WARN] All dimensions empty — falling back to standalone query: '{fallback_q[:60]}'")
-        lan_q = act_q = atm_q = fallback_q
-
-    if lan_q:
+    if intent_dimensions.expected_landscape_content.strip():
         res_lan = vector_db.similarity_search_with_relevance_scores(
-            lan_q, k=15, filter={"dimension": "landscape_content"}
+            intent_dimensions.expected_landscape_content,
+            k=15,
+            filter={"dimension": "landscape_content"}
         )
 
-    if act_q:
+    if intent_dimensions.expected_activities.strip():
         res_act = vector_db.similarity_search_with_relevance_scores(
-            act_q, k=15, filter={"dimension": "activity"}
+            intent_dimensions.expected_activities,
+            k=15,
+            filter={"dimension": "activity"}
         )
 
-    if atm_q:
+    if intent_dimensions.expected_atmosphere.strip():
         res_atm = vector_db.similarity_search_with_relevance_scores(
-            atm_q, k=15, filter={"dimension": "atmosphere"}
+            intent_dimensions.expected_atmosphere,
+            k=15,
+            filter={"dimension": "atmosphere"}
         )
 
     item_scores = {}
@@ -147,10 +125,8 @@ _cross_encoder_model = None
 def get_cross_encoder():
     global _cross_encoder_model
     if _cross_encoder_model is None:
-        print("\nMemuat model BAAI/bge-reranker-base ke memori (Hanya satu kali)...")
-        # Mengganti Qwen3 dengan BAAI bge-reranker-base untuk mencegah Segfault / Crash.
-        # BGE-Reranker sangat stabil dan mendukung bahasa Indonesia dengan sangat baik.
-        _cross_encoder_model = CrossEncoder('BAAI/bge-reranker-base')
+        print("\nMemuat model Qwen3-Reranker-0.6B ke memori (Hanya satu kali)...")
+        _cross_encoder_model = CrossEncoder('Qwen/Qwen3-Reranker-0.6B', trust_remote_code=True)
     return _cross_encoder_model
 
 def cross_encoder_rerank(standalone_query, top_results, uadc_data_dict):
@@ -186,7 +162,7 @@ def cross_encoder_rerank(standalone_query, top_results, uadc_data_dict):
     return top_results[:5]
 
 def generate_final_response(user_query, reranked_results, uadc_data_dict=None):
-    llm = get_chat_llm(temperature=0.6, max_new_tokens=1024)
+    llm = _get_llm(temperature=0.6, max_tokens=512)
 
     context_text = ""
     for i, res in enumerate(reranked_results):
@@ -217,4 +193,4 @@ def generate_final_response(user_query, reranked_results, uadc_data_dict=None):
         "context": context_text
     })
 
-    return strip_thinking(response)
+    return response

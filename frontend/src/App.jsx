@@ -50,9 +50,6 @@ function App() {
     setIsLoading(true);
 
     try {
-      // 1. Jalankan `python scripts/start_ngrok.py` di server
-      // 2. Masukkan Ngrok Authtoken Anda di terminal server tersebut
-      // 3. Copy URL yang muncul dan paste di bawah ini:
       const API_URL = 'https://judicial-extradite-richness.ngrok-free.dev/api/chat';
 
       const response = await fetch(API_URL, {

@@ -1,0 +1,1214 @@
+{
+    "0": {
+        "item_id": "0",
+        "place_name": "PASIR PUTIH LUMBAN BULBUL",
+        "category": "Wisata Bahari",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Pasir putih yang bersih, pemandangan laut yang jernih, dan beberapa bangunan tradisional di sekitar pantai.",
+            "activity_features": "Berenang, snorkeling, bermain pasir, dan jalan-jalan di pantai.",
+            "atmosphere_features": "Tenang, sejuk, dan cocok untuk bersantai.",
+            "summary": "Pasir Putih Lumban Bulbul adalah tempat wisata pantai dengan pasir putih yang indah dan pemandangan laut yang jernih, menjadi destinasi populer untuk rekreasi dan bersantai."
+        }
+    },
+    "1": {
+        "item_id": "1",
+        "place_name": "Patung Yesus, Bukit Sibea-bea, Huta Harian Boho",
+        "category": "Wisata Rohani",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Patung Yesus adalah patung berbentuk manusia dengan kualitas fisik yang baik, berada di sekitar Bukit Sibea-bea yang merupakan kawasan alam terbuka, serta Huta Harian Boho yang memiliki nuansa budaya khas. Tempat ini mencakup pemandangan alam, sejarah budaya, dan bangunan tradisional.",
+            "activity_features": "Pengunjung dapat mengunjungi patung Yesus, bersepeda di Bukit Sibea-bea, mengelola Huta Harian Boho, dan mengikuti aktivitas budaya seperti pesta lokal.",
+            "atmosphere_features": "Mood religius, tenang, dan harmonis. Keramaian rendah karena merupakan tempat ibadah, dengan suasana hati yang positif dan penuh keajaiban.",
+            "summary": "Tempat wisata yang menampilkan patung Yesus religius, pemandangan alam, dan budaya Huta Harian Boho. Kombinasi antara sejarah, alam, dan budaya memberikan pengalaman yang penuh makna dan kehangatan."
+        }
+    },
+    "2": {
+        "item_id": "2",
+        "place_name": "Pelabuhan wisata danau toba",
+        "category": "Wisata Bahari",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Pemandangan danau toba yang indah, marina bersih dan rapi, serta keberadaan kapal yang menghiasi area wisata.",
+            "activity_features": "Pengunjung dapat bersepeda di perairan danau toba menggunakan kapal, jam operasional pagi hari, dan penggunaan kapal di pelabuhan.",
+            "atmosphere_features": "Keheningan dan kebersihan, dengan peringatan tentang tumpahan bahan bakar minyak yang memengaruhi kualitas lingkungan.",
+            "summary": "Pelabuhan wisata danau toba menawarkan pemandangan alam, aktivitas bersepeda di perairan, dan jam operasional pagi, namun perlu perhatian terhadap tumpahan bahan bakar minyak."
+        }
+    },
+    "3": {
+        "item_id": "3",
+        "place_name": "Singgolom",
+        "category": "Wisata Alam",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "pemandangan alam yang indah dan udara sejuk",
+            "activity_features": "aktivitas alam seperti hiking dan bersepeda",
+            "atmosphere_features": "sejuk dan tenang",
+            "summary": "Tempat wisata alam dengan pemandangan indah, udara sejuk, dan suasana tenang"
+        }
+    },
+    "4": {
+        "item_id": "4",
+        "place_name": "Puncak Panorama Aek Nauli",
+        "category": "Wisata Alam",
+        "rating": 4.0,
+        "features": {
+            "landscape_content_features": "Pemandangan gunung yang memukau, jalur trekking yang terjal, spot pengunjung terbatas, dan kualitas fisik alam yang memukau",
+            "activity_features": "Trekking berdasarkan jalur yang terjal, pengunjung mengunjungi puncak panorama",
+            "atmosphere_features": "Menantang, sejuk, dan berada di lokasi yang terbatas",
+            "summary": "Puncak Panorama Aek Nauli merupakan tempat wisata alam dengan pemandangan memukau, jalur trekking terjal, dan pengunjung harus berjuang untuk mencapai spot pengunjung terbatas."
+        }
+    },
+    "5": {
+        "item_id": "5",
+        "place_name": "BUKIT GIBEON (YAPIM TARUNA)",
+        "category": "Wisata Rohani",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang terbuka, terumbu karst, dan lingkungan hijau yang menarik",
+            "activity_features": "Aktivitas rohani seperti meditasi, yoga, dan pengelolaan alam",
+            "atmosphere_features": "Nuansa emosional: tenang, damai, dan religius",
+            "summary": "Tempat rohani yang menawarkan pemandangan alam, aktivitas rohani, dan suasana tenang"
+        }
+    },
+    "6": {
+        "item_id": "6",
+        "place_name": "Monumen Raja SONAKMALELA",
+        "category": "Wisata Ziarah",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Monumen Raja SONAKMALELA merupakan benteng sejarah yang terdiri dari bangunan bersejarah, pemandangan alam yang indah, dan peninggalan budaya khas daerah. Kombinasi antara struktur bangunan, simbol kekayaan budaya, dan pemandangan alam yang menarik menjadi ciri khas.",
+            "activity_features": "Pengunjung dapat mengunjungi monumen, melakukan ziarah, dan mengikuti tour edukatif tentang sejarah dan budaya daerah. Aktivitas seperti pemandangan alam, pengelolaan lingkungan, dan pengenalan sejarah juga tersedia.",
+            "atmosphere_features": "Mood yang penuh rasa hormat, khusyuk, dan keberanian. Sejarah yang mendalam dan kekayaan budaya memberikan nuansa emosional yang mendalam dan penuh makna.",
+            "summary": "Monumen Raja SONAKMALELA adalah tempat wisata ziarah yang menampilkan peninggalan sejarah, pemandangan alam, dan budaya daerah. Tempat ini menawarkan aktivitas edukatif, pengelolaan lingkungan, dan pengalaman emosional yang mendalam terkait sejarah dan budaya daerah."
+        }
+    },
+    "8": {
+        "item_id": "8",
+        "place_name": "Penatapan Huta Ginjang",
+        "category": "Wisata Alam",
+        "rating": 4.0,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang eksklusif, sejarah geologis, dan bangunan wisata seperti hotel dan cafe terbatas, dengan kualitas fisik yang memukau dan arsitektur tradisional.",
+            "activity_features": "Pengunjung dapat menikmati pemandangan danau Toba, hiking, dan aktivitas sejarah seperti bersepeda di sekitar kawasan.",
+            "atmosphere_features": "Suasana tenang, sejuk, dan murni dengan tingkat keramaian rendah, menciptakan mood yang damai dan penuh rasa keterpurukan.",
+            "summary": "Penatapan Huta Ginjang menawarkan pemandangan danau Toba yang memukau dengan fasilitas minimal, ideal untuk pengunjung yang mencari pengalaman alam terbuka dan suasana tenang."
+        }
+    },
+    "9": {
+        "item_id": "9",
+        "place_name": "Patung Sigale gale",
+        "category": "Wisata Budaya",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Patung Sigale Gale merupakan patung budaya yang terletak di Danau Toba, dengan pemandangan alam yang indah dan sejarah yang terkait dengan kehidupan lokal. Kualitas fisik patungnya memadai, dengan desain yang mencerminkan budaya lokal dan sejarah geografis daerah.",
+            "activity_features": "Pengunjung dapat mengunjungi patung, mengambil foto, dan mengikuti tour budaya. Aktivitas tambahan seperti pengelolaan sejarah dan pengenalan tradisi lokal juga tersedia.",
+            "atmosphere_features": "Suasana hati yang ramai, dengan nuansa emosional positif dan kehangatan dari budaya lokal. Keramaian moderat, sehingga suasana hati sejuk dan menyenangkan.",
+            "summary": "Patung Sigale Gale adalah destinasi wisata budaya di Danau Toba, dengan pemandangan alam yang memukau, sejarah yang terkait, dan aktivitas budaya yang menarik. Suasana yang ramai namun menyenangkan, dengan nuansa emosional positif."
+        }
+    },
+    "10": {
+        "item_id": "10",
+        "place_name": "Pusat Informasi Toba Kaldera Unesco Global Geopark",
+        "category": "Wisata Alam",
+        "rating": 4.0,
+        "features": {
+            "landscape_content_features": "Bangunan (bakery)",
+            "activity_features": "Menjual bolu yang beraneka ragam",
+            "atmosphere_features": "Keramaian rendah",
+            "summary": "Tempat wisata berupa bangunan (bakery) yang menjual bolu beraneka ragam, berada di kawasan UNESCO Global Geopark."
+        }
+    },
+    "11": {
+        "item_id": "11",
+        "place_name": "Pemandian Bukit Gibeon",
+        "category": "Wisata Alam",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Pemandangan yang indah, air dingin, dan tidak cocok untuk mandi lama",
+            "activity_features": "Aktivitas berupa mandi di air dingin",
+            "atmosphere_features": "Suasana dingin, tetapi pemandangan yang menarik",
+            "summary": "Tempat wisata alam dengan pemandangan indah, air dingin, dan aktivitas mandi yang terbatas"
+        }
+    },
+    "12": {
+        "item_id": "12",
+        "place_name": "Istana Raja Sisingamangaraja",
+        "category": "Wisata Ziarah",
+        "rating": 4.688679245283019,
+        "features": {
+            "landscape_content_features": "Pemandangan alam dan lingkungan sekitar yang indah, serta peninggalan sejarah seperti Istana Raja Sisingamangaraja, rumah adat Batak, dan kawasan bersejarah. Kualitas fisiknya masih baik, tetapi kurang terjaga dan dirawat. Ada kejutan terhadap keadaan yang monoton dan kebutuhan untuk meningkatkan pemeliharaan.",
+            "activity_features": "Kunjungan untuk ziarah, melakukan doa, berfoto, dan mengunjungi kawasan bersejarah. Ada kebutuhan untuk memperbaiki informasi dan fasilitas, serta keinginan untuk membangun museum berisi cerita sejarah.",
+            "atmosphere_features": "Mood yang tenang, sejarah, dan kebersihan. Ada kejutan terhadap keadaan yang monoton dan kebutuhan untuk meningkatkan pemeliharaan. Atmosfer yang mengesankan dan menarik, tetapi juga merasa kurang dijaga.",
+            "summary": "Istana Raja Sisingamangaraja adalah tempat bersejarah yang penuh dengan nilai budaya dan pemandangan alam. Meskipun masih kurang terjaga, tempat ini menawarkan pengalaman ziarah yang mengesankan dan bersejarah. Kebutuhan untuk meningkatkan pemeliharaan dan fasilitas menjadi prioritas, serta menjadi tempat wisata yang harus dilestarikan."
+        }
+    },
+    "13": {
+        "item_id": "13",
+        "place_name": "Caldera toba nomadic escape (glamour camping)",
+        "category": "Wisata Alam",
+        "rating": 4.44,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang indah dengan danau Toba, pegunungan, dan fasilitas seperti toilet, cafe, kopi lokal, serta area camping yang luas. Tempat ini terletak di sekitar kota wisata Parapat, dengan akses melalui jalan menuju Taman Gibeon dan Bandar Udara Sibisa. Fasilitas termasuk meja dan kursi, kafe, dan restoran dengan harga terjangkau.",
+            "activity_features": "Pengunjung dapat berhiking, camping, mengambil foto di pemandangan alam, dan menikmati makanan dan minuman lokal. Jalur hiking terdapat di area curam, cocok untuk keluarga dan anak-anak. Ada fasilitas seperti campsite box dan villa.",
+            "atmosphere_features": "Suasana menyenangkan dan segar, cocok untuk beristirahat dan berjemur. Meski ada kritik terkait harga dan kondisi fasilitas (seperti toilet), pengunjung merasa tempat ini sangat bagus dan menyegarkan mata serta jiwa. Kritik terkait biaya tinggi dan perawatan fasilitas buruk.",
+            "summary": "Caldera Toba Nomadic Escape adalah tempat wisata alam yang menawarkan pemandangan danau Toba, pegunungan, serta fasilitas camping dengan kafe dan restoran lokal. Tempat ini cocok untuk keluarga, hiking, dan berfoto, meski ada kritik terkait harga dan perawatan fasilitas. Pemandangan yang indah dan akses yang baik membuatnya menjadi pilihan yang menarik, meski dengan beberapa kekurangan."
+        }
+    },
+    "14": {
+        "item_id": "14",
+        "place_name": "Geopark danau Toba (Batu Parsidangan)",
+        "category": "Wisata Budaya",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Geopark danau Toba menawarkan pemandangan alam terbentuk oleh gunung api yang dahulu berdiri, serta sejarah geologi yang mencerminkan proses pembentukan danau. Area ini juga memiliki bentuk-bentuk geologis unik seperti batu berlapis dan kawah yang menjadi ciri khas.",
+            "activity_features": "Pengunjung dapat melakukan aktivitas seperti bersepeda di jalur pendakian, mengunjungi kawah danau Toba, dan mengamati pemandangan alam dari ketinggian. Aktivitas ini cocok untuk keluarga yang ingin menghabiskan akhir pekan dengan kegiatan yang tidak terlalu intensif.",
+            "atmosphere_features": "Suasana hati yang tenang dan ramah, dengan kebun raya yang menawarkan pemandangan alam yang menenangkan. Pengunjung merasa nyaman dan tidak terlalu ramai, terutama di waktu pagi atau sore hari.",
+            "summary": "Geopark danau Toba menawarkan pemandangan alam, sejarah geologi, dan aktivitas keluarga yang ramah, dengan suasana tenang dan nyaman."
+        }
+    },
+    "15": {
+        "item_id": "15",
+        "place_name": "Makam Missonaris Pdt.DR.IL.Nommensen",
+        "category": "Wisata Ziarah",
+        "rating": 4.753846153846154,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang indah di sekitar kampung halaman, kampung halaman yang terawat dengan baik, makam bersejarah, dan sejarah peradaban misionaris Jerman di Batak.",
+            "activity_features": "Ziarah rohani, pengunjung mengunjungi makam misionaris, pengembangan video klip tentang sejarah misionaris, pengunjung berinteraksi dengan sejarah dan budaya Batak, serta aktivitas sejarahwan dan wisata rohani.",
+            "atmosphere_features": "Mood yang tenang, spiritual, dan emosional, dengan suasana hati yang menyentuh dan memotivasi generasi muda, serta kenyamanan dan kebersihan tempat wisata.",
+            "summary": "Makam Misionaris DR. IL Nommensen adalah tempat wisata rohani bersejarah di Batak, terletak di belakang HKBP, dengan pemandangan alam yang indah dan sejarah peradaban misionaris. Tempat ini menawarkan pengalaman ziarah rohani, sejarahwan, dan budaya Batak, serta atmosfer tenang dan spiritual yang memotivasi generasi muda."
+        }
+    },
+    "16": {
+        "item_id": "16",
+        "place_name": "Taman Wisata Asal Usul (Legenda) Danau Toba",
+        "category": "Wisata Sejarah",
+        "rating": 4.666666666666667,
+        "features": {
+            "landscape_content_features": "Pemandangan alam danau toba, patung sejarah yang menceritakan asal usul danau toba, serta kualitas fisik yang baik meskipun ada kerusakan pada patung.",
+            "activity_features": "Melihat patung sejarah, berfoto di sekitar pemandangan alam, dan belajar sejarah tentang asal usul danau toba.",
+            "atmosphere_features": "Pemandangan indah dengan nuansa emosional yang menggambarkan keindahan alam dan kebutuhan perhatian terhadap kelestarian.",
+            "summary": "Taman Wisata Asal Usul Danau Toba menawarkan pemandangan alam yang indah dengan patung sejarah yang memperkenalkan asal usul danau toba, meskipun perlu perhatian terhadap kelestarian."
+        }
+    },
+    "17": {
+        "item_id": "17",
+        "place_name": "Wisata Alam Ajibata",
+        "category": "Wisata Bahari",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang menarik, air yang sangat jernih, dan lokasi yang masih alami. Potensi pengembangan wisata yang lebih maju di masa depan.",
+            "activity_features": "Aktivitas seperti bermain air, berjalan-jalan di pantai, dan pengembangan wisata yang membutuhkan investasi.",
+            "atmosphere_features": "Mood tenang, harapan, dan potensi wisata yang menarik. Keheningan yang menggambarkan potensi pengembangan wisata.",
+            "summary": "Wisata Alam Ajibata menawarkan pemandangan alam yang jernih, lokasi masih alami, dan potensi pengembangan wisata yang menarik. Atmosfer tenang dan harapan untuk berkembang menjadi destinasi wisata yang lebih maju."
+        }
+    },
+    "18": {
+        "item_id": "18",
+        "place_name": "Pantai Pasir Putih Parparean",
+        "category": "Wisata Bahari",
+        "rating": 4.365724381625442,
+        "features": {
+            "landscape_content_features": "Pantai Pasir Putih Parparean terkenal dengan pemandangan danau Toba yang indah, pasir putih bersih, dan lingkungan yang terawat. Area wisata memiliki kualitas fisik yang baik, dengan pemandangan alam yang memukau dan sejarah yang terkait dengan pengembangan kawasan wisata.",
+            "activity_features": "Pengunjung dapat beraktivitas seperti berenang, bersantai, dan mengunjungi gazebo atau taman yang terdapat di sekitar pantai. Aktivitas tambahan seperti menikmati sunset dan mengelola area wisata dengan kebutuhan tambahan seperti pohon penutup dan area bermain.",
+            "atmosphere_features": "Suasana hati yang tenang dan bersih, dengan pemandangan yang memukau dan lingkungan yang dijaga kebersihannya. Namun, ada beberapa masalah seperti pungli, harga yang tinggi, dan kurangnya perbaikan terhadap fasilitas.",
+            "summary": "Pantai Pasir Putih Parparean adalah tempat wisata yang menawarkan pemandangan danau Toba yang indah, pasir putih bersih, dan lingkungan yang terawat. Tempat ini cocok untuk liburan keluarga, tetapi perlu perbaikan terhadap fasilitas seperti harga, pungli, dan kebutuhan tambahan seperti pohon penutup."
+        }
+    },
+    "19": {
+        "item_id": "19",
+        "place_name": "Hatulian Beach",
+        "category": "Wisata Bahari",
+        "rating": 4.38,
+        "features": {
+            "landscape_content_features": "Pantai Hatulian berada di sekitar Danau Toba, memiliki pemandangan yang luas, bersih, dan jernih. Lokasi terbuka dengan infrastruktur yang sedikit rusak, namun tetap memenuhi kebutuhan pengunjung. Ada fasilitas seperti pedagang kaki lima, area bermain anak, dan spot foto yang menarik. Pemandangan matahari terbenam indah, dan area pantai yang luas cocok untuk menghilangkan penat.",
+            "activity_features": "Pengunjung dapat beraktivitas seperti berenang, bermain anak, berhiking, dan mengambil foto. Area pantai disarankan untuk keluarga dan anak-anak dengan fasilitas pengawasan. Ada permainan anak yang aman, dan lokasi yang sepi tetapi tetap bersih untuk aktivitas olahraga.",
+            "atmosphere_features": "Suasana hati yang tenang dan asri, dengan pemandangan yang indah dan bersih. Ada penilaian positif terhadap kebersihan dan kualitas fisik, namun juga menyebutkan kebutuhan perawatan lebih lanjut. Kehadiran pengunjung yang sedikit dan kebutuhan infrastruktur yang perlu diperbaiki menjadi nuansa emosional yang bervariasi.",
+            "summary": "Hatulian Beach adalah destinasi pantai di Danau Toba yang menawarkan pemandangan alam yang luas, kebersihan yang baik, dan fasilitas dasar yang cukup. Area pantai sepi tetapi nyaman untuk menghilangkan penat, cocok untuk keluarga dan anak-anak. Meskipun infrastruktur sedikit rusak, pantai ini layak dikembangkan untuk pengunjung yang mencari keindahan alam dan pengalaman berhiking. Kehadiran pengunjung yang sedikit dan kebutuhan perawatan infrastruktur menjadi fitur yang perlu diperhatikan."
+        }
+    },
+    "20": {
+        "item_id": "20",
+        "place_name": "Kaldera Sunset Hill",
+        "category": "Wisata Alam",
+        "rating": 4.527777777777778,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, kaldera yang menakjubkan, pemandangan lembah, fasilitas seperti campsite, dan area parkir yang cukup luas.",
+            "activity_features": "Hiking, camping, picnicking, pengamatan kehidupan liar, penggunaan ATVs, dan aktivitas bersepeda di sekitar area parkir.",
+            "atmosphere_features": "Suka-suka yang sejuk, nyaman, dan menakjubkan, dengan suasana yang terbuka dan pemandangan yang memikat, tetapi juga ada kejenuhan akibat keramaian dan kebutuhan fasilitas pendukung yang kurang.",
+            "summary": "Kaldera Sunset Hill adalah tempat wisata alam yang menawarkan pemandangan danau Toba dan kaldera yang indah, cocok untuk hiking, camping, dan bersepeda. Meski memiliki fasilitas pendukung yang kurang, lokasinya strategis dan layak dikunjungi untuk pengalaman yang menyenangkan."
+        }
+    },
+    "21": {
+        "item_id": "21",
+        "place_name": "Pesanggrahan Bung Karno",
+        "category": "Wisata Sejarah",
+        "rating": 4.466019417475728,
+        "features": {
+            "landscape_content_features": "Pemandangan danau toba, bangunan bersejarah, pohon pinus, kualitas fisik bersih, dan arsitektur khas pesanggrahan bung karno.",
+            "activity_features": "Pemandangan dari luar, foto spot, pengunjung hanya bisa melihat dari luar, aktivitas sejarah, dan pengalaman mengenali pahlawan bangsa.",
+            "atmosphere_features": "Seren, sejuk, nyaman, nostalgia, dan kebersihan yang baik, dengan nuansa emosional khusyuk dan kebanggaan terhadap sejarah.",
+            "summary": "Pesanggrahan Bung Karno adalah tempat bersejarah dengan pemandangan danau toba yang indah, bangunan terawat, bersih, dan sejuk. Aktivitas utama adalah pengunjung yang hanya bisa melihat dari luar, dengan nuansa emosional khusyuk dan kebanggaan terhadap sejarah Indonesia."
+        }
+    },
+    "22": {
+        "item_id": "22",
+        "place_name": "Tombak Sulusulu",
+        "category": "Wisata Sejarah",
+        "rating": 4.627450980392157,
+        "features": {
+            "landscape_content_features": "Tombak Sulusulu merupakan tempat berbatuan bersejarah dengan pemandangan danau Toba yang indah, padi menguning, pohon daun segar, serta kawasan hutan lindung. Tempat ini terkenal dengan peninggalan sejarah Raja Sisingamangaraja, kota bersejarah, dan view alam yang menarik, termasuk sisi bukit kapur dan persawahan. Kombinasi antara alam, sejarah, dan budaya menjadi ciri khas.",
+            "activity_features": "Pengunjung dapat melakukan aktivitas seperti foto di spot bersejarah, mancing di danau Toba, menginjak batuan dengan perhatian, dan mengunjungi kawasan hutan lindung. Ada pemandangan sunset, spot mancing, dan pengamatan geologi di sekitar area. Aktivitas tambahan mencakup studi sejarah dan budaya.",
+            "atmosphere_features": "Suasana tenang, sejuk, dan positif dengan pemandangan alam yang memukau. Ada kejutan karena keberadaan kawasan hutan lindung dan peninggalan sejarah yang masih terjaga. Emosi pengunjung terkait keindahan alam, sejarah, dan budaya, serta keberadaan fasilitas pendukung yang terbatas.",
+            "summary": "Tombak Sulusulu adalah tempat bersejarah dengan pemandangan danau Toba, padi menguning, dan pohon daun segar. Tempat ini terkenal dengan peninggalan Raja Sisingamangaraja, kota bersejarah, dan view alam yang menarik. Aktivitas yang tersedia mencakup foto, mancing, dan studi sejarah. Suasana tenang dengan pemandangan alam yang memukau, meskipun ada kekurangan fasilitas seperti toilet."
+        }
+    },
+    "23": {
+        "item_id": "23",
+        "place_name": "Siregar Aek Nalas",
+        "category": "Wisata Alam",
+        "rating": 4.324324324324325,
+        "features": {
+            "landscape_content_features": "Pemandangan danau toba yang indah, sumber air panas aek rangat, lingkungan alam yang asri, dan kebersihan yang masih perlu diperbaiki.",
+            "activity_features": "Pemandian air panas alami, karaoke dengan sistem audio berkualitas, aktivitas bermain di pantai, dan pengelolaan wisata rakyat yang murah meriah.",
+            "atmosphere_features": "Mood yang menyenangkan dengan pemandangan alam yang menawan, tetapi ada kritik terkait kebersihan dan kondisi jalan yang kurang rapi.",
+            "summary": "Siregar Aek Nalas adalah destinasi wisata alam dengan pemandangan danau toba yang indah, sumber air panas aek rangat, dan lingkungan alam yang asri. Namun, kebersihan dan kondisi jalan masih perlu diperbaiki, serta pengelolaan wisata rakyat yang murah meriah."
+        }
+    },
+    "24": {
+        "item_id": "24",
+        "place_name": "Museum Huta Bolon Simanindo",
+        "category": "Wisata Budaya",
+        "rating": 4.27710843373494,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang asri, sejarah budaya Batak Toba, bangunan museum yang terawat, dan kualitas fisik yang baik dengan berbagai objek antik dan perahu tradisional. Area sekitar terlihat tenang, dengan pemandangan Danau Toba di belakang.",
+            "activity_features": "Pengunjung dapat mengunjungi museum, melihat barang-barang sejarah, mendengar cerita sejarah dari pemandu, melihat pertunjukan tari lokal, bersepeda ke Danau Toba, dan mengikuti pertunjukan budaya seperti Tor Tor Si Galegale. Ada area wisata rumah kuno dan restoran yang bisa dikunjungi.",
+            "atmosphere_features": "Suasana tenang, ramah, dan menyenangkan. Pengunjung merasa nyaman di area yang tidak terlalu ramai, dengan nuansa emosional yang positif terkait budaya dan alam. Ada elemen yang membuat suasana hati bersemangat, seperti pertunjukan tari dan musik tradisional.",
+            "summary": "Museum Huta Bolon Simanindo adalah destinasi wisata budaya yang menampilkan sejarah Batak Toba melalui objek antik, perahu tradisional, dan pertunjukan budaya. Tempat ini tenang, terawat, dan dekat dengan Danau Toba. Aktivitas yang tersedia mencakup pengunjungan ke museum, pengamatan pemandangan alam, dan pengalaman budaya. Suasana yang nyaman dan positif membuatnya cocok untuk pengunjung yang ingin belajar sejarah dan merasakan budaya lokal."
+        }
+    },
+    "25": {
+        "item_id": "25",
+        "place_name": "Bukit Holbung",
+        "category": "Wisata Alam",
+        "rating": 4.826086956521739,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang menawan dari Samosir, jalur menuju tempat wisata masih dalam perbaikan, terdapat batu dan tanah timbun, serta kualitas fisik yang memungkinkan pengunjung mengambil foto yang bagus.",
+            "activity_features": "Camping, hiking, sewa tenda, dan aktivitas berbasis jalur mendaki. Pengunjung perlu hati-hati karena jalur masih kurang layak dan terdapat batu serta tanah timbun.",
+            "atmosphere_features": "Sejuk, indah, dan memungkinkan pengalaman santai. Ada tantangan seperti jalur yang kurang layak dan musim hujan yang memperparah kondisi.",
+            "summary": "Bukit Holbung menawarkan pemandangan alam yang menawan dari Samosir, dengan jalur yang sedang dalam perbaikan dan batu serta tanah timbun. Tempat ini cocok untuk camping dan hiking, tetapi perlu hati-hati terhadap kondisi jalur yang kurang layak dan musim hujan."
+        }
+    },
+    "26": {
+        "item_id": "26",
+        "place_name": "Batu Lihi Star",
+        "category": "Wisata Alam",
+        "rating": 4.401639344262295,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba dari ketinggian, hutan pinus, udara segar, spot foto, restoran, dan fasilitas yang kurang dirawat (cat kusam).",
+            "activity_features": "Mengambil foto, mengunjungi restoran, melihat danau Toba dari ketinggian, berenang di tepi danau, dan berjalan-jalan di jalur yang rusak.",
+            "atmosphere_features": "Suka dengan pemandangan alam, udara segar, dan lokasi strategis, tetapi ada kritik terkait harga tinggi dan fasilitas yang kurang baik.",
+            "summary": "Tempat wisata alam di sekitar Danau Toba dengan pemandangan indah dari ketinggian, spot foto yang menarik, restoran dengan harga terbuka, dan lokasi strategis di pinggir jalan. Namun, fasilitasnya kurang baik dan harga makanan tinggi."
+        }
+    },
+    "27": {
+        "item_id": "27",
+        "place_name": "Pantai Lumban Bul-bul Balige",
+        "category": "Wisata Bahari",
+        "rating": 4.396032329169728,
+        "features": {
+            "landscape_content_features": "Pantai Lumban Bul-bul Balige menawarkan pemandangan indah dari Danau Toba, fasilitas umum seperti mushola, kamar mandi, dan warung yang menyediakan makanan dan minuman. Tempat ini terdapat berbagai aktivitas seperti bermain air, naik banana boat, speed boat, dan ATV, serta fasilitas parkir yang dikenai biaya. Kehadiran pondok-pondok yang berbayar dan ketersediaan pilihan makanan enak menjadi bagian dari kualitas fisik tempat wisata.",
+            "activity_features": "Pengunjung dapat melakukan aktivitas seperti bermain air, bermain dengan pasir, naik banana boat, speed boat, dan ATV. Tempat ini juga cocok untuk keluarga dan anak-anak dengan fasilitas seperti pemandangan dan wahana menarik. Ketersediaan pilihan permainan dan sarana berenang serta pengelolaan yang terbatas menjadi faktor aktivitas yang bisa dilakukan.",
+            "atmosphere_features": "Nuansa emosional tergantung pada kritik terhadap harga dan pengelolaan. Namun, tempat ini dikenal sebagai tempat bersantai yang nyaman, dengan suasana sejuk dan pemandangan indah. Ada kritik terkait kebanyakan pengunjung Muslim dan ketersediaan fasilitas yang berbayar, yang memengaruhi suasana hati pengunjung.",
+            "summary": "Pantai Lumban Bul-bul Balige adalah tempat wisata bahari yang menawarkan pemandangan indah dari Danau Toba, fasilitas umum seperti mushola dan kamar mandi, serta berbagai aktivitas seperti bermain air dan permainan. Meski ada kritik terkait harga dan pengelolaan, tempat ini dikenal sebagai tempat yang nyaman untuk bersantai, cocok untuk keluarga, dan memiliki pemandangan yang indah. Ketersediaan pilihan makanan enak dan fasilitas berbayar menjadi bagian dari pengalaman wisata yang bisa dijadikan pilihan."
+        }
+    },
+    "28": {
+        "item_id": "28",
+        "place_name": "Batu Maroppa",
+        "category": "Wisata Alam",
+        "rating": 4.888888888888889,
+        "features": {
+            "landscape_content_features": "Pemandangan yang indah, alam yang luas, dan jalur yang menantang dengan view dari danau Toba, gunung, dan sawah. Ada pemandangan luar biasa, udara segar, dan kualitas fisik yang memadai.",
+            "activity_features": "Pemandian yang menantang, jalur pendakian yang steep, dan aktivitas berbasis hiking dengan tantangan fisik dan emosional. Pengunjung menyukai pengalaman mendaki yang menggabungkan keindahan alam dan kesulitan.",
+            "atmosphere_features": "Mood positif, emosi kebanggaan atas pencapaian, dan nuansa keterbatasan yang membutuhkan kerja sama. Atmosfer yang menggambarkan keindahan alam dan tantangan yang menginspirasi.",
+            "summary": "Batu Maroppa adalah destinasi alam yang menawarkan pemandangan luar biasa, jalur pendakian menantang, udara segar, dan view dari danau Toba serta gunung. Aktivitas utama adalah hiking yang menggabungkan keindahan alam dan tantangan fisik, dengan suasana yang positif dan menginspiratif."
+        }
+    },
+    "29": {
+        "item_id": "29",
+        "place_name": "Pulau Tolping",
+        "category": "Wisata Alam",
+        "rating": 4.444444444444445,
+        "features": {
+            "landscape_content_features": "Pulau Tolping terkenal dengan pemandangan alam yang misterius di Danau Toba, memiliki pantai berpasir kecil dengan lebar 10 meter dan panjang 100 meter, restoran lokal, perahu motor tua, serta perahu dayung bebek. Keheningan alam dan keberadaan pulau yang tidak berpenghuni serta akses yang sulit mempertegas nuansa alam dan sejarah.",
+            "activity_features": "Pengunjung dapat melakukan aktivitas seperti berenang, menggunakan perahu dayung bebek, memakan makanan lokal, dan mengunjungi restoran di pulau. Aktivitas ini terbatas pada area yang tersedia dan tidak ada jalan raya.",
+            "atmosphere_features": "Nuansa emosional yang damai, pemandangan alam yang sangat indah, serta kesan sejuk dan terpencil karena akses yang sulit. Pengunjung merasa nyaman dan terhibur di lingkungan yang tidak ramai.",
+            "summary": "Pulau Tolping adalah destinasi alam yang misterius di Danau Toba, menawarkan pantai berpasir, restoran lokal, dan aktivitas tradisional. Tempat ini menawarkan pemandangan alam yang indah, suasana damai, dan akses yang sulit, menjadikannya tempat wisata yang cocok untuk pengunjung yang mencari keberadaan dan keindahan alam."
+        }
+    },
+    "30": {
+        "item_id": "30",
+        "place_name": "Panatapan Tara Bunga",
+        "category": "Wisata Alam",
+        "rating": 4.8,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang sangat indah dengan hamparan sawah, pemandangan dari bukit, dan kualitas fisik yang masih kurang baik namun cocok untuk pengunjung yang ingin menikmati pemandangan.",
+            "activity_features": "Pengunjung dapat melakukan aktivitas seperti picnic, menikmati pemandangan alam, dan menghabiskan waktu di area yang tenang.",
+            "atmosphere_features": "Suasana tenang, damai, dan segar dengan kualitas udara yang baik, serta suasana hati yang nyaman dan menyenangkan.",
+            "summary": "Panatapan Tara Bunga adalah tempat wisata alam yang menawarkan pemandangan indah dengan hamparan sawah dan pemandangan dari bukit, meskipun jalan masih kurang baik. Tempat ini cocok untuk picnic, menikmati pemandangan, dan menghabiskan waktu di area yang tenang dengan udara segar."
+        }
+    },
+    "31": {
+        "item_id": "31",
+        "place_name": "TOGARAJA",
+        "category": "Wisata Alam",
+        "rating": 4.761904761904762,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba dari ketinggian, pemandangan gunung Bukit Sibeabea, danau Toba, serta kota dan desa di sekitarnya. Kondisi tanah berkerikil, jalur akses masih kurang mulus, dan fasilitas camping seperti kamar mandi, area ngecamp, dan perlengkapan camping. Pemandangan yang sangat indah, terutama saat matahari terbit dan terbenam, serta keberadaan spot foto yang menarik.",
+            "activity_features": "Camping, menikmati pemandangan danau Toba di pagi hari, mengambil foto di spot terbaik, menggunakan sleeping bag karena suhu dingin, dan memerlukan perlengkapan camping seperti jaket tebal. Aktivitas tambahan termasuk berjalan di jalur yang masih berkerikil, memerlukan peralatan pengaman, dan penggunaan kamar mandi yang bersih.",
+            "atmosphere_features": "Suasana tenang dan sejuk di pagi hari, pemandangan yang memikat, keberadaan angin kencang, serta kebutuhan perlengkapan jaket untuk malam yang dingin. Atmosfer yang bersih, tetapi dengan keterbatasan akses jalan dan fasilitas yang terbatas.",
+            "summary": "Togaraja adalah tempat wisata alam yang menawarkan pemandangan danau Toba dari ketinggian, pemandangan gunung Bukit Sibeabea, dan desa di sekitarnya. Lokasinya memiliki jalur akses yang masih berkerikil, fasilitas camping yang lengkap, dan suhu dingin. Tempat ini cocok untuk camping, menikmati pemandangan alam, dan mengambil foto di spot terbaik, tetapi perlu perhatian terhadap kondisi jalan dan kebutuhan perlengkapan camping."
+        }
+    },
+    "32": {
+        "item_id": "32",
+        "place_name": "Istana Kaldera Unesco Geopark Danau Toba",
+        "category": "Wisata Alam",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang indah, terutama pemandangan danau bukit dan hamparan sawah, serta fitur geopark seperti caldera dan landasan matahari yang menarik.",
+            "activity_features": "Camping, pengamatan pemandangan, dan pengalaman berada di landasan matahari.",
+            "atmosphere_features": "Mood yang memukau, emosi terinspirasi oleh pemandangan alam yang luar biasa, dan suasana hati yang membangunkan.",
+            "summary": "Istana Kaldera Unesco Geopark Danau Toba menawarkan pemandangan alam yang indah, aktivitas camping, dan pengalaman berada di landasan matahari, dengan atmosfer yang membangunkan dan memukau."
+        }
+    },
+    "33": {
+        "item_id": "33",
+        "place_name": "Pantai Pulo Tao",
+        "category": "Wisata Bahari",
+        "rating": 4.8,
+        "features": {
+            "landscape_content_features": "Pantai Pulo Tao terkenal dengan pasir putih, air jernih, pemandangan danau Toba yang indah, dan pulau di atas danau yang sangat bagus. Lokasi terbuka dengan lingkungan alam yang bersih dan memiliki nuansa Batak yang khas.",
+            "activity_features": "Pengunjung dapat beristirahat di pantai, bersepeda, bermain air, dan mengunjungi rumah adat Batak. Ada kemungkinan berkipar di area ini, serta aktivitas berenang dan menyaksikan pemandangan danau Toba.",
+            "atmosphere_features": "Suasana tenang, positif, dan ramah. Pengunjung merasa seperti berada di surga dengan pemandangan alam yang memukau dan lingkungan yang sejuk.",
+            "summary": "Pantai Pulo Tao adalah destinasi wisata bahari dengan pasir putih, air jernih, dan pemandangan danau Toba yang indah. Lokasi terbuka dengan lingkungan alam yang bersih, serta kemungkinan aktivitas berkipar dan pengalaman menyaksikan Batak di pantai."
+        }
+    },
+    "34": {
+        "item_id": "34",
+        "place_name": "Desa Wisata Sigapiton",
+        "category": "Wisata Pertanian",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang terbaik, lingkungan tenang, dan kehadiran desa wisata yang ramah.",
+            "activity_features": "Pengunjung dapat mengikuti aktivitas pertanian, mengunjungi desa, dan berinteraksi dengan warga lokal.",
+            "atmosphere_features": "Suasana tenang, ramah, dan positif dengan nuansa kehangatan masyarakat desa.",
+            "summary": "Desa Wisata Sigapiton merupakan tempat wisata pertanian dengan pemandangan alam terbaik, lingkungan tenang, dan masyarakat yang ramah, menawarkan aktivitas pertanian dan pengalaman kehidupan desa."
+        }
+    },
+    "35": {
+        "item_id": "35",
+        "place_name": "Menara Pandang Simanindo",
+        "category": "Wisata Alam",
+        "rating": 4.571428571428571,
+        "features": {
+            "landscape_content_features": "Pemandangan danau toba yang indah, menara pandang yang terletak di atas pantai sibolazi, serta kualitas fisik yang masih dalam proses penataan dan perawatan. Ada penjelasan tentang pemandangan yang kerenn dan akses jalan menuju tempat ini yang sedikit rusak.",
+            "activity_features": "Berjalan kaki, menikmati pemandangan danau toba dari menara pandang, pengalaman berada di area yang masih baru dan belum banyak diketahui, serta pengalaman melihat pemandangan dari jarak jauh.",
+            "atmosphere_features": "Mood yang tenang dan positif, dengan pemandangan yang menarik dan suasana hati yang sepi karena akses jalan yang sedikit rusak. Ada elemen yang menggambarkan keindahan alam dan kesulitan dalam mencapai lokasi.",
+            "summary": "Menara Pandang Simanindo adalah tempat wisata alam yang menawarkan pemandangan danau toba yang indah dari atas pantai sibolazi. Meski akses jalan sedikit rusak, tempat ini menawarkan pengalaman berjalan kaki dan pemandangan yang menarik. Meski ada keterbatasan perawatan, pemandangan danau toba yang bagus serta kesempatan untuk menikmati keindahan alam menjadi daya tarik utama."
+        }
+    },
+    "36": {
+        "item_id": "36",
+        "place_name": "Air Terjun Pandumaan",
+        "category": "Wisata Alam",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Pemandangan air terjun yang terbaik di Balige, jalur hiking off-road dengan trek sulit, jalur setapak di sebelah sungai, dan pemandangan alam yang masih terjaga. Kombinasi pemandangan sungai, jalur setapak, dan view air terjun yang jelas terlihat.",
+            "activity_features": "Hiking off-road dengan trek 40 menit, jalur setapak di sebelah sungai, dan pengalaman menyusuri sungai serta air terjun. Aktivitas terkait trek, pemandangan alam, dan pengelolaan lingkungan.",
+            "atmosphere_features": "Suasana bersemangat dengan pujian terhadap keindahan alam, kebersihan lingkungan, dan kepedulian terhadap alam. Momen yang menantang dan penuh keajaiban, serta keharmonisan antara pengunjung dan lingkungan.",
+            "summary": "Air Terjun Pandumaan adalah tempat wisata alam yang menawarkan pemandangan air terjun terbaik di Balige, jalur hiking off-road dengan trek sulit, dan pemandangan sungai yang indah. Aktivitas utama melibatkan hiking, menyusuri sungai, dan pengelolaan lingkungan. Suasana penuh keajaiban dengan emosi positif, tetapi juga kepedulian terhadap kebersihan alam."
+        }
+    },
+    "37": {
+        "item_id": "37",
+        "place_name": "Tugu Toga Aritonang",
+        "category": "Wisata Budaya",
+        "rating": 4.60427807486631,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang sangat menakjubkan, tugu Toga Aritonang sebagai simbol penghormatan kepada leluhur, fasilitas seperti guest house dan villa di dekat tugu, serta ketersediaan akses jalan yang masih dalam tahap pengembangan.",
+            "activity_features": "Pengunjung dapat mengambil foto, mengunjungi tugu, menikmati pemandangan danau Toba dari ketinggian, menggunakan akses jalan yang masih dalam tahap perbaikan, dan menginap di guest house atau villa di sekitar tugu.",
+            "atmosphere_features": "Suasana tenang, alam yang indah, pemandangan yang sangat menakjubkan, dan keberadaan tugu sebagai simbol budaya yang memperkaya pengalaman wisata.",
+            "summary": "Tugu Toga Aritonang adalah tempat wisata budaya dengan pemandangan danau Toba yang sangat menakjubkan, tugu sebagai simbol budaya, fasilitas pendukung seperti guest house, dan akses jalan yang masih dalam tahap pengembangan. Tempat ini menawarkan pengalaman wisata yang tenang, alam yang indah, dan kesan budaya yang memperkaya pengalaman pengunjung."
+        }
+    },
+    "38": {
+        "item_id": "38",
+        "place_name": "Bukit Burung",
+        "category": "Wisata Alam",
+        "rating": 4.761904761904762,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, bukit Burung sebagai penjelajah alam, sejarah dan keindahan alam yang tersembunyi, serta kualitas fisik yang alami dan terbatas karena tanah milik pribadi.",
+            "activity_features": "Berjalan kaki, mendaki bukit, penggunaan sepeda motor, pemandangan danau Toba di samping bukit, aktivitas menyendiri, dan pengalaman petualangan dengan pemandangan yang menakjubkan.",
+            "atmosphere_features": "Seren, sejuk, pemandangan yang menakjubkan, kejutan terhadap tantangan jalur berbatu, dan suasana hati yang tenang namun memerlukan perhatian untuk keamanan.",
+            "summary": "Bukit Burung adalah tempat wisata alam yang menawarkan pemandangan danau Toba yang indah, berjalan kaki yang menantang, dan suasana tenang. Namun, tempat ini kurang terawat, memiliki jalur berbatu, dan tidak memiliki fasilitas seperti parkir atau toilet. Meskipun demikian, lokasinya tersembunyi dan cocok untuk pengunjung yang ingin menyendiri atau berpetualangan dengan pemandangan alam yang memikat."
+        }
+    },
+    "39": {
+        "item_id": "39",
+        "place_name": "Bukit Senyum Motung",
+        "category": "Wisata Alam",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang menakjubkan, pemandangan mantap, jalan yang sedang dibangun dengan stip dan kurva, serta kesan alam yang terbuka dengan view danau Toba dan pegunungan Toba yang menjulang. Tempat ini memiliki kualitas fisik yang cukup baik, dengan pemandangan yang indah dan alam yang terbuka.",
+            "activity_features": "Kemudahan beraktivitas seperti camping, berfoto dengan background pemandangan danau Toba, makan dan minum, menikmati sunset dan sunrise, serta pengalaman bersantai di area terbuka. Aktivitas terkait dengan keindahan alam dan pengalaman berada di ketinggian.",
+            "atmosphere_features": "Nuansa emosional yang positif seperti kagum, senang, dan kebanggaan terhadap keindahan alam. Namun, ada kritik terkait kebersihan yang buruk dan kondisi jalan rusak, yang memengaruhi pengalaman wisata.",
+            "summary": "Bukit Senyum Motung adalah tempat wisata alam yang menawarkan pemandangan danau Toba yang indah, dengan jalan terbuka yang menarik. Aktivitas yang tersedia meliputi camping, foto, makan, dan pengalaman menyaksikan sunrise/sunset. Meskipun memiliki kebersihan yang perlu diperbaiki, tempat ini sangat cocok untuk mengalami keindahan alam Toba dengan suasana yang khas."
+        }
+    },
+    "40": {
+        "item_id": "40",
+        "place_name": "Kota Balige",
+        "category": "Wisata Bisnis",
+        "rating": 4.363636363636363,
+        "features": {
+            "landscape_content_features": "Kota Balige menawarkan pemandangan danau Toba yang mengesankan, sejarah kota yang bersejarah, serta kekhasan budaya yang terlihat dari aktivitas seperti turnamen jetski. Kualitas fisik kota masih perlu perbaikan, terutama dalam aspek kebersihan dan penataan pedagang.",
+            "activity_features": "Kunjungan ke Kota Balige menawarkan aktivitas seperti turnamen jetski, pengunjung bisa menikmati pemandangan danau Toba, serta pengalaman budaya di sekitar kota. Ada opsi aktivitas rekreasi di sebelah Toba Samosir.",
+            "atmosphere_features": "Kota Balige memiliki suasana yang menyenangkan dengan pemandangan alam yang mengesankan, namun masih ada kritik terkait kebersihan dan penataan kota. Atmosfernya cenderung positif namun dengan peringatan bahwa renovasi masih terlambat.",
+            "summary": "Kota Balige adalah destinasi wisata yang menawarkan pemandangan danau Toba, sejarah kota, serta aktivitas rekreasi seperti turnamen jetski. Meskipun kualitas fisik dan kebersihan masih perlu perbaikan, kota ini memiliki potensi besar sebagai destinasi wisata yang menarik dengan pemandangan alam yang mengesankan dan budaya khas."
+        }
+    },
+    "41": {
+        "item_id": "41",
+        "place_name": "Air Terjun Sampuran",
+        "category": "Wisata Alam",
+        "rating": 5.0,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang indah, terbentuk oleh air terjun, hutan semak, dan bukit kapur, serta sejarah geologis yang terlihat dari bentuk datar dan ketinggian. Jalur perjalanan yang aspal dan berbentuk curam, serta kualitas fisik yang memadai untuk aktivitas kaki.",
+            "activity_features": "Hiking dan trekking, pengambilan foto, pengamatan lingkungan, serta pengalaman jalan kaki yang sulit namun berharga karena panorama alam yang luar biasa.",
+            "atmosphere_features": "Suasana tenang, dingin, dan penuh kepuasan setelah perjuangan fisik, dengan angin yang sejuk dan pemandangan yang memikat emosi pengunjung.",
+            "summary": "Air Terjun Sampuran adalah tempat wisata alam yang menawarkan pemandangan indah, jalur hiking yang sulit, dan pengalaman jalan kaki yang berharga dengan lingkungan alami yang memukau dan suasana tenang."
+        }
+    },
+    "42": {
+        "item_id": "42",
+        "place_name": "WF Coffee&Resto",
+        "category": "Wisata Bisnis",
+        "rating": 4.224,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, pantai pasir putih, ubin di pantai awal rusak, dan pantai buatan. Tempat memiliki fasilitas umum seperti jualan makanan, toilet gazebo, dan tempat parkir yang cukup luas.",
+            "activity_features": "Makanan enak, pemandangan danau Toba, penggunaan tabir surya, sholat di mushola, tempat untuk keluarga duduk dan berkumpul, serta aktivitas berenang, bermain air, dan berfoto di pantai.",
+            "atmosphere_features": "Nyaman, ramai, ramah, indah, dan memerlukan perhatian terhadap kondisi pantai yang rusak. Tempat cocok untuk keluarga, tetapi sangat penuh dan memerlukan antisipasi terhadap angin kencang.",
+            "summary": "WF Coffee&Resto menawarkan pemandangan danau Toba yang indah, pantai pasir putih dengan ubin rusak, dan fasilitas umum yang lengkap. Tempat ramai, nyaman, dan cocok untuk keluarga, tetapi perlu waspada terhadap kondisi pantai yang rusak dan angin kencang."
+        }
+    },
+    "43": {
+        "item_id": "43",
+        "place_name": "Air Terjun Tombak Pangaribuan",
+        "category": "Wisata Alam",
+        "rating": 4.666666666666667,
+        "features": {
+            "landscape_content_features": "Pemandangan hutan yang luas, air terjun dengan kualitas fisik yang baik, udara segar dan sejuk, serta keindahan alam yang memukau.",
+            "activity_features": "Aktivitas seperti berjalan-jalan di hutan, menanjak, berdoa di tempat alam, dan bermain air terjun yang menantang.",
+            "atmosphere_features": "Suasana tenang, segar, dan penuh keindahan alam yang memperkaya pengalaman wisata dengan nuansa emosional relaksasi dan keagamaan.",
+            "summary": "Air Terjun Tombak Pangaribuan merupakan tempat wisata alam yang menawarkan pemandangan hutan, air terjun yang indah, udara segar, serta aktivitas bersejarah dan pemandangan alam yang menarik."
+        }
+    },
+    "44": {
+        "item_id": "44",
+        "place_name": "Long Beach",
+        "category": "Wisata Bahari",
+        "rating": 4.08,
+        "features": {
+            "landscape_content_features": "Pantai Long Beach di Danau Toba dengan pemandangan danau yang indah, fasilitas seperti kamar mandi, gajebo, dan area istirahat terbatas, serta lingkungan yang bersih dan sejuk. Area terbuka terdapat batu air dan ketersediaan ban, namun kondisi terawat dan kebersihan masih ada perbaikan.",
+            "activity_features": "Pengunjung dapat berenang, mancing, naik banana boat dan speed boat, serta menginap di hotel. Ada opsi untuk duduk di area terbuka dengan biaya tambahan, serta kegiatan keluarga seperti berenang dan menikmati pemandangan danau.",
+            "atmosphere_features": "Suasana tenang, damai, dan bersih dengan pemandangan danau yang segar. Pengunjung merasa nyaman dan tidak terlalu ramai, dengan catatan kebersihan dan peraturan tidak boleh membawa sampah.",
+            "summary": "Long Beach di Danau Toba merupakan tempat rekreasi yang indah dengan pemandangan danau, fasilitas dasar seperti kamar mandi dan gajebo, serta lingkungan yang sejuk dan bersih. Tempat ini cocok untuk keluarga dan pengunjung yang ingin berenang, mancing, atau menikmati pemandangan. Meski ada perbaikan terhadap kebersihan, tempat ini disarankan untuk dikunjungi dengan kebijakan lingkungan yang baik."
+        }
+    },
+    "45": {
+        "item_id": "45",
+        "place_name": "Pantai Silalahi",
+        "category": "Wisata Bahari",
+        "rating": 4.315384615384615,
+        "features": {
+            "landscape_content_features": "Pantai Silalahi menawarkan pemandangan danau Toba yang indah, perbukitan hijau, dan fasilitas camping yang lengkap. Lokasinya berada di desa Silalahi, Sumatera Utara, dengan akses jalan yang baik. Tempat ini menyediakan pondok tikar, fasilitas makan minum, dan objek utamanya adalah danau Toba. Ada peninggalan sejarah seperti Raja Silahi Sabungan yang perlu dipelajari lebih lanjut.",
+            "activity_features": "Pengunjung dapat berenang, mancing ikan, camping, dan menikmati pemandangan danau Toba. Fasilitas tambahan termasuk penginapan, kuliner tradisional Batak, dan objek wisata seperti perbukitan. Aktivitas tambahan termasuk pengelolaan wahana dan penginapan di area campsite.",
+            "atmosphere_features": "Suasana tenang dan alam yang indah menjadi ciri utama. Pengunjung mengapresiasi pemandangan danau Toba, kebersihan, dan kenyamanan. Namun, ada kritik terkait kurangnya pengelolaan, sampah, dan kondisi jalan yang kurang baik. Emosi umumnya positif, tetapi ada pernyataan negatif terkait kebersihan dan fasilitas.",
+            "summary": "Pantai Silalahi adalah destinasi wisata yang menawarkan pemandangan danau Toba, perbukitan hijau, dan fasilitas camping lengkap. Lokasinya dekat Medan, dengan akses jalan yang baik. Tempat ini menawarkan aktivitas seperti berenang, mancing, dan camping, serta peninggalan sejarah. Meskipun memiliki keindahan alam, ada kritik terkait kebersihan, pengelolaan, dan kondisi fasilitas. Tempat ini cocok untuk keluarga dan pengunjung yang mencari pemandangan alam dan pengalaman wisata."
+        }
+    },
+    "46": {
+        "item_id": "46",
+        "place_name": "Tao Silalahi Hotel",
+        "category": "Wisata Bisnis",
+        "rating": 4.611111111111111,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, lingkungan alam terbuka, fasilitas camping, sejarah dan keindahan alam, kebersihan lingkungan, lokasi strategis di tepi danau Toba, serta pemandangan pegunungan yang menyatu dengan danau.",
+            "activity_features": "Kemudahan camping, berenang di tepi danau, berkeliling menggunakan kapal wisata, bermain pancing ikan, aktivitas alam dan kegiatan keluarga, serta pengunjung dapat menikmati pemandangan danau Toba secara privat.",
+            "atmosphere_features": "Seren, sejuk, nyaman, suasana alam terbuka, kehangatan lingkungan, serta emosi positif terkait pemandangan danau Toba yang indah dan khas.",
+            "summary": "Tao Silalahi Hotel merupakan destinasi wisata bisnis di tepi danau Toba dengan pemandangan alam yang indah, fasilitas camping yang lengkap, lingkungan sejuk dan bersih, serta lokasi strategis untuk menikmati keindahan danau Toba dan pemandangan pegunungan. Pengunjung dapat beraktivitas seperti camping, berenang, berkeliling kapal, dan menikmati pemandangan alam secara privat."
+        }
+    },
+    "47": {
+        "item_id": "47",
+        "place_name": "Sopo Guru Tatea Bulan",
+        "category": "Wisata Budaya",
+        "rating": 4.633507853403142,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, sejarah budaya Batak, bangunan bersejarah, kualitas lingkungan bersih, dan nuansa spiritual dari situs kebudayaan Sopo Guru Tatea Bulan.",
+            "activity_features": "Pemandangan alam, aktivitas religi, pengelolaan budaya, pengambilan foto, pengalaman sejarah, dan pengunjung yang menikmati pemandangan danau Toba.",
+            "atmosphere_features": "Keramaian rendah, suasana tenang, emosi religius, udara sejuk, dan nuansa spiritual yang kuat dari situs kebudayaan.",
+            "summary": "Sopo Guru Tatea Bulan adalah tempat kebudayaan di Danau Toba yang menampilkan pemandangan alam, sejarah Batak, dan aktivitas religi. Tempat ini bersih, tenang, dan memiliki nuansa spiritual yang kuat, dengan pemandangan danau Toba yang indah dan pengalaman sejarah yang menginspirasi."
+        }
+    },
+    "48": {
+        "item_id": "48",
+        "place_name": "Desa Meat",
+        "category": "Wisata Bahari",
+        "rating": 4.444444444444445,
+        "features": {
+            "landscape_content_features": "Desa Meat terkenal dengan pemandangan alam yang indah, seperti pemandangan danau Toba, gunung, dan sawah. Terdapat sarung tenun dengan pewarna alam, serta kombinasi sawah, gunung, dan danau yang menciptakan suasana alam yang sangat indah. Desa ini juga memiliki potensi wisata budaya dan sejarah, seperti warisan budaya 'warisanku' dan desa yang sangat indah.",
+            "activity_features": "Pengunjung dapat mengunjungi desa wisata, mengambil foto di 1000 tenda, mengamati pemandangan danau Toba, dan berinteraksi dengan masyarakat desa yang ramah. Aktivitas tambahan mencakup pengelolaan sarung tenun alam dan pengembangan potensi wisata dengan peningkatan jalan dan penanganan sampah.",
+            "atmosphere_features": "Suasana desa yang sangat positif, dengan emosi pengunjung yang sangat luar biasa, indah, dan terbaik. Desa ini dijuluki sebagai destinasi terbaik, memiliki suasana alam yang asri, dan atmosfer yang nyaman serta ramah.",
+            "summary": "Desa Meat adalah destinasi wisata alam yang menawarkan pemandangan danau Toba, sarung tenun alam, dan kombinasi sawah, gunung, serta budaya desa yang ramah. Tempat ini dijuluki sebagai destinasi terbaik dengan potensi wisata yang sangat besar, namun perlu peningkatan sarana prasarana dan penanganan sampah untuk meningkatkan pengalaman wisata."
+        }
+    },
+    "49": {
+        "item_id": "49",
+        "place_name": "Sigurgur Beach & Restaurant",
+        "category": "Wisata Bahari",
+        "rating": 4.405405405405405,
+        "features": {
+            "landscape_content_features": "Pantai Sigurgur bersih dengan pasir yang landai, kedalaman yang cukup aman untuk pengunjung baru, dan memiliki mushola. Lokasinya strategis di sekitar Danau Toba, dengan pemandangan yang indah dan kebersihan yang dijaga. Restoran menyediakan makanan yang bagus dan kopi yang mantab.",
+            "activity_features": "Pengunjung dapat melakukan aktivitas seperti memancing, berenang, menggunakan banana boat, jet ski, dan memperoleh pengalaman berenang di Danau Toba. Ada opsi untuk menginap dan membeli kelapa di warung sebelah.",
+            "atmosphere_features": "Suasana berada di antara positif dan negatif. Pengunjung merasa seru, santai, dan nyaman di tepi pantai. Ada kritik terhadap pelayanan dan ketersediaan layanan di restoran, tetapi umumnya dijuluki sebagai tempat yang luar biasa dan direkomendasikan.",
+            "summary": "Sigurgur Beach & Restaurant adalah destinasi wisata bahari yang menawarkan pemandangan indah, kebersihan yang baik, dan berbagai aktivitas seperti memancing dan berenang. Meski ada kritik terhadap pelayanan dan ketersediaan layanan di restoran, tempat ini dijuluki sebagai tempat yang luar biasa dan direkomendasikan untuk pengunjung yang ingin menghabiskan waktu di tepi pantai Danau Toba."
+        }
+    },
+    "50": {
+        "item_id": "50",
+        "place_name": "Tanjung Unta",
+        "category": "Wisata Alam",
+        "rating": 4.464285714285714,
+        "features": {
+            "landscape_content_features": "Pemandangan danau toba yang indah, pemandangan dari tanjung unta yang cantik, alam yang asri, dan kualitas fisik yang baik dengan jalan menuju lokasi rusak parah.",
+            "activity_features": "Camping, memancing, mengambil foto, dan aktivitas lainnya seperti berjalan-jalan di sekitar danau toba.",
+            "atmosphere_features": "Suka dengan suasana tenang, indah, dan menyenangkan. Pengunjung merasa kangen dan ingin mengambil foto dengan suasana alami.",
+            "summary": "Tanjung Unta adalah tempat wisata alam yang menawarkan pemandangan indah dari danau toba, suasana tenang, dan aktivitas seperti camping serta memancing. Tempat ini cocok untuk pengunjung yang ingin menikmati keindahan alam dan mengambil foto dengan suasana tenang."
+        }
+    },
+    "51": {
+        "item_id": "51",
+        "place_name": "Aek Rangat Pangururan",
+        "category": "Wisata Bahari",
+        "rating": 4.3993115318416525,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, pemandian air panas berbentuk kolam dengan air jernih, lingkungan bersih, dan perubahan warna batuan yang terlihat di sekitar area wisata. Tempat juga memiliki pemandangan bukit Holbung dan area pendakian yang ramah lingkungan.",
+            "activity_features": "Pengunjung dapat berenang, bermandi, bersepeda, berkeluarga, dan menginap di penginapan. Ada pilihan kuliner tradisional Aek Rangat dan aktivitas seperti berenang di kolam air panas, bersepeda, dan menginap di hotel. Pemandian air panas juga bisa disertai aktivitas kuliner.",
+            "atmosphere_features": "Suasana nyaman dan sejuk, dengan pemandangan yang memikat dan lingkungan bersih. Meski ada kritik terhadap kualitas layanan dan harga tiket, kesan umum positif terhadap pengalaman wisata.",
+            "summary": "Aek Rangat Pangururan adalah destinasi wisata alam yang menawarkan pemandangan danau Toba, pemandian air panas berbentuk kolam, dan lingkungan hijau. Aktivitas utama meliputi berenang, bersepeda, dan menginap di penginapan. Suasana sejuk dan bersih, meski ada kritik terhadap harga tiket dan layanan. Tempat ini cocok untuk keluarga dan pengunjung yang mencari pengalaman alam dan kuliner tradisional."
+        }
+    },
+    "52": {
+        "item_id": "52",
+        "place_name": "Puncak Huta Ginjang",
+        "category": "Wisata Alam",
+        "rating": 4.7184,
+        "features": {
+            "landscape_content_features": "Pemandangan alam danau toba, kaldera danau toba, pemandangan seperti negeri di atas awan, serta fitur geopark yang menawarkan view terluas dan pemandangan indah dari puncak huta ginjang.",
+            "activity_features": "Pengunjung dapat berfoto di spot pemandangan, berparalayang, dan mengikuti aktivitas seperti memotret dengan jaket karena suhu dingin. Ada fasilitas untuk mencetak foto dalam 5 menit dan biaya masuk yang tergantung jumlah pengunjung.",
+            "atmosphere_features": "Mood yang menakjubkan, emosi penikmat alam, keindahan pemandangan yang terbatas karena kabut, dan suasana dingin yang memerlukan pakaian tebal. Ada nuansa keramaian yang sifatnya ramai dan kebersihan tempat wisata.",
+            "summary": "Puncak Huta Ginjang adalah destinasi geopark yang menawarkan pemandangan alam danau toba dari puncak, kaldera, dan view terluas. Aktivitas seperti foto, paralayang, dan pengunjungan dengan biaya masuk beragam. Tempat ini menawarkan pengalaman alam yang menakjubkan, tetapi perlu persiapan untuk suhu dingin dan kabut."
+        }
+    },
+    "53": {
+        "item_id": "53",
+        "place_name": "Tugu D.I PANJAITAN",
+        "category": "Wisata Sejarah",
+        "rating": 4.48,
+        "features": {
+            "landscape_content_features": "Tugu D.I Panjaitan adalah monumen bersejarah di Balige yang terkenal dengan kisah tokoh pahlawan nasional Bapak di Panjaitan. Pemandangan alam dan struktur bangunan terlihat biasa tetapi memiliki nilai sejarah yang luar biasa. Lokasinya strategis di pusat kota Balige, dengan peninggalan sejarah dan bangunan yang melekat di kisah pahlawan.",
+            "activity_features": "Tugu D.I Panjaitan cocok untuk mengadakan acara penting, pertemuan, dan pengambilan foto. Aktivitas utama meliputi pengelolaan acara, pengunjung yang berkumpul, dan pengambilan foto udara.",
+            "atmosphere_features": "Nuansa emosional campuran antara kebanggaan terhadap peninggalan sejarah dan kekecewaan terhadap kebersihan dan perhatian pemerintah. Atmosfer dianggap positif namun dengan keterbatasan dalam perawatan fisik dan lingkungan.",
+            "summary": "Tugu D.I Panjaitan adalah monumen bersejarah di Balige yang memiliki nilai sejarah luar biasa, lokasinya strategis, dan cocok untuk acara penting. Namun, kondisi kebersihannya masih buruk, sehingga menjadi tempat wisata yang menarik tetapi perlu perhatian lebih lanjut."
+        }
+    },
+    "54": {
+        "item_id": "54",
+        "place_name": "Pemandian Air Panas Rianiate",
+        "category": "Wisata Alam",
+        "rating": 3.925925925925926,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, sumber air panas belerang alami, batu belerang putih, serta fasilitas perbaikan yang perlu diperhatikan. Pemandangan alam yang menarik, kualitas fisik yang masih sedikit kotor, dan peninggalan sejarah alam yang terlihat. Ada keindahan alam, pemandangan yang menarik, dan fasilitas yang perlu diperbaiki.",
+            "activity_features": "Berendam di air panas, memanjat batu belerang, bersepeda, berkeluarga, dan memperoleh makanan halal. Ada opsi untuk piknik keluarga, pengelolaan yang sedikit terganggu, dan fasilitas makanan yang perlu dikoreksi.",
+            "atmosphere_features": "Mood positif terkait pemandangan dan alam, tetapi ada kekhawatiran terkait kebersihan dan fasilitas. Ada kepuasan terhadap pemandangan dan alam, namun perlu peningkatan kualitas fasilitas dan kebersihan.",
+            "summary": "Pemandian Air Panas Rianiate menawarkan pemandangan alam yang indah di sekitar Danau Toba, sumber air panas belerang alami, dan batu belerang putih. Aktivitas utama meliputi berendam di air panas, memanjat batu belerang, dan piknik keluarga. Namun, fasilitas perlu diperbaiki, kebersihan sedikit kurang, dan harga makanan masih murah. Tempat ini cocok untuk keluarga dan wisatawan yang suka alam, tetapi perlu peningkatan kualitas layanan dan kebersihan."
+        }
+    },
+    "55": {
+        "item_id": "55",
+        "place_name": "PENATAPAN PARHALLOW SIGARANTUNG",
+        "category": "Wisata Alam",
+        "rating": 4.60931899641577,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba dari ketinggian 1200 meter, tuk-tuk, dan alam sekitar yang indah, serta fasilitas seperti toilet umum dan parkir luas. Lokasi berada di kawasan yang terbuka, memungkinkan pengunjung menikmati pemandangan alam dan kota Toba dari ketinggian.",
+            "activity_features": "Pengunjung dapat berfoto, menikmati makanan seperti pisang goreng dan kentang goreng, minum kopi yang disajikan di warung kecil, bersepeda motor, bermain paralayang, dan menghabiskan waktu bersantai di area terbuka. Ada fasilitas untuk beristirahat, berfoto, dan beraktivitas olahraga seperti paralayang.",
+            "atmosphere_features": "Mood yang nyaman, sejuk, dan positif. Pengunjung merasa cocok untuk beristirahat, berfoto, dan menikmati pemandangan alam. Meski ada kritik terhadap kualitas kopi, keseluruhan suasana hati tetap positif dan menarik.",
+            "summary": "Penatapan Parhalow Sigarantung adalah tempat wisata alam yang menawarkan pemandangan danau Toba dari ketinggian, fasilitas parkir luas, makanan murah enak, dan lingkungan yang nyaman. Tempat ini cocok untuk berfoto, beristirahat, dan menghabiskan waktu bersama keluarga atau teman dengan suasana hati positif."
+        }
+    },
+    "56": {
+        "item_id": "56",
+        "place_name": "Batu Gantung",
+        "category": "Wisata Sejarah",
+        "rating": 4.61340206185567,
+        "features": {
+            "landscape_content_features": "Pemandangan danau toba yang indah, bentuk batu gantung (batugamping, stalaktit, stalagmit), sejarah legenda Batak, dan keindahan alam yang masih terjaga. Objek wisata berupa batu penuh cerita rakyat dan mistis, serta pemandangan yang menarik.",
+            "activity_features": "Pengunjung dapat menyewa kapal motor untuk berjalan kaki ke batu gantung, mengambil foto, mengalami cerita rakyat Batak, dan menikmati pemandangan danau toba. Aktivitas terkait perahu, pengambilan foto, dan pengalaman sejarah.",
+            "atmosphere_features": "Suasana tenang, alami, dan khas Batak dengan cerita rakyat yang melegenda. Tempat selalu ramai, namun tetap menyimpan nuansa khas dan estetika yang menarik. Emosi pengunjung terkait keindahan alam dan sejarah.",
+            "summary": "Batu Gantung adalah objek wisata sejarah di Danau Toba yang penuh dengan cerita rakyat Batak, pemandangan alam yang indah, dan aktivitas berbasis perahu. Tempat ini menawarkan pengalaman sejarah, keindahan alam, dan atmosfer yang khas, serta merupakan spot foto yang menarik untuk pengunjung yang ingin merasakan keunikan danau toba."
+        }
+    },
+    "57": {
+        "item_id": "57",
+        "place_name": "Tarabunga",
+        "category": "Wisata Alam",
+        "rating": 4.595744680851064,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang memukau, 360 derajat view, hutan bakau, kuburan, dan fasilitas umum seperti pondok istirahat. Area terbuka dengan pemandangan danau Toba yang terlihat dari ketinggian, serta kebersihan yang masih perlu perawatan.",
+            "activity_features": "Pemandangan danau Toba, foto, duduk, beristirahat, hiking, dan pengambilan foto dari sudut berbeda. Aktivitas utama berfokus pada pengamatan pemandangan dan pengalaman bersantai.",
+            "atmosphere_features": "Bersih, indah, dan menyenangkan. Kombinasi alam, keindahan, dan kebersihan yang perlu perbaikan. Atmosfer yang tenang dan penuh kebayaan, serta kecintaan terhadap pemandangan danau Toba.",
+            "summary": "Tarabunga adalah tempat wisata alam dengan pemandangan danau Toba yang memukau, 360 derajat view, hutan bakau, dan kuburan. Aktivitas utama melibatkan pengamatan pemandangan, foto, duduk, dan hiking. Atmosfernya indah, bersih, dan perlu perbaikan fasilitas umum. Tempat ini cocok untuk pengunjung yang suka keindahan alam dan pengalaman bersantai."
+        }
+    },
+    "58": {
+        "item_id": "58",
+        "place_name": "Gunung Pusuk Buhit",
+        "category": "Wisata Sejarah",
+        "rating": 4.580645161290323,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba, gunung Pusuk Buhit yang disakralkan oleh masyarakat Batak, serta sejarah keberadaannya sebagai panggung legenda lahirnya suku Batak. Kombinasi alam, pemandangan, sejarah, dan kekayaan budaya lokal.",
+            "activity_features": "Pengunjung dapat melakukan ritual, berdoa, camping, dan hiking. Ada jalur yang membutuhkan perjalanan jauh dengan motor dan berjalan, serta akses ke coffee shop untuk upacara ritual. Aktivitas terkait dengan keindahan alam dan kekayaan budaya.",
+            "atmosphere_features": "Nuansa spiritual dan misterius, dengan perbedaan emosi antara yang mengagumi keindahan dan yang merasa tantangan. Kombinasi antusiasme, keteguhan, dan kegembiraan terhadap keajaiban alam.",
+            "summary": "Gunung Pusuk Buhit adalah tempat wisata sejarah yang sakral bagi masyarakat Batak, dengan pemandangan danau Toba yang memukau. Aktivitas terkait ritual, hiking, dan camping, serta akses ke coffee shop untuk upacara. Atmosfernya menampilkan keajaiban alam dan kekayaan budaya, dengan nuansa spiritual dan misterius."
+        }
+    },
+    "59": {
+        "item_id": "59",
+        "place_name": "Aek Sipangolu Bakkara",
+        "category": "Wisata Sejarah",
+        "rating": 4.428571428571429,
+        "features": {
+            "landscape_content_features": "Pemandangan dan alam danau toba yang indah, pemandangan dari desa bakti raja, sejarah mitologi tentang mata air yang terus menerus mengalir, bangunan dan tradisi Batak yang masih kuat, serta lingkungan bersih dan alam yang sakral.",
+            "activity_features": "Pengunjung dapat mengunjungi kolam mandi, kolam renang, melakukan ritual adat, berdoa sebelum minum air, memperoleh kebersihan gratis, dan mengalami perubahan fisik (lumpuh menjadi berjalan) melalui air. Aktivitas tambahan termasuk bersejarah, berdoa, dan mengalami perubahan tubuh.",
+            "atmosphere_features": "Suasana sakral dan spiritual, tenang, segar, dingin, dan nyaman. Emosi pengunjung mencakup kepuasan, rasa syukur, dan keinginan untuk berdoa sebelum meminum air. Atmosfer terlihat harmonis antara alam, sejarah, dan adat Batak.",
+            "summary": "Aek Sipangolu Bakkara adalah tempat wisata sejarah dan adat Batak yang terletak di pinggiran danau Toba. Tempat ini menawarkan pemandangan alam yang indah, air bersih dan dingin, serta ritual adat yang sakral. Pengunjung dapat mengalami perubahan fisik melalui air, berdoa sebelum minum, dan mengalami kebersihan gratis. Tempat ini merupakan bagian dari sejarah kerajaan Sisingamangaraja, dengan atmosfer yang harmonis dan spiritual."
+        }
+    },
+    "60": {
+        "item_id": "60",
+        "place_name": "Bukit Sipolha",
+        "category": "Wisata Alam",
+        "rating": 4.632850241545894,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, kualitas fisik tempat wisata baik, lokasi strategis di tepi danau Toba, serta keindahan alam yang menarik. Ada pemandangan dari atas bukit, jalan yang rusak, dan kebersihan yang diinginkan.",
+            "activity_features": "Hiking, camping, fishing, dan fotografi. Ada area campsite, warung makan, dan akses jalan yang terbatas.",
+            "atmosphere_features": "Sejuk, tenang, dan tidak ramai. Suasana hati yang menyenangkan, dengan pemandangan yang memanjakan mata dan kebersihan yang diinginkan.",
+            "summary": "Bukit Sipolha adalah tempat wisata alam yang menawarkan pemandangan danau Toba yang indah, lingkungan sejuk dan tenang, serta aktivitas seperti hiking, camping, dan fishing. Tempat ini cocok untuk berfoto, beristirahat, dan menikmati keindahan alam, meskipun ada perluasan infrastruktur dan kebersihan yang perlu diperbaiki."
+        }
+    },
+    "61": {
+        "item_id": "61",
+        "place_name": "Air Terjun Janji",
+        "category": "Wisata Alam",
+        "rating": 4.547842401500938,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang menyejukkan, air terjun jernih dan segar, dua tempat pemandian terpisah, kondisi lingkungan bersih dan nyaman, serta objek wisata alami di desa Marbun Toruan Baktiraja.",
+            "activity_features": "Pengunjung dapat bermain basah basahan, berfoto, mandi, dan mengambil foto di area terbuka. Lokasi mudah diakses, tidak ada biaya retribusi, dan tersedia tempat khusus mandi.",
+            "atmosphere_features": "Suasana tenang, sejuk, dan ramah. Pengunjung merasa nyaman, cocok untuk berpasangan, dan memiliki nuansa positif dengan saran untuk pengelolaan lebih profesional.",
+            "summary": "Air Terjun Janji adalah objek wisata alam yang menawarkan pemandangan menyejukkan, air terjun jernih, dua tempat pemandian, dan lingkungan bersih. Lokasinya mudah diakses, nyaman, dan cocok untuk pengunjung yang ingin menikmati keindahan alam Danau Toba."
+        }
+    },
+    "62": {
+        "item_id": "62",
+        "place_name": "Pasar Tomok",
+        "category": "Wisata Bisnis",
+        "rating": 4.347079037800687,
+        "features": {
+            "landscape_content_features": "Pasar Tomok menawarkan pemandangan alam yang indah di sekitar area, dengan pilihan souvenir khas Samosir, pakaian adat, dan berbagai produk dagangan. Terdapat museum dan makam raja Batak yang menjadi bagian dari peninggalan sejarah, serta fasilitas seperti spot foto di museum dan mushola. Kualitas fisik pasar tergolong baik, dengan penataan yang rapi dan kebersihan yang dijaga.",
+            "activity_features": "Pengunjung dapat berbelanja souvenir, pakaian adat, makanan non-halal, dan berbagai produk lokal. Aktivitas utama meliputi belanja, pengalaman berfoto di museum, dan pengunjungan ke makam raja Batak. Pasar juga menyediakan pilihan makanan tradisional dan berbagai item yang bisa dijual dengan harga terjangkau.",
+            "atmosphere_features": "Pasar Tomok dijuluki 'macetramaibanyak' (ramai dan macet) dengan keduanya memiliki nuansa yang bervariasi. Pengunjung mengalami emosi positif terhadap keindahan alam, kebersihan pasar, dan kekayaan budaya. Namun, ada kekacauan di sekitar area yang memengaruhi suasana hati.",
+            "summary": "Pasar Tomok adalah tempat belanja dan pengalaman budaya yang menarik, dengan pilihan produk lokal, pemandangan alam, dan peninggalan sejarah. Meski ada kekacauan di sekitar area, pasar tetap menjadi destinasi wisata yang menawarkan keindahan, kebersihan, dan kekayaan budaya Batak. Kondisi pasar sedang berubah, dengan penataan yang lebih rapi dan berbagai aktivitas yang bisa diikuti."
+        }
+    },
+    "63": {
+        "item_id": "63",
+        "place_name": "Tempat Pengasingan Soekarno",
+        "category": "Wisata Sejarah",
+        "rating": 4.4818181818181815,
+        "features": {
+            "landscape_content_features": "Pemandangan danau toba yang indah, bangunan pesanggrahan milik belanda tahun 1820, sejarah presiden soekarno diasingkan di sini, dan suasana alam yang sejuk serta bersih.",
+            "activity_features": "Pemandangan sunset, foto dari speedboats, pengunjung jalan-jalan sambil belajar sejarah, dan pengunjung yang ingin menikmati pemandangan danau toba dari tepi kota.",
+            "atmosphere_features": "Sejuk, bersih, nyaman, dan memiliki nuansa emosional yang mengagumkan karena pemandangan indah dan sejarah yang terawat.",
+            "summary": "Tempat bersejarah di tepi danau toba yang menawarkan pemandangan indah, bangunan pesanggrahan milik belanda, dan kesempatan untuk berfoto dari speedboats. Tempat ini cocok untuk pengunjung yang ingin menikmati pemandangan danau toba, belajar sejarah, dan merasakan suasana sejuk serta bersih."
+        }
+    },
+    "64": {
+        "item_id": "64",
+        "place_name": "Batak Museum",
+        "category": "Wisata Budaya",
+        "rating": 4.364077669902913,
+        "features": {
+            "landscape_content_features": "Pemandangan alam dan budaya Batak terlihat dalam bentuk bangunan rumah adat, kerajinan kayu, dan seni rupa. Museum terletak di dalam bangunan rumah adat Batak, dengan koleksi artefak ornamen, senjata tradisional, dan karya seni rupa. Ada tanda arsitektur tradisional yang terlihat, meskipun ada debu dan cahaya yang kurang. Koleksi kerajinan kayu menarik, tetapi ada tantangan dalam pencahayaan yang memengaruhi pengalaman pengunjung.",
+            "activity_features": "Pengunjung dapat mengunjungi museum, melihat rumah batak, menonton tarian, dan mengamati seni rupa. Aktivitas terkait dengan belajar sejarah budaya Batak, mempelajari seni kerajinan, dan mengambil foto di dalam bangunan. Ada kesempatan untuk menggabungkan pengunjungan dengan makam raja dan pasar lokal.",
+            "atmosphere_features": "Nuansa positif dan ramah terlihat dari staf yang ramah, kebersihan yang baik, dan suasana yang sejuk. Pengunjung merasa terinspirasi oleh budaya Batak, dengan energi positif yang kuat dan kebersamaan dalam silaturahmi. Ada kejutan emosional dari pengalaman belajar sejarah dan budaya.",
+            "summary": "Batak Museum adalah tempat wisata budaya yang menyajikan koleksi kerajinan, seni rupa, dan artefak budaya Batak dalam bangunan rumah adat. Museum kecil dengan kualitas fisik yang baik, tetapi ada tantangan dalam pencahayaan. Aktivitas terkait dengan belajar sejarah, menonton tarian, dan mengamati seni. Pengunjung merasa positif, ramah, dan terinspirasi oleh budaya Batak. Museum ini berada di dalam rumah adat Batak, dengan harga masuk murah dan berpotensi untuk pengembangan ekonomi lokal."
+        }
+    },
+    "65": {
+        "item_id": "65",
+        "place_name": "Pemandian Aek Sipitu Dai",
+        "category": "Wisata Sejarah",
+        "rating": 4.1976744186046515,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang indah dengan 7 mata air yang terdapat di sekitar tempat wisata, serta peninggalan sejarah Batak seperti Marga Limbong dan cerita keramat. Lokasi terletak di kaki Gunung Simpul, dengan kualitas fisik yang baik, fasilitas parkir yang cukup, dan pemandangan yang menarik.",
+            "activity_features": "Pengunjung dapat mengunjungi 7 mata air dengan rasa berbeda, mencicipi makanan khas Batak, mengunjungi tempat sejarah, dan berinteraksi dengan komunitas lokal. Aktivitas tambahan termasuk pengelolaan yang kurang maksimal dan perlu peningkatan fasilitas.",
+            "atmosphere_features": "Suasana yang sejuk dan berhembus, dengan emosi campuran antara apresiasi terhadap kebersihan dan keindahan alam, serta kritik terhadap pelayanan yang kurang ramah. Mood yang terkesan kumuh dan kecewa terhadap pengelolaan yang tidak optimal.",
+            "summary": "Pemandian Aek Sipitu Dai adalah destinasi sejarah Batak dengan 7 mata air yang terkenal, pemandangan alam yang indah, dan kehidupan komunitas lokal. Meski memiliki potensi yang besar, perlu peningkatan fasilitas, pelayanan, dan pengelolaan yang lebih baik untuk mempertahankan keberadaannya sebagai tempat wisata yang berkesan."
+        }
+    },
+    "66": {
+        "item_id": "66",
+        "place_name": "The Kaldera",
+        "category": "Wisata Alam",
+        "rating": 4.501639344262295,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, kaldera vulkanik, pemandangan alam, dan fasilitas umum yang sedang dalam pengembangan. Tempat ini menawarkan pemandangan vulkanik, keindahan danau Toba, serta pengalaman berada di area yang terbentuk dari letusan vulkanik.",
+            "activity_features": "Pemandangan kaldera, berfoto, hiking, camping, dan pengalaman berada di area yang terbentuk dari letusan vulkanik. Aktivitas tambahan termasuk pengambilan foto, berjalan-jalan di sekitar area, dan pengalaman berada di lokasi yang terbentuk dari letusan vulkanik.",
+            "atmosphere_features": "Mood positif, pemandangan yang menakjubkan, suasana sejuk, dan kebersihan yang sedang dalam pengembangan. Ada kritik terkait fasilitas umum dan biaya yang tinggi, tetapi umumnya pengunjung merasa puas dan ingin mengunjungi tempat ini.",
+            "summary": "The Kaldera adalah tempat wisata alam yang menawarkan pemandangan danau Toba yang indah, kaldera vulkanik, dan pengalaman berada di area yang terbentuk dari letusan vulkanik. Aktivitas utama meliputi pengambilan foto, hiking, camping, dan pengalaman berada di area yang terbentuk dari letusan vulkanik. Meskipun ada kritik terkait fasilitas umum dan biaya yang tinggi, tempat ini dianggap sangat indah dan layak dikunjungi untuk pengalaman berada di alam yang menakjubkan."
+        }
+    },
+    "67": {
+        "item_id": "67",
+        "place_name": "Pantai Indah Situngkir (PIS)",
+        "category": "Wisata Bahari",
+        "rating": 4.298969072164948,
+        "features": {
+            "landscape_content_features": "Pantai Indah Situngkir terletak di Danau Toba dengan pemandangan danau yang indah, perbukitan hijau, dan pasir putih. Lokasi terletak di tepi danau, dengan kualitas fisik yang baik, lingkungan alam yang tenang, dan fasilitas seperti wahana air mandi dan perahu banana boat. Area pantai bersih, tenang, dan cocok untuk aktivitas keluarga, camping, dan pengalaman berada di alam terbuka.",
+            "activity_features": "Pengunjung dapat melakukan aktivitas seperti camping, bermain wahana air mandi, berenang, dan menggunakan perahu banana boat. Lokasi cocok untuk keluarga, anak-anak, dan pengalaman berada di alam terbuka. Ada fasilitas seperti kamar hotel homestay dan area parkir yang bebas terbuka.",
+            "atmosphere_features": "Suasana tenang, nyaman, dan menyenangkan. Pengunjung merasa pemandangan danau yang indah, lingkungan alam yang bersih, dan suasana hati yang positif. Keheningan dan kebersihan menjadi faktor utama dalam nuansa emosional pengunjung.",
+            "summary": "Pantai Indah Situngkir di Danau Toba menawarkan pemandangan danau yang indah, perbukitan hijau, dan pasir putih. Lokasi tenang, bersih, dan cocok untuk aktivitas keluarga, camping, dan pengalaman berada di alam terbuka. Fasilitas lengkap, seperti wahana air mandi dan perahu banana boat, membuat pengalaman wisata yang menyenangkan dan bermakna."
+        }
+    },
+    "68": {
+        "item_id": "68",
+        "place_name": "Batu Kursi Raja Siallagan ( Stone Chair of King Siallagan )",
+        "category": "Wisata Budaya",
+        "rating": 4.578078078078078,
+        "features": {
+            "landscape_content_features": "Pemandangan alam dan seni budaya yang terlihat dari prasasti batu, kursi batu raja Siallagan, serta renovasi modern yang memodernisasi situs warisan budaya. Situs memiliki kejutan sejarah, bangunan tradisional, dan kualitas fisik yang baik dengan pemandangan yang menarik.",
+            "activity_features": "Pertunjukan tarian dan budaya Batak, penjualan souvenir kerajinan tangan, pengunjung dapat berpose di depan rumah Batak, dan pengelolaan tempat wisata yang ramah. Aktivitas terkait dengan pengalaman belajar budaya dan pengetahuan sejarah.",
+            "atmosphere_features": "Suasana sakral dan magis yang masih terasa, namun terdengar kurang halus karena renovasi modern. Pengunjung merasa kecewa terhadap perubahan situs, tetapi tetap menyukai kejutan sejarah dan keberadaan budaya.",
+            "summary": "Tempat wisata sejarah kampung raja Siallagan dengan pemandangan alam dan seni budaya, menawarkan aktivitas budaya dan belajar sejarah. Situs terdapat renovasi modern yang memodernisasi pengalaman, tetapi tetap memiliki nilai sejarah dan kejutan budaya."
+        }
+    },
+    "69": {
+        "item_id": "69",
+        "place_name": "Wisata Rumah Pohon",
+        "category": "Wisata Alam",
+        "rating": 4.478260869565218,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, pohon yang cukup banyak, lokasi strategis, lingkungan bersih, dan fasilitas sederhana namun ramah. Kualitas fisiknya baik, dengan jalan yang sempit dan tidak rata, serta ketersediaan makanan dan minuman terjangkau.",
+            "activity_features": "Pengunjung dapat berfoto di spot destinasi baru, menikmati pemandangan danau Toba, dan menginap di pemukiman warga. Aktivitas utama adalah berfoto dan bersantai, serta mengakses lokasi dengan roda empat.",
+            "atmosphere_features": "Mood yang sejuk, suasana nyaman, dan empati dengan masyarakat sekitar. Pengunjung merasa nyaman dan menyukai pemandangan, meskipun ada kekurangan dalam fasilitas dan akses jalan.",
+            "summary": "Wisata Rumah Pohon menawarkan pemandangan danau Toba yang indah, pohon yang cukup banyak, dan lokasi strategis. Meskipun ada kekurangan dalam akses jalan dan fasilitas, tempat ini layak dikunjungi untuk foto dan bersantai di sekitar danau Toba."
+        }
+    },
+    "70": {
+        "item_id": "70",
+        "place_name": "Huta Siallagan",
+        "category": "Wisata Budaya",
+        "rating": 4.672897196261682,
+        "features": {
+            "landscape_content_features": "Huta Siallagan terkenal dengan pemandangan alam yang indah, terdapat bangunan rumah tradisional Batak, tari Sigalegale, dan museum yang menyimpan sejarah lokal. Area terjaga bersih, terawat, dan menampilkan elemen budaya seperti pakaian tradisional, permainan tradisional, serta asal mula raja Batak. Kombinasi antara alam, sejarah, dan arsitektur tradisional menjadi ciri khas tempat ini.",
+            "activity_features": "Pengunjung dapat mengikuti tari Sigalegale, mengenakan pakaian tradisional Batak, mengunjungi rumah tradisional, dan mengelola museum yang menyimpan sejarah lokal. Aktivitas tambahan termasuk pengelolaan oleh pemandu lokal, pengalaman berbelanja di pasar tradisional, serta pengunjungan ke area perbelanjaan yang rapi. Pemandu lokal memberikan penjelasan tentang budaya, sejarah, dan kehidupan lokal.",
+            "atmosphere_features": "Suasana yang menyenangkan, bersih, dan sejuk dengan nuansa nostalgia dan kekayaan budaya. Pengunjung merasa tertarik, terhibur, dan terinspirasi oleh kekayaan budaya Batak. Ada elemen yang menunjukkan kekayaan dan kekayaan budaya, serta kekayaan seni yang terjaga dengan baik.",
+            "summary": "Huta Siallagan adalah tempat wisata budaya yang menampilkan pemandangan alam, bangunan tradisional Batak, tari tradisional, dan sejarah lokal. Tempat ini bersih, terawat, dan menawarkan pengalaman budaya yang menyenangkan, termasuk tari Sigalegale, pengelolaan oleh pemandu lokal, serta museum yang menyimpan sejarah lokal. Tempat ini sangat cocok untuk pengunjung yang ingin memahami budaya Batak, sejarah lokal, dan kekayaan budaya Indonesia."
+        }
+    },
+    "71": {
+        "item_id": "71",
+        "place_name": "Air Terjun Taman Eden 100",
+        "category": "Wisata Alam",
+        "rating": 4.681818181818182,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang indah, air terjun jernih, udara sejuk dan segar, ketersediaan area konservasi hutan, serta adanya bangunan pelestarian budaya Batak Toba (tenun) di dalam kawasan taman eden.",
+            "activity_features": "Hiking, camping, jalan kaki di hutan, pengunjung dapat menikmati pemandangan air terjun, serta aktivitas sejarah seperti pengunjungan ke lokasi pelestarian budaya Batak Toba.",
+            "atmosphere_features": "Seren, sejuk, pemandangan indah, udara segar, dan suasana hati positif yang membuat pengunjung merasa tenang dan menyukai keindahan alam.",
+            "summary": "Taman Eden 100 merupakan tempat wisata alam yang menawarkan pemandangan indah, air terjun jernih, udara segar, serta pengalaman sejarah dan budaya Batak Toba. Tempat ini cocok untuk aktivitas seperti hiking, camping, dan jalan kaki di hutan. Atmosfernya tenang dan menyenangkan, dengan ketersediaan area konservasi hutan dan pelestarian budaya."
+        }
+    },
+    "72": {
+        "item_id": "72",
+        "place_name": "Bukit Pahoda",
+        "category": "Wisata Alam",
+        "rating": 4.64,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang sangat indah, spot panorama alam, pemandangan matahari terbit, dan view dari kota Balige. Ada pemandangan yang menakjubkan di sekitar lokasi, serta perjalanan yang menarik dengan sawah di sebelahnya.",
+            "activity_features": "Membayur matahari terbit, memandang danau Toba, berfoto, berpacaran, hiking, dan aktivitas rekreasi. Ada kafe ditepi danau, restoran yang bagus, dan pengunjung yang suka berfoto di spot terbuka.",
+            "atmosphere_features": "Mood positif, suasana tenang dan alami, pemandangan yang menyenangkan, serta suasana hati yang romantis. Ada kejutan alam seperti sunset dan lampu kota yang indah.",
+            "summary": "Bukit Pahoda adalah tempat wisata alam yang menawarkan pemandangan danau Toba yang sangat indah, spot panorama alam, dan aktivitas rekreasi seperti memandang matahari terbit, berfoto, dan berhijau. Lokasi ini cocok untuk pengunjung yang suka pemandangan alam, perjalanan menarik, dan pengalaman berfoto di spot terbuka. Ada kafe ditepi danau dan perjalanan yang menarik dengan sawah di sebelahnya."
+        }
+    },
+    "73": {
+        "item_id": "73",
+        "place_name": "Objek Wisata Budaya Batu Kursi Raja Siallagan",
+        "category": "Wisata Budaya",
+        "rating": 4.783783783783784,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang indah, peninggalan sejarah seperti rumah adat berbentuk perahu, bangunan berbahan seng dan kayu, serta keindahan budaya Batak dalam bentuk tarian dan ritual adat.",
+            "activity_features": "Pengunjung dapat mengikuti tarian Batak (tortor), manortor, dan menari bersama cicit raja Siallagan, serta mengikuti tour dengan guide untuk memahami sejarah dan ritual adat Batak.",
+            "atmosphere_features": "Nuansa emosional positif, kearifan budaya yang menarik, dan suasana hati yang penuh semangat karena pengalaman langsung dengan budaya lokal dan sejarah Batak.",
+            "summary": "Tempat wisata budaya ini menampilkan pemandangan alam, struktur rumah adat berbentuk perahu, dan aktivitas budaya seperti tarian Batak serta ritual adat Batak, serta cocok untuk pengembangan studytour dan pengembangan pariwisata budaya."
+        }
+    },
+    "74": {
+        "item_id": "74",
+        "place_name": "Pantai Meat",
+        "category": "Wisata Bahari",
+        "rating": 4.346153846153846,
+        "features": {
+            "landscape_content_features": "Pantai Meat merupakan tempat camping yang terletak di tepi Danau Toba, dengan pemandangan alam yang indah, pemandangan danau toba, serta desa Meat yang diadakan acara tahunan seribu tenda. Tempat ini memiliki kualitas fisik yang baik, dengan pantai yang asri, lingkungan hijau, dan pemandangan yang menarik. Ada peninggalan sejarah dan budaya seperti festival musik tradisional yang diadakan di sini, serta desa yang mewarisi pengetahuan menenun secara tradisional.",
+            "activity_features": "Pengunjung dapat melakukan aktivitas seperti berkemah, menginap di tenda, mengikuti acara tahunan seribu tenda, menghadiri festival musik tradisional, dan bersepeda di sekitar area wisata. Aktivitas tambahan termasuk pengunjung yang berenang, bersepeda, dan menginap di penginapan tenda.",
+            "atmosphere_features": "Suasana tempat wisata ini sangat tenang dan menyegarkan, dengan pemandangan danau toba yang indah dan alam yang memanjakan. Emosi pengunjung tergolong positif, tetapi ada kritik terkait keterbatasan akses dan pemeliharaan. Mood yang diungkapkan adalah ketenangan, keindahan alam, dan kebahagiaan atas pengalaman berada di sana.",
+            "summary": "Pantai Meat adalah destinasi wisata bahari di tepi Danau Toba yang menawarkan pemandangan alam yang indah, lingkungan hijau, dan pengalaman camping yang menyegarkan. Tempat ini sangat terkenal dengan acara tahunan seribu tenda dan festival musik tradisional, namun masih memerlukan perbaikan terkait akses, fasilitas umum, dan pemeliharaan. Tempat ini cocok untuk pengunjung yang mencari ketenangan, alam, dan pengalaman budaya."
+        }
+    },
+    "75": {
+        "item_id": "75",
+        "place_name": "Air Terjun Siboruon",
+        "category": "Wisata Alam",
+        "rating": 4.826086956521739,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang indah, air terjun yang sejuk dan bersih, lingkungan yang masih asli, serta keberadaan jalan setapak yang mempertahankan keaslian alam.",
+            "activity_features": "Pemandangan alam yang menarik, aktivitas jalan kaki, pengunjung yang berinteraksi dengan lingkungan alam, dan pengalaman berada di area yang jauh dari kebisingan kota.",
+            "atmosphere_features": "Suasana tenang, segar, dan penuh dengan keterpurukan alam, serta emosi yang menyenangkan dan menyembuhkan dari pengunjung.",
+            "summary": "Air Terjun Siboruon adalah destinasi alam yang menawarkan pemandangan indah, air terjun sejuk, lingkungan yang bersih dan asli, serta aktivitas jalan kaki yang menarik. Tempat ini cocok untuk pengunjung yang mencari kesejukan dan pengalaman dengan alam yang terjaga."
+        }
+    },
+    "76": {
+        "item_id": "76",
+        "place_name": "Bukit Beta Tuk-tuk",
+        "category": "Wisata Alam",
+        "rating": 4.666666666666667,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang sangat indah dengan danau Toba, bukit gian, tebing air terjun, dan kawasan yang berada di ketinggian. Terdapat kawasan khusus untuk berfoto, serta elemen sejarah seperti kuburan warga dan kerbau dirantai. Infrastruktur masih dalam keadaan alami, tetapi memiliki potensi untuk ditingkatkan.",
+            "activity_features": "Pengunjung dapat berjalan kaki, menikmati pemandangan dari atas bukit, mengambil foto di spot yang bagus, mengunjungi kawasan khusus untuk kuburan warga, dan melihat danau Toba dari ketinggian. Lokasi terletak di persimpangan jalan lintas Samosir menuju Tuktuksiadong, dengan akses yang mudah via kaki.",
+            "atmosphere_features": "Suasana tenang, positif, dan ideal untuk fotografi. Pengunjung merasa nyaman, terinspirasi oleh slogan 'kepingan surga', serta merasa alami. Ada elemen sejarah dan kebun raya yang memberikan nuansa emosional yang khas.",
+            "summary": "Bukit Beta Tuk-tuk adalah tempat wisata alam yang menawarkan pemandangan indah dengan danau Toba, bukit gian, dan tebing air terjun. Lokasinya strategis, mudah diakses via kaki, dan memiliki spot foto yang menarik. Kombinasi antara alam, sejarah, dan kebun raya membuatnya menjadi destinasi yang menarik untuk pengunjung yang ingin menikmati keindahan alam dan kesejajaran dengan lingkungan asli."
+        }
+    },
+    "77": {
+        "item_id": "77",
+        "place_name": "Air Terjun Efrata",
+        "category": "Wisata Alam",
+        "rating": 4.453890489913545,
+        "features": {
+            "landscape_content_features": "Pemandangan air terjun yang indah dengan warna merah, fasilitas toilet bersih, akses jalan yang cukup bagus, dan lokasi strategis di sekitar jalan raya. Tempat memiliki kualitas fisik yang baik dengan jalanan berbatu yang tidak rata, namun fasilitas seperti mushola, rest area, dan kabin terbuka tersedia. Penjelasan tentang alam, sejarah, dan ketersediaan fasilitas yang memadai.",
+            "activity_features": "Pengunjung dapat mengunjungi air terjun, mengambil foto, menikmati pemandangan, berjalan kaki di jalur yang menantang, menggunakan fasilitas rest area, dan menginap di pondok-pondok yang disediakan. Aktivitas tambahan termasuk menikmati makan siang di tempat makan, memperkaya pengalaman wisata.",
+            "atmosphere_features": "Mood yang positif, suasana sejuk, dan menyegarkan. Pengunjung merasa tenang, tidak terlalu ramai, dan merasakan kesejukan alam. Ada elemen yang memperkuat suasana seperti kebersihan fasilitas, keberadaan mushola, dan ketersediaan tempat istirahat.",
+            "summary": "Air Terjun Efrata adalah destinasi alam yang menawarkan pemandangan indah dengan air merah, akses jalan yang cukup, fasilitas rest area lengkap, dan lingkungan sejuk. Tempat ini cocok untuk tamasya dengan pemandangan yang menarik, namun perlu hati-hati dengan jalur berbatu yang tidak rata. Ketersediaan mushola, kabin terbuka, dan fasilitas umum memperkuat pengalaman wisata yang nyaman dan bervariasi."
+        }
+    },
+    "78": {
+        "item_id": "78",
+        "place_name": "Pakkodian Toba",
+        "category": "Wisata Bahari",
+        "rating": 4.5675675675675675,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, pasir putih, lingkungan bersih, fasilitas toilet bersih, area parkir luas, dan ketersediaan camping dengan tenda, kamar mandi, serta pemandangan alam yang menarik.",
+            "activity_features": "Kemah, bermain di pantai, pengunjung berlibur keluarga, aktivitas bersepeda, dan pengunjung yang memilih camping di area terbuka.",
+            "atmosphere_features": "Suasana tenang, sejuk, dan positif, dengan keterbatasan akses jalan yang berbatu, perlu perbaikan infrastruktur, serta kebersihan yang baik.",
+            "summary": "Pakkodian Toba adalah tempat wisata pantai yang menawarkan pemandangan danau Toba indah, lingkungan bersih, fasilitas camping, dan akses jalan yang terbatas. Tempat ini cocok untuk pengunjung yang ingin bersantai, bersepeda, atau berlibur keluarga, meskipun ada keterbatasan dalam akses jalan dan perlu perbaikan infrastruktur."
+        }
+    },
+    "79": {
+        "item_id": "79",
+        "place_name": "Taman Eden 100",
+        "category": "Wisata Pertanian",
+        "rating": 4.6048780487804875,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang indah dengan air terjun, hutan natural, dan kebersihan yang selalu terjaga. Taman memiliki luas namun ada masalah nyamuk dan kurang perawatan terhadap area pemandangan.",
+            "activity_features": "Tidak hanya hiking dan trekking, tetapi juga aktivitas edukatif seperti memetik jeruk, bermain belajar tumbuhan, dan camping. Cocok untuk keluarga dan grup yang suka outbound dan pelestarian hutan.",
+            "atmosphere_features": "Suasana sejuk, asri, dan tenang dengan kebisingan burung dan air terjun. Tempat ini disebut 'sepi' dan cocok untuk pengunjung yang menyukai keberadaan alam yang tidak ramai.",
+            "summary": "Taman Eden 100 adalah destinasi alam yang menawarkan pemandangan indah, air terjun, dan hutan natural. Aktivitasnya beragam, termasuk hiking, camping, dan edukatif. Tempatnya nyaman dan sejuk, tetapi ada masalah nyamuk dan kurang perawatan. Cocok untuk keluarga dan pengunjung yang suka kegiatan outdoor dan pelestarian lingkungan."
+        }
+    },
+    "80": {
+        "item_id": "80",
+        "place_name": "Wisata Bukit Gibeon",
+        "category": "Wisata Alam",
+        "rating": 4.529953917050691,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang sangat indah, air dingin dan alami, kolam renang alamiah, air terjun sejuk, serta villa dan kolam renang yang tersedia. Lokasi terbuka untuk umum, terdapat pondok penginapan, dan fasilitas seperti kolam renang yang airnya langsung dari air terjun.",
+            "activity_features": "Pengunjung dapat menginap di villa, bermain di kolam renang, mengunjungi air terjun, mengambil foto di pemandangan alam, dan melakukan aktivitas keluarga seperti bermain di area perkebunan kopi. Ada fasilitas seperti kantine yang menjual snack dan minuman.",
+            "atmosphere_features": "Suasana tenang, sejuk, dan positif. Pengunjung merasa menyatu dengan alam, pemandangan sangat indah, dan lingkungan yang bersih. Ada elemen religi dan toleransi antaragama.",
+            "summary": "Bukit Gibeon adalah tempat wisata alam yang menawarkan pemandangan indah, air dingin alami, kolam renang alamiah, dan fasilitas penginapan yang nyaman. Lokasinya strategis di lembah, terdapat air terjun sejuk, dan sangat cocok untuk keluarga serta pengunjung yang mencari kesejukan dan pengalaman berkesan dengan alam."
+        }
+    },
+    "81": {
+        "item_id": "81",
+        "place_name": "Air Terjun Situmurun",
+        "category": "Wisata Alam",
+        "rating": 4.690839694656488,
+        "features": {
+            "landscape_content_features": "Pemandangan danau toba yang indah, air terjun langsung berada di dekat danau toba, lokasi geopark yang terkait dengan caldera toba, serta keunikan alam yang mempertemukan danau dengan air terjun tinggi. Fasilitas penunjang seperti toilet dan penjual makanan terbatas, namun memiliki potensi pariwisata yang sangat baik.",
+            "activity_features": "Pengunjung dapat berenang, berfoto, mengarungi kapal, dan mengunjungi area geopark. Aktivitas terbatas karena kebutuhan kapal untuk akses, serta keamanan yang perlu diperhatikan. Ada opsi untuk bermain di danau dan mengamati ikan kecil di sekitar air terjun.",
+            "atmosphere_features": "Suasana alam yang luar biasa, pemandangan indah, dan keunikan geopark. Emosi pengunjung tergolong positif, namun ada kritik terkait kekurangan fasilitas dan keamanan. Atmosfer yang segar dan menarik, dengan nuansa misterius dan keindahan alam yang belum terjamah.",
+            "summary": "Air Terjun Situmurun adalah tempat wisata alam yang menawarkan pemandangan danau toba dan air terjun yang indah, terkait dengan geopark caldera toba. Lokasinya membutuhkan kapal untuk akses, dan aktivitasnya terbatas namun menarik. Tempat ini memiliki potensi pariwisata yang besar, namun perlu perbaikan fasilitas dan keamanan. Suasana alam yang luar biasa, dengan pemandangan yang segar dan unik, serta potensi sebagai saku wisata yang belum terjamah."
+        }
+    },
+    "82": {
+        "item_id": "82",
+        "place_name": "Dolok Pesona Panoguan Solu",
+        "category": "Wisata Alam",
+        "rating": 4.473684210526316,
+        "features": {
+            "landscape_content_features": "Pemandangan danau toba yang indah, lokasi berada di pinggiran jalan raya, spot foto terbuka, fasilitas tempat duduk, dan ketersediaan makanan sederhana.",
+            "activity_features": "Pengunjung dapat berfoto di spot terbuka, mengakses danau toba melalui jalur yang mulus, membeli tiket parkir, dan menikmati makanan di warung sederhana.",
+            "atmosphere_features": "Suasana tenang, pemandangan indah, dan kebersihan area wisata yang membuat pengunjung merasa rileks dan nyaman.",
+            "summary": "Dolok Pesona Panoguan Solu adalah tempat wisata alam dengan pemandangan danau toba yang indah, lokasi strategis di pinggiran jalan raya, fasilitas tempat duduk dan makanan sederhana, serta suasana tenang yang cocok untuk melepas kepenatan."
+        }
+    },
+    "83": {
+        "item_id": "83",
+        "place_name": "Taman Wisata Iman",
+        "category": "Wisata Rohani",
+        "rating": 4.543417366946779,
+        "features": {
+            "landscape_content_features": "Taman Wisata Iman terkenal dengan pemandangan kota Sumbul dari ketinggian, lingkungan hijau yang sejuk, serta lima rumah ibadah yang terdapat di sana. Kombinasi alam, sejarah religius, dan fasilitas wisata spiritual seperti patung, kios souvenir, dan ruang doa menciptakan nuansa pemandangan yang menarik dan kualitas fisik yang baik.",
+            "activity_features": "Pengunjung dapat mengunjungi ruang doa, patung agama, kios souvenir, dan jalur jalan yang membutuhkan stamina. Aktivitas utama meliputi pengambilan foto, pengelilingan taman, dan pengalaman religius seperti mendengarkan cerita agama dan mengunjungi rumah ibadah.",
+            "atmosphere_features": "Nuansa emosional yang tenang, damai, dan spiritual terasa di sini. Pengunjung merasa tenang, damai, dan mendalam saat berada di ruang doa, sementara suasana hati tergolong positif dengan pemandangan yang indah dan lingkungan yang bersih.",
+            "summary": "Taman Wisata Iman adalah tempat wisata religius yang menawarkan pemandangan alam, ruang doa, dan lima rumah ibadah yang terdapat di sana. Tempat ini cocok untuk keluarga dan pengunjung yang ingin berwisata religius, dengan suasana tenang, sejuk, dan kualitas fisik yang baik. Meski ada beberapa area yang kurang terawat, taman ini tetap dianggap sebagai tempat wisata yang sangat indah dan layak dikunjungi."
+        }
+    },
+    "84": {
+        "item_id": "84",
+        "place_name": "Bukit Dolok Tolong",
+        "category": "Wisata Alam",
+        "rating": 3.9,
+        "features": {
+            "landscape_content_features": "Pemandangan dari puncak ke Danau Toba sangat indah, terdapat titik tertinggi di Kabupaten Toba Samosir (1624 m), akses jalan cukup bagus untuk roda 2, tetapi jalan tidak terawat dan ada risiko longsor, serta terdapat pemancar dan peninggalan sejarah Sisingamangaraja sekitar 25 meter dari pintu pemancar.",
+            "activity_features": "Pengunjung dapat bersepeda roda 2, mengunjungi puncak tertinggi Kabupaten Toba Samosir, melihat pemandangan Danau Toba, dan mengunjungi peninggalan sejarah Sisingamangaraja. Aktivitas terbatas karena jalan tidak terawat dan ada risiko kecelakaan.",
+            "atmosphere_features": "Mood yang mengejutkan dan mengagumkan, dengan pemandangan alam yang luar biasa tetapi berisiko, serta nuansa emosional yang mencerminkan keajaiban alam dan kekhawatiran terhadap kondisi jalan.",
+            "summary": "Bukit Dolok Tolong adalah tempat wisata alam dengan puncak tertinggi di Kabupaten Toba Samosir, pemandangan Danau Toba yang indah, dan peninggalan sejarah Sisingamangaraja. Namun, akses jalan tidak terawat dan ada risiko longsor, sehingga aktivitas terbatas."
+        }
+    },
+    "85": {
+        "item_id": "85",
+        "place_name": "Taman Bunga Sapo Juma",
+        "category": "Wisata Pertanian",
+        "rating": 4.4789915966386555,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, bunga beragam, taman yang terawat, lokasi dekat danau Toba, fasilitas camping, cafe, dan home stay. Kualitas fisiknya baik, pemandangan memanjakan mata, dan terdapat berbagai jenis bunga yang menarik.",
+            "activity_features": "Camping, berfoto, bersepeda, bermain permainan, membeli benih bunga, memandangi danau Toba dari sudut yang menarik, berlibur keluarga, dan penginapan di taman. Aktivitas terkait dengan kebun, cafe, dan fasilitas permainan.",
+            "atmosphere_features": "Sejuk, nyaman, romantis, dan sedikit bising karena nyamuk. Suasana hati positif, pemandangan memanjakan mata, dan ada elemen yang membuat pengunjung merasa tenang. Ada sedikit kegembiraan karena keindahan dan fasilitas yang tersedia.",
+            "summary": "Taman Bunga Sapo Juma adalah tempat wisata pertanian yang menawarkan pemandangan danau Toba yang indah, bunga beragam, dan fasilitas camping, cafe, serta home stay. Lokasinya dekat danau Toba dengan udara sejuk dan pemandangan memanjakan mata. Meski ada sedikit kegembiraan terkait jumlah bunga dan nyamuk, tempat ini sangat direkomendasikan untuk liburan dan pengalaman yang romantis serta menyenangkan."
+        }
+    },
+    "86": {
+        "item_id": "86",
+        "place_name": "Kebun Raya Samosir, SUMUT",
+        "category": "Wisata Pertanian",
+        "rating": 4.349514563106796,
+        "features": {
+            "landscape_content_features": "Kebun Raya Samosir terkenal dengan pemandangan alam yang indah, terutama pohon pinus, danau Toba, serta kawasan hutan yang hijau dan asri. Pemandangan dari titik tertinggi di sana menawarkan panorama yang menakjubkan, serta keberadaan hewan liar seperti kerbau yang menjadi bagian dari habitat alam tersebut.",
+            "activity_features": "Pengunjung dapat mengikuti aktivitas seperti berjalan-jalan di jalur hutan, mengamati flora dan fauna, mengambil foto pemandangan alam, dan mengalami pengalaman berkendara di jalur yang masih sedang diperbaiki. Aktivitas tambahan termasuk pengamatan pemandangan danau Toba dari ketinggian, serta pengalaman mendekati hewan ternak yang berada di sekitar kawasan tersebut.",
+            "atmosphere_features": "Suasana yang tenang dan penuh keindahan, dengan nuansa emosional yang beragam seperti ketertarikan pada alam, ketakutan terhadap hewan liar, dan kebahagiaan saat melihat pemandangan indah. Ada elemen yang memperkuat suasana seperti kebisingan kendaraan dan kebutuhan untuk berhati-hati karena jalur masih kurang terawat.",
+            "summary": "Kebun Raya Samosir adalah destinasi wisata pertanian yang menawarkan pemandangan alam yang indah, terutama pohon pinus, danau Toba, serta kawasan hutan yang hijau. Aktivitas yang tersedia mencakup berjalan-jalan di jalur hutan, pengamatan flora dan fauna, serta pengalaman berkendara di jalur yang sedang diperbaiki. Suasana yang penuh keindahan, sekaligus berisiko karena hewan liar dan kondisi jalur yang kurang terawat, menjadi ciri khas tempat ini."
+        }
+    },
+    "87": {
+        "item_id": "87",
+        "place_name": "Pantai Paris",
+        "category": "Wisata Bahari",
+        "rating": 4.299719887955182,
+        "features": {
+            "landscape_content_features": "Pantai Paris terletak di tepian danau Toba, memiliki pemandangan yang sangat indah, fasilitas seperti kamar mandi, restoran, dan permainan untuk keluarga. Area pantai bersih, nyaman, dan terawat dengan akses parkir yang terbatas (15rb IDR) dan fasilitas penginapan (musholla) yang lengkap.",
+            "activity_features": "Pengunjung dapat bermain di danau, mandi, memperkaya dengan permainan anak, memperoleh makanan terjangkau, dan menikmati aktivitas seperti naik banana boat. Fasilitas lengkap seperti kamar mandi, restoran, dan penginapan tersedia.",
+            "atmosphere_features": "Pantai Paris memiliki suasana yang positif, dengan pemandangan indah dan fasilitas yang lengkap. Namun, terdapat keterbatasan akses jalan dan parkir, serta kebisingan saat hari libur yang memengaruhi pengalaman pengunjung.",
+            "summary": "Pantai Paris adalah tempat wisata yang menawarkan pemandangan indah di tepian danau Toba, fasilitas lengkap untuk keluarga, dan aktivitas yang menarik. Namun, akses jalan dan parkir terbatas, serta kebisingan saat hari libur memengaruhi pengalaman pengunjung."
+        }
+    },
+    "88": {
+        "item_id": "88",
+        "place_name": "Bukit Doa",
+        "category": "Wisata Rohani",
+        "rating": 4.393939393939394,
+        "features": {
+            "landscape_content_features": "Pemandangan danau toba dari ketinggian, tugu doa, rumput hijau, bangunan unik, dan kualitas fisik yang baik di sekitar area wisata.",
+            "activity_features": "Pengunjung bisa mengambil foto, menggunakan rest area, menikmati pemandangan danau toba, dan mengunjungi tugu doa. Aktivitas terbatas karena area belum dikelola dengan baik.",
+            "atmosphere_features": "Suasana tenang, spiritual, sejuk, dan menyegarkan. Ada nuansa kebanyakan pengunjung sepi, namun ada kejutan emosional dari pemandangan yang ajaib.",
+            "summary": "Bukit Doa merupakan tempat wisata spiritual dengan pemandangan danau toba yang indah, tugu doa, dan rumput hijau. Meski ada kekurangan dalam perawatan dan fasilitas, tempat ini menawarkan pengalaman refresi yang menyegarkan dan pemandangan yang ajaib."
+        }
+    },
+    "89": {
+        "item_id": "89",
+        "place_name": "Sapo Juma",
+        "category": "Wisata Alam",
+        "rating": 4.452127659574468,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba dari ketinggian, vegetasi terbuka, area ngegebet, fasilitas parkir, dan penginapan yang nyaman. Lokasi strategis dengan pemandangan alam yang megah, terbuka di kawasan hutan dan terbuka di kawasan danau.",
+            "activity_features": "Foto alam, camping, penginapan, pengunjung berlibur, aktivitas berjemar, pengelolaan kawasan yang ramah, pengunjung keluarga, pengelolaan kawasan yang terbuka, pengelolaan kawasan yang tidak ramai, pengelolaan kawasan yang terbatas.",
+            "atmosphere_features": "Santai, sejuk, menyejukkan mata, nyaman, tidak ramai, suasana hati tenang, suasana hati alami, suasana hati yang menyegarkan, suasana hati yang tidak berlebihan, suasana hati yang tenang dan tidak ramai.",
+            "summary": "Sapo Juma adalah tempat wisata alam yang menawarkan pemandangan danau Toba dari ketinggian, fasilitas penginapan dan camping, pengelolaan kawasan yang ramah, dan suasana hati yang tenang. Tempat ini cocok untuk beristirahat, berfoto, dan menghabiskan waktu bersama keluarga dengan pemandangan alam yang megah dan udara sejuk."
+        }
+    },
+    "90": {
+        "item_id": "90",
+        "place_name": "Pantai Batuhoda",
+        "category": "Wisata Bahari",
+        "rating": 4.609230769230769,
+        "features": {
+            "landscape_content_features": "Pantai Batuhoda terkenal dengan pemandangan laut yang jernih, pasir yang bersih, dan fasilitas lengkap seperti air mineral. Area pantai terbuka dengan kualitas fisik yang baik, serta memiliki penjaga yang memastikan kebersihan dan tidak ada sampah. Desainnya menawarkan spot foto yang menarik dan pemandangan yang indah.",
+            "activity_features": "Pengunjung dapat bermain air, mengambil foto, dan menikmati pemandangan laut. Aktivitas tambahan seperti berjemur, bermain permainan, dan pengelolaan area pantai yang terbuka. Namun, ada keterbatasan seperti tidak ada pondok pasang surut, tidak ada tikar, dan pengelolaan yang terbatas.",
+            "atmosphere_features": "Suasana hati yang positif, santai, dan sejuk. Pengunjung merasa nyaman dengan udara yang sepoi-sepoi, lokasi yang strategis, dan pemandangan yang menarik. Ada elemen negatif seperti kepadatan pengunjung yang memengaruhi kenyamanan, tetapi keseluruhan pengalaman dianggap menyenangkan.",
+            "summary": "Pantai Batuhoda adalah tempat wisata bahari yang bersih, teratur, dan nyaman untuk berjemur dan berfoto. Meski ada keterbatasan seperti tidak ada pondok pasang surut dan pengelolaan yang terbatas, pengunjung merasa sangat menyenangkan dengan pemandangan laut yang jernih dan fasilitas yang lengkap."
+        }
+    },
+    "91": {
+        "item_id": "91",
+        "place_name": "Bukit Holbung Samosir",
+        "category": "Wisata Alam",
+        "rating": 4.748531139835488,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang menakjubkan, pemandangan Toba eksotik, dan kualitas fisik yang mulus serta terawat. Tempat ini memiliki view yang mempesona, dengan pemandangan yang sangat memuaskan dan spot foto eksotik. Kebijakan kebersihan yang diterapkan oleh pengelola, serta keberadaan parkir dan fasilitas pendukung seperti tenda dan makanan, menunjukkan keseimbangan antara keindahan alam dan kebersihan.",
+            "activity_features": "Kunjungan berupa camping, pengambilan foto, penggunaan tenda, dan pengelolaan peralatan sendiri. Ada fasilitas parkir, biaya masuk, dan kebijakan kebersihan yang diterapkan. Aktivitas tambahan seperti pengelolaan sampah dan perawatan alam juga disebutkan.",
+            "atmosphere_features": "Nuansa yang menarik dan alami, dengan pemandangan yang menakjubkan dan suasana yang sejuk di malam hari. Ada elemen yang memicu kegiatan berada di luar biasa, seperti angin kencang dan kebersihan yang diterapkan. Atmosfer yang khas, sekaligus menggambarkan keindahan alam yang memikat dan keterbatasan kebersihan yang diterapkan.",
+            "summary": "Bukit Holbung Samosir adalah tempat wisata alam yang menawarkan pemandangan Toba eksotik, keindahan alam yang mempesona, dan fasilitas pendukung seperti camping dan pengelolaan sampah. Tempat ini memiliki kualitas fisik yang mulus, kebijakan kebersihan yang diterapkan, dan keberadaan parkir serta fasilitas pendukung. Namun, ada kebijakan biaya masuk dan kebijakan kebersihan yang diterapkan, serta perjalanan yang cukup lama. Tempat ini sangat indah, dengan suasana yang menarik dan pemandangan yang sangat memuaskan."
+        }
+    },
+    "92": {
+        "item_id": "92",
+        "place_name": "Geosite Sipinsur",
+        "category": "Wisata Alam",
+        "rating": 4.680616740088106,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang bersih, terawat, dan indah, dengan lingkungan alam yang asri, pohon pinus, dan area parkir luas. Tempat wisata terletak di puncak, memiliki view yang luar biasa, dan dielokkan oleh pemerintah daerah.",
+            "activity_features": "Camping, berfoto, bersepeda, bermain di playground, berenang, dan berkeluarga. Ada kolam renang, spot foto yang bagus, dan aktivitas outbond. Tiket masuk murah (Rp 1000), serta fasilitas parkir yang luas.",
+            "atmosphere_features": "Seren, sejuk, dan nyaman dengan suasana hati yang positif. Pengunjung merasa kaya akan keindahan alam, kebersihan, dan kehangatan lingkungan. Ada kebersihan yang baik, tanpa sampah, dan suasana yang tidak kotor.",
+            "summary": "Geosite Sipinsur adalah tempat wisata alam yang indah dengan pemandangan danau Toba yang bersih, terawat, dan menakjubkan, cocok untuk berfoto, camping, dan keluarga. Pengelolaan yang baik, fasilitas parkir luas, dan harga tiket murah membuatnya menjadi destinasi yang menyegarkan dan menyenangkan untuk berlibur."
+        }
+    },
+    "93": {
+        "item_id": "93",
+        "place_name": "Bukit Indah Simarjarunjung",
+        "category": "Wisata Alam",
+        "rating": 4.488059701492538,
+        "features": {
+            "landscape_content_features": "Pemandangan danau toba yang indah, alpine terrain, taman berbukit, spot foto, kualitas jalan yang buruk, parkir yang terbatas, harga masuk mobil 20 ribu, wahana foto, dan penyeberangan yang menyenangkan.",
+            "activity_features": "Pemandangan danau toba, hiking, menggunakan wahana foto, kabel kereta, penyeberangan, dan aktivitas berbasis pemandangan.",
+            "atmosphere_features": "Seren dan megah, pemandangan yang menakjubkan, tantangan jalur yang berbahaya, kebutuhan parkir yang terbatas, harga masuk yang tinggi, dan kebersihan yang baik.",
+            "summary": "Bukit Indah Simarjarunjung adalah tempat wisata alam dengan pemandangan danau toba yang indah, jalur berbahaya, parkir terbatas, dan wahana foto. Tempat ini cocok untuk bersantai, menikmati pemandangan, dan mengalami tantangan alam, meskipun ada permasalahan terkait harga dan ketersediaan fasilitas."
+        }
+    },
+    "94": {
+        "item_id": "94",
+        "place_name": "Menara Pandang Tele",
+        "category": "Wisata Alam",
+        "rating": 4.455732946298984,
+        "features": {
+            "landscape_content_features": "Pemandangan alam yang masih terbuka, menara pandang tele sebagai bagian dari geopark kaldera toba, serta fasilitas rest area dengan kantin, toilet, dan mushola yang terbatas. Area wisata terletak di ketinggian, dengan pemandangan danau toba yang indah dan menakjubkan, serta perbaikan yang sedang dilakukan.",
+            "activity_features": "Pengunjung dapat mengakses pemandangan danau toba dari atas, berada di rest area dengan fasilitas kantin, toilet, dan mushola, serta mengunjungi area geopark yang memiliki ruang rehat berdinding kaca. Aktivitas termasuk pengambilan foto, penggunaan menara untuk melihat jarak jauh, dan pengunjungan gratis dengan pembayaran parkir.",
+            "atmosphere_features": "Mood positif terkait pemandangan yang indah dan alam yang memanjakan mata, tetapi ada kritik terkait perbaikan yang sedang dilakukan, kotoran di area rest area, dan kurangnya fasilitas terawat. Suasana hati tergantung pada kondisi renovasi dan ketersediaan fasilitas.",
+            "summary": "Menara Pandang Tele adalah tempat wisata alam dan geopark di Samosir dengan pemandangan danau toba dari atas, menara sebagai bagian dari geopark, serta fasilitas rest area dengan kantin dan toilet terbatas. Tempat ini menawarkan pemandangan yang indah dan menakjubkan, tetapi sedang dalam proses perbaikan, menyebabkan kritik terkait ketersediaan fasilitas dan kualitas pemandangan."
+        }
+    },
+    "95": {
+        "item_id": "95",
+        "place_name": "Pantai Pasir Putih Parbaba",
+        "category": "Wisata Bahari",
+        "rating": 4.297841726618705,
+        "features": {
+            "landscape_content_features": "Pantai Pasir Putih Parbaba terletak di Danau Toba, memiliki pasir putih yang indah, tidak ada ombak besar, dan merupakan bagian dari danau. Namun, terdapat masalah seperti kebersihan yang kurang terjaga, parkir tidak terawat, kafe di dekat garis air, dan perlu perbaikan infrastruktur. Sebagai destinasi wisata di pesisir danau Toba, pantai ini memiliki potensi untuk bermain air, berenang, dan makan di restoran, serta menyajikan pemandangan danau yang indah.",
+            "activity_features": "Pengunjung dapat melakukan aktivitas seperti berenang, bermain air, berkeliling danau, menggunakan banana boat, dan membeli makanan di restoran. Ada fasilitas seperti gazebo dan berbagai pilihan makanan dan minuman.",
+            "atmosphere_features": "Pantai Pasir Putih Parbaba memiliki nuansa yang campuran antara indah dan kritis. Meski pemandangan danau yang indah, lingkungan terlihat kotor, parkir tidak terawat, dan layanan restoran tidak memadai. Pengunjung merasa terhibur dengan aktivitas air, tetapi perlu peningkatan keramahan, perawatan lingkungan, dan fasilitas yang lebih baik.",
+            "summary": "Pantai Pasir Putih Parbaba adalah destinasi wisata di danau Toba yang memiliki pasir putih dan pemandangan indah, tetapi perlu perbaikan infrastruktur, kebersihan, dan layanan. Meski ada masalah seperti kotoran di sekitar pantai dan parkir tidak terawat, pantai ini tetap menawarkan aktivitas air dan pemandangan yang menarik untuk dikunjungi."
+        }
+    },
+    "96": {
+        "item_id": "96",
+        "place_name": "Museum Batak Tb Silalahi Center",
+        "category": "Wisata Budaya",
+        "rating": 4.655714285714286,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang eksotis, bangunan arsitektur modern, koleksi peninggalan sejarah Batak, dan perpaduan antara budaya Batak dan sejarah Indonesia terlihat dalam museum ini. Koleksi museum lengkap, termasuk barang-barang peninggalan suku Batak, serta pemandangan danau Toba yang terlihat dari bangunan dengan dinding kaca.",
+            "activity_features": "Pengunjung dapat belajar sejarah Batak, mengenal budaya lokal melalui klasifikasi dan koleksi museum, mengikuti tour edukatif, dan menikmati pemandangan danau Toba. Museum juga menyediakan cafe, music, dan fasilitas seperti parkir sepeda motor. Aktivitas utama meliputi pengembangan pengetahuan budaya, edukasi sejarah, dan pengalaman belajar melalui karya seni dan koleksi.",
+            "atmosphere_features": "Museum memiliki suasana yang positif, edukatif, dan menarik. Pengunjung merasa terinspirasi dan ingin belajar, meskipun ada kritik terkait harga tiket dan perawatan. Atmosfernya keren, bersih, dan rapi, dengan nuansa yang menegaskan pentingnya kebudayaan Batak dan sejarah Indonesia.",
+            "summary": "Museum Batak Tb Silalahi Center adalah pusat edukasi budaya dan sejarah Batak dengan pemandangan danau Toba yang eksotis. Museum menyediakan koleksi lengkap, bangunan arsitektur modern, dan aktivitas edukatif. Meskipun ada kritik terkait harga tiket dan perawatan, tempat ini sangat bagus untuk belajar sejarah, budaya, dan mengalami pemandangan alam yang indah. Museum ini merupakan sumber pengetahuan untuk generasi muda dan merupakan bagian dari kekayaan budaya Batak."
+        }
+    },
+    "97": {
+        "item_id": "97",
+        "place_name": "Bukit Senyum",
+        "category": "Wisata Alam",
+        "rating": 4.654545454545454,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang indah, pemandangan alam terbuka, dan ketersediaan spot foto dan camping. Tempat ini terletak di desa Motung, dekat pelabuhan Ajibata, dengan pemandangan yang menawarkan view dari danau Toba, daerah Parapat, dan Samosir. Ada keterbatasan dalam pengelolaan sampah dan fasilitas, tetapi tempat ini dianggap sebagai 'hidden gem' yang menawarkan kesan alam yang asri dan indah.",
+            "activity_features": "Kemudahan berjalan kaki, camping, foto, dan penggunaan motor/mobil untuk akses. Diperlukan bawa bekal makanan dan minuman, serta perhatian terhadap jalan yang terjal dan sampah. Aktivitas terbatas pada pemandangan danau Toba, dengan keterbatasan akses ke beberapa area.",
+            "atmosphere_features": "Kesan alam yang asri dan indah, tetapi dengan peringatan tentang kebersihan dan kebutuhan untuk tidak membawa sampah. Suasana hati positif, tetapi ada pernyataan bahwa tempat ini kurang ramai dan perlu perhatian pengunjung terhadap lingkungan.",
+            "summary": "Bukit Senyum adalah tempat wisata alam yang menawarkan pemandangan danau Toba dari sisi yang berbeda, dengan akses via motor/mobil dan ketersediaan spot foto serta camping. Meskipun dianggap sebagai 'hidden gem', tempat ini menghadapi keterbatasan dalam pengelolaan sampah dan fasilitas, serta tantangan akses ke beberapa area. Tempat ini cocok untuk pengunjung yang ingin menikmati keindahan alam dengan perhatian terhadap lingkungan."
+        }
+    },
+    "98": {
+        "item_id": "98",
+        "place_name": "Bukit Sibea-Bea",
+        "category": "Wisata Alam",
+        "rating": 4.462328767123288,
+        "features": {
+            "landscape_content_features": "Pemandangan danau Toba yang menawan, terletak di pinggiran danau Toba, dengan jalur yang mulus dan tidak berlobang, serta patung Yesus yang sedang dipugar. Tempat ini sedang dalam proses perbaikan fasilitas, sehingga terbatasnya aktivitas seperti foto dan pengunjung yang ingin melihat danau Toba langsung.",
+            "activity_features": "Pengunjung dapat mengambil foto yang bagus dari sekitar area, membeli tiket masuk 50rb, dan mengunjungi spot view danau Toba. Aktivitas terbatas karena sedang dalam perbaikan, tetapi masih ada kesempatan untuk mengambil foto dan mengalami kekecewaan akibat tutupnya.",
+            "atmosphere_features": "Mood yang campuran antara kekecewaan karena tutupnya dan kepuasan terhadap pemandangan yang menawan. Emosi pengunjung mencakup kecewa, tidak ramah terhadap petugas, dan kepuasan terhadap pemandangan yang sangat menarik.",
+            "summary": "Bukit Sibea-Bea adalah tempat wisata alam dengan pemandangan danau Toba yang menawan, jalur yang mulus, dan patung Yesus yang sedang dipugar. Tempat ini sedang dalam proses perbaikan, sehingga aktivitas terbatas, tetapi pemandangan yang sangat menarik membuat pengunjung tetap menyukainya."
+        }
+    },
+    "99": {
+        "item_id": "99",
+        "place_name": "Pertunjukan Tari Sigale Gale",
+        "category": "Wisata Budaya",
+        "rating": 4.523316062176166,
+        "features": {
+            "landscape_content_features": "Pertunjukan tarian Sigale Gale yang ikonik, peninggalan sejarah Batak Tomok, bangunan tradisional, kualitas fisik yang baik, dan kekayaan budaya Batak terlihat dari corak adat, tarian, dan museum Batak Tomok.",
+            "activity_features": "Pertunjukan tarian tradisional Batak, partisipasi langsung pengunjung, pengalaman menari dengan musik unik, dan peluang belajar tentang budaya Batak melalui pemandangan dan patung Sigale Gale.",
+            "atmosphere_features": "Kesan religius, budaya, dan sejarah yang kental, suasana misterius dan sakral, serta pengalaman yang menyenangkan dengan campuran kebajikan dan kearifan lokal.",
+            "summary": "Tempat wisata budaya yang menggabungkan tarian tradisional Batak, peninggalan sejarah, dan museum Batak Tomok, dengan suasana religius dan budaya yang kental. Pengunjung dapat menikmati pertunjukan tarian, partisipasi langsung, dan belajar tentang budaya Batak melalui pemandangan dan patung."
+        }
+    },
+    "100": {
+        "item_id": "100",
+        "place_name": "Pantai Bebas Parapat, Danau Toba",
+        "category": "Wisata Bahari",
+        "rating": 4.518925518925519,
+        "features": {
+            "landscape_content_features": "Pantai Bebas Parapat menawarkan pemandangan danau Toba yang indah, taman terbuka, musholla, kamar mandi, dan fasilitas umum. Area wisata terdapat kota Parapat, perahu, dan ruang terbuka publik yang ditata dengan baik. Fasilitas seperti parkiran luas dan akses ke pusat kota juga disebutkan.",
+            "activity_features": "Pengunjung dapat bersantai, bermain anak, membeli berbagai item, memperbarui fasilitas, dan mengambil foto. Aktivitas termasuk penggunaan perahu, pengelolaan sampah, dan pengunjung yang memperbarui fasilitas.",
+            "atmosphere_features": "Suasana yang ramai, baik untuk foto, tetapi ada masalah terkait sampah dan akses masuk yang kurang menarik. Pengunjung mengapresiasi kebersihan dan ketersediaan fasilitas, meskipun ada kritik terhadap ketersediaan tiket dan akses.",
+            "summary": "Pantai Bebas Parapat adalah tempat wisata yang menawarkan pemandangan danau Toba, taman terbuka, fasilitas umum seperti musholla dan kamar mandi, serta akses ke kota Parapat. Area wisata ramai, baik untuk foto, tetapi ada masalah terkait sampah dan akses masuk. Fasilitas terus diperbarui untuk meningkatkan pengalaman pengunjung."
+        }
+    },
+    "101": {
+        "item_id": "101",
+        "place_name": "Danau Toba Parapat",
+        "category": "Wisata Bahari",
+        "rating": 4.755667506297229,
+        "features": {
+            "landscape_content_features": "Danau Toba Parapat dikenal sebagai danau terbesar di Indonesia, dengan pemandangan yang indah, tepian yang asri, dan lingkungan alam yang sejuk. Lokasinya berada di Pulau Samosir, memperkuat keindahan alam dan sejarahnya. Kualitas fisiknya bersih, terjaga, dan dielokkan oleh pemerintah lokal.",
+            "activity_features": "Pengunjung dapat melakukan aktivitas seperti berenang, menggunakan speedboat, keliling danau, memancing, dan menginap di taman wisata. Ada pilihan atraksi budaya, seperti pengelolaan lingkungan yang ramah wisata, serta pengalaman bersantai dengan keluarga.",
+            "atmosphere_features": "Suasana hati yang tenang, damai, dan menyegarkan. Pengunjung merasa terpesona oleh pemandangan yang luar biasa, udara segar, dan lingkungan alam yang sejuk. Emosi yang diungkapkan mencakup kepuasan, rindu, dan keinginan untuk kembali.",
+            "summary": "Danau Toba Parapat adalah destinasi wisata yang menawarkan pemandangan alam yang indah, lingkungan bersih, dan aktivitas yang menarik. Sebagai danau terbesar di Indonesia, tempat ini dianggap sebagai keajaiban dunia, dengan pengelolaan yang terstruktur dan ramah wisata. Pengunjung merasa tenang, menyegarkan, dan terkesan dengan keindahan alam yang luar biasa."
+        }
+    }
+}
