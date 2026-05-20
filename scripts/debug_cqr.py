@@ -4,6 +4,7 @@ import time
 
 # Ensure v2 root is in python path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, BASE_DIR)
 sys.path.insert(0, os.path.join(BASE_DIR, "src"))
 
 from database import init_db, create_session, save_message, get_chat_history, get_first_query
