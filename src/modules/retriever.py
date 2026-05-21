@@ -21,6 +21,8 @@ def log_llm_response(module_name, raw_text):
 
 def _parse_ca_ier_json(raw: str, fallback_query: str) -> CAIEROutput:
     """Extract and parse JSON from LLM output, return fallback on failure."""
+    # First: strip any Qwen3 <think>...</think> reasoning blocks that slipped through
+    raw = strip_thinking(raw)
     # Strip markdown code fences
     raw = re.sub(r"```(?:json)?", "", raw).strip().rstrip("```").strip()
     # Find first { ... } block
@@ -48,7 +50,7 @@ def _parse_ca_ier_json(raw: str, fallback_query: str) -> CAIEROutput:
 
 
 def get_ca_ier(current_query: str, chat_history: list) -> CAIEROutput:
-    llm = get_chat_llm(temperature=0.0, max_new_tokens=512)
+    llm = get_chat_llm(temperature=0.0, max_new_tokens=1024)
 
     history_str = "Tidak ada riwayat. Ini adalah pesan pertama."
     if chat_history:
