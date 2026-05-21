@@ -11,10 +11,17 @@ from langchain_huggingface import HuggingFacePipeline, ChatHuggingFace
 from langchain_core.messages import BaseMessage
 
 class RobustChatHuggingFace(ChatHuggingFace):
+    """ChatHuggingFace subclass that:
+    1. Removes the strict 'last message must be HumanMessage' validation.
+    2. Supports enable_thinking=False for Qwen3 to suppress reasoning mode
+       on structured/JSON extraction tasks (CA-IER).
+    """
+    enable_thinking: bool = True
+
     def _to_chat_prompt(self, messages: list[BaseMessage]) -> str:
         if not messages:
             raise ValueError("At least one message must be provided!")
-            
+
         messages_dicts = []
         for m in messages:
             role = "user"
@@ -25,12 +32,22 @@ class RobustChatHuggingFace(ChatHuggingFace):
                 role = "assistant"
             elif "Human" in class_name or getattr(m, "type", "") == "human":
                 role = "user"
-                
+
             messages_dicts.append({"role": role, "content": m.content})
-            
-        return self.tokenizer.apply_chat_template(
-            messages_dicts, tokenize=False, add_generation_prompt=True
-        )
+
+        # Use Qwen3's official enable_thinking parameter if supported
+        try:
+            return self.tokenizer.apply_chat_template(
+                messages_dicts,
+                tokenize=False,
+                add_generation_prompt=True,
+                enable_thinking=self.enable_thinking,
+            )
+        except TypeError:
+            # Fallback: tokenizer doesn't support enable_thinking
+            return self.tokenizer.apply_chat_template(
+                messages_dicts, tokenize=False, add_generation_prompt=True
+            )
 
 MODEL_NAME = os.environ.get("LLM_MODEL", "Qwen/Qwen3-14B")
 
@@ -99,6 +116,7 @@ def get_chat_llm(temperature: float = 0.0, max_new_tokens: int = 512) -> RobustC
     """
     Returns a LangChain-compatible RobustChatHuggingFace using the cached Qwen3 model.
     Drop-in replacement for ChatOpenAI in all LangChain chains.
+    Thinking mode ON (default) — suitable for NLG / conversational responses.
     """
     model, tokenizer = load_model()
     do_sample = temperature > 0.0
@@ -115,4 +133,28 @@ def get_chat_llm(temperature: float = 0.0, max_new_tokens: int = 512) -> RobustC
         return_full_text=False,
     )
 
-    return RobustChatHuggingFace(llm=HuggingFacePipeline(pipeline=pipe))
+    return RobustChatHuggingFace(llm=HuggingFacePipeline(pipeline=pipe), enable_thinking=True)
+
+
+def get_chat_llm_no_think(temperature: float = 0.0, max_new_tokens: int = 1024) -> RobustChatHuggingFace:
+    """
+    Like get_chat_llm() but with enable_thinking=False for Qwen3.
+    Use for structured JSON extraction tasks (CA-IER) where reasoning tokens
+    waste the token budget and increase latency significantly.
+    """
+    model, tokenizer = load_model()
+    do_sample = temperature > 0.0
+
+    pipe = hf_pipeline(
+        "text-generation",
+        model=model,
+        tokenizer=tokenizer,
+        max_new_tokens=max_new_tokens,
+        do_sample=do_sample,
+        temperature=temperature if do_sample else 1.0,
+        repetition_penalty=1.05,
+        pad_token_id=tokenizer.eos_token_id,
+        return_full_text=False,
+    )
+
+    return RobustChatHuggingFace(llm=HuggingFacePipeline(pipeline=pipe), enable_thinking=False)

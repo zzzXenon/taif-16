@@ -109,7 +109,6 @@ Riwayat Chat (Pesan Terlama -> Terbaru):
 Kueri Saat Ini:
 {current_query}
 Output:
-/no_think
 """
 
 SYSTEM_PROMPT_NLG = """

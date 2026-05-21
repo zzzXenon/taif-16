@@ -7,7 +7,7 @@ from langchain_core.output_parsers import StrOutputParser
 from schemas import CAIEROutput
 from core.prompts import SYSTEM_PROMPT_CA_IER, SYSTEM_PROMPT_NLG
 from sentence_transformers import CrossEncoder
-from modules.llm_loader import get_chat_llm, strip_thinking
+from modules.llm_loader import get_chat_llm, get_chat_llm_no_think, strip_thinking
 
 os.makedirs("logs", exist_ok=True)
 
@@ -50,7 +50,7 @@ def _parse_ca_ier_json(raw: str, fallback_query: str) -> CAIEROutput:
 
 
 def get_ca_ier(current_query: str, chat_history: list) -> CAIEROutput:
-    llm = get_chat_llm(temperature=0.0, max_new_tokens=1024)
+    llm = get_chat_llm_no_think(temperature=0.0, max_new_tokens=1024)
 
     history_str = "Tidak ada riwayat. Ini adalah pesan pertama."
     if chat_history:
