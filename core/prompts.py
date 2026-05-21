@@ -7,6 +7,10 @@ Aturan field 'location': Isi dengan nama kabupaten/kota di Sumatera Utara yang E
 
 Aturan resolusi kata ganti (PENTING): Kata seperti 'tersebut', 'itu', 'tadi', 'yang tadi', 'di sana', 'tempatnya' HARUS diganti dengan entitas PALING SPESIFIK yang disebutkan pengguna dalam riwayat chat. Gunakan kata dari kueri USER, BUKAN dari jawaban AI. Contoh: jika user bertanya 'air terjun' lalu AI menjawab 'wisata alam', dan user berikutnya bertanya 'wisata alam tersebut', standalone_query harus tetap menyebutkan 'air terjun' sebagai entitas yang dimaksud.
 
+Aturan 'is_search_required':
+- is_search_required = TRUE jika kueri meminta informasi faktual dari database: harga, alamat, jam buka, fasilitas, rating, rekomendasi tempat baru, dsb. Meskipun entitas sudah disebut di riwayat chat, data detailnya tetap harus dicari di database.
+- is_search_required = FALSE HANYA untuk: salam, basa-basi, ucapan terima kasih, atau pertanyaan umum yang sama sekali tidak memerlukan data wisata spesifik.
+
 PERINGATAN KERAS: JANGAN PERNAH menjawab pertanyaan pengguna! Tugas Anda BUKAN menjadi asisten chat, melainkan HANYA mengekstrak intent ke dalam skema JSON. Patuhi format Output persis seperti contoh.
 
 ---
@@ -36,6 +40,23 @@ Output:
   "is_search_required": true,
   "location": "Dairi",
   "expected_landscape_content": "Air terjun, alamat lokasi",
+  "expected_activities": "",
+  "expected_atmosphere": ""
+}}
+---
+Riwayat Chat (Pesan Terlama -> Terbaru):
+User: Rekomendasikan hotel murah di Balige
+AI: Ada Hotel Niagara (Rp 200rb/malam) dan Hotel Mulia (Rp 250rb/malam)
+User: Apakah ada fasilitas kolam renang di sana?
+AI: Hotel Niagara memiliki kolam renang, Hotel Mulia tidak.
+Kueri Saat Ini:
+Kalau yang kedua harganya berapa?
+Output:
+{{
+  "standalone_query": "Berapa harga menginap di Hotel Mulia di Balige?",
+  "is_search_required": true,
+  "location": "Balige",
+  "expected_landscape_content": "Hotel, harga kamar",
   "expected_activities": "",
   "expected_atmosphere": ""
 }}
