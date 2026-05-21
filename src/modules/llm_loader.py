@@ -8,6 +8,29 @@ import subprocess
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline as hf_pipeline
 from langchain_huggingface import HuggingFacePipeline, ChatHuggingFace
+from langchain_core.messages import BaseMessage
+
+class RobustChatHuggingFace(ChatHuggingFace):
+    def _to_chat_prompt(self, messages: list[BaseMessage]) -> str:
+        if not messages:
+            raise ValueError("At least one message must be provided!")
+            
+        messages_dicts = []
+        for m in messages:
+            role = "user"
+            class_name = m.__class__.__name__
+            if "System" in class_name or getattr(m, "type", "") == "system":
+                role = "system"
+            elif "AI" in class_name or getattr(m, "type", "") == "ai" or getattr(m, "type", "") == "assistant":
+                role = "assistant"
+            elif "Human" in class_name or getattr(m, "type", "") == "human":
+                role = "user"
+                
+            messages_dicts.append({"role": role, "content": m.content})
+            
+        return self.tokenizer.apply_chat_template(
+            messages_dicts, tokenize=False, add_generation_prompt=True
+        )
 
 MODEL_NAME = os.environ.get("LLM_MODEL", "Qwen/Qwen3-14B")
 
@@ -72,9 +95,9 @@ def strip_thinking(text: str) -> str:
     return cleaned if cleaned else text
 
 
-def get_chat_llm(temperature: float = 0.0, max_new_tokens: int = 512) -> ChatHuggingFace:
+def get_chat_llm(temperature: float = 0.0, max_new_tokens: int = 512) -> RobustChatHuggingFace:
     """
-    Returns a LangChain-compatible ChatHuggingFace using the cached Qwen3 model.
+    Returns a LangChain-compatible RobustChatHuggingFace using the cached Qwen3 model.
     Drop-in replacement for ChatOpenAI in all LangChain chains.
     """
     model, tokenizer = load_model()
@@ -92,4 +115,4 @@ def get_chat_llm(temperature: float = 0.0, max_new_tokens: int = 512) -> ChatHug
         return_full_text=False,
     )
 
-    return ChatHuggingFace(llm=HuggingFacePipeline(pipeline=pipe))
+    return RobustChatHuggingFace(llm=HuggingFacePipeline(pipeline=pipe))
