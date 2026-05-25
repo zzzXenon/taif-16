@@ -149,10 +149,8 @@ _cross_encoder_model = None
 def get_cross_encoder():
     global _cross_encoder_model
     if _cross_encoder_model is None:
-        print("\nMemuat model BAAI/bge-reranker-base ke memori (Hanya satu kali)...")
-        # Mengganti Qwen3 dengan BAAI bge-reranker-base untuk mencegah Segfault / Crash.
-        # BGE-Reranker sangat stabil dan mendukung bahasa Indonesia dengan sangat baik.
-        _cross_encoder_model = CrossEncoder('BAAI/bge-reranker-base')
+        print("\nMemuat model BAAI/bge-reranker-v2-m3 ke memori (Hanya satu kali)...")
+        _cross_encoder_model = CrossEncoder('BAAI/bge-reranker-v2-m3')
     return _cross_encoder_model
 
 def cross_encoder_rerank(standalone_query, top_results, uadc_data_dict):
