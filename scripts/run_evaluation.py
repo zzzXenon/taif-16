@@ -19,14 +19,14 @@ import sys
 # ============================================================
 # KONFIGURASI
 # ============================================================
-API_URL = "http://localhost:8002/api/chat"
+API_URL = "http://127.0.0.1:8004/api/chat"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 
 # Override dengan env var jika ingin pakai file lain:
-#   EVAL_GT_A=data/eval_pipeline_a_single_turn.json python scripts/run_evaluation.py
-SINGLE_TURN_GT_PATH = os.path.join(DATA_DIR, os.environ.get("EVAL_GT_A", "eval_pipeline_a_single_turn.json"))
-MULTI_TURN_GT_PATH  = os.path.join(DATA_DIR, os.environ.get("EVAL_GT_B", "eval_pipeline_b_multi_turn.json"))
+#   EVAL_GT_A=data/eval_ground_truths.json python scripts/run_evaluation.py
+SINGLE_TURN_GT_PATH = os.path.join(DATA_DIR, os.environ.get("EVAL_GT_A", "eval_ground_truths.json"))
+MULTI_TURN_GT_PATH  = os.path.join(DATA_DIR, os.environ.get("EVAL_GT_B", "eval_pipeline_b.json"))
 # Output paths will be generated dynamically in main()
 
 # Mode ablasi yang diperiksa untuk single-turn
