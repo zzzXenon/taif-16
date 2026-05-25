@@ -47,8 +47,9 @@ def sync_checkpoint():
             )
             
             name_changed = old_pn.strip().lower() != new_data["place_name"].strip().lower()
+            category_changed = data.get("category", "").strip().lower() != new_data["category"].strip().lower()
 
-            if name_changed or has_corrupt_text:
+            if name_changed or has_corrupt_text or category_changed:
                 # Hapus dari cache agar LLM melakukan ekstraksi ulang untuk baris yang bersih ini
                 keys_to_delete.append(item_id)
             else:
