@@ -196,7 +196,7 @@ def main():
         )
         
         print(f"\n=== TOP {min(10, len(top_results))} HASIL PENCARIAN ===")
-        for i, res in enumerate(top_results[:args.top_k]):
+        for i, res in enumerate(top_results[:min(10, len(top_results))]):
             print(f"  {i+1}. {res['place_name']} [{res['category']}] (score: {res['total_score']:.4f})")
         
         # Cross-Encoder Reranking
