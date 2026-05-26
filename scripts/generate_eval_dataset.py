@@ -193,7 +193,9 @@ Deskripsi skenario: {scenario_desc}
     # Determine eval_turn (retrieval turns) and clean up ground_truths
     eval_turns = []
     cleaned_turns = []
-    valid_names = {e["place_name"].lower() for e in (anchor_entities + (pivot_entities or []))}
+    
+    valid_entity_names = {e["place_name"].strip() for e in (anchor_entities + (pivot_entities or []))}
+    valid_entity_names_lower = {v.lower(): v for v in valid_entity_names}
 
     for t in turns:
         turn_num = t.get("turn", len(cleaned_turns) + 1)
@@ -201,10 +203,20 @@ Deskripsi skenario: {scenario_desc}
 
         # Clean ground truths — keep only valid entity names
         raw_gts = t.get("ground_truths", [])
-        clean_gts = [
-            g for g in raw_gts
-            if any(v in g.lower() or g.lower() in v for v in valid_names)
-        ]
+        clean_gts = []
+        for g in raw_gts:
+            g_clean = g.strip()
+            matched_v = None
+            for v_lower, v_orig in valid_entity_names_lower.items():
+                if g_clean.lower() == v_lower:
+                    matched_v = v_orig
+                    break
+                elif g_clean.lower() in v_lower or v_lower in g_clean.lower():
+                    matched_v = v_orig
+            if matched_v:
+                clean_gts.append(matched_v)
+
+        clean_gts = list(dict.fromkeys(clean_gts))
 
         if is_retrieval:
             eval_turns.append(turn_num)
@@ -283,7 +295,9 @@ ATURAN WAJIB:
     ])
     chain = prompt | get_llm() | StrOutputParser()
     
+    valid_names_lower = {e['place_name'].strip().lower(): e['place_name'].strip() for e in pool}
     matched_names = []
+    
     # Process in chunks of 30 to avoid context overflow
     chunk_size = 30
     for i in range(0, len(pool), chunk_size):
@@ -305,7 +319,9 @@ ATURAN WAJIB:
                 if isinstance(names, list):
                     for n in names:
                         if isinstance(n, str) and n.strip():
-                            matched_names.append(n.strip())
+                            n_clean = n.strip()
+                            if n_clean.lower() in valid_names_lower:
+                                matched_names.append(valid_names_lower[n_clean.lower()])
         except Exception as e:
             print(f"      [WARN] Validator gagal memproses chunk: {e}")
             
@@ -507,14 +523,29 @@ def build_pipeline_b(checkpoint: dict) -> list:
             else None
         )
 
-        scenario = generate_pipeline_b_scenario(
-            scenario_id=tmpl["id"],
-            scenario_name=tmpl["name"],
-            scenario_desc=tmpl["description"],
-            anchor_entities=anchor,
-            n_turns=tmpl["n_turns"],
-            pivot_entities=pivot,
-        )
+        attempts = 0
+        max_attempts = 5
+        scenario = None
+        while attempts < max_attempts:
+            attempts += 1
+            try:
+                scenario = generate_pipeline_b_scenario(
+                    scenario_id=tmpl["id"],
+                    scenario_name=tmpl["name"],
+                    scenario_desc=tmpl["description"],
+                    anchor_entities=anchor,
+                    n_turns=tmpl["n_turns"],
+                    pivot_entities=pivot,
+                )
+                if len(scenario["turns"]) >= tmpl["n_turns"] - 2:
+                    break
+                print(f"      [WARN] Turn count too low ({len(scenario['turns'])}), retrying scenario generation...")
+            except Exception as e:
+                print(f"      [WARN] Scenario generation attempt {attempts} failed: {e}")
+                time.sleep(2)
+
+        if not scenario or len(scenario["turns"]) == 0:
+            raise ValueError(f"Failed to generate scenario '{tmpl['name']}' after {max_attempts} attempts.")
 
         # Validate turn count
         actual_turns = len(scenario["turns"])
@@ -545,6 +576,33 @@ if __name__ == "__main__":
     with open(CHECKPOINT_FILE, "r", encoding="utf-8") as f:
         checkpoint = json.load(f)
     print(f"\n  Loaded {len(checkpoint)} entities from checkpoint.")
+
+    # Filter checkpoint against clean entities_final.csv
+    csv_path = os.path.join(BASE_DIR, "data", "entities_final.csv")
+    import pandas as pd
+    if os.path.exists(csv_path):
+        print(f"  Validating and filtering checkpoint against clean database: {csv_path}...")
+        df = pd.read_csv(csv_path)
+        valid_csv_names = set(df['place_name'].astype(str).str.strip().tolist())
+        
+        cleaned_checkpoint = {}
+        ignored_count = 0
+        for k, v in checkpoint.items():
+            pn = str(v.get("place_name", "")).strip()
+            has_corrupt_text = (
+                "google.com" in pn.lower() or 
+                "google.com" in json.dumps(v.get("features", {})).lower() or
+                "(sc:" in pn.lower() or
+                "ulasan :" in pn.lower()
+            )
+            if pn in valid_csv_names and not has_corrupt_text:
+                cleaned_checkpoint[k] = v
+            else:
+                ignored_count += 1
+        checkpoint = cleaned_checkpoint
+        print(f"  Filtered checkpoint: kept {len(checkpoint)} clean entities, ignored {ignored_count} dirty/missing entities.")
+    else:
+        print("  [WARN] entities_final.csv tidak ditemukan, melewati penyaringan checkpoint.")
 
     t_start = time.time()
 

@@ -109,7 +109,8 @@ def strip_thinking(text: str) -> str:
     # Also remove any unclosed <think> block (everything from <think> to end)
     cleaned = re.sub(r"<think>.*", "", cleaned, flags=re.DOTALL)
     cleaned = cleaned.strip()
-    return cleaned if cleaned else text
+    # Jika hasil pembersihan kosong, berarti seluruh teks adalah blok pemikiran (tidak ada jawaban)
+    return cleaned if cleaned else ""
 
 
 def get_chat_llm(temperature: float = 0.0, max_new_tokens: int = 512) -> RobustChatHuggingFace:
