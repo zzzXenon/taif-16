@@ -94,6 +94,17 @@ def ping_ollama():
     pass
 
 
+def get_allowed_categories(seed_categories: set[str]) -> set[str]:
+    allowed = set()
+    for cat in seed_categories:
+        cat_clean = cat.strip()
+        allowed.add(cat_clean)
+        # Group related food/beverage/dining categories
+        if cat_clean in ["Restoran", "Restoran (Halal)", "Kafe"]:
+            allowed.update(["Restoran", "Restoran (Halal)", "Kafe"])
+    return allowed
+
+
 def generate_pipeline_a_query(level: int, seeds: list[dict]) -> str:
     """Generate a single-turn query from seed entity features."""
     spec = LEVEL_SPECS[level]
@@ -198,6 +209,13 @@ Deskripsi skenario: {scenario_desc}
     valid_entity_names = {e["place_name"].strip() for e in (anchor_entities + (pivot_entities or []))}
     valid_entity_names_lower = {v.lower(): v for v in valid_entity_names}
 
+    # Pre-filter candidate pool based on scenario seed categories to avoid false positives
+    seed_cats = {e.get("category", "") for e in (anchor_entities + (pivot_entities or [])) if e.get("category")}
+    allowed_cats = get_allowed_categories(seed_cats)
+    filtered_pool = [e for e in pool if e.get("category", "") in allowed_cats]
+    if not filtered_pool:
+        filtered_pool = pool
+
     for t in turns:
         turn_num = t.get("turn", len(cleaned_turns) + 1)
         raw_gts = t.get("ground_truths", [])
@@ -222,7 +240,7 @@ Deskripsi skenario: {scenario_desc}
             standalone_q = t.get("expected_standalone", "")
             if standalone_q:
                 print(f"      [Validation] Turn {turn_num}: Running DB-wide search for '{standalone_q}'...")
-                additional_gts = find_all_matching_entities(standalone_q, pool)
+                additional_gts = find_all_matching_entities(standalone_q, filtered_pool)
                 clean_gts.extend(additional_gts)
                 print(f"      [Validation] Turn {turn_num}: Found {len(additional_gts)} matching entities.")
 
@@ -293,14 +311,17 @@ def _parse_json_from_llm(raw: str, fallback):
 def find_all_matching_entities(query: str, pool: list[dict]) -> list[str]:
     """Passes the pool of entities to LLM to find ALL that match the query."""
     prompt = ChatPromptTemplate.from_messages([
-        ("system", """Anda adalah juri evaluasi sistem rekomendasi wisata.
+        ("system", """Anda adalah juri evaluasi sistem rekomendasi wisata Danau Toba.
 Diberikan sebuah [QUERY] dari user, dan daftar [KANDIDAT TEMPAT] beserta fiturnya.
-Tugas Anda: Pilih SEMUA nama tempat yang memenuhi syarat dalam [QUERY] tersebut.
+Tugas Anda: Pilih SEMUA nama tempat dari kandidat yang MEMENUHI syarat dan cocok dengan [QUERY] tersebut.
 
-ATURAN WAJIB:
-- Output HANYA berupa JSON array string berisi nama tempat yang cocok.
-- Jika tidak ada yang cocok, kembalikan [].
-- Jangan beri penjelasan apapun, hanya array JSON."""),
+ATURAN KETAT VALIDASI:
+1. Pastikan kecocokan kategori dengan teliti:
+   - Jika query mencari tempat belanja oleh-oleh/souvenir/pusat perbelanjaan khas, JANGAN pilih restoran, rumah makan, warung makan, kafe, penginapan/hotel, atau SPBU (meskipun ulasan/deskripsinya menyebut kata "oleh-oleh").
+   - Jika query mencari tempat wisata alam (air terjun, bukit, pantai), JANGAN pilih akomodasi/hotel atau SPBU/fasilitas umum.
+   - Jika query mencari tempat makan/restoran/kafe/kuliner, JANGAN pilih tempat wisata alam, tempat ibadah, atau toko souvenir murni.
+2. Output HANYA berupa JSON array string berisi nama tempat yang cocok secara persis (sesuai field "Nama" kandidat).
+3. Jika tidak ada yang cocok, kembalikan []. Jangan beri penjelasan apapun."""),
         ("human", "[QUERY]: {query}\n\n[KANDIDAT TEMPAT]:\n{context}\n\nPilih nama tempat yang cocok (Output JSON array):")
     ])
     chain = prompt | get_llm() | StrOutputParser()
@@ -441,8 +462,15 @@ def build_pipeline_a(checkpoint: dict) -> list:
                 if len(query) < 10:
                     continue
 
-                # EXHAUSTIVE VALIDATION: run LLM validator across ALL 591 entities
-                validated_gts = find_all_matching_entities(query, entities)
+                # Pre-filter candidate pool based on seed categories to eliminate cross-category false positives
+                seed_cats = {s.get("category", "") for s in seeds if s.get("category")}
+                allowed_cats = get_allowed_categories(seed_cats)
+                filtered_pool = [e for e in entities if e.get("category", "") in allowed_cats]
+                if not filtered_pool:
+                    filtered_pool = entities
+
+                # EXHAUSTIVE VALIDATION: run LLM validator across the filtered pool
+                validated_gts = find_all_matching_entities(query, filtered_pool)
 
                 # Merge: initial group/seeds + validator results (no duplicates)
                 ground_truths = list(dict.fromkeys(initial_gts + validated_gts))
