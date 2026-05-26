@@ -10,6 +10,9 @@ import warnings
 
 # Suppress HuggingFace max_new_tokens vs max_length warning spam
 warnings.filterwarnings("ignore", message=".*max_new_tokens.*")
+from transformers import logging as transformers_logging
+transformers_logging.set_verbosity_error()
+
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline as hf_pipeline
 from langchain_huggingface import HuggingFacePipeline, ChatHuggingFace
 from langchain_core.messages import BaseMessage
