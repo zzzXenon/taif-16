@@ -6,6 +6,10 @@ import os
 import re
 import subprocess
 import torch
+import warnings
+
+# Suppress HuggingFace max_new_tokens vs max_length warning spam
+warnings.filterwarnings("ignore", message=".*max_new_tokens.*")
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline as hf_pipeline
 from langchain_huggingface import HuggingFacePipeline, ChatHuggingFace
 from langchain_core.messages import BaseMessage
@@ -94,6 +98,8 @@ def load_model():
         dtype=torch.float16,
         device_map="auto"
     )
+    if hasattr(_model, "generation_config") and _model.generation_config is not None:
+        _model.generation_config.max_length = None
     _model.eval()
     print(f"✅ Model {MODEL_NAME} berhasil dimuat!")
     return _model, _tokenizer
