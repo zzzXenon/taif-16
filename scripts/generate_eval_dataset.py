@@ -549,16 +549,22 @@ if __name__ == "__main__":
     t_start = time.time()
 
     # ── Pipeline A ─────────────────────────────────
-    pipeline_a = build_pipeline_a(checkpoint)
-    with open(OUT_PIPELINE_A, "w", encoding="utf-8") as f:
-        json.dump(pipeline_a, f, indent=2, ensure_ascii=False)
-    print(f"\n✅ Pipeline A: {len(pipeline_a)} queries → {OUT_PIPELINE_A}")
+    if os.path.exists(OUT_PIPELINE_A):
+        print(f"\n   [Pipeline A] File {OUT_PIPELINE_A} sudah ada, melewati pembuatan.")
+    else:
+        pipeline_a = build_pipeline_a(checkpoint)
+        with open(OUT_PIPELINE_A, "w", encoding="utf-8") as f:
+            json.dump(pipeline_a, f, indent=2, ensure_ascii=False)
+        print(f"\n✅ Pipeline A: {len(pipeline_a)} queries → {OUT_PIPELINE_A}")
 
     # ── Pipeline B ─────────────────────────────────
-    pipeline_b = build_pipeline_b(checkpoint)
-    with open(OUT_PIPELINE_B, "w", encoding="utf-8") as f:
-        json.dump(pipeline_b, f, indent=2, ensure_ascii=False)
-    print(f"✅ Pipeline B: {len(pipeline_b)} scenarios → {OUT_PIPELINE_B}")
+    if os.path.exists(OUT_PIPELINE_B):
+        print(f"\n   [Pipeline B] File {OUT_PIPELINE_B} sudah ada, melewati pembuatan.")
+    else:
+        pipeline_b = build_pipeline_b(checkpoint)
+        with open(OUT_PIPELINE_B, "w", encoding="utf-8") as f:
+            json.dump(pipeline_b, f, indent=2, ensure_ascii=False)
+        print(f"✅ Pipeline B: {len(pipeline_b)} scenarios → {OUT_PIPELINE_B}")
 
     print(f"\n{'='*60}")
     print(f"  TOTAL WAKTU: {(time.time()-t_start)/60:.1f} menit")
