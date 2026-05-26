@@ -33,7 +33,7 @@ from langchain_core.documents import Document
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, "src"))
 from schemas import AttractionFeatures
-from modules.llm_loader import get_chat_llm_no_think, strip_thinking
+from modules.llm_loader import get_chat_llm, strip_thinking
 
 # ─────────────────────────────────────────────────
 # CONFIG  (all overridable via env vars)
@@ -81,7 +81,7 @@ berikan estimasi masuk akal berdasarkan nama/kategori tempat. JANGAN KOSONG.
 
 def extract_features_with_llm(place_name: str, category: str, description: str) -> dict:
     """Extract 4 feature dimensions from entity description using LLM."""
-    llm    = get_chat_llm_no_think(temperature=0.1, max_new_tokens=1024)
+    llm    = get_chat_llm(temperature=0.1, max_new_tokens=2048)
     parser = PydanticOutputParser(pydantic_object=AttractionFeatures)
 
     prompt = ChatPromptTemplate.from_messages([
