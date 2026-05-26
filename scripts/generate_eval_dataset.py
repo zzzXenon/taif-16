@@ -412,9 +412,9 @@ def build_pipeline_a(checkpoint: dict) -> list:
                 cat_name, city_name = group_key
 
                 # Use a representative subset (≤5) for the LLM prompt
-                # but the FULL group is the initial ground truth pool
+                # Only the prompt seeds are the initial ground truth pool (not the full group)
                 prompt_seeds = random.sample(group_entities, min(5, len(group_entities)))
-                initial_gts  = [e["place_name"] for e in group_entities]
+                initial_gts  = [e["place_name"] for e in prompt_seeds]
                 seeds = prompt_seeds
 
                 print(f"      [Group] {cat_name} @ {city_name or 'unspecified'} "
