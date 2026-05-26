@@ -325,7 +325,12 @@ ATURAN WAJIB:
             import re
             match = re.search(r'\[.*?\]', raw, re.DOTALL)
             if match:
-                names = json.loads(match.group(0))
+                try:
+                    names = json.loads(match.group(0))
+                except json.JSONDecodeError:
+                    # Fallback: extract all strings in double quotes inside the brackets
+                    names = re.findall(r'"([^"]*)"', match.group(0))
+                    
                 if isinstance(names, list):
                     for n in names:
                         if isinstance(n, str) and n.strip():
