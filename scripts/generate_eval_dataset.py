@@ -29,7 +29,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, "src"))
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from modules.llm_loader import get_chat_llm, strip_thinking
+from modules.llm_loader import get_chat_llm_no_think, strip_thinking
 
 # ─────────────────────────────────────────────────
 # CONFIG
@@ -86,7 +86,7 @@ LEVEL_SPECS = {
 # LLM HELPERS
 # ─────────────────────────────────────────────────
 def get_llm():
-    return get_chat_llm(temperature=0.7, max_new_tokens=1024)
+    return get_chat_llm_no_think(temperature=0.7, max_new_tokens=1024)
 
 
 def ping_ollama():
@@ -144,6 +144,7 @@ def generate_pipeline_b_scenario(
     scenario_desc: str,
     anchor_entities: list[dict],
     n_turns: int,
+    pool: list[dict],
     pivot_entities: list[dict] = None,
 ) -> dict:
     """Generate a full multi-turn Pipeline B scenario."""
@@ -199,24 +200,33 @@ Deskripsi skenario: {scenario_desc}
 
     for t in turns:
         turn_num = t.get("turn", len(cleaned_turns) + 1)
-        is_retrieval = t.get("is_retrieval", len(t.get("ground_truths", [])) > 0)
+        raw_gts = t.get("ground_truths", [])
+        is_retrieval = t.get("is_retrieval", len(raw_gts) > 0)
 
         # Clean ground truths — keep only valid entity names
-        raw_gts = t.get("ground_truths", [])
         clean_gts = []
-        for g in raw_gts:
-            g_clean = g.strip()
-            matched_v = None
-            for v_lower, v_orig in valid_entity_names_lower.items():
-                if g_clean.lower() == v_lower:
-                    matched_v = v_orig
-                    break
-                elif g_clean.lower() in v_lower or v_lower in g_clean.lower():
-                    matched_v = v_orig
-            if matched_v:
-                clean_gts.append(matched_v)
+        if is_retrieval:
+            for g in raw_gts:
+                g_clean = g.strip()
+                matched_v = None
+                for v_lower, v_orig in valid_entity_names_lower.items():
+                    if g_clean.lower() == v_lower:
+                        matched_v = v_orig
+                        break
+                    elif g_clean.lower() in v_lower or v_lower in g_clean.lower():
+                        matched_v = v_orig
+                if matched_v:
+                    clean_gts.append(matched_v)
 
-        clean_gts = list(dict.fromkeys(clean_gts))
+            # Database-wide search for all matching entities based on the standalone query
+            standalone_q = t.get("expected_standalone", "")
+            if standalone_q:
+                print(f"      [Validation] Turn {turn_num}: Running DB-wide search for '{standalone_q}'...")
+                additional_gts = find_all_matching_entities(standalone_q, pool)
+                clean_gts.extend(additional_gts)
+                print(f"      [Validation] Turn {turn_num}: Found {len(additional_gts)} matching entities.")
+
+            clean_gts = list(dict.fromkeys(clean_gts))
 
         if is_retrieval:
             eval_turns.append(turn_num)
@@ -510,6 +520,7 @@ def _sample_entities_by_category(checkpoint: dict, categories: list[str], n: int
 def build_pipeline_b(checkpoint: dict) -> list:
     print(f"\n[Pipeline B] Generating 4 multi-turn scenarios...")
     results = []
+    entities = list(checkpoint.values())
 
     for tmpl in SCENARIO_TEMPLATES:
         print(f"\n   Scenario: {tmpl['name']} ({tmpl['n_turns']} turns)...")
@@ -535,6 +546,7 @@ def build_pipeline_b(checkpoint: dict) -> list:
                     scenario_desc=tmpl["description"],
                     anchor_entities=anchor,
                     n_turns=tmpl["n_turns"],
+                    pool=entities,
                     pivot_entities=pivot,
                 )
                 if len(scenario["turns"]) >= tmpl["n_turns"] - 2:
