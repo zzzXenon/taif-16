@@ -19,7 +19,7 @@ import sys
 # ============================================================
 # KONFIGURASI
 # ============================================================
-API_URL = "http://127.0.0.1:8004/api/chat"
+API_URL = os.environ.get("API_URL", "http://127.0.0.1:8004/api/chat")
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 
