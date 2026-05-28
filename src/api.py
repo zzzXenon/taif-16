@@ -68,7 +68,7 @@ def startup_event():
     
     print("Memuat model LLM Qwen3 ke GPU...")
     load_model()
-    llm = get_chat_llm(temperature=0.7, max_new_tokens=512)
+    llm = get_chat_llm(temperature=0.7, max_new_tokens=1024)
     retriever = baseline_db.as_retriever(search_kwargs={"k": 5})
     baseline_qa = RetrievalQA.from_chain_type(
         llm=llm,
@@ -166,7 +166,7 @@ async def chat_endpoint(request: ChatRequest):
                 search_kwargs={"k": 5, "filter": {"city_regency": location_filter}}
             )
             from langchain_classic.chains import RetrievalQA as RQA
-            llm_base = get_chat_llm(temperature=0.7, max_new_tokens=512)
+            llm_base = get_chat_llm(temperature=0.7, max_new_tokens=1024)
             qa_with_filter = RQA.from_chain_type(
                 llm=llm_base, chain_type="stuff",
                 retriever=retriever, return_source_documents=True

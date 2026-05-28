@@ -126,7 +126,7 @@ def get_chat_llm(temperature: float = 0.0, max_new_tokens: int = 512) -> RobustC
     """
     Returns a LangChain-compatible RobustChatHuggingFace using the cached Qwen3 model.
     Drop-in replacement for ChatOpenAI in all LangChain chains.
-    Thinking mode ON (default) — suitable for NLG / conversational responses.
+    Thinking mode OFF — suitable for NLG / conversational responses (prevents truncation).
     """
     model, tokenizer = load_model()
     do_sample = temperature > 0.0
@@ -143,7 +143,7 @@ def get_chat_llm(temperature: float = 0.0, max_new_tokens: int = 512) -> RobustC
         return_full_text=False,
     )
 
-    return RobustChatHuggingFace(llm=HuggingFacePipeline(pipeline=pipe), enable_thinking=True)
+    return RobustChatHuggingFace(llm=HuggingFacePipeline(pipeline=pipe), enable_thinking=False)
 
 
 def get_chat_llm_no_think(temperature: float = 0.0, max_new_tokens: int = 1024) -> RobustChatHuggingFace:
