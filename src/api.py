@@ -134,7 +134,14 @@ async def chat_endpoint(request: ChatRequest):
             print("\nAiYukToba (Chit-Chat):")
             start_nlg = time.time()
             llm = get_chat_llm(temperature=0.5, max_new_tokens=512)
-            casual_response = llm.invoke(f"Berdasarkan percakapan ini, jawab sapaan pengguna dengan ramah: '{query}'")
+            
+            from langchain_core.prompts import ChatPromptTemplate
+            prompt = ChatPromptTemplate.from_messages([
+                ("system", "Kamu adalah AiYukToba, asisten wisata daerah Toba yang ramah dan hangat. Jawab sapaan, ucapan terima kasih, atau obrolan santai pengguna secara langsung. JANGAN menuliskan pengantar apa pun seperti 'Tentu, berikut adalah...' atau 'Berikut jawabannya:'. Langsung sapa dan jawab pengguna saja."),
+                ("human", "{query}")
+            ])
+            chain = prompt | llm
+            casual_response = chain.invoke({"query": query})
             reply = strip_thinking(casual_response.content)
             time_nlg = time.time() - start_nlg
             print(f"  [Timer] Casual Chat Selesai dalam {time_nlg:.2f} detik")
