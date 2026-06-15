@@ -69,14 +69,14 @@ def detect_device() -> tuple[str, int]:
         if torch.cuda.is_available():
             name = torch.cuda.get_device_name(0)
             vram = torch.cuda.get_device_properties(0).total_memory // (1024**2)
-            print(f"   [Device] GPU terdeteksi: {name} ({vram} MB VRAM) → menggunakan CUDA")
+            print(f"   [Device] GPU terdeteksi: {name} ({vram} MB VRAM) -> menggunakan CUDA")
             # Large encode batch: embedding model is small (~120 MB), VRAM headroom is generous
             batch = 512 if vram >= 6000 else 256
             return "cuda", batch
         else:
-            print("   [Device] CUDA tidak tersedia → menggunakan CPU")
+            print("   [Device] CUDA tidak tersedia -> menggunakan CPU")
     except ImportError:
-        print("   [Device] PyTorch tidak terinstall → menggunakan CPU")
+        print("   [Device] PyTorch tidak terinstall -> menggunakan CPU")
 
     return "cpu", 64
 
@@ -129,7 +129,7 @@ def load_documents(file_path: str) -> list[Document]:
         )
     ]
 
-    print(f"   → {len(documents)} dokumen dimuat dalam {time.time()-t0:.1f}s")
+    print(f"   -> {len(documents)} dokumen dimuat dalam {time.time()-t0:.1f}s")
     return documents
 
 
@@ -166,7 +166,7 @@ def split_documents(documents: list[Document]) -> list[Document]:
     else:
         chunks = _split_batch(documents)
 
-    print(f"   → {len(chunks)} chunks dalam {time.time()-t0:.1f}s")
+    print(f"   -> {len(chunks)} chunks dalam {time.time()-t0:.1f}s")
     return chunks
 
 
@@ -216,7 +216,7 @@ def save_to_chroma(chunks: list[Document], device: str, encode_batch_size: int):
             db.add_documents(batch)
 
     total_time = time.time() - t0
-    print(f"   → ChromaDB tersimpan di: {CHROMA_PATH}  ({total_time:.1f}s total)")
+    print(f"   -> ChromaDB tersimpan di: {CHROMA_PATH}  ({total_time:.1f}s total)")
 
 
 # ─────────────────────────────────────────────────
@@ -239,11 +239,11 @@ def sanity_check(device: str):
     print(f"\n   Query: '{test_query}' filter city_regency='Samosir'")
     if results:
         for r in results:
-            print(f"   • {r.metadata.get('place_name')} [{r.metadata.get('city_regency')}]")
+            print(f"   * {r.metadata.get('place_name')} [{r.metadata.get('city_regency')}]")
     else:
         print("   Tidak ada hasil. Coba tanpa filter:")
         for r in db.similarity_search(test_query, k=3):
-            print(f"   • {r.metadata.get('place_name')} [{r.metadata.get('city_regency')}]")
+            print(f"   * {r.metadata.get('place_name')} [{r.metadata.get('city_regency')}]")
 
     print("\n[DONE] Ingestion selesai.")
 
@@ -256,7 +256,7 @@ if __name__ == "__main__":
     multiprocessing.freeze_support()
 
     print("=" * 60)
-    print("  Ingest v2 — entities_final.csv → chroma_db_baseline")
+    print("  Ingest v2 - entities_final.csv -> chroma_db_baseline")
     print("=" * 60)
 
     t_start = time.time()

@@ -589,6 +589,7 @@ def main():
     parser = argparse.ArgumentParser(description="Evaluasi RAG Pipeline Terpadu")
     parser.add_argument("--single-turn", action="store_true", help="Hanya evaluasi single-turn (A, Baseline, Proposed)")
     parser.add_argument("--multi-turn", action="store_true", help="Hanya evaluasi multi-turn (Pipeline B CQR)")
+    parser.add_argument("--hybrid", action="store_true", help="Evaluasi hybrid (single + multi-turn)")
     parser.add_argument("--limit", type=int, default=0, help="Batasi jumlah kueri (0 = semua). Gunakan --limit 5 untuk tes cepat.")
     parser.add_argument("--mode", type=str, help="Hanya evaluasi mode spesifik (misal: 'baseline', 'pipeline_a_only', 'proposed')")
     args = parser.parse_args()
@@ -608,6 +609,10 @@ def main():
         file_suffix += "_ST"
     if args.multi_turn:
         file_suffix += "_MT"
+    if args.hybrid:
+        file_suffix += "_HB"
+        global MULTI_TURN_GT_PATH
+        MULTI_TURN_GT_PATH = os.path.join(DATA_DIR, "eval_pipeline_c_hybrid.json")
         
     results_path = os.path.join(DATA_DIR, f"eval_results{file_suffix}.json")
     report_path = os.path.join(DATA_DIR, f"eval_report{file_suffix}.txt")
@@ -624,9 +629,9 @@ def main():
     # Default: jalankan keduanya jika tidak ada flag
     run_st = True
     run_mt = True
-    if args.single_turn or args.multi_turn:
+    if args.single_turn or args.multi_turn or args.hybrid:
         run_st = args.single_turn
-        run_mt = args.multi_turn
+        run_mt = args.multi_turn or args.hybrid
     
     st_results = None
     mt_results = None
