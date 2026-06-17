@@ -89,6 +89,8 @@ class ChatResponse(BaseModel):
     source_documents: list[str] = []
     json_parse_fails: int = 0
     latency_seconds: float = 0.0
+    query_type: str = ""
+    is_ambiguous: bool = False
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
@@ -147,7 +149,9 @@ async def chat_endpoint(request: ChatRequest):
                 reply=clarification_reply,
                 standalone_query=ca_ier.standalone_query,
                 source_documents=[],
-                latency_seconds=total_time
+                latency_seconds=total_time,
+                query_type=getattr(ca_ier, "query_type", "recommendation"),
+                is_ambiguous=getattr(ca_ier, "is_ambiguous", False)
             )
         
         if not ca_ier.is_search_required:
@@ -175,7 +179,9 @@ async def chat_endpoint(request: ChatRequest):
                 reply=reply,
                 standalone_query=ca_ier.standalone_query,
                 source_documents=[],
-                latency_seconds=total_time
+                latency_seconds=total_time,
+                query_type=getattr(ca_ier, "query_type", "recommendation"),
+                is_ambiguous=getattr(ca_ier, "is_ambiguous", False)
             )
 
     source_docs = []
@@ -219,7 +225,9 @@ async def chat_endpoint(request: ChatRequest):
             reply=final_output,
             standalone_query=ca_ier.standalone_query,
             source_documents=source_docs,
-            latency_seconds=total_time
+            latency_seconds=total_time,
+            query_type=getattr(ca_ier, "query_type", "recommendation"),
+            is_ambiguous=getattr(ca_ier, "is_ambiguous", False)
         )
         
     # Proposed (A+B) or pipeline_a_only
@@ -256,7 +264,9 @@ async def chat_endpoint(request: ChatRequest):
             reply=no_result_reply,
             standalone_query=ca_ier.standalone_query,
             source_documents=[],
-            latency_seconds=total_time
+            latency_seconds=total_time,
+            query_type=getattr(ca_ier, "query_type", "recommendation"),
+            is_ambiguous=getattr(ca_ier, "is_ambiguous", False)
         )
 
     format_fails = 0
@@ -291,7 +301,9 @@ async def chat_endpoint(request: ChatRequest):
         standalone_query=ca_ier.standalone_query,
         source_documents=source_docs,
         json_parse_fails=format_fails,
-        latency_seconds=total_time
+        latency_seconds=total_time,
+        query_type=getattr(ca_ier, "query_type", "recommendation"),
+        is_ambiguous=getattr(ca_ier, "is_ambiguous", False)
     )
 
 if __name__ == "__main__":
