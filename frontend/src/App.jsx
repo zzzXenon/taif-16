@@ -76,7 +76,9 @@ function App() {
         role: 'bot',
         content: data.reply,
         source_documents: data.source_documents,
-        standalone_query: data.standalone_query
+        standalone_query: data.standalone_query,
+        query_type: data.query_type,
+        is_ambiguous: data.is_ambiguous
       }]);
 
     } catch (error) {
@@ -167,12 +169,27 @@ function App() {
                   <ReactMarkdown>{msg.content}</ReactMarkdown>
                 </div>
 
-                {msg.role === 'bot' && (msg.standalone_query || (msg.source_documents && msg.source_documents.length > 0)) && (
+                {msg.role === 'bot' && (msg.standalone_query || msg.query_type || msg.is_ambiguous !== undefined || (msg.source_documents && msg.source_documents.length > 0)) && (
                   <div className="bot-metadata">
                     {msg.standalone_query && (
                       <div className="bot-metadata-title">
                         <span className="badge">CQR Engine</span>
                         <span>"{msg.standalone_query}"</span>
+                      </div>
+                    )}
+
+                    {(msg.query_type || msg.is_ambiguous !== undefined) && (
+                      <div style={{ marginTop: '0.5rem', fontSize: '0.8rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                        {msg.query_type && (
+                          <span style={{ background: '#e0f2fe', color: '#0369a1', padding: '0.2rem 0.5rem', borderRadius: '4px', fontWeight: '500' }}>
+                            Type: {msg.query_type}
+                          </span>
+                        )}
+                        {msg.is_ambiguous !== undefined && (
+                          <span style={{ background: msg.is_ambiguous ? '#fee2e2' : '#dcfce7', color: msg.is_ambiguous ? '#991b1b' : '#166534', padding: '0.2rem 0.5rem', borderRadius: '4px', fontWeight: '500' }}>
+                            Ambiguous: {msg.is_ambiguous ? 'YES' : 'NO'}
+                          </span>
+                        )}
                       </div>
                     )}
 
