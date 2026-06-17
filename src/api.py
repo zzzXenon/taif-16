@@ -10,7 +10,7 @@ import traceback
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from modules.retriever import get_ca_ier, dimension_aware_search, cross_encoder_rerank, generate_final_response
+from modules.retriever import get_ca_ier, dimension_aware_search, cross_encoder_rerank, generate_final_response, generate_informational_response
 from schemas import CAIEROutput
 from database import init_db, create_session, save_message, get_chat_history, get_first_query
 
@@ -129,6 +129,26 @@ async def chat_endpoint(request: ChatRequest):
         ca_ier = get_ca_ier(query, prompt_history)
         time_ca_ier = time.time() - start_ca_ier
         print(f"  [Timer] CA-IER Selesai dalam {time_ca_ier:.2f} detik")
+        
+        # Intersepsi Ambiguitas (Dynamic Clarification / Slot Filling)
+        if ca_ier.is_search_required and getattr(ca_ier, "is_ambiguous", False):
+            clarification_reply = (
+                "Tentu! Saya senang sekali bisa membantu mencarikan rekomendasi yang cocok untuk rencana liburan Anda. "
+                "Namun, agar saya dapat memberikan rekomendasi yang presisi dan sesuai harapan, boleh tahu Anda berencana berkunjung "
+                "ke daerah mana di sekitar Danau Toba? (Contoh: Samosir, Balige, Parapat, Dairi, atau Karo) 😊"
+            )
+            print("\nAiYukToba (Clarification):")
+            save_message(session_id, "user", query, ca_ier.standalone_query)
+            save_message(session_id, "ai", clarification_reply)
+            
+            total_time = time.time() - start_time_total
+            print(f"== [Timer] TOTAL KESELURUHAN: {total_time:.2f} detik ==\n")
+            return ChatResponse(
+                reply=clarification_reply,
+                standalone_query=ca_ier.standalone_query,
+                source_documents=[],
+                latency_seconds=total_time
+            )
         
         if not ca_ier.is_search_required:
             print("\nAiYukToba (Chit-Chat):")
@@ -251,7 +271,12 @@ async def chat_endpoint(request: ChatRequest):
         
     print("\nMenyusun respons akhir (NLG)...")
     start_nlg = time.time()
-    final_output = generate_final_response(ca_ier.standalone_query, reranked_results, uadc_data_dict)
+    if getattr(ca_ier, "query_type", "recommendation") == "informational":
+        print("  [Routing] Menggunakan mode Informasional (jawaban langsung)")
+        final_output = generate_informational_response(ca_ier.standalone_query, reranked_results, uadc_data_dict)
+    else:
+        print("  [Routing] Menggunakan mode Rekomendasi (3 entitas)")
+        final_output = generate_final_response(ca_ier.standalone_query, reranked_results, uadc_data_dict)
     time_nlg = time.time() - start_nlg
     print(f"  [Timer] NLG Selesai dalam {time_nlg:.2f} detik")
     

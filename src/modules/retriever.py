@@ -5,7 +5,7 @@ import json
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from schemas import CAIEROutput
-from core.prompts import SYSTEM_PROMPT_CA_IER, SYSTEM_PROMPT_NLG
+from core.prompts import SYSTEM_PROMPT_CA_IER, SYSTEM_PROMPT_NLG, SYSTEM_PROMPT_INFORMATIONAL
 from sentence_transformers import CrossEncoder
 from modules.llm_loader import get_chat_llm, get_chat_llm_no_think, strip_thinking
 
@@ -43,6 +43,8 @@ def _parse_ca_ier_json(raw: str, fallback_query: str) -> CAIEROutput:
                             expected_landscape_content=data.get("expected_landscape_content", ""),
                             expected_activities=data.get("expected_activities", ""),
                             expected_atmosphere=data.get("expected_atmosphere", ""),
+                            query_type=data.get("query_type", "recommendation"),
+                            is_ambiguous=bool(data.get("is_ambiguous", False)),
                         )
                     except Exception:
                         break
@@ -208,6 +210,43 @@ def generate_final_response(user_query, reranked_results, uadc_data_dict=None):
     prompt = ChatPromptTemplate.from_messages([
         ("system", SYSTEM_PROMPT_NLG),
         ("human", "Kueri Pengguna: {query}\n\nRekomendasi Tempat dan Fiturnya:\n{context}")
+    ])
+
+    chain = prompt | llm | StrOutputParser()
+
+    response = chain.invoke({
+        "query": user_query,
+        "context": context_text
+    })
+
+    return strip_thinking(response)
+
+def generate_informational_response(user_query, reranked_results, uadc_data_dict=None):
+    llm = get_chat_llm(temperature=0.4, max_new_tokens=1024)
+
+    context_text = ""
+    if reranked_results:
+        res = reranked_results[0]
+        item_id = str(res.get("item_id", ""))
+        features = {}
+        if uadc_data_dict and item_id in uadc_data_dict:
+            features = uadc_data_dict[item_id].get("features", {})
+
+        landscape = features.get("landscape_content_features", "Detail fisik tempat")
+        activities = features.get("activity_features", "Aktivitas di tempat")
+        atmosphere = features.get("atmosphere_features", "Suasana tempat")
+        summary = features.get("summary", "Deskripsi umum")
+
+        context_text += f"Nama Tempat: {res['place_name']}\n"
+        context_text += f"Kategori: {res['category']}\n"
+        context_text += f"Deskripsi: {summary}\n"
+        context_text += f"Fitur Fisik/Fasilitas: {landscape}\n"
+        context_text += f"Aktivitas: {activities}\n"
+        context_text += f"Suasana: {atmosphere}\n"
+
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", SYSTEM_PROMPT_INFORMATIONAL),
+        ("human", "Kueri Pengguna: {query}\n\nInformasi Tempat Wisata:\n{context}")
     ])
 
     chain = prompt | llm | StrOutputParser()

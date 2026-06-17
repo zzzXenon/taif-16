@@ -9,6 +9,8 @@ class CAIEROutput(BaseModel):
     expected_landscape_content: str = Field(description="Kata kunci untuk lanskap/visual/fasilitas. Kosongkan jika tidak relevan.")
     expected_activities: str = Field(description="Kata kunci untuk aktivitas. Kosongkan jika tidak relevan.")
     expected_atmosphere: str = Field(description="Kata kunci untuk suasana/mood. Kosongkan jika tidak relevan.")
+    query_type: str = Field(default="recommendation", description="Tipe kueri: 'recommendation' (jika mencari rekomendasi/tempat baru) atau 'informational' (jika menanyakan info spesifik, sejarah, alamat, tiket, jam buka dari suatu tempat tertentu).")
+    is_ambiguous: bool = Field(default=False, description="True jika kueri terlalu umum (misal: 'cari hotel', 'rekomendasi wisata') tanpa menyebutkan lokasi spesifik atau kriteria unik, sehingga butuh pertanyaan klarifikasi.")
 
 # 2. SKEMA UNTUK UADC (INGESTION / DATABASE)
 class AttractionFeatures(BaseModel):
