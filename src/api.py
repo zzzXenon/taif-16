@@ -306,6 +306,15 @@ async def chat_endpoint(request: ChatRequest):
         is_ambiguous=getattr(ca_ier, "is_ambiguous", False)
     )
 
+@app.get("/api/debug/logs")
+async def get_debug_logs():
+    log_path = os.path.join(BASE_DIR, "logs", "json_parsing.log")
+    if os.path.exists(log_path):
+        with open(log_path, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+        return {"logs": "".join(lines[-100:])}
+    return {"logs": "Log file not found"}
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8004)
