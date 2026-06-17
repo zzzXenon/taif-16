@@ -21,7 +21,7 @@ AI: Ini ada 3 air terjun...
 Kueri Saat Ini:
 Berapa harga tiket masuk tempat yang pertama?
 Output:
-{
+{{
   "standalone_query": "Berapa harga tiket masuk air terjun pertama yang direkomendasikan di Danau Toba?",
   "is_search_required": true,
   "location": "",
@@ -30,7 +30,7 @@ Output:
   "expected_atmosphere": "",
   "query_type": "informational",
   "is_ambiguous": false
-}
+}}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
 User: Saya mencari air terjun di sekitar daerah Dairi
@@ -38,7 +38,7 @@ AI: Wisata alam yang terletak di sekitar Dairi...
 Kueri Saat Ini:
 Dimana alamat wisata alam tersebut?
 Output:
-{
+{{
   "standalone_query": "Dimana alamat air terjun di daerah Dairi?",
   "is_search_required": true,
   "location": "Dairi",
@@ -47,7 +47,7 @@ Output:
   "expected_atmosphere": "",
   "query_type": "informational",
   "is_ambiguous": false
-}
+}}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
 User: Rekomendasikan hotel murah di Balige
@@ -57,7 +57,7 @@ AI: Hotel Niagara memiliki kolam renang.
 Kueri Saat Ini:
 Kalau yang kedua harganya berapa?
 Output:
-{
+{{
   "standalone_query": "Berapa harga menginap di Hotel Mulia di Balige?",
   "is_search_required": true,
   "location": "Balige",
@@ -66,14 +66,14 @@ Output:
   "expected_atmosphere": "",
   "query_type": "informational",
   "is_ambiguous": false
-}
+}}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
 User: Hai AiYukToba!
 Kueri Saat Ini:
 Cari tempat makan yang enak di Samosir
 Output:
-{
+{{
   "standalone_query": "Cari tempat makan yang enak di Samosir",
   "is_search_required": true,
   "location": "Samosir",
@@ -82,14 +82,14 @@ Output:
   "expected_atmosphere": "Enak, lezat",
   "query_type": "recommendation",
   "is_ambiguous": false
-}
+}}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
 User: Halo asisten wisata!
 Kueri Saat Ini:
 Tolong carikan penginapan dong
 Output:
-{
+{{
   "standalone_query": "Tolong carikan penginapan dong",
   "is_search_required": true,
   "location": "",
@@ -98,14 +98,14 @@ Output:
   "expected_atmosphere": "",
   "query_type": "recommendation",
   "is_ambiguous": true
-}
+}}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
 AI: Semoga liburan Anda menyenangkan!
 Kueri Saat Ini:
 Terima kasih sarannya!
 Output:
-{
+{{
   "standalone_query": "Terima kasih sarannya!",
   "is_search_required": false,
   "location": "",
@@ -114,7 +114,7 @@ Output:
   "expected_atmosphere": "",
   "query_type": "recommendation",
   "is_ambiguous": false
-}
+}}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
 {chat_history}
