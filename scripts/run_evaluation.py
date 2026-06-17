@@ -151,7 +151,8 @@ def send_chat_request(session_id, message, ablation_mode):
     payload = {
         "session_id": session_id,
         "message": message,
-        "ablation_mode": ablation_mode
+        "ablation_mode": ablation_mode,
+        "is_eval": True
     }
     try:
         res = requests.post(API_URL, json=payload, timeout=REQUEST_TIMEOUT)

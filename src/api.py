@@ -82,6 +82,7 @@ class ChatRequest(BaseModel):
     session_id: str
     message: str
     ablation_mode: str = "proposed" # 'proposed', 'pipeline_a_only', 'pipeline_b_only', 'baseline'
+    is_eval: bool = False
 
 class ChatResponse(BaseModel):
     reply: str
@@ -133,7 +134,7 @@ async def chat_endpoint(request: ChatRequest):
         print(f"  [Timer] CA-IER Selesai dalam {time_ca_ier:.2f} detik")
         
         # Intersepsi Ambiguitas (Dynamic Clarification / Slot Filling)
-        if ca_ier.is_search_required and getattr(ca_ier, "is_ambiguous", False):
+        if not request.is_eval and ca_ier.is_search_required and getattr(ca_ier, "is_ambiguous", False):
             clarification_reply = (
                 "Tentu! Saya senang sekali bisa membantu mencarikan rekomendasi yang cocok untuk rencana liburan Anda. "
                 "Namun, agar saya dapat memberikan rekomendasi yang presisi dan sesuai harapan, boleh tahu Anda berencana berkunjung "
