@@ -88,6 +88,93 @@ def get_ca_ier(current_query: str, chat_history: list) -> CAIEROutput:
             expected_atmosphere=current_query
         )
 
+_location_cache = None
+
+def get_dynamic_city_regency_mapping(location_query: str) -> list:
+    """
+    Dynamically maps a location query (which could be a village, subdistrict, or landmark)
+    to its corresponding city_regency from entities_final.csv.
+    """
+    global _location_cache
+    
+    loc_clean = location_query.lower().strip()
+    if not loc_clean:
+        return []
+
+    # 1. Base list of known regencies/cities in our dataset
+    known_regencies = {
+        "samosir": "Samosir",
+        "toba": "Toba",
+        "humbang hasundutan": "Humbang Hasundutan",
+        "dairi": "Dairi",
+        "karo": "Karo",
+        "simalungun": "Simalungun",
+        "tapanuli utara": "Tapanuli Utara",
+        "pakpak bharat": "Pakpak Bharat",
+        "pematang siantar": "Pematang Siantar",
+        "balige": "Toba",
+    }
+    
+    # If it directly matches a known regency, return it
+    if loc_clean in known_regencies:
+        if loc_clean == "toba" or loc_clean == "balige":
+            return ["Toba", "Balige"]
+        if loc_clean == "samosir":
+            return ["Samosir", "Pangururan"]
+        return [known_regencies[loc_clean]]
+
+    # 2. Hardcoded mapping for common towns / subdistricts
+    location_mapping = {
+        "pangururan": ["Samosir", "Pangururan"],
+        "parapat": ["Simalungun", "Parapat"],
+        "sidikalang": ["Dairi", "Sidikalang"],
+        "tarutung": ["Tapanuli Utara", "Tarutung"],
+        "dolok sanggul": ["Humbang Hasundutan", "Dolok Sanggul", "Doloksanggul"],
+        "doloksanggul": ["Humbang Hasundutan", "Dolok Sanggul", "Doloksanggul"],
+        "kabanjahe": ["Karo", "Kabanjahe"],
+        "berastagi": ["Karo", "Berastagi"],
+        "salak": ["Pakpak Bharat", "Salak"],
+    }
+    if loc_clean in location_mapping:
+        return location_mapping[loc_clean]
+
+    # 3. Dynamic lookup from entities_final.csv
+    try:
+        import pandas as pd
+        if _location_cache is None:
+            # Resolve CSV path
+            module_dir = os.path.dirname(os.path.abspath(__file__))
+            project_root = os.path.dirname(os.path.dirname(module_dir))
+            csv_path = os.path.join(project_root, "data", "entities_final.csv")
+            if os.path.exists(csv_path):
+                df = pd.read_csv(csv_path).fillna("")
+                # Cache only necessary columns to save memory
+                _location_cache = df[["place_name", "address", "city_regency"]].to_dict(orient="records")
+            else:
+                _location_cache = []
+        
+        # Search the cache for matches
+        matches = []
+        for row in _location_cache:
+            place_name = str(row["place_name"]).lower()
+            address = str(row["address"]).lower()
+            if loc_clean in place_name or loc_clean in address:
+                regency = str(row["city_regency"]).strip()
+                if regency:
+                    matches.append(regency)
+                    
+        if matches:
+            # Find the most common regency
+            from collections import Counter
+            most_common = Counter(matches).most_common(1)[0][0]
+            print(f"  [Location Match] Dynamic map '{location_query}' -> '{most_common}' based on address lookup.")
+            return [most_common, location_query, location_query.title()]
+    except Exception as e:
+        print(f"  [WARN] Dynamic location lookup failed: {e}")
+
+    # Fallback to the original title cased location query if all else fails
+    return [location_query, loc_clean.title()]
+
 def dimension_aware_search(vector_db, intent_dimensions, w_lan=1.0, w_act=1.0, w_atm=1.0, top_k=5):
     res_lan, res_act, res_atm = [], [], []
 
@@ -114,28 +201,6 @@ def dimension_aware_search(vector_db, intent_dimensions, w_lan=1.0, w_act=1.0, w
     }
     allowed_categories = category_mapping.get(target_cat, category_mapping["Semua"])
 
-    location_mapping = {
-        "balige": ["Toba", "Balige"],
-        "toba": ["Toba", "Balige"],
-        "pangururan": ["Samosir", "Pangururan"],
-        "samosir": ["Samosir", "Pangururan"],
-        "parapat": ["Simalungun", "Parapat"],
-        "simalungun": ["Simalungun", "Parapat"],
-        "sidikalang": ["Dairi", "Sidikalang"],
-        "dairi": ["Dairi", "Sidikalang"],
-        "tarutung": ["Tapanuli Utara", "Tarutung"],
-        "tapanuli utara": ["Tapanuli Utara", "Tarutung"],
-        "dolok sanggul": ["Humbang Hasundutan", "Dolok Sanggul", "Doloksanggul"],
-        "doloksanggul": ["Humbang Hasundutan", "Dolok Sanggul", "Doloksanggul"],
-        "humbang hasundutan": ["Humbang Hasundutan", "Dolok Sanggul", "Doloksanggul"],
-        "kabanjahe": ["Karo", "Kabanjahe"],
-        "berastagi": ["Karo", "Berastagi"],
-        "karo": ["Karo", "Kabanjahe", "Berastagi"],
-        "salak": ["Pakpak Bharat", "Salak"],
-        "pakpak bharat": ["Pakpak Bharat", "Salak"],
-        "singkil": ["Aceh Singkil"],
-    }
-
     # Construct metadata filter
     def get_filter(dimension_name):
         and_clauses = [
@@ -143,8 +208,7 @@ def dimension_aware_search(vector_db, intent_dimensions, w_lan=1.0, w_act=1.0, w
             {"category": {"$in": allowed_categories}}
         ]
         if location:
-            loc_clean = location.lower().strip()
-            allowed_locations = location_mapping.get(loc_clean, [location, loc_clean.title()])
+            allowed_locations = get_dynamic_city_regency_mapping(location)
             and_clauses.append({"city_regency": {"$in": allowed_locations}})
         return {"$and": and_clauses}
 
