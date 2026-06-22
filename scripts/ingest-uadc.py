@@ -214,10 +214,11 @@ def build_chroma_uadc(extracted: dict, device: str, encode_batch_size: int):
     documents = []
     for item_id, data in extracted.items():
         base_meta = {
-            "item_id":    data["item_id"],
-            "place_name": data["place_name"],
-            "category":   data["category"],
-            "rating":     data["rating"],
+            "item_id":      data["item_id"],
+            "place_name":   data["place_name"],
+            "category":     data["category"],
+            "city_regency": data.get("city_regency", ""),
+            "rating":       data["rating"],
         }
         feats = data["features"]
 

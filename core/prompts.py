@@ -11,6 +11,12 @@ Aturan field:
   * 'recommendation': jika pengguna mencari rekomendasi tempat baru/tempat makan/penginapan secara umum (contoh: "cari hotel murah", "rekomendasikan pantai indah").
   * 'informational': jika pengguna menanyakan detail spesifik, sejarah, jam buka, tiket, alamat dari entitas/tempat tertentu yang sudah diketahui (contoh: "siapa pendiri museum batak?", "berapa tiket masuk pantai parbaba?", "saya ingin tahu sejarah museum").
 - 'is_ambiguous': TRUE jika pengguna mencari kategori umum (seperti hotel, tempat wisata, restoran, pantai) tetapi TIDAK menyebutkan lokasi spesifik atau kriteria unik, sehingga sistem butuh bertanya klarifikasi lokasi terlebih dahulu. FALSE jika kueri sudah memiliki lokasi, kriteria yang sangat spesifik, atau menanyakan informasi dari entitas tertentu (seperti "Museum Batak Silalahi").
+- 'target_category': Kategori entitas utama yang dicari. Harus salah satu dari nilai berikut:
+  * 'Akomodasi': jika kueri secara eksplisit mencari penginapan, hotel, homestay, guesthouse, villa, cottage, resort.
+  * 'Kuliner': jika kueri mencari tempat makan, restoran, kafe, warung makan, kuliner.
+  * 'Wisata': jika kueri mencari objek wisata, alam, budaya, buatan, tempat ibadah (masjid/gereja sebagai destinasi wisata religi), pantai, bukit, air terjun.
+  * 'Umum': jika kueri mencari tempat belanja, minimarket, pasar, pusat oleh-oleh, ATM, fasilitas umum.
+  * 'Semua': jika kueri mencari informasi campuran, chit-chat (is_search_required=false), atau tidak mengarah ke kategori spesifik.
 
 PERINGATAN KERAS: JANGAN PERNAH menjawab pertanyaan pengguna! Tugas Anda BUKAN menjadi asisten chat, melainkan HANYA mengekstrak intent ke dalam skema JSON. Patuhi format Output persis seperti contoh.
 
@@ -29,7 +35,8 @@ Output:
   "expected_activities": "",
   "expected_atmosphere": "",
   "query_type": "informational",
-  "is_ambiguous": false
+  "is_ambiguous": false,
+  "target_category": "Wisata"
 }}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
@@ -46,7 +53,8 @@ Output:
   "expected_activities": "",
   "expected_atmosphere": "",
   "query_type": "informational",
-  "is_ambiguous": false
+  "is_ambiguous": false,
+  "target_category": "Wisata"
 }}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
@@ -65,7 +73,8 @@ Output:
   "expected_activities": "",
   "expected_atmosphere": "",
   "query_type": "informational",
-  "is_ambiguous": false
+  "is_ambiguous": false,
+  "target_category": "Akomodasi"
 }}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
@@ -81,7 +90,8 @@ Output:
   "expected_activities": "Makan, kuliner",
   "expected_atmosphere": "Enak, lezat",
   "query_type": "recommendation",
-  "is_ambiguous": false
+  "is_ambiguous": false,
+  "target_category": "Kuliner"
 }}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
@@ -97,7 +107,8 @@ Output:
   "expected_activities": "Menginap, tidur",
   "expected_atmosphere": "",
   "query_type": "recommendation",
-  "is_ambiguous": true
+  "is_ambiguous": true,
+  "target_category": "Akomodasi"
 }}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
@@ -113,7 +124,8 @@ Output:
   "expected_activities": "",
   "expected_atmosphere": "",
   "query_type": "recommendation",
-  "is_ambiguous": false
+  "is_ambiguous": false,
+  "target_category": "Semua"
 }}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):

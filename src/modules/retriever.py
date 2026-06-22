@@ -45,6 +45,7 @@ def _parse_ca_ier_json(raw: str, fallback_query: str) -> CAIEROutput:
                             expected_atmosphere=data.get("expected_atmosphere", ""),
                             query_type=data.get("query_type", "recommendation"),
                             is_ambiguous=bool(data.get("is_ambiguous", False)),
+                            target_category=data.get("target_category", "Semua"),
                         )
                     except Exception:
                         break
@@ -100,19 +101,66 @@ def dimension_aware_search(vector_db, intent_dimensions, w_lan=1.0, w_act=1.0, w
         print(f"  [WARN] All dimensions empty — falling back to standalone query: '{fallback_q[:60]}'")
         lan_q = act_q = atm_q = fallback_q
 
+    target_cat = getattr(intent_dimensions, "target_category", "Semua")
+    location = getattr(intent_dimensions, "location", "").strip()
+
+    # category mapping
+    category_mapping = {
+        "Akomodasi": ["Akomodasi"],
+        "Kuliner": ["Restoran", "Kafe"],
+        "Wisata": ["Wisata Alam", "Wisata Budaya & Sejarah", "Wisata Buatan", "Tempat Ibadah"],
+        "Umum": ["Fasilitas Umum", "Pusat Oleh-Oleh"],
+        "Semua": ["Akomodasi", "Restoran", "Kafe", "Wisata Alam", "Wisata Budaya & Sejarah", "Wisata Buatan", "Tempat Ibadah", "Fasilitas Umum", "Pusat Oleh-Oleh"]
+    }
+    allowed_categories = category_mapping.get(target_cat, category_mapping["Semua"])
+
+    location_mapping = {
+        "balige": ["Toba", "Balige"],
+        "toba": ["Toba", "Balige"],
+        "pangururan": ["Samosir", "Pangururan"],
+        "samosir": ["Samosir", "Pangururan"],
+        "parapat": ["Simalungun", "Parapat"],
+        "simalungun": ["Simalungun", "Parapat"],
+        "sidikalang": ["Dairi", "Sidikalang"],
+        "dairi": ["Dairi", "Sidikalang"],
+        "tarutung": ["Tapanuli Utara", "Tarutung"],
+        "tapanuli utara": ["Tapanuli Utara", "Tarutung"],
+        "dolok sanggul": ["Humbang Hasundutan", "Dolok Sanggul", "Doloksanggul"],
+        "doloksanggul": ["Humbang Hasundutan", "Dolok Sanggul", "Doloksanggul"],
+        "humbang hasundutan": ["Humbang Hasundutan", "Dolok Sanggul", "Doloksanggul"],
+        "kabanjahe": ["Karo", "Kabanjahe"],
+        "berastagi": ["Karo", "Berastagi"],
+        "karo": ["Karo", "Kabanjahe", "Berastagi"],
+        "salak": ["Pakpak Bharat", "Salak"],
+        "pakpak bharat": ["Pakpak Bharat", "Salak"],
+        "singkil": ["Aceh Singkil"],
+    }
+
+    # Construct metadata filter
+    def get_filter(dimension_name):
+        and_clauses = [
+            {"dimension": dimension_name},
+            {"category": {"$in": allowed_categories}}
+        ]
+        if location:
+            loc_clean = location.lower().strip()
+            allowed_locations = location_mapping.get(loc_clean, [location, loc_clean.title()])
+            and_clauses.append({"city_regency": {"$in": allowed_locations}})
+        return {"$and": and_clauses}
+
     if lan_q:
         res_lan = vector_db.similarity_search_with_relevance_scores(
-            lan_q, k=15, filter={"dimension": "landscape_content"}
+            lan_q, k=15, filter=get_filter("landscape_content")
         )
 
     if act_q:
         res_act = vector_db.similarity_search_with_relevance_scores(
-            act_q, k=15, filter={"dimension": "activity"}
+            act_q, k=15, filter=get_filter("activity")
         )
 
     if atm_q:
         res_atm = vector_db.similarity_search_with_relevance_scores(
-            atm_q, k=15, filter={"dimension": "atmosphere"}
+            atm_q, k=15, filter=get_filter("atmosphere")
         )
 
     item_scores = {}
