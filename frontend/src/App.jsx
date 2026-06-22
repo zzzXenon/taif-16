@@ -25,6 +25,8 @@ function App() {
   const [sessionId] = useState(generateUUID());
 
   const [ablationMode, setAblationMode] = useState('proposed'); // modes: proposed, pipeline_a_only, pipeline_b_only
+  const [isEvalMode, setIsEvalMode] = useState(false);
+  const [historyLimit, setHistoryLimit] = useState(8);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -61,7 +63,9 @@ function App() {
         body: JSON.stringify({
           session_id: sessionId,
           message: userMsg.content,
-          ablation_mode: ablationMode
+          ablation_mode: ablationMode,
+          is_eval: isEvalMode,
+          history_limit: historyLimit
         })
       });
 
@@ -151,6 +155,35 @@ function App() {
               <div className="radio-custom"></div>
               <div className="radio-text">Baseline</div>
             </label>
+          </div>
+        </div>
+
+        <div className="glass-panel" style={{ marginTop: '1rem' }}>
+          <div className="control-group">
+            <h3 className="control-label">Simulasi Evaluasi</h3>
+            
+            <label className="checkbox-option">
+              <input
+                type="checkbox"
+                checked={isEvalMode}
+                onChange={(e) => setIsEvalMode(e.target.checked)}
+              />
+              <span className="checkbox-text">Ignore Ambiguity</span>
+            </label>
+
+            <div style={{ marginTop: '1rem' }}>
+              <h4 className="control-label" style={{ fontSize: '0.75rem', marginBottom: '0.25rem' }}>History Limit</h4>
+              <select 
+                value={historyLimit} 
+                onChange={(e) => setHistoryLimit(Number(e.target.value))}
+                className="select-custom"
+              >
+                <option value={4}>4 pesan (2 turn)</option>
+                <option value={6}>6 pesan (3 turn)</option>
+                <option value={8}>8 pesan (4 turn)</option>
+                <option value={10}>10 pesan (5 turn)</option>
+              </select>
+            </div>
           </div>
         </div>
 

@@ -83,6 +83,7 @@ class ChatRequest(BaseModel):
     message: str
     ablation_mode: str = "proposed" # 'proposed', 'pipeline_a_only', 'pipeline_b_only', 'baseline'
     is_eval: bool = False
+    history_limit: int = 8
 
 class ChatResponse(BaseModel):
     reply: str
@@ -123,7 +124,7 @@ async def chat_endpoint(request: ChatRequest):
         # Pipeline A Only ignores chat history to test isolated retrieval
         if ablation_mode in ["proposed", "pipeline_b_only"]:
             q1 = get_first_query(session_id)
-            recent_history = get_chat_history(session_id, limit=4)
+            recent_history = get_chat_history(session_id, limit=request.history_limit)
             if q1 and (not recent_history or recent_history[0][1] != q1):
                 prompt_history.append(("user", f"[PESAN PERTAMA]: {q1}"))
             prompt_history.extend(recent_history)
