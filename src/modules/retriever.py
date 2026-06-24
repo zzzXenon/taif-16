@@ -191,6 +191,19 @@ def dimension_aware_search(vector_db, intent_dimensions, w_lan=1.0, w_act=1.0, w
     target_cat = getattr(intent_dimensions, "target_category", "Semua")
     location = getattr(intent_dimensions, "location", "").strip()
 
+    # Normalize category to handle synonyms and case variations case-insensitively
+    target_cat_clean = target_cat.lower().strip()
+    if target_cat_clean in ["akomodasi", "hotel", "penginapan", "homestay", "villa", "cottage", "resort", "guesthouse"]:
+        norm_cat = "Akomodasi"
+    elif target_cat_clean in ["kuliner", "restoran", "kafe", "cafe", "makanan", "warung", "tempat makan", "minuman"]:
+        norm_cat = "Kuliner"
+    elif target_cat_clean in ["wisata", "rekreasi", "pantai", "bukit", "air terjun", "museum", "taman", "wisata alam", "wisata religi", "tempat ibadah", "gereja", "masjid"]:
+        norm_cat = "Wisata"
+    elif target_cat_clean in ["umum", "fasilitas umum", "belanja", "minimarket", "pasar", "pusat oleh-oleh", "atm", "supermarket"]:
+        norm_cat = "Umum"
+    else:
+        norm_cat = "Semua"
+
     # category mapping
     category_mapping = {
         "Akomodasi": ["Akomodasi"],
@@ -199,7 +212,7 @@ def dimension_aware_search(vector_db, intent_dimensions, w_lan=1.0, w_act=1.0, w
         "Umum": ["Fasilitas Umum", "Pusat Oleh-Oleh"],
         "Semua": ["Akomodasi", "Restoran", "Kafe", "Wisata Alam", "Wisata Budaya & Sejarah", "Wisata Buatan", "Tempat Ibadah", "Fasilitas Umum", "Pusat Oleh-Oleh"]
     }
-    allowed_categories = category_mapping.get(target_cat, category_mapping["Semua"])
+    allowed_categories = category_mapping[norm_cat]
 
     # Construct metadata filter
     def get_filter(dimension_name):
