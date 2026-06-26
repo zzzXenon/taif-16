@@ -1,0 +1,370 @@
+[
+  {
+    "id": "scenario_b_001",
+    "name": "The Hotel Hunter",
+    "description": "User mencari penginapan di Samosir, berpindah dari umum ke mewah, diselingi chitchat dan pertanyaan informasi spesifik.",
+    "eval_turn": [1, 3, 6, 7],
+    "turns": [
+      {
+        "turn": 1,
+        "message": "Halo, saya sedang mencari hotel atau homestay yang nyaman di Samosir. Ada rekomendasi?",
+        "expected_standalone": "mencari hotel atau homestay nyaman di Samosir",
+        "ground_truths": [
+          "Bagus Bay Guest House",
+          "Carolina Hotel",
+          "Hotel Santo Djaya",
+          "Purnama Balige Hotel",
+          "Romlan Guesthouse",
+          "Toba Village inn"
+        ]
+      },
+      {
+        "turn": 2,
+        "message": "Oh iya, cuaca di Samosir saat ini bagaimana ya?",
+        "expected_standalone": "tanya cuaca di Samosir",
+        "ground_truths": []
+      },
+      {
+        "turn": 3,
+        "message": "Kalau saya ingin pindah to hotel yang lebih mewah, ada apa saja di sekitar Samosir?",
+        "expected_standalone": "mencari hotel mewah di Samosir",
+        "ground_truths": [
+          "Carolina Hotel",
+          "Toba Village inn"
+        ]
+      },
+      {
+        "turn": 4,
+        "message": "Apakah Carolina Hotel itu dekat dengan dermaga kapal?",
+        "expected_standalone": "apakah Carolina Hotel di Samosir dekat dengan dermaga",
+        "ground_truths": [
+          "Carolina Hotel"
+        ]
+      },
+      {
+        "turn": 5,
+        "message": "Wah baguslah kalau begitu, terima kasih infonya!",
+        "expected_standalone": "terima kasih info",
+        "ground_truths": []
+      },
+      {
+        "turn": 6,
+        "message": "Apakah ada penginapan lain di Samosir yang suasananya tenang mirip dengan Romlan Guesthouse?",
+        "expected_standalone": "mencari penginapan tenang mirip Romlan Guesthouse di Samosir",
+        "ground_truths": [
+          "Romlan Guesthouse",
+          "Bagus Bay Guest House",
+          "Toba Village inn"
+        ]
+      },
+      {
+        "turn": 7,
+        "message": "Berapa tarif menginap per malam di Romlan Guesthouse?",
+        "expected_standalone": "berapa tarif per malam di Romlan Guesthouse Samosir",
+        "ground_truths": [
+          "Romlan Guesthouse"
+        ]
+      },
+      {
+        "turn": 8,
+        "message": "Baik, rencana liburan saya sudah hampir siap. Sampai jumpa!",
+        "expected_standalone": "salam perpisahan",
+        "ground_truths": []
+      }
+    ]
+  },
+  {
+    "id": "scenario_b_002",
+    "name": "The Nature Explorer",
+    "description": "User mencari tempat wisata alam di Simalungun, menanyakan air terjun, penatapan puncak, dan pemandian alam.",
+    "eval_turn": [2, 5, 7, 8],
+    "turns": [
+      {
+        "turn": 1,
+        "message": "Halo asisten wisata! Saya berencana liburan akhir pekan ini.",
+        "expected_standalone": "salam perkenalan",
+        "ground_truths": []
+      },
+      {
+        "turn": 2,
+        "message": "Bisa rekomendasikan tempat wisata alam berupa air terjun di Simalungun?",
+        "expected_standalone": "rekomendasi wisata alam air terjun di Simalungun",
+        "ground_truths": [
+          "Air Terjun Bah Salak",
+          "Air Terjun Binanga Bolon",
+          "Air Terjun Turunan Buhit (Jabel)",
+          "Bah Salak Waterfall"
+        ]
+      },
+      {
+        "turn": 3,
+        "message": "Berapa tiket masuk untuk ke Air Terjun Binanga Bolon?",
+        "expected_standalone": "berapa tiket masuk Air Terjun Binanga Bolon di Simalungun",
+        "ground_truths": [
+          "Air Terjun Binanga Bolon"
+        ]
+      },
+      {
+        "turn": 4,
+        "message": "Oh begitu, terima kasih informasinya.",
+        "expected_standalone": "ucapan terima kasih",
+        "ground_truths": []
+      },
+      {
+        "turn": 5,
+        "message": "Kalau wisata alam perbukitan atau pegunungan yang sejuk di Simalungun, ada rekomendasi?",
+        "expected_standalone": "wisata alam perbukitan atau pegunungan sejuk di Simalungun",
+        "ground_truths": [
+          "Pinus Hills Simarjarunjung",
+          "Bukit Sipolha",
+          "Puncak Panorama Aek Nauli"
+        ]
+      },
+      {
+        "turn": 6,
+        "message": "Apakah di Pinus Hills Simarjarunjung ada spot foto yang menarik?",
+        "expected_standalone": "apakah Pinus Hills Simarjarunjung memiliki spot foto",
+        "ground_truths": [
+          "Pinus Hills Simarjarunjung"
+        ]
+      },
+      {
+        "turn": 7,
+        "message": "Selain itu, ada pemandian air alami atau kolam pemandian di Simalungun?",
+        "expected_standalone": "mencari pemandian air alami di Simalungun",
+        "ground_truths": [
+          "Pemandian alam Bah Damanik",
+          "Pemandian Alam Sejuk Pas"
+        ]
+      },
+      {
+        "turn": 8,
+        "message": "Di mana alamat lengkap Pemandian alam Bah Damanik?",
+        "expected_standalone": "alamat lengkap Pemandian alam Bah Damanik di Simalungun",
+        "ground_truths": [
+          "Pemandian alam Bah Damanik"
+        ]
+      },
+      {
+        "turn": 9,
+        "message": "Sip, infonya lengkap sekali. Terima kasih!",
+        "expected_standalone": "terima kasih",
+        "ground_truths": []
+      }
+    ]
+  },
+  {
+    "id": "scenario_b_003",
+    "name": "The Food Wanderer",
+    "description": "User menjelajahi kuliner halal di Balige, mencari restoran khas Batak, kafe kopi, dan tempat makan tepi danau.",
+    "eval_turn": [1, 4, 6, 7, 9],
+    "turns": [
+      {
+        "turn": 1,
+        "message": "Aku sedang mencari tempat makan halal yang enak di sekitar Balige. Ada rekomendasi?",
+        "expected_standalone": "mencari tempat makan halal yang enak di Balige",
+        "ground_truths": [
+          "SATE MADURA Cabang Bundaran BALIGE",
+          "RM ISLAM \"NAULI\"",
+          "Rumah Makan Minang Saiyo",
+          "Rujak Agam Balige",
+          "Dunia Bubur",
+          "Rumah Makan Islam Mami Tempo",
+          "Rumah Makan Pondok Salero",
+          "RM Citra Minang AYU",
+          "Rumah Makan Sederhana",
+          "Rumah Makan Rizal",
+          "Pondok Makan H. Karsim"
+        ]
+      },
+      {
+        "turn": 2,
+        "message": "Apakah Sate Madura Cabang Bundaran Balige itu bukanya sampai malam?",
+        "expected_standalone": "apakah Sate Madura Cabang Bundaran Balige buka sampai malam",
+        "ground_truths": [
+          "SATE MADURA Cabang Bundaran BALIGE"
+        ]
+      },
+      {
+        "turn": 3,
+        "message": "Baguslah kalau buka malam. Aku suka sekali dengan sate.",
+        "expected_standalone": "suka sate",
+        "ground_truths": []
+      },
+      {
+        "turn": 4,
+        "message": "Kalau aku ingin makan hidangan khas Batak yang halal di Balige, di mana tempatnya?",
+        "expected_standalone": "mencari restoran khas Batak halal di Balige",
+        "ground_truths": [
+          "RM ISLAM \"NAULI\"",
+          "Rumah Makan Panca"
+        ]
+      },
+      {
+        "turn": 5,
+        "message": "Apakah RM Islam Nauli menyajikan menu ikan mas arsik?",
+        "expected_standalone": "apakah RM Islam Nauli menyajikan ikan mas arsik",
+        "ground_truths": [
+          "RM ISLAM \"NAULI\""
+        ]
+      },
+      {
+        "turn": 6,
+        "message": "Aku juga ingin mencari kafe yang asyik buat nongkrong atau minum kopi di Balige. Rekomendasikan beberapa.",
+        "expected_standalone": "mencari kafe nongkrong minum kopi di Balige",
+        "ground_truths": [
+          "Tataring Coffee 26 Resto",
+          "TaTaring Coffee & Resto",
+          "Point Coffee Balige",
+          "Leon Cafe",
+          "Amora Cafe",
+          "Putra Kembar Coffee Shop & Resto",
+          "Putra Kembar Coffee Shop 26 Resto",
+          "Green's Cafe Balige"
+        ]
+      },
+      {
+        "turn": 7,
+        "message": "Apakah Tataring Coffee & Resto memiliki fasilitas live music?",
+        "expected_standalone": "apakah Tataring Coffee & Resto di Balige memiliki live music",
+        "ground_truths": [
+          "Tataring Coffee 26 Resto",
+          "TaTaring Coffee & Resto"
+        ]
+      },
+      {
+        "turn": 8,
+        "message": "Wah, nongkrong sambil denger live music pasti seru banget.",
+        "expected_standalone": "suka live music",
+        "ground_truths": []
+      },
+      {
+        "turn": 9,
+        "message": "Ada restoran seafood atau tempat makan dengan pemandangan langsung ke tepi danau di Balige?",
+        "expected_standalone": "restoran seafood atau tempat makan tepi danau di Balige",
+        "ground_truths": [
+          "RAJA SEAFOOD BALIGE",
+          "Sunset Beach Restaurant",
+          "Tepi Danau Bistro Balige",
+          "Sigurgur Beach and Restaurant"
+        ]
+      },
+      {
+        "turn": 10,
+        "message": "Mantap, terima kasih banyak atas semua rekomendasinya!",
+        "expected_standalone": "terima kasih",
+        "ground_truths": []
+      }
+    ]
+  },
+  {
+    "id": "scenario_b_004",
+    "name": "The Weekend Planner",
+    "description": "User merencanakan liburan lengkap di Samosir (wisata alam → camping → wisata budaya → makan → oleh-oleh → hotel).",
+    "eval_turn": [1, 2, 3, 5, 7, 9, 10],
+    "turns": [
+      {
+        "turn": 1,
+        "message": "Aku mau merencanakan liburan akhir pekan ke Samosir. Ada rekomendasi tempat wisata alam yang seru?",
+        "expected_standalone": "rekomendasi tempat wisata alam seru di Samosir",
+        "ground_truths": [
+          "Bukit Holbung",
+          "Air Terjun Efrata",
+          "Pantai Pasir Putih Parbaba",
+          "Danau Sidihoni",
+          "Pusuk Buhit Mountain",
+          "Pantai Batuhoda"
+        ]
+      },
+      {
+        "turn": 2,
+        "message": "Oh, aku suka suasana alam yang tenang. Kalau mau camping, tempat mana yang paling cocok?",
+        "expected_standalone": "tempat camping tenang di Samosir",
+        "ground_truths": [
+          "Bukit Holbung",
+          "Danau Sidihoni",
+          "Pantai Silalahi"
+        ]
+      },
+      {
+        "turn": 3,
+        "message": "Kalau aku ingin belajar budaya Batak, ada tempat sejarah yang bisa dikunjungi di Samosir?",
+        "expected_standalone": "wisata budaya sejarah Batak di Samosir",
+        "ground_truths": [
+          "Batak Museum",
+          "Batu Kursi Raja Siallagan ( Stone Chair of King Siallagan )",
+          "Desa Wisata Tomok Parsaoran",
+          "Patung Sigalegale",
+          "Sopo Guru Tatea Bulan"
+        ]
+      },
+      {
+        "turn": 4,
+        "message": "Terima kasih atas rekomendasinya!",
+        "expected_standalone": "terima kasih",
+        "ground_truths": []
+      },
+      {
+        "turn": 5,
+        "message": "Aku juga butuh tempat makan atau restoran keluarga khas setempat di Samosir. Ada rekomendasi?",
+        "expected_standalone": "restoran keluarga khas setempat di Samosir",
+        "ground_truths": [
+          "Rumah Makan Rosa Khas Batak",
+          "Elios - Rumah Makan Khas Batak",
+          "Restaurant DUGUL",
+          "Rumah Makan Rahmat",
+          "Rumah Makan Islam Monggo"
+        ]
+      },
+      {
+        "turn": 6,
+        "message": "Apakah Rumah Makan Rosa Khas Batak itu menyajikan makanan halal?",
+        "expected_standalone": "apakah Rumah Makan Rosa Khas Batak di Samosir menyajikan makanan halal",
+        "ground_truths": [
+          "Rumah Makan Rosa Khas Batak"
+        ]
+      },
+      {
+        "turn": 7,
+        "message": "Aku tertarik beli oleh-oleh khas Batak di Samosir. Di mana bisa beli ulos yang autentik?",
+        "expected_standalone": "tempat beli tenun ulos autentik di Samosir",
+        "ground_truths": [
+          "Tenun Ulos",
+          "Marysca Souvenir",
+          "Kampung Ulos Hutaraja"
+        ]
+      },
+      {
+        "turn": 8,
+        "message": "Baiklah, rasanya menarik sekali.",
+        "expected_standalone": "reaksi tentang ulos",
+        "ground_truths": []
+      },
+      {
+        "turn": 9,
+        "message": "Aku sedang mencari penginapan atau vila sederhana dekat danau di Samosir. Ada rekomendasi?",
+        "expected_standalone": "mencari penginapan atau vila sederhana dekat danau di Samosir",
+        "ground_truths": [
+          "Romlan Guesthouse",
+          "Carolina Hotel",
+          "Bagus Bay Guest House",
+          "Toba Village inn"
+        ]
+      },
+      {
+        "turn": 10,
+        "message": "Apakah Carolina Hotel memiliki pantai pribadi dan papan loncat berenang?",
+        "expected_standalone": "apakah Carolina Hotel di Samosir memiliki pantai pribadi dan papan loncat",
+        "ground_truths": [
+          "Carolina Hotel"
+        ]
+      },
+      {
+        "turn": 11,
+        "message": "Sip, rencana liburanku sudah lengkap. Terima kasih banyak ya!",
+        "expected_standalone": "terima kasih",
+        "ground_truths": []
+      }
+    ]
+  }
+]

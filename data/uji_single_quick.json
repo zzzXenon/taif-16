@@ -1,0 +1,53 @@
+[
+  {
+    "level": 1,
+    "query": "Rekomendasikan hotel atau akomodasi yang nyaman untuk menginap di Samosir.",
+    "ground_truths": [
+      "Bagus Bay Guest House",
+      "Carolina Hotel",
+      "Hotel Santo Djaya",
+      "Purnama Balige Hotel",
+      "Romlan Guesthouse",
+      "Toba Village inn"
+    ]
+  },
+  {
+    "level": 2,
+    "query": "Carikan restoran yang menyajikan masakan khas Batak di daerah Balige.",
+    "ground_truths": [
+      "RM. GOMGOM KHAS BATAK",
+      "RM Khas Batak Mata Mual",
+      "RM Lapo Jior",
+      "Rumah Makan Khas Batak Lamhot",
+      "Rumah Makan Khas Karo Tambar Lihe",
+      "Rumah Makan Panca",
+      "Warung Kembar (KHAS BATAK)"
+    ]
+  },
+  {
+    "level": 3,
+    "query": "Pusat oleh-oleh atau tempat belanja yang menjual kain tenun ulos khas Batak di Samosir.",
+    "ground_truths": [
+      "Tenun Ulos",
+      "Marysca Souvenir"
+    ]
+  },
+  {
+    "level": 4,
+    "query": "Destinasi wisata alam berupa air terjun di Kabupaten Dairi yang cocok untuk menikmati pemandangan sejuk.",
+    "ground_truths": [
+      "Air Terjun Lae",
+      "Taman Wisata Iman Sitinjo"
+    ]
+  },
+  {
+    "level": 5,
+    "query": "Saya sedang mencari kafe yang nyaman untuk bersantai atau nongkrong dengan suasana yang tenang dan sejuk di Karo.",
+    "ground_truths": [
+      "Cafe Jabu",
+      "Kesain Cafe",
+      "Takar Coffee and Resto",
+      "Toko Kopi Berastagi Pak RM"
+    ]
+  }
+]
