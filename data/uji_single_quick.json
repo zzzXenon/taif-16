@@ -1,7 +1,7 @@
 [
   {
     "level": 1,
-    "query": "Rekomendasikan hotel atau akomodasi yang nyaman untuk menginap di Samosir.",
+    "query": "Rekomendasikan hotel atau akomodasi yang nyaman untuk tempat menginap di Samosir.",
     "ground_truths": [
       "Bagus Bay Guest House",
       "Carolina Hotel",
@@ -13,36 +13,47 @@
   },
   {
     "level": 2,
-    "query": "Carikan restoran yang menyajikan masakan khas Batak di daerah Balige.",
+    "query": "Carikan restoran di daerah Toba (Balige) yang menyajikan hidangan khas Batak dengan pemandangan alam yang indah menghadap ke danau.",
     "ground_truths": [
       "RM. GOMGOM KHAS BATAK",
       "RM Khas Batak Mata Mual",
       "RM Lapo Jior",
+      "RM. Siganupari Ajibata",
       "Rumah Makan Khas Batak Lamhot",
       "Rumah Makan Khas Karo Tambar Lihe",
       "Rumah Makan Panca",
-      "Warung Kembar (KHAS BATAK)"
+      "Rumah Makan Sigiring Giring",
+      "Warung Kembar (KHAS BATAK)",
+      "BPK Karona",
+      "BPK PANCA JAYA",
+      "BPK TAMBAR LIHE CLARISSA GURUSINGA",
+      "Ola Kisat",
+      "Rumah Makan Martabe",
+      "Rumah Makan Romauli"
     ]
   },
   {
     "level": 3,
-    "query": "Pusat oleh-oleh atau tempat belanja yang menjual kain tenun ulos khas Batak di Samosir.",
+    "query": "Saya mencari tempat belanja produk lokal atau pusat oleh-oleh di Samosir yang menjual kain tenun ulos khas Batak, dengan suasana yang ramai dan autentik, serta memiliki fasilitas yang terorganisir.",
     "ground_truths": [
+      "Marysca Souvenir",
       "Tenun Ulos",
-      "Marysca Souvenir"
+      "Kampung Ulos Hutaraja",
+      "Pasar Tomok"
     ]
   },
   {
     "level": 4,
-    "query": "Destinasi wisata alam berupa air terjun di Kabupaten Dairi yang cocok untuk menikmati pemandangan sejuk.",
+    "query": "Saya ingin berkunjung ke destinasi wisata alam berupa air terjun di Kabupaten Dairi yang suasananya tidak terlalu ramai, cocok untuk menikmati pemandangan sejuk, serta memiliki fasilitas sederhana seperti warung makan lokal atau tempat istirahat.",
     "ground_truths": [
       "Air Terjun Lae",
-      "Taman Wisata Iman Sitinjo"
+      "Taman Wisata Iman Sitinjo",
+      "Jembatan Lae Pendaroh"
     ]
   },
   {
     "level": 5,
-    "query": "Saya sedang mencari kafe yang nyaman untuk bersantai atau nongkrong dengan suasana yang tenang dan sejuk di Karo.",
+    "query": "Saya sedang mencari kafe yang nyaman untuk bersantai dan nongkrong lama di Karo dengan pemandangan alam pegunungan yang sejuk, suasana yang tenang dan tidak terlalu ramai, tempat duduk yang nyaman dan luas, serta menyajikan pilihan kopi hangat dan camilan yang lezat.",
     "ground_truths": [
       "Cafe Jabu",
       "Kesain Cafe",

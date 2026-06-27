@@ -1466,7 +1466,22 @@
         "message": "Aku sedang mencari penginapan sederhana tapi dekat danau. Ada rekomendasi?",
         "expected_standalone": "akomodasi dekat danau",
         "ground_truths": [
-          "Damasus Nataboan Resto"
+          "Romlan Guesthouse",
+          "Toba Village inn",
+          "Carolina Hotel",
+          "Bagus Bay Guest House",
+          "Hotel Santo Djaya",
+          "Pondok Siliwangi 29",
+          "Pondok Siliwangi 27",
+          "SAPADIA VILLA BALIGE II",
+          "Tao Silalahi Hotel",
+          "Tiara Bunga Hotel",
+          "Ita Soposurung Hotel",
+          "Nauli Inn",
+          "Mutiara Balige Hotel",
+          "Hotel Nabasa",
+          "Pondok Siliwangi 26",
+          "Vany Villa Balige"
         ]
       },
       {

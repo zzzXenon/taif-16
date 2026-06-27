@@ -3,7 +3,12 @@
     "id": "scenario_b_001",
     "name": "The Hotel Hunter",
     "description": "User mencari penginapan di Samosir, berpindah dari umum ke mewah, diselingi chitchat dan pertanyaan informasi spesifik.",
-    "eval_turn": [1, 3, 6, 7],
+    "eval_turn": [
+      1,
+      3,
+      6,
+      7
+    ],
     "turns": [
       {
         "turn": 1,
@@ -30,7 +35,8 @@
         "expected_standalone": "mencari hotel mewah di Samosir",
         "ground_truths": [
           "Carolina Hotel",
-          "Toba Village inn"
+          "Toba Village inn",
+          "Purnama Balige Hotel"
         ]
       },
       {
@@ -54,7 +60,10 @@
         "ground_truths": [
           "Romlan Guesthouse",
           "Bagus Bay Guest House",
-          "Toba Village inn"
+          "Toba Village inn",
+          "Carolina Hotel",
+          "Purnama Balige Hotel",
+          "Bukit Beta Tuk-tuk"
         ]
       },
       {
@@ -77,7 +86,12 @@
     "id": "scenario_b_002",
     "name": "The Nature Explorer",
     "description": "User mencari tempat wisata alam di Simalungun, menanyakan air terjun, penatapan puncak, dan pemandian alam.",
-    "eval_turn": [2, 5, 7, 8],
+    "eval_turn": [
+      2,
+      5,
+      7,
+      8
+    ],
     "turns": [
       {
         "turn": 1,
@@ -117,7 +131,10 @@
         "ground_truths": [
           "Pinus Hills Simarjarunjung",
           "Bukit Sipolha",
-          "Puncak Panorama Aek Nauli"
+          "Puncak Panorama Aek Nauli",
+          "Wisata Anugerah Indah Sippan",
+          "Batu lihi star",
+          "Tanjung Unta"
         ]
       },
       {
@@ -134,7 +151,8 @@
         "expected_standalone": "mencari pemandian air alami di Simalungun",
         "ground_truths": [
           "Pemandian alam Bah Damanik",
-          "Pemandian Alam Sejuk Pas"
+          "Pemandian Alam Sejuk Pas",
+          "Manigom Nauli"
         ]
       },
       {
@@ -157,7 +175,13 @@
     "id": "scenario_b_003",
     "name": "The Food Wanderer",
     "description": "User menjelajahi kuliner halal di Balige, mencari restoran khas Batak, kafe kopi, dan tempat makan tepi danau.",
-    "eval_turn": [1, 4, 6, 7, 9],
+    "eval_turn": [
+      1,
+      4,
+      6,
+      7,
+      9
+    ],
     "turns": [
       {
         "turn": 1,
@@ -166,15 +190,24 @@
         "ground_truths": [
           "SATE MADURA Cabang Bundaran BALIGE",
           "RM ISLAM \"NAULI\"",
-          "Rumah Makan Minang Saiyo",
-          "Rujak Agam Balige",
           "Dunia Bubur",
-          "Rumah Makan Islam Mami Tempo",
           "Rumah Makan Pondok Salero",
-          "RM Citra Minang AYU",
           "Rumah Makan Sederhana",
           "Rumah Makan Rizal",
-          "Pondok Makan H. Karsim"
+          "Pondok Makan & Home Stay H. Karsim",
+          "Diva Putri Minang",
+          "Rumah Makan Diva Putri Minang",
+          "BAKSO MAS PANDU \"WONG SOLO\"",
+          "BAKSO PAK RADIT (BAKSO KHAS MALANG)",
+          "Balige Seafood",
+          "Family Resto",
+          "RAJA SEAFOOD BALIGE",
+          "RM GUMARANG",
+          "RM. Islam Roda Baru",
+          "Sinar Minang Restaurant & Convention Hall",
+          "SIPPIN",
+          "Tepi Danau Bistro",
+          "Warung Makan Muslim Bu Nurul"
         ]
       },
       {
@@ -196,8 +229,7 @@
         "message": "Kalau aku ingin makan hidangan khas Batak yang halal di Balige, di mana tempatnya?",
         "expected_standalone": "mencari restoran khas Batak halal di Balige",
         "ground_truths": [
-          "RM ISLAM \"NAULI\"",
-          "Rumah Makan Panca"
+          "RM ISLAM \"NAULI\""
         ]
       },
       {
@@ -213,14 +245,23 @@
         "message": "Aku juga ingin mencari kafe yang asyik buat nongkrong atau minum kopi di Balige. Rekomendasikan beberapa.",
         "expected_standalone": "mencari kafe nongkrong minum kopi di Balige",
         "ground_truths": [
-          "Tataring Coffee 26 Resto",
-          "TaTaring Coffee & Resto",
-          "Point Coffee Balige",
-          "Leon Cafe",
           "Amora Cafe",
-          "Putra Kembar Coffee Shop & Resto",
-          "Putra Kembar Coffee Shop 26 Resto",
-          "Green's Cafe Balige"
+          "Betesda Cafe Balige",
+          "Binneka cafe & resto",
+          "BMW Coffee",
+          "Damar Toba ~ Lakeside Eatery & Stay",
+          "D'barans Cafe",
+          "Green's Cafe Balige",
+          "Hutanta Cafe",
+          "ijabu Coffee & Roastery",
+          "Leon Cafe",
+          "Onand Coffee",
+          "Point Coffee Balige",
+          "Rapindo cafe balige",
+          "Tao Tio Coffee and Resto",
+          "Tepi Coffee",
+          "Tepi Danau Bistro",
+          "Tepi Danau Bistro Balige Lumban Silintong"
         ]
       },
       {
@@ -244,9 +285,13 @@
         "expected_standalone": "restoran seafood atau tempat makan tepi danau di Balige",
         "ground_truths": [
           "RAJA SEAFOOD BALIGE",
-          "Sunset Beach Restaurant",
-          "Tepi Danau Bistro Balige",
-          "Sigurgur Beach and Restaurant"
+          "Tambunan Sunset Beach",
+          "Tepi Danau Bistro",
+          "Sigurgur Beach and Restaurant",
+          "Damar Toba ~ Lakeside Eatery & Stay",
+          "Rapindo cafe balige",
+          "Tepi Danau Bistro Balige Lumban Silintong",
+          "Balige Seafood"
         ]
       },
       {
@@ -261,7 +306,15 @@
     "id": "scenario_b_004",
     "name": "The Weekend Planner",
     "description": "User merencanakan liburan lengkap di Samosir (wisata alam → camping → wisata budaya → makan → oleh-oleh → hotel).",
-    "eval_turn": [1, 2, 3, 5, 7, 9, 10],
+    "eval_turn": [
+      1,
+      2,
+      3,
+      5,
+      7,
+      9,
+      10
+    ],
     "turns": [
       {
         "turn": 1,
@@ -269,11 +322,23 @@
         "expected_standalone": "rekomendasi tempat wisata alam seru di Samosir",
         "ground_truths": [
           "Bukit Holbung",
+          "Bukit Holbung Samosir",
           "Air Terjun Efrata",
-          "Pantai Pasir Putih Parbaba",
-          "Danau Sidihoni",
+          "Air Terjun Nai sogop",
+          "Air Terjun Sigarattung (Sampuran Na Pitu)",
+          "Air Terjun Sitapigagan",
+          "Sitapigagan Waterfall",
+          "Air Terjun Tombak Pangaribuan",
+          "Bukit Beta Tuk-tuk",
+          "Bukit Burung",
+          "Gunung Pusuk Buhit",
           "Pusuk Buhit Mountain",
-          "Pantai Batuhoda"
+          "Pantai Batuhoda",
+          "Pantai Pasir Putih Parbaba",
+          "Pasir Putih Parbaba",
+          "Pantai Pulo Tao",
+          "Togaraja",
+          "Wisata Alam Fishing-Camp Siarubung"
         ]
       },
       {
@@ -282,8 +347,16 @@
         "expected_standalone": "tempat camping tenang di Samosir",
         "ground_truths": [
           "Bukit Holbung",
+          "Bukit Holbung Samosir",
           "Danau Sidihoni",
-          "Pantai Silalahi"
+          "Bukit Sidihoni",
+          "Pantai Silalahi",
+          "Bukit Beta Tuk-tuk",
+          "Bukit Burung",
+          "Bukit Sipatungan",
+          "Rumah Kreatif Guntur",
+          "Togaraja",
+          "Wisata Alam Fishing-Camp Siarubung"
         ]
       },
       {
@@ -295,7 +368,10 @@
           "Batu Kursi Raja Siallagan ( Stone Chair of King Siallagan )",
           "Desa Wisata Tomok Parsaoran",
           "Patung Sigalegale",
-          "Sopo Guru Tatea Bulan"
+          "Sopo Guru Tatea Bulan",
+          "Kampung Ulos Hutaraja",
+          "Museum Huta Bolon Simanindo",
+          "Pemandian Aek Sipitu Dai"
         ]
       },
       {
@@ -313,7 +389,17 @@
           "Elios - Rumah Makan Khas Batak",
           "Restaurant DUGUL",
           "Rumah Makan Rahmat",
-          "Rumah Makan Islam Monggo"
+          "Rumah Makan Islam Monggo",
+          "Rumah Makan Holong Ini Dainang",
+          "Rumah Makan Khas Batak Moranta Simbolon",
+          "Yodi Kuliner Khas Batak",
+          "RM Gulasa",
+          "RM. Nasional Sampean Uli",
+          "RUMAH MAKAN Nasional Sinurat",
+          "Samosir Villa Restaurant",
+          "Yolanda Restaurant",
+          "Rumba Restaurant",
+          "Sekapur Sirih Restaurant"
         ]
       },
       {
@@ -331,7 +417,8 @@
         "ground_truths": [
           "Tenun Ulos",
           "Marysca Souvenir",
-          "Kampung Ulos Hutaraja"
+          "Kampung Ulos Hutaraja",
+          "Pasar Tomok"
         ]
       },
       {
@@ -348,7 +435,8 @@
           "Romlan Guesthouse",
           "Carolina Hotel",
           "Bagus Bay Guest House",
-          "Toba Village inn"
+          "Toba Village inn",
+          "Purnama Balige Hotel"
         ]
       },
       {
