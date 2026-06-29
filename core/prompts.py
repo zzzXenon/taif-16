@@ -5,6 +5,7 @@ Tugas: Context-Aware Intent Extraction (CA-IER). Analisis "Riwayat Chat Terakhir
 
 Aturan field:
 - 'is_search_required': TRUE jika kueri meminta informasi faktual dari database (harga, alamat, jam buka, rekomendasi, sejarah, dsb.). FALSE jika sekadar obrolan/chit-chat/salam/terima kasih.
+- 'is_in_domain': TRUE jika kueri berkaitan dengan pariwisata, akomodasi, kuliner, aktivitas rekreasi, sejarah/budaya lokal, oleh-oleh, fasilitas umum, atau kebutuhan lokal di kawasan Danau Toba/Sumatera Utara. FALSE jika kueri menanyakan topik umum di luar pariwisata (seperti pemrograman, matematika, sains, resep masakan umum, politik nasional, dll.).
 - 'location': Nama kabupaten/kota di Sumatera Utara yang EKSPLISIT disebutkan pengguna (tanpa prefix 'Kota'/'Kabupaten'). Contoh: 'Samosir', 'Toba', 'Tapanuli Utara', 'Dairi', 'Karo', 'Simalungun', 'Humbang Hasundutan'. Kosongkan jika tidak ada lokasi spesifik yang disebutkan.
 - 'expected_landscape_content', 'expected_activities', 'expected_atmosphere': Kata kunci dimensi detail pencarian jika ada.
 - 'query_type':
@@ -30,6 +31,7 @@ Output:
 {{
   "standalone_query": "Berapa harga tiket masuk air terjun pertama yang direkomendasikan di Danau Toba?",
   "is_search_required": true,
+  "is_in_domain": true,
   "location": "",
   "expected_landscape_content": "Air terjun, tiket masuk",
   "expected_activities": "",
@@ -48,6 +50,7 @@ Output:
 {{
   "standalone_query": "Dimana alamat air terjun di daerah Dairi?",
   "is_search_required": true,
+  "is_in_domain": true,
   "location": "Dairi",
   "expected_landscape_content": "Air terjun, alamat lokasi",
   "expected_activities": "",
@@ -68,6 +71,7 @@ Output:
 {{
   "standalone_query": "Berapa harga menginap di Hotel Mulia di Balige?",
   "is_search_required": true,
+  "is_in_domain": true,
   "location": "Balige",
   "expected_landscape_content": "Hotel, harga kamar",
   "expected_activities": "",
@@ -85,6 +89,7 @@ Output:
 {{
   "standalone_query": "Cari tempat makan yang enak di Samosir",
   "is_search_required": true,
+  "is_in_domain": true,
   "location": "Samosir",
   "expected_landscape_content": "Restoran, rumah makan",
   "expected_activities": "Makan, kuliner",
@@ -102,6 +107,7 @@ Output:
 {{
   "standalone_query": "Tolong carikan penginapan dong",
   "is_search_required": true,
+  "is_in_domain": true,
   "location": "",
   "expected_landscape_content": "Penginapan, hotel, homestay",
   "expected_activities": "Menginap, tidur",
@@ -119,6 +125,41 @@ Output:
 {{
   "standalone_query": "Terima kasih sarannya!",
   "is_search_required": false,
+  "is_in_domain": true,
+  "location": "",
+  "expected_landscape_content": "",
+  "expected_activities": "",
+  "expected_atmosphere": "",
+  "query_type": "recommendation",
+  "is_ambiguous": false,
+  "target_category": "Semua"
+}}
+---
+Riwayat Chat (Pesan Terlama -> Terbaru):
+Kueri Saat Ini:
+Bagaimana cara menulis coding Python untuk loop?
+Output:
+{{
+  "standalone_query": "Bagaimana cara menulis coding Python untuk loop?",
+  "is_search_required": false,
+  "is_in_domain": false,
+  "location": "",
+  "expected_landscape_content": "",
+  "expected_activities": "",
+  "expected_atmosphere": "",
+  "query_type": "recommendation",
+  "is_ambiguous": false,
+  "target_category": "Semua"
+}}
+---
+Riwayat Chat (Pesan Terlama -> Terbaru):
+Kueri Saat Ini:
+Siapa nama presiden Indonesia saat ini?
+Output:
+{{
+  "standalone_query": "Siapa nama presiden Indonesia saat ini?",
+  "is_search_required": false,
+  "is_in_domain": false,
   "location": "",
   "expected_landscape_content": "",
   "expected_activities": "",

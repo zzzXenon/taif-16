@@ -134,6 +134,28 @@ async def chat_endpoint(request: ChatRequest):
         time_ca_ier = time.time() - start_ca_ier
         print(f"  [Timer] CA-IER Selesai dalam {time_ca_ier:.2f} detik")
         
+        # Intersepsi Domain (Domain Restriction / Out of Domain)
+        if hasattr(ca_ier, "is_in_domain") and not ca_ier.is_in_domain:
+            out_of_domain_reply = (
+                "Maaf, saya didesain khusus sebagai asisten pariwisata Danau Toba dan Sumatera Utara. "
+                "Saya hanya dapat membantu merekomendasikan destinasi wisata, hotel, kuliner, oleh-oleh, atau informasi lokal di kawasan tersebut. "
+                "Silakan tanyakan hal-hal yang berkaitan dengan pariwisata Danau Toba ya! 😊"
+            )
+            print("\nAiYukToba (Out of Domain Intercept):")
+            save_message(session_id, "user", query, ca_ier.standalone_query)
+            save_message(session_id, "ai", out_of_domain_reply)
+            
+            total_time = time.time() - start_time_total
+            print(f"== [Timer] TOTAL KESELURUHAN (INTERCEPTED): {total_time:.2f} detik ==\n")
+            return ChatResponse(
+                reply=out_of_domain_reply,
+                standalone_query=ca_ier.standalone_query,
+                source_documents=[],
+                latency_seconds=total_time,
+                query_type=getattr(ca_ier, "query_type", "recommendation"),
+                is_ambiguous=False
+            )
+
         # Intersepsi Ambiguitas (Dynamic Clarification / Slot Filling)
         if not request.is_eval and ca_ier.is_search_required and getattr(ca_ier, "is_ambiguous", False):
             clarification_reply = (

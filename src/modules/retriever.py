@@ -39,6 +39,7 @@ def _parse_ca_ier_json(raw: str, fallback_query: str) -> CAIEROutput:
                         return CAIEROutput(
                             standalone_query=data.get("standalone_query", fallback_query),
                             is_search_required=bool(data.get("is_search_required", True)),
+                            is_in_domain=bool(data.get("is_in_domain", True)),
                             location=data.get("location", ""),
                             expected_landscape_content=data.get("expected_landscape_content", ""),
                             expected_activities=data.get("expected_activities", ""),
@@ -83,6 +84,7 @@ def get_ca_ier(current_query: str, chat_history: list) -> CAIEROutput:
         return CAIEROutput(
             standalone_query=current_query,
             is_search_required=True,
+            is_in_domain=True,
             expected_landscape_content=current_query,
             expected_activities=current_query,
             expected_atmosphere=current_query

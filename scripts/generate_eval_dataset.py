@@ -504,7 +504,6 @@ def build_pipeline_a(checkpoint: dict) -> list:
 SCENARIO_TEMPLATES = [
     {
         "id": "scenario_b_001",
-        "name": "The Hotel Hunter",
         "description": "User mencari penginapan di Toba, berpindah dari budget ke mewah, diselingi chit-chat tentang fasilitas dan lokasi.",
         "n_turns": 8,
         "anchor_categories": ["Akomodasi"],
@@ -512,7 +511,6 @@ SCENARIO_TEMPLATES = [
     },
     {
         "id": "scenario_b_002",
-        "name": "The Nature Explorer",
         "description": "User mencari wisata alam pantai lalu beralih ke wisata bukit/panorama, diselingi chit-chat tentang akses dan cuaca.",
         "n_turns": 9,
         "anchor_categories": ["Wisata Alam"],
@@ -520,7 +518,6 @@ SCENARIO_TEMPLATES = [
     },
     {
         "id": "scenario_b_003",
-        "name": "The Food Wanderer",
         "description": "User mencari kuliner halal, berpindah topik ke kafe/tempat nongkrong, diselingi chit-chat tentang harga dan menu.",
         "n_turns": 10,
         "anchor_categories": ["Restoran (Halal)", "Restoran"],
@@ -528,7 +525,6 @@ SCENARIO_TEMPLATES = [
     },
     {
         "id": "scenario_b_004",
-        "name": "The Weekend Planner",
         "description": "User merencanakan liburan lengkap (wisata → makan → menginap → oleh-oleh) dalam satu sesi percakapan.",
         "n_turns": 11,
         "anchor_categories": ["Wisata Alam", "Wisata Budaya & Sejarah"],
