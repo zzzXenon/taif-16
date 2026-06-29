@@ -52,7 +52,7 @@ function App() {
     setIsLoading(true);
 
     try {
-      const API_URL = 'https://judicial-extradite-richness.ngrok-free.dev/api/chat';
+      const API_URL = import.meta.env.VITE_API_URL || 'https://judicial-extradite-richness.ngrok-free.dev/api/chat';
 
       const response = await fetch(API_URL, {
         method: 'POST',
