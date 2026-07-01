@@ -170,6 +170,23 @@ Output:
 }}
 ---
 Riwayat Chat (Pesan Terlama -> Terbaru):
+Kueri Saat Ini:
+Saya mau cari cafe atau tempat nongkrong yang sejuk di Karo
+Output:
+{
+  "standalone_query": "Saya mau mencari cafe atau tempat nongkrong yang sejuk di Karo",
+  "is_search_required": true,
+  "is_in_domain": true,
+  "location": "Karo",
+  "expected_landscape_content": "Cafe, tempat nongkrong",
+  "expected_activities": "Nongkrong, minum kopi",
+  "expected_atmosphere": "Sejuk",
+  "query_type": "recommendation",
+  "is_ambiguous": false,
+  "target_category": "Kuliner"
+}
+---
+Riwayat Chat (Pesan Terlama -> Terbaru):
 {chat_history}
 
 Kueri Saat Ini:
